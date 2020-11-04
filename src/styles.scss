@@ -127,6 +127,14 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
       opacity: 0.5;
     }
   }
+  button.round-btn {
+    border-radius: 20px;
+  }
+  table.mat-table {
+    width: 100%;
+    box-shadow: none;
+    font-family:Poppins;
+  }
   app-dashboard {
     width: 100%;
   }
