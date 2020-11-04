@@ -1,1 +1,50 @@
-<p>user-roles works!</p>
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+    <div fxFlex>
+      <h3 class="page-title">
+        User Roles
+      </h3>
+      <ul class="breadcrumb">
+        <li>Dashboard</li> 
+        <li>Roles & Access</li>
+         <li>User Roles</li>
+      </ul>
+    </div>
+
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table > <!--[dataSource]="dataSource"-->
+          
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> Role </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.position}} </td> -->
+                <td mat-cell *matCellDef="let element"> element </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> No. Of User </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.name}} </td> -->
+                <td mat-cell *matCellDef="let element"> name}} </td>
+              </ng-container>
+          
+              <ng-container matColumnDef="weight">
+                <th mat-header-cell *matHeaderCellDef> Weight </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.weight}} </td> -->
+                <td mat-cell *matCellDef="let element"> eight}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> Symbol </th>
+                <!-- <td mat-cell *matCellDef="let element"> {{element.symbol}} </td> -->
+                <td mat-cell *matCellDef="let element">ymbol}} </td>
+              </ng-container>
+          
+              <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr> -->
+            </table>
+          
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator> -->
+          </div>
+          
+    </div>
+  </div>
+  

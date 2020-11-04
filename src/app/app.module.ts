@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatListModule } from '@angular/material/list';
+import {MatTableModule} from '@angular/material/table';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -14,6 +15,7 @@ import { HeaderComponent } from './common/header/header.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { DashboardComponent } from './container/dashboard/dashboard.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { UserRolesComponent } from './container/roles-access/user-roles/user-rol
     MatButtonModule,
     FlexLayoutModule,
     MatListModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
