@@ -1,0 +1,43 @@
+
+.logo{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/14px var(--unnamed-font-family-poppins);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-000000);
+  text-align: left;
+  font: normal normal 600 18px/14px Poppins;
+  letter-spacing: 0px;
+  color: #000000;
+  text-transform: capitalize;
+  span{
+    color:#FFAA00;
+    text-align:right;
+    display: block;
+  }
+}
+.user-info {
+  margin-top: 35px;
+  img{
+    width:70px;
+    height:70px;
+    margin:0 auto;
+  }
+  .user-name{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-23) var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: center;
+    text-transform: capitalize;
+    opacity: 1;
+    margin: 0;
+  }
+
+.usere-desig{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-18) var(--unnamed-font-family-poppins);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3d3d3d);
+  text-align: center;
+  text-transform: capitalize;
+  opacity: 1;
+}
+
+}
