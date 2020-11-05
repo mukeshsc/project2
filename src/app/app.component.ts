@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component,  ViewChild } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 export class AppComponent {
   @ViewChild('drawer') public drawer: MatDrawer;
   title = 'hrmd';
+  showHeader = true;
   toggleMenu(): void{this.drawer.toggle(); }
+  constructor(public router: Router){}
+
 }

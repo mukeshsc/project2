@@ -1,0 +1,312 @@
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+  <div fxFlex>
+    <h3 class="page-title">
+      Dashboard
+    </h3>
+    <ul class="breadcrumb">
+      <li>Dashboard</li>
+    </ul>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+  <div fxFlex="25"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-count">
+      <h4>Active Employees</h4>
+      <h2>100 / 150</h2>
+      <img src="./assets/img/Image_7.png" />
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.gt-xs="100">
+    <mat-card class="dashboard-count">
+      <h4>Late Coming</h4>
+      <h2>20</h2>
+      <img src="./assets/img/Image_2.png" />
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.gt-xs="100">
+    <mat-card class="dashboard-count">
+      <h4>Working From Home</h4>
+      <h2>100</h2>
+      <img src="./assets/img/Image_2.png" />
+    </mat-card>
+  </div>
+  <div fxFlex="25" fxFlex.gt-xs="100">
+    <mat-card class="dashboard-count">
+      <h4>On leave</h4>
+      <h2>100</h2>
+      <img src="./assets/img/Image_2.png" />
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="50"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail" fxFlexAlign="stretch">
+      <mat-card-header>
+        <mat-card-title>Contracts Renewed</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <img src="./assets/img/echarts_1_1.png" />
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="50"  fxFlex.gt-xs="100" >
+    <mat-card class="dashboard-detail" fxFlexAlign="stretch">
+      <mat-card-header>
+        <mat-card-title>Recent Survey</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <img src="./assets/img/Image_8.png" />
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="100"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail">
+      <mat-card-header>
+        <mat-card-title>Company's HRA Score</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+          <div fxFlex="70"  fxFlex.gt-xs="100">
+            <img src="./assets/img/Image_3.png" />
+          </div>
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="65"  fxFlex.gt-xs="100">
+    <div fxLayout="row" >
+      <div fxFlex="100"  fxFlex.gt-xs="100" class="scroller-parent">
+        <mat-card class="dashboard-detail" >
+          <mat-card-header>
+            <mat-card-title>Birthdays</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div   class="scroller" >
+              <mat-card>
+                <img src="./assets/img/Ellipse_1_b.png" />
+                <h4 class="user-name">Emily Smith</h4>
+                <h6 class="usere-desig">Manager</h6>
+                <button mat-raised-button class="round-btn" color="primary">Say Happy Birthday</button>
+              </mat-card>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row"  class="mid-graph">
+      <div fxFlex="100">
+        <mat-card class="dashboard-detail" >
+          <mat-card-header>
+            <mat-card-title>Employees</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> # </th>
+                <td mat-cell *matCellDef="let element">
+                  <img [src]="element.position" />
+                </td>
+              </ng-container>
+
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              </ng-container>
+
+              <!-- Weight Column -->
+              <ng-container matColumnDef="designation">
+                <th mat-header-cell *matHeaderCellDef> Designation </th>
+                <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+              </ng-container>
+
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef> Status </th>
+                <td mat-cell *matCellDef="let element">
+                  <button mat-raised-button class="round-btn" *ngIf="element.status == 0" color="light">Active</button>
+                  <button mat-raised-button class="round-btn" *ngIf="element.status == 1" color="accent">On Leave</button>
+                  <button mat-raised-button class="round-btn" *ngIf="element.status == 2" color="warn">Locked</button>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row" class="mid-graph">
+      <div fxFlex="100"  fxFlex.gt-xs="100" class="scroller-parent">
+        <mat-card class="dashboard-detail" >
+          <mat-card-header>
+            <mat-card-title>Anniversaries</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div   class="scroller" >
+              <mat-card>
+                <img src="./assets/img/Ellipse_1_b.png" />
+                <h4 class="user-name">Emily Smith</h4>
+                <h6 class="usere-desig">Manager</h6>
+                <button mat-raised-button class="round-btn" color="primary">Wish Anniversary</button>
+              </mat-card>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  <div fxFlex="35"  fxFlex.gt-xs="100" >
+    <div fxLayout="row">
+      <div fxFlex="100"  fxFlex.gt-xs="100" >
+        <mat-card class="notification-parent">
+          <mat-card-header>
+            <mat-card-title>Notifications</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="left-side">Important</span><span class="right">9mins</span></div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+    <div fxLayout="row"  class="mid-graph">
+      <div fxFlex="100"  fxFlex.gt-xs="100" >
+        <mat-card class="notification-parent">
+          <mat-card-header>
+            <mat-card-title>Messages</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+              <mat-list-item>
+                <div class="list-img"><img src="../../../assets/img/Ellipse_1.png"/></div>
+                <div mat-line>Important</div>
+                <div mat-line>Your Health Insurance is expiring in 15 Days.</div>
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>
+<div fxLayout="row"  class="mid-graph">
+  <div fxFlex="100"  fxFlex.gt-xs="100" >
+    <ejs-schedule width='100%' height='550px' currentView="month" [selectedDate]="selectedDate" [eventSettings]="eventSettings" > <e-views><e-view option="Month"></e-view> <e-view option="Week"></e-view> <e-view option="Day"></e-view> </e-views> </ejs-schedule>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="100"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail">
+      <mat-card-header>
+        <mat-card-title>rewards</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+          <div fxFlex="70"  fxFlex.gt-xs="100">
+            <img src="./assets/img/Image_9.png" />
+          </div>
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="100"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail">
+      <mat-card-header>
+        <mat-card-title>rewards</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+          <div fxFlex="40"  fxFlex.gt-xs="100">
+            <mat-list class="survey-info">
+              <mat-list-item>
+                <div mat-line><span class="surve-timing">02 : 30 : 59</span></div>
+                <div mat-line><small>Time left</small></div>
+                <button mat-raised-button  color="warn">End Survey</button>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="surve-score">15 / 100</span></div>
+                <div mat-line><small>Not attempted yet!</small></div>
+                <button mat-raised-button  color="primary">Send reminder</button>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+
