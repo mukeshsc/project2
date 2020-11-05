@@ -1,0 +1,75 @@
+<div class="back-bg">
+  <div class="login-container">
+    <div class="container">
+      <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
+        <div fxFlex="50" fxFlex.gt-xs="100" fxFlexAlign="stretch">
+          <div fxLayout="column"  fxLayoutAlign="space-around left" fxFlexAlign="stretch">
+            <div fxFlex="20">
+              <h3 class="logo">
+                Company <br /><span>Logo</span>
+              </h3>
+            </div>
+            <div fxFlex="70">
+              <div class="login-heading">
+                <h1>welcome on<br /> Company admin portal</h1>
+                <p>Lorem Ipsum is simply dummy text of the printing and<br /> typesetting industry. Lorem Ipsum has been the industry's<br/> standard dummy text.</p>
+              </div>
+            </div>
+            <div fxFlex="10">
+              <div class="quick-links" >
+                <ul>
+                  <li>
+                    <a>About us</a>
+                  </li>
+                  <li>
+                    <a>Contact us</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="50" fxFlex.gt-xs="100" >
+          <mat-card class="loing-card" >
+            <mat-card-header>
+              <mat-card-title>Login</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+              <form>
+                <p>
+                  <mat-form-field appearance="legacy">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput>
+                    <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                  </mat-form-field>
+                </p>
+                <p>
+                  <mat-form-field appearance="standard">
+                    <mat-label>Password</mat-label>
+                    <input matInput>
+                    <mat-icon matSuffix>vpn_key</mat-icon>
+                  </mat-form-field>
+                </p>
+                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="login-form-links">
+                  <div fxFlex="50">
+                    <mat-checkbox class="example-margin" >Remember Me</mat-checkbox>
+                  </div>
+                  <div fxFlex="50" class="forgot-link">
+                    <a routerLink="/forgot-password">Forgot Password?</a>
+                  </div>
+                </div>
+                <p>
+                  <button mat-raised-button color="primary" class="block-btn login-button" routerLink="/dashboard">
+                    LOGIN
+                  </button>
+                </p>
+              </form>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="front-bg">
+  </div>
+</div>

@@ -252,3 +252,61 @@
     </div>
   </div>
 </div>
+<div fxLayout="row"  class="mid-graph">
+  <div fxFlex="100"  fxFlex.gt-xs="100" >
+    <ejs-schedule width='100%' height='550px' currentView="month" [selectedDate]="selectedDate" [eventSettings]="eventSettings" > <e-views><e-view option="Month"></e-view> <e-view option="Week"></e-view> <e-view option="Day"></e-view> </e-views> </ejs-schedule>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="100"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail">
+      <mat-card-header>
+        <mat-card-title>rewards</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+          <div fxFlex="70"  fxFlex.gt-xs="100">
+            <img src="./assets/img/Image_9.png" />
+          </div>
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+  <div fxFlex="100"  fxFlex.gt-xs="100">
+    <mat-card class="dashboard-detail">
+      <mat-card-header>
+        <mat-card-title>rewards</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+          <div fxFlex="30"  fxFlex.gt-xs="100">
+            <img src="./assets/img/echarts_1.png" />
+          </div>
+          <div fxFlex="40"  fxFlex.gt-xs="100">
+            <mat-list class="survey-info">
+              <mat-list-item>
+                <div mat-line><span class="surve-timing">02 : 30 : 59</span></div>
+                <div mat-line><small>Time left</small></div>
+                <button mat-raised-button  color="warn">End Survey</button>
+              </mat-list-item>
+              <mat-list-item>
+                <div mat-line><span class="surve-score">15 / 100</span></div>
+                <div mat-line><small>Not attempted yet!</small></div>
+                <button mat-raised-button  color="primary">Send reminder</button>
+              </mat-list-item>
+            </mat-list>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+

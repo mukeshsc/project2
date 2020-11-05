@@ -1,5 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:display=swap');
+@import '../node_modules/@syncfusion/ej2-base/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-buttons/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-calendars/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-dropdowns/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-inputs/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-lists/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-popups/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-navigations/styles/material.css';
+@import '../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: 'Poppins', sans-serif;}
@@ -100,7 +109,9 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
   text-transform: var(--unnamed-text-transform-titlecase);
   }
 
-
+  .no-padding {
+    padding: 0 !important;
+  }
   .page-title{
     text-align: left;
     font: normal normal 600 24px/35px Poppins !important;
@@ -125,8 +136,40 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
       text-align: left;
       text-transform: capitalize;
       opacity: 0.5;
+      display: inline;
+      padding: 0 15px 0 0;
+      a{
+        text-decoration: none;
+        color: var(--unnamed-color-000000);
+        &:after{
+          content:">";
+          margin-left: 15px;
+        }
+      }
+
     }
   }
+
+  .mat-drawer-inner-container {
+    max-height: calc(100vh - 50px);
+    padding: 20px;
+    width: 225px !important;
+
+  }
+  .mat-drawer-inner-container::-webkit-scrollbar {
+    width: .5em;
+  }
+
+  .mat-drawer-inner-container::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+
+  .mat-drawer-inner-container::-webkit-scrollbar-thumb {
+    background-color: #FFAA00;
+    border-radius:10px
+  }
+
+
   button.round-btn {
     border-radius: 20px;
   }
@@ -135,6 +178,61 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
     box-shadow: none;
     font-family:Poppins;
   }
-  app-dashboard {
+  .mat-form-field {
+    width: 93%;
+    border: 1px solid var(--unnamed-color-e0e0e0);
+    border: 1px solid #E0E0E0;
+    border-radius: 5px;
+    opacity: 1;
+    padding-left:15px;
+    padding-right:15px;
+
+  }
+  .mat-form-field-underline {
+    display: none;
+  }
+  button.block-btn {
+    display: block;
+    width: 100%;
+  }
+  .search-field {
+    width: 215px;
+    background: #fff;
+    border-radius: 100px;
+    .mat-form-field-wrapper {
+      padding-bottom: 0 !important;
+    }
+    .mat-form-field-flex {
+      flex-direction: row-reverse;
+    }
+    .mat-form-field-infix {
+      padding: 8px !important;
+    border-top: 0px !important;
+    }
+    mat-icon.mat-icon {
+      position: absolute;
+      top: -16px;
+      color: #3D3D3D;
+      font-size:15px;
+      opacity: 0.5;
+    }
+    input {
+      padding-left: 30px !important;
+   }
+   span.mat-form-field-label-wrapper {
+    margin-left: 31px;
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-23) var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 15px/23px Poppins;
+    letter-spacing: 0px;
+    color: #000000;
+    text-transform: capitalize;
+    opacity: 0.5;
+  }
+  }
+
+  app-dashboard ,app-login, app-forgot-password, app-calendar {
     width: 100%;
   }
