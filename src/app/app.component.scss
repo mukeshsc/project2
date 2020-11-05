@@ -15,8 +15,11 @@ mat-drawer-content {
 }
 mat-drawer {
   width: 268px;
-  padding:20px;
+  padding:0;
+
+
 }
 app-header {
   width: 100%;
+  padding: 15px 0;
 }
