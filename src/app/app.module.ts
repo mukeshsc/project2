@@ -11,6 +11,7 @@ import { ScheduleModule } from '@syncfusion/ej2-angular-schedule';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import { AppRoutingModule } from './app-routing.module';
@@ -23,7 +24,7 @@ import { UserRolesComponent } from './container/roles-access/user-roles/user-rol
 import { LoginComponent } from './auth/login/login.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { CalendarComponent } from './container/calendar/calendar.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChatComponent } from './container/chat/chat.component';
 
 @NgModule({
@@ -53,7 +54,8 @@ import { ChatComponent } from './container/chat/chat.component';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

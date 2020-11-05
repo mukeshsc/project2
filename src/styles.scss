@@ -232,7 +232,73 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
     opacity: 0.5;
   }
   }
+  .user-contact .mat-list-item-content{
+    flex-direction: row-reverse !important;
+    .list-img {
+      margin-right: 15px;
+    }
+    .mat-line.list-name {
+      text-align: left;
+      font-family: Poppins  !important;
+      font-size:15px;
+      line-height: 26px;
+      font-weight: 600;
+      letter-spacing: 0px;
+      color: #000000;
+      text-transform: capitalize;
+      opacity: 1;
+   }
+   .mat-line.list-desc{
+      text-align: left;
+      font: normal normal normal 15px/23px Poppins !important;
+      letter-spacing: 0px;
+      color: #3D3D3D;
+      text-transform: capitalize;
+      opacity: 1;
+   }
+  }
+  .chat-contact-tabs {
+    mat-tab-header.mat-tab-header {
+      border: 0 !important;
+    }
+    div.mat-tab-label {
+    min-width: 10px !important;
+    padding: 0 !important;
+    }
+    mat-ink-bar.mat-ink-bar {
+      display: none;
+    }
+    .mat-tab-label-content {
+      background: #ecedf7 0% 0% no-repeat padding-box;
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-20)/27px Material-Design-Iconic-Font;
+      letter-spacing: var(--unnamed-character-spacing-0);
+      color: var(--unnamed-color-3F51B5);
+      text-align: right;
+      font: normal normal normal 20px/27px Material-Design-Iconic-Font;
+      letter-spacing: 0px;
+      color: #3F51B5;
+      text-transform: capitalize;
+      opacity: 1;
+      border-radius: 100%;
+      padding: 10px;
+      display: flex;
+      margin: 0 7px;
+      mat-icon.mat-icon {
+        font-size: 20px;
+        text-align: center;
+        line-height: 26px;
+     }
+    }
+    .mat-tab-label-active{
+      opacity:1;
+      .mat-tab-label-content{
+        color:#fff;
+        background: #3F51B5;
+      }
+    }
+  }
 
-  app-dashboard ,app-login, app-forgot-password, app-calendar {
+
+  app-dashboard ,app-login, app-forgot-password, app-calendar, app-chat {
     width: 100%;
   }
