@@ -1,0 +1,96 @@
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+  <div fxFlex>
+    <h3 class="page-title">
+      Employees
+    </h3>
+    <ul class="breadcrumb">
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li><a routerLink="/employees">Dashboard</a></li>
+      <li>Romika Gupta</li>
+    </ul>
+    <span class="back-link" routerLink="/employees">
+      <mat-icon matSuffix>keyboard_backspace</mat-icon>
+      Back
+    </span>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+  <div fxFlex="25">
+    <mat-card class="intro-card">
+      <mat-card-content>
+        <span class="card-title">Romika Gupta</span>
+        <span class="card-subtitle">Sr. Associate</span>
+        <img src="assets/img/Ellipse_1_b.png" />
+        <ul class="contact-list">
+          <li><mat-icon>phone</mat-icon> 264-624-6484</li>
+          <li><mat-icon>email</mat-icon> romika@gmail.com</li>
+          <li><mat-icon>place</mat-icon> 456, Estern evenue, Courtage area, New York</li>
+        </ul>
+        <button mat-raised-button class="round-btn" color="primary">Message</button>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="intro-card">
+      <mat-card-content>
+        <span class="card-title">HRA Score</span>
+        <img src="assets/img/echarts_1_1.png" />
+        <span class="average">Average</span>
+        <span class="average-score">80/100 HRA Score</span><br />
+        <button mat-raised-button class="round-btn" color="primary">View Details</button>
+        <br />
+        <span class="better-percent">
+          Better than 65% of employees
+        </span>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="intro-card">
+      <mat-card-content>
+        <span class="card-title">Badge Won</span>
+        <img src="assets/img/echarts_1_1.png" />
+        <span class="better-percent">
+          4Th Position Out Of 50 Employees
+        </span>
+        <span class="card-subtitle">3 times</span>
+        <button mat-raised-button class="round-btn" color="primary">Message</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div fxFlex="75">
+    <mat-card class="employee-tab">
+      <mat-card-content>
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Profile">
+            <div class="profile-detail">
+              <span class="card-title">About Me</span>
+              <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
+              <a>Show More</a>
+            </div>
+            <div class="profile-detail">
+              <span class="card-title">Skills</span>
+              <br />
+              <mat-chip-list
+                class="example-chip"
+                cdkDropList
+                cdkDropListOrientation="horizontal"
+                (cdkDropListDropped)="drop($event)">
+                <mat-chip
+                  class="example-box"
+                  cdkDrag
+                  *ngFor="let skill of skills">
+                  {{skill.name}}
+                </mat-chip>
+              </mat-chip-list>
+              <button mat-fab color="primary" aria-label="Add Skill">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </mat-tab>
+          <mat-tab label="Attandance">Content 2</mat-tab>
+          <mat-tab label="Health">Content 3</mat-tab>
+          <mat-tab label="Documents">Content 4</mat-tab>
+          <mat-tab label="Insurance">Content 5</mat-tab>
+          <mat-tab label="Salaries">Content 6</mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
