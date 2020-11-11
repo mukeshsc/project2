@@ -42,6 +42,10 @@ export class LoginComponent implements OnInit {
         this.openSnackBar(response.message);
       }
       console.log(res);
+    },err => {
+      const error = err.error;
+      this.ngxService.stop();
+      this.openSnackBar(error.message);
     }));
   }
 
