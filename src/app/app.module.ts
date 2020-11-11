@@ -12,7 +12,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { FormsModule } from '@angular/forms';
+import { NgxUiLoaderModule } from 'ngx-ui-loader';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { NgxDropzoneModule } from 'ngx-dropzone';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatExpansionModule} from '@angular/material/expansion';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -26,6 +32,13 @@ import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.
 import { CalendarComponent } from './container/calendar/calendar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChatComponent } from './container/chat/chat.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { AuthGuardService } from './service/auth-guard.service';
+import { EmployeesComponent } from './container/employees/employees.component';
+import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
+import { SettingComponent } from './container/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +50,11 @@ import { ChatComponent } from './container/chat/chat.component';
     LoginComponent,
     ForgotPasswordComponent,
     CalendarComponent,
-    ChatComponent
+    ChatComponent,
+    ResetPasswordComponent,
+    EmployeesComponent,
+    EmployeeDetailComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,
@@ -55,9 +72,18 @@ import { ChatComponent } from './container/chat/chat.component';
     MatInputModule,
     MatCheckboxModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    FormsModule,
+    HttpClientModule,
+    NgxUiLoaderModule,
+    MatSnackBarModule,
+    MatChipsModule,
+    MatProgressBarModule,
+    NgxDropzoneModule,
+    MatSlideToggleModule,
+    MatExpansionModule
   ],
-  providers: [],
+  providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

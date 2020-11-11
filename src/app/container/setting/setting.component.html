@@ -1,0 +1,237 @@
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+  <div fxFlex>
+    <h3 class="page-title">
+      Setting
+    </h3>
+    <ul class="breadcrumb">
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li>Setting</li>
+    </ul>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+  <div fxFlex="100">
+    <mat-card class="employee-tab">
+      <mat-card-content>
+        <mat-tab-group mat-align-tabs="start">
+          <mat-tab label="Theme Settings">
+            <div fxLayout="row" class="theme-setting-inner">
+              <div fxFlex="50">
+                <span class="card-title">Lable</span>
+                <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
+              </div>
+              <div fxFlex="50">
+                <mat-label>Website Name</mat-label>
+                <mat-form-field>
+                  <input matInput  type="text" #website  name="website" required autocomplete="off" />
+                  <div *ngIf="website.errors && website.touched">
+                    <span class="error" *ngIf="website.errors?.required">Website is mandatory.</span>
+                  </div>
+                </mat-form-field>
+
+                <mat-label>Company Brand</mat-label>
+                <mat-form-field>
+                  <input matInput  type="color" #brand  name="brand" required autocomplete="off" />
+                  <div *ngIf="brand.errors && brand.touched">
+                    <span class="error" *ngIf="brand.errors?.required">Brand is mandatory.</span>
+                  </div>
+                </mat-form-field>
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+                <span class="card-title">Logo and iconography</span>
+                <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
+                <br />
+                <p>Recommended image size is 40px x 40px</p>
+              </div>
+              <div fxFlex="50">
+                <mat-label>Light Logo</mat-label>
+                <div class="dropzone">
+                  <ngx-dropzone (change)="onSelect($event)">
+                    <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
+                      Upload Your Document<br />
+                      <small>drag & drop to upload the document</small>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+                <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
+                <br />
+                <p>Recommended image size is 40px x 40px</p>
+              </div>
+              <div fxFlex="50">
+                <mat-label>Favicon</mat-label>
+                <div class="dropzone">
+                  <ngx-dropzone (change)="onSelect($event)">
+                    <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
+                      Upload Your Document<br />
+                      <small>drag & drop to upload the document</small>
+                    </ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+              </div>
+              <div fxFlex="50">
+                <button mat-raised-button class="big-btn block-btn" color="primary">Save Settings</button>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Notifications">
+            <div fxLayout="row" class="theme-setting-inner">
+              <div fxFlex="50">
+                <span class="card-title">Lable</span>
+                <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
+              </div>
+              <div fxFlex="50">
+                <section class="toggle-section">
+                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >
+                  </mat-slide-toggle>
+                </section>
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+              </div>
+              <div fxFlex="50">
+                <button mat-raised-button class="big-btn block-btn" color="primary">Save Settings</button>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Security Settings">
+            <div fxLayout="row" class="theme-setting-inner">
+              <div fxFlex="50">
+                <span class="card-title">Change Password</span>
+                <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
+              </div>
+              <div fxFlex="50">
+                <mat-form-field>
+                  <input matInput  type="password" #password  name="password" required autocomplete="off" placeholder="Old Password" />
+                  <div *ngIf="password.errors && password.touched">
+                    <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
+                  </div>
+                </mat-form-field><br />
+                <mat-form-field>
+                  <input matInput  type="password" #password  name="password" required autocomplete="off" placeholder="New Password" />
+                  <div *ngIf="password.errors && password.touched">
+                    <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
+                  </div>
+                </mat-form-field><br />
+                <mat-form-field>
+                  <input matInput  type="password" #password  name="password" required autocomplete="off" placeholder="Confirm Password" />
+                  <div *ngIf="password.errors && password.touched">
+                    <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
+                  </div>
+                </mat-form-field><br />
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+              </div>
+              <div fxFlex="50">
+                <button mat-raised-button class="big-btn block-btn" color="primary">Update Password</button>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="FAQs">
+            <div fxLayout="row" class="theme-setting-inner">
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">FAQs</span>
+                  <span class="spacer"></span>
+                  <mat-form-field class="search-field">
+                    <mat-icon matSuffix>search</mat-icon>
+                    <input matInput placeholder="Search">
+                  </mat-form-field>
+
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync">
+                    <mat-icon>filter_list</mat-icon>
+                  </button>
+                </mat-toolbar>
+                <mat-accordion>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Q1. Anim pariatur cliche reprehenderit?
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single origin coffee nulla assumenda shoreditchet. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente.</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Q1. Anim pariatur cliche reprehenderit?
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single origin coffee nulla assumenda shoreditchet. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente.</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Q1. Anim pariatur cliche reprehenderit?
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single origin coffee nulla assumenda shoreditchet. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente.</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Q1. Anim pariatur cliche reprehenderit?
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single origin coffee nulla assumenda shoreditchet. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente.</p>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel hideToggle>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Q1. Anim pariatur cliche reprehenderit?
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single origin coffee nulla assumenda shoreditchet. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente.</p>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Privacy Policy">
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

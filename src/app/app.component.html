@@ -1,9 +1,10 @@
+<ngx-ui-loader></ngx-ui-loader>
 <mat-drawer-container class="main-container"   autosize>
-  <mat-drawer #drawer mode="side" opened *ngIf="!(router.url === '/' || router.url === '/forgot-password')">
+  <mat-drawer #drawer mode="side" opened *ngIf="!(router.url === '/' || router.url === '/forgot-password' || router.url === '/reset-password')">
     <app-sidebar></app-sidebar>
   </mat-drawer>
-  <mat-drawer-content [ngClass]="(router.url === '/' || router.url === '/forgot-password')?'no-padding':''">
-    <app-header (toggleMenu)="toggleMenu()"  *ngIf="!(router.url === '/' || router.url === '/forgot-password')"></app-header>
+  <mat-drawer-content [ngClass]="(router.url === '/' || router.url === '/forgot-password' || router.url === '/reset-password')?'no-padding':''">
+    <app-header (toggleMenu)="toggleMenu()"  *ngIf="!(router.url === '/' || router.url === '/forgot-password' || router.url === '/reset-password')"></app-header>
     <router-outlet></router-outlet>
   </mat-drawer-content>
 </mat-drawer-container>

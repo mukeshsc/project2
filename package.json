@@ -25,6 +25,8 @@
     "@angular/router": "~10.1.6",
     "@syncfusion/ej2-angular-schedule": "^18.3.44",
     "moment": "^2.29.1",
+    "ngx-dropzone": "^2.2.2",
+    "ngx-ui-loader": "^9.1.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

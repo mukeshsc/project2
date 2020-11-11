@@ -1,43 +1,34 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from 'src/app/service/auth-service.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-import {
-  MatSnackBar
-} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrls: ['./reset-password.component.scss']
 })
-export class LoginComponent implements OnInit {
-  // from data for login api
+export class ResetPasswordComponent implements OnInit {
   formData = {
-    email: '',
-    password: ''
+    otp: '',
+    newPassword: '',
+    confirmPassword:'',
   }
   constructor(public _auth: AuthServiceService, private ngxService: NgxUiLoaderService, private _snackBar: MatSnackBar, public router:Router) { }
 
   ngOnInit(): void {
-
-    // Checking is login credential saved in remember me
-    if(localStorage.getItem('loginCred')){
-      this.formData = JSON.parse(localStorage.getItem('loginCred'));
-    }
   }
 
   // login api calling
-  async login(){
+  async reset(){
     this.ngxService.start();
-    await(this._auth.login(this.formData).subscribe(res => {
+    await(this._auth.resetPassword(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
       if (response.success == true){
-        localStorage.setItem('userData', JSON.stringify(response.data));
-        localStorage.setItem('token', response.data.tokens)
         this.openSnackBar(response.message);
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/login']);
       }else{
         this.openSnackBar(response.message);
       }
@@ -49,14 +40,6 @@ export class LoginComponent implements OnInit {
     }));
   }
 
-  // remember me to save login cred in cookies
-  rememberMe(e){
-    if (e.checked){
-      localStorage.setItem('loginCred', JSON.stringify(this.formData));
-    }else{
-      localStorage.setItem('loginCred', undefined);
-    }
-  }
 
   // alert message after api response
   openSnackBar(msg) {
