@@ -35,31 +35,37 @@
               <mat-card-title>Login</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-              <form>
+              <form name="loginform" (ngSubmit)="login()" #loginform="ngForm">
                 <p>
-                  <mat-form-field appearance="legacy">
+                  <mat-form-field appearance="standard">
                     <mat-label>Email Address</mat-label>
-                    <input matInput>
+                    <input matInput type="email" #email [(ngModel)]="formData.email" name="email" required autocomplete="off" />
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+                    <div *ngIf="email.errors && email.touched">
+											<span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
+										</div>
                   </mat-form-field>
                 </p>
                 <p>
                   <mat-form-field appearance="standard">
                     <mat-label>Password</mat-label>
-                    <input matInput>
+                    <input matInput  type="password" #password [(ngModel)]="formData.password" name="password" required autocomplete="off" />
                     <mat-icon matSuffix>vpn_key</mat-icon>
+                    <div *ngIf="password.errors && password.touched">
+											<span class="password" *ngIf="password.errors?.required">Password is mandatory.</span>
+										</div>
                   </mat-form-field>
                 </p>
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="login-form-links">
                   <div fxFlex="50">
-                    <mat-checkbox class="example-margin" >Remember Me</mat-checkbox>
+                    <mat-checkbox (change)="rememberMe($event)" class="example-margin" >Remember Me</mat-checkbox>
                   </div>
                   <div fxFlex="50" class="forgot-link">
                     <a routerLink="/forgot-password">Forgot Password?</a>
                   </div>
                 </div>
                 <p>
-                  <button mat-raised-button color="primary" class="block-btn login-button" routerLink="/dashboard">
+                  <button mat-raised-button color="primary" class="block-btn login-button"  [disabled]="!loginform.valid" (click)="login()">
                     LOGIN
                   </button>
                 </p>

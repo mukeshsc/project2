@@ -2,20 +2,27 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { CalendarComponent } from './container/calendar/calendar.component';
 import { ChatComponent } from './container/chat/chat.component';
 import { DashboardComponent } from './container/dashboard/dashboard.component';
+import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
+import { EmployeesComponent } from './container/employees/employees.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
+import { AuthGuardService } from './service/auth-guard.service';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'calendar', component: CalendarComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'user-roles', component: UserRolesComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuardService] },
+  { path: 'calendar', component: CalendarComponent,canActivate: [AuthGuardService] },
+  { path: 'chat', component: ChatComponent,canActivate: [AuthGuardService] },
+  { path: 'employees', component: EmployeesComponent,canActivate: [AuthGuardService] },
+  { path: 'employees/:id', component: EmployeeDetailComponent,canActivate: [AuthGuardService] },
+  { path: 'user-roles', component: UserRolesComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 
