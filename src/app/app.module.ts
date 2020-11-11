@@ -34,6 +34,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuardService } from './service/auth-guard.service';
 import { EmployeesComponent } from './container/employees/employees.component';
 import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
+import { SettingComponent } from './container/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { EmployeeDetailComponent } from './container/employee-detail/employee-de
     ChatComponent,
     ResetPasswordComponent,
     EmployeesComponent,
-    EmployeeDetailComponent
+    EmployeeDetailComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

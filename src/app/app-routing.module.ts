@@ -9,6 +9,7 @@ import { DashboardComponent } from './container/dashboard/dashboard.component';
 import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
 import { EmployeesComponent } from './container/employees/employees.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
+import { SettingComponent } from './container/setting/setting.component';
 import { AuthGuardService } from './service/auth-guard.service';
 
 
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'employees', component: EmployeesComponent,canActivate: [AuthGuardService] },
   { path: 'employees/:id', component: EmployeeDetailComponent,canActivate: [AuthGuardService] },
   { path: 'user-roles', component: UserRolesComponent,canActivate: [AuthGuardService] },
+  { path: 'setting', component: SettingComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 
