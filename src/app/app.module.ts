@@ -35,6 +35,7 @@ import { AuthGuardService } from './service/auth-guard.service';
 import { EmployeesComponent } from './container/employees/employees.component';
 import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
 import { SettingComponent } from './container/setting/setting.component';
+import { InsuranceComponent } from './container/insurance/insurance.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { SettingComponent } from './container/setting/setting.component';
     ResetPasswordComponent,
     EmployeesComponent,
     EmployeeDetailComponent,
-    SettingComponent
+    SettingComponent,
+    InsuranceComponent
   ],
   imports: [
     BrowserModule,
