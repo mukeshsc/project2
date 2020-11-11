@@ -94,8 +94,71 @@
 
   </div>
   <div fxFlex="75" fxFlex.gt-xs="75">
-    <mat-card >
-
-    </mat-card>
+      <mat-toolbar color="primary">
+        <img src="assets/img/Ellipse_1_b.png" />
+        <span class="mat-toolbar-title">
+          Ryan Sandival <br />
+          <small>Manager</small>
+        </span>
+        <span class="spacer"></span>
+        <button mat-mini-fab color="primary" class="cal-button"  aria-label="Add new" >
+          <mat-icon>description</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="cal-button"  aria-label="Add new" >
+          <mat-icon>videocam</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="cal-button"  aria-label="Filter">
+          <mat-icon>local_phone</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" class="cal-button" aria-label="Sync">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-toolbar>
+      <mat-card class="chat-box">
+        <mat-card-content>
+          <div class="chat-box-inner">
+            <div class="message-in-div">
+              <span class="in-message">
+                Hi Isha! How are you???
+              </span>
+            </div>
+            <div class="message-in-div">
+              <span class="in-message">
+                Dear! need your help to complete Healthcare project.
+              </span>
+            </div>
+            <div class="message-in-div">
+              <span class="in-time">
+                12:30 PM
+              </span>
+            </div>
+            <div class="message-out-div">
+              <span class="out-message">
+                Hi Isha! How are you???
+              </span>
+            </div>
+            <div class="message-out-div">
+              <span class="out-message">
+                Dear! need your help to complete Healthcare project.
+              </span>
+            </div>
+            <div class="message-out-div">
+              <span class="out-time">
+                12:31 PM
+              </span>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-footer class="chat-footer">
+          <mat-form-field class="chat-message">
+            <mat-icon matPreffix>sentiment_very_satisfied</mat-icon>
+            <input matInput placeholder="Write message....">
+            <mat-icon matSuffix>camera_alt</mat-icon>
+          </mat-form-field>
+          <button mat-mini-fab color="primary" class="cal-button"  aria-label="Add new" >
+            <mat-icon>add</mat-icon>
+          </button>
+        </mat-card-footer>
+      </mat-card>
   </div>
 </div>
