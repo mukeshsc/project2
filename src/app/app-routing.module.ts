@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password/:key', component: ResetPasswordComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuardService] },
   { path: 'calendar', component: CalendarComponent,canActivate: [AuthGuardService] },
   { path: 'chat', component: ChatComponent,canActivate: [AuthGuardService] },
