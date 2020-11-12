@@ -149,7 +149,21 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
 
     }
   }
-
+  mat-card {
+    padding: 30px !important;
+    border-radius: 10px !important;
+  }
+  p{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/25px var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: left;
+    font: normal normal normal 15px/25px Poppins;
+    letter-spacing: 0px;
+    color: #000000;
+    text-transform: capitalize;
+    opacity: 0.5;
+  }
   .mat-drawer-inner-container {
     max-height: calc(100vh - 50px);
     padding: 20px;
@@ -360,13 +374,20 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
   text-transform: capitalize;
   opacity: 0.5;
 }
+.mat-tab-group{
+  font-family: var(--unnamed-font-family-poppins);
+}
 .employee-tab{
-  mat-tab-header.mat-tab-header {
-    padding-left: 30px;
+  .mat-tab-labels {
+    justify-content: space-between;
   }
   .mat-tab-label {
     padding-left: 0;
     justify-content:start;
+    padding-bottom:28px;
+  }
+  .mat-tab-body-wrapper {
+    padding: 30px 0;
   }
   .mat-tab-label-active{
     opacity:1;
@@ -383,7 +404,6 @@ body { margin: 0; font-family: 'Poppins', sans-serif;}
       opacity: 1;
       min-width: 90px;
       justify-content: start !important;
-      padding: 0 25px 0 0;
       height: 55px;
     }
   }
@@ -411,6 +431,65 @@ mat-chip {
   margin: 10px !important;
 }
 
-app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-insurance {
+mat-label {
+  padding: 30px 0 10px;
+  display: block;
+}
+.dropzone {
+  border: 1px solid var(--unnamed-color-e0e0e0);
+  padding: 10px;
+  border-radius: 5px;
+}
+ngx-dropzone-label {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-poppins);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3d3d3d);
+  text-align: center;
+  font: normal normal 600 20px/30px Poppins;
+  letter-spacing: 0px;
+  color: #3D3D3D;
+  text-transform: capitalize;
+  opacity: 1;
+  small{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/var(--unnamed-line-spacing-23) var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: center;
+    font: normal normal normal 15px/23px Poppins;
+    letter-spacing: 0px;
+    color: #000000;
+    text-transform: capitalize;
+    opacity: 0.5;
+  }
+  mat-icon {
+    color: var(--unnamed-color-3f51b5);
+    font-size: 62px !important;
+    margin-top: 15px;
+  }
+}
+.big-btn {
+  height: 65px;
+}
+section.toggle-section {
+  border: 1px solid var(--unnamed-color-e0e0e0);
+  border-radius: 5px;
+  padding: 0 30px 30px;
+  margin-bottom:10px;
+}
+mat-expansion-panel-header {
+  height: 88px !important;
+  mat-panel-title {
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-20)/var(--unnamed-line-spacing-30) var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-3d3d3d);
+    text-align: left;
+    font: normal normal 600 20px/30px Poppins;
+    letter-spacing: 0px;
+    color: #3D3D3D;
+    text-transform: capitalize;
+    opacity: 1;
+  }
+}
+app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting {
   width: 100%;
 }
