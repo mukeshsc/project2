@@ -64,6 +64,15 @@
       color: var(--unnamed-color-3f51b5);
     }
   }
+  & .active-block{
+    background: #f6f7fc 0% 0% no-repeat padding-box;
+    mat-icon{
+      color: var(--unnamed-color-3f51b5);
+    }
+    .mat-line {
+      color: var(--unnamed-color-3f51b5);
+    }
+  }
   .mat-list-item-content:focus{
     outline:0 !important;
   }

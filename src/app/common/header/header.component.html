@@ -8,9 +8,15 @@
       <div fxFlex="30" fxFlexOffset="60"  >
         <div fxLayout="row" fxLayoutAlign="space-around center" dir="rtl">
           <div fxFlex>
-            <button mat-mini-fab color="light"  aria-label="expand">
-              <mat-icon>aspect_ratio</mat-icon>
+            <button mat-mini-fab color="light" [matMenuTriggerFor]="menu" aria-label="expand">
+              <mat-icon>settings</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>power_settings_new</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
           </div>
           <div fxFlex>
             <button mat-mini-fab color="light" class="img-fab"  aria-label="expand">

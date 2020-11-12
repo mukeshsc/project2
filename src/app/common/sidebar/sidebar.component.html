@@ -16,99 +16,31 @@
 </div>
 <div fxLayout="row" class="side-nav" fxLayoutAlign="space-around center" >
   <div fxFlex="100" >
-    <mat-list>
-      <mat-list-item  routerLink="/dashboard" routerLinkActive="active">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Dashboard</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/calendar" routerLinkActive="active" >
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Calendar</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item    routerLink="/chat" routerLinkActive="active" >
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Chat</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-divider></mat-divider>
-    <mat-list>
-      <mat-list-item  routerLink="/employees" routerLinkActive="active" >
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Employees</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/user-roles" routerLinkActive="active">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Roles & access</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Documents</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Announcements</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Salary Management</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Surveys</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Reports</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-divider></mat-divider>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Health & Wellness</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Insurance</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Rewards</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-divider></mat-divider>
-    <mat-list>
-      <mat-list-item  routerLink="/">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Company Profile</div>
-      </mat-list-item>
-    </mat-list>
-    <mat-list>
-      <mat-list-item  routerLink="/setting">
-        <mat-icon mat-list-icon>sentiment_satisfied</mat-icon>
-        <div mat-line>Settings</div>
-      </mat-list-item>
-    </mat-list>
+    <ng-container *ngFor="let p of pages">
+      <mat-list *ngIf="p.title !== 'divider'" >
+        <mat-list-item [routerLink]="p.url" routerLinkActive="active" *ngIf="p.children.length === 0">
+          <mat-icon mat-list-icon>{{p.icon}}</mat-icon>
+          <div mat-line>{{p.title}}</div>
+        </mat-list-item>
+        <mat-list-item (click)="p.open = !p.open"  *ngIf="p.children.length !== 0"  [ngClass]="p.open?'active-block':''">
+          <mat-icon mat-list-icon>{{p.icon}}</mat-icon>
+          <div mat-line>{{p.title}}</div>
+          <ng-container class="child-menu" *ngIf="p.children.length > 0" >
+            <mat-icon mat-list-icon *ngIf="!p.open">keyboard_arrow_right</mat-icon>
+            <mat-icon mat-list-icon *ngIf="p.open">keyboard_arrow_down</mat-icon>
+          </ng-container>
+        </mat-list-item>
+        <ng-container *ngIf="p.open" >
+          <mat-list *ngFor="let c of p.children" [ngClass]="p.open?'active-block':''">
+            <mat-list-item [routerLink]="c.url">
+              <mat-icon mat-list-icon>{{c.icon}}</mat-icon>
+              {{c.title}}
+            </mat-list-item>
+          </mat-list>
+        </ng-container>
+        </mat-list>
+      <mat-divider *ngIf="p.title === 'divider'"></mat-divider>
+    </ng-container>
   </div>
 </div>
 

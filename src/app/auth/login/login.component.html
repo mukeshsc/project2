@@ -36,26 +36,22 @@
             </mat-card-header>
             <mat-card-content>
               <form name="loginform" (ngSubmit)="login()" #loginform="ngForm">
-                <p>
+                  <mat-label>Email Address</mat-label>
                   <mat-form-field appearance="standard">
-                    <mat-label>Email Address</mat-label>
                     <input matInput type="email" #email [(ngModel)]="formData.email" name="email" required autocomplete="off" />
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                     <div *ngIf="email.errors && email.touched">
 											<span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
 										</div>
                   </mat-form-field>
-                </p>
-                <p>
+                  <mat-label>Password</mat-label>
                   <mat-form-field appearance="standard">
-                    <mat-label>Password</mat-label>
                     <input matInput  type="password" #password [(ngModel)]="formData.password" name="password" required autocomplete="off" />
                     <mat-icon matSuffix>vpn_key</mat-icon>
                     <div *ngIf="password.errors && password.touched">
 											<span class="password" *ngIf="password.errors?.required">Password is mandatory.</span>
 										</div>
                   </mat-form-field>
-                </p>
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="login-form-links">
                   <div fxFlex="50">
                     <mat-checkbox (change)="rememberMe($event)" class="example-margin" >Remember Me</mat-checkbox>
@@ -64,11 +60,9 @@
                     <a routerLink="/forgot-password">Forgot Password?</a>
                   </div>
                 </div>
-                <p>
-                  <button mat-raised-button color="primary" class="block-btn login-button"  [disabled]="!loginform.valid" (click)="login()">
+                  <button mat-raised-button color="primary" class="block-btn login-button"  [disabled]="!loginform.valid" >
                     LOGIN
                   </button>
-                </p>
               </form>
             </mat-card-content>
           </mat-card>

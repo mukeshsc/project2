@@ -12,13 +12,14 @@ import { UserRolesComponent } from './container/roles-access/user-roles/user-rol
 import { SettingComponent } from './container/setting/setting.component';
 import { AuthGuardService } from './service/auth-guard.service';
 import { InsuranceComponent } from './container/insurance/insurance.component';
+import { EmployeeSalaryComponent } from './container/employee-salary/employee-salary.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full' },
   { path: '', component: LoginComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
-  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password/:key', component: ResetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuardService] },
   { path: 'calendar', component: CalendarComponent,canActivate: [AuthGuardService] },
   { path: 'chat', component: ChatComponent,canActivate: [AuthGuardService] },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'user-roles', component: UserRolesComponent,canActivate: [AuthGuardService] },
   { path: 'setting', component: SettingComponent,canActivate: [AuthGuardService] },
   { path: 'insurance', component: InsuranceComponent,canActivate: [AuthGuardService] },
+  { path: 'employee-salary', component: EmployeeSalaryComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

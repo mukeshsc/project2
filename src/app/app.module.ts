@@ -20,6 +20,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
+import { ChartsModule } from 'ng2-charts';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -41,6 +43,7 @@ import { EmployeesComponent } from './container/employees/employees.component';
 import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
 import { SettingComponent } from './container/setting/setting.component';
 import { InsuranceComponent } from './container/insurance/insurance.component';
+import { EmployeeSalaryComponent } from './container/employee-salary/employee-salary.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,8 @@ import { InsuranceComponent } from './container/insurance/insurance.component';
     EmployeesComponent,
     EmployeeDetailComponent,
     SettingComponent,
-    InsuranceComponent
+    InsuranceComponent,
+    EmployeeSalaryComponent
   ],
   imports: [
     BrowserModule,
@@ -87,6 +91,8 @@ import { InsuranceComponent } from './container/insurance/insurance.component';
     MatExpansionModule,
     FroalaEditorModule.forRoot(),
     FroalaViewModule.forRoot(),
+    ChartsModule,
+    MatMenuModule,
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]

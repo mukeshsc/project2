@@ -12,6 +12,12 @@ export class AppComponent {
   title = 'hrmd';
   showHeader = true;
   toggleMenu(): void{this.drawer.toggle(); }
-  constructor(public router: Router){}
+  constructor(public router: Router){
+  }
+
+  getRoute(url){
+    let rute = url.split('/')
+    return rute[1];
+  }
 
 }

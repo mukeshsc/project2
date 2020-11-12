@@ -493,6 +493,22 @@ mat-expansion-panel-header {
 .fr-second-toolbar {
   display: none;
 }
+span.error {
+  color: red;
+  font-size: 10px;
+}
+.fr-box.fr-basic {
+  padding: 30px;
+}
+
+.mat-list mat-list.mat-list {
+  padding-left: 10px;
+  font-size: 13px;
+  mat-icon {
+    font-size: 12px !important;
+    margin-top: 12px;
+  }
+}
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting {
   width: 100%;
 }
