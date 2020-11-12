@@ -117,7 +117,7 @@ export class SidebarComponent implements OnInit {
     },
     {
       title:'Insurance',
-      url:'/*',
+      url:'/insurance',
       open:false,
       icon:'sentiment_satisfied',
       children:[]
