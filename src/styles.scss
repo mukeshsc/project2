@@ -489,6 +489,9 @@ mat-expansion-panel-header {
     opacity: 1;
   }
 }
+.fr-second-toolbar {
+  display: none;
+}
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting {
   width: 100%;
 }

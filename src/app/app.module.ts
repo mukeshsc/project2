@@ -19,6 +19,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -81,7 +82,9 @@ import { SettingComponent } from './container/setting/setting.component';
     MatProgressBarModule,
     NgxDropzoneModule,
     MatSlideToggleModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FroalaEditorModule.forRoot(),
+    FroalaViewModule.forRoot(),
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]
