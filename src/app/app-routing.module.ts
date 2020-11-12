@@ -11,6 +11,7 @@ import { EmployeesComponent } from './container/employees/employees.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
 import { SettingComponent } from './container/setting/setting.component';
 import { AuthGuardService } from './service/auth-guard.service';
+import { InsuranceComponent } from './container/insurance/insurance.component';
 
 
 const routes: Routes = [
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'employees/:id', component: EmployeeDetailComponent,canActivate: [AuthGuardService] },
   { path: 'user-roles', component: UserRolesComponent,canActivate: [AuthGuardService] },
   { path: 'setting', component: SettingComponent,canActivate: [AuthGuardService] },
+  { path: 'insurance', component: InsuranceComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 
