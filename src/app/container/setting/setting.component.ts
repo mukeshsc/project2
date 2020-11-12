@@ -15,6 +15,7 @@ export class SettingComponent implements OnInit {
   faqData:any;
   privacyPolicyData:any;
   themeDataSet:any;
+  smtpDataSet:any;
   themeData = {
     "company_Brand":"#000000" ,
     "ligth_logo": "",
@@ -35,6 +36,7 @@ export class SettingComponent implements OnInit {
     this.getFaq();
     this.getPrivacyPolicy();
     this.getTheme();
+    this.getsmtp();
   }
 
   // Security setting (Update password)
@@ -163,6 +165,26 @@ async updateTheme(){
 
 }
 
+ // Get smtp
+ async getsmtp(){
+  this.ngxService.start();
+  await(this._api.getSmtp().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.smtpDataSet = response.data;
+      this.openSnackBar(response.message);
+    }else{
+      this.openSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openSnackBar(error.message);
+  }));
+
+}
 
   onSelect(event) {
     console.log(event);

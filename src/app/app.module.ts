@@ -22,6 +22,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ChartsModule } from 'ng2-charts';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -93,6 +94,7 @@ import { EmployeeSalaryComponent } from './container/employee-salary/employee-sa
     FroalaViewModule.forRoot(),
     ChartsModule,
     MatMenuModule,
+    MatRadioModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]

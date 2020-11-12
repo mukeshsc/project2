@@ -11,7 +11,7 @@
 @import '../node_modules/@syncfusion/ej2-angular-schedule/styles/material.css';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Poppins', sans-serif;}
+body { margin: 0; font-family: 'Poppins', sans-serif !important;}
 
 :root {
 
@@ -507,6 +507,18 @@ span.error {
   mat-icon {
     font-size: 12px !important;
     margin-top: 12px;
+  }
+}
+mat-radio-group.mat-radio-group {
+  width: 93%;
+  border: 1px solid lightgray;
+  display: flex;
+  border-radius: 5px;
+  padding: 21px 15px;
+  flex-wrap: wrap;
+  mat-radio-button {
+    display: flex;
+    flex: auto;
   }
 }
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting {

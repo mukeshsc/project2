@@ -57,4 +57,13 @@ export class CommonServiceService {
 		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyUpdateTheme`,formData, {headers}).pipe(map(res => <any>res));
   }
 
+  // setting get smtp
+  getSmtp() {
+		let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+		});
+		return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}companyShowSMTP`, {headers}).pipe(map(res => <any>res));
+  }
+
 }

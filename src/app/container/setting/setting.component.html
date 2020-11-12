@@ -226,49 +226,55 @@
               <div fxFlex="50">
                 <mat-label>Mail Server</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #mail_server  name="mail_server" required autocomplete="off" />
-                  <div *ngIf="mail_server.errors && mail_server.touched">
-                    <span class="error" *ngIf="mail_server.errors?.required">Mail Server is mandatory.</span>
+                  <input matInput  type="text" #mail_Server  name="mail_Server" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
+                  <div *ngIf="mail_Server.errors && mail_Server.touched">
+                    <span class="error" *ngIf="mail_Server.errors?.required">Mail Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-label>SMTP Port</mat-label>
                 <mat-form-field>
-                  <input matInput  type="number" #port  name="port" required autocomplete="off" />
-                  <div *ngIf="port.errors && port.touched">
-                    <span class="error" *ngIf="port.errors?.required">SMTP Server is mandatory.</span>
+                  <input matInput  type="number" #smtp_Port  name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
+                  <div *ngIf="smtp_Port.errors && smtp_Port.touched">
+                    <span class="error" *ngIf="smtp_Port.errors?.required">SMTP Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-label>Username</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #username  name="username" required autocomplete="off" />
-                  <div *ngIf="username.errors && username.touched">
-                    <span class="error" *ngIf="username.errors?.required">Username is mandatory.</span>
+                  <input matInput  type="text" #userName  name="userName" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
+                  <div *ngIf="userName.errors && userName.touched">
+                    <span class="error" *ngIf="userName.errors?.required">Username is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-label>Password</mat-label>
                 <mat-form-field>
-                  <input matInput  type="password" #password  name="password" required autocomplete="off" />
+                  <input matInput  type="password" #password  name="password" [(ngModel)]="smtpDataSet.password" required autocomplete="off" />
                   <div *ngIf="password.errors && password.touched">
                     <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
                   </div>
                 </mat-form-field>
 
+                <mat-label>Server Security</mat-label>
+                <mat-radio-group aria-label="Select an option" [(ngModel)]="smtpDataSet.server_Security">
+                  <mat-radio-button value="TLS">TLS</mat-radio-button>
+                  <mat-radio-button value="SSL">SSL</mat-radio-button>
+                </mat-radio-group>
+
                 <mat-label>Default Sender</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #sender  name="sender" required autocomplete="off" />
-                  <div *ngIf="sender.errors && sender.touched">
-                    <span class="error" *ngIf="sender.errors?.required">Default Sender is mandatory.</span>
+                  <input matInput  type="text" #default_Sender  name="default_Sender" [(ngModel)]="smtpDataSet.default_Sender" required autocomplete="off" />
+                  <div *ngIf="default_Sender.errors && default_Sender.touched">
+                    <span class="error" *ngIf="default_Sender.errors?.required">Default Sender is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-label>Default Sender Name</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #sender_name  name="sender_name" required autocomplete="off" />
-                  <div *ngIf="sender_name.errors && sender_name.touched">
-                    <span class="error" *ngIf="sender_name.errors?.required">Default Sender Name is mandatory.</span>
+                  <input matInput  type="text" #default_SenderName  [(ngModel)]="smtpDataSet.default_SenderName"  name="default_SenderName" required autocomplete="off" />
+                  <div *ngIf="default_SenderName.errors && default_SenderName.touched">
+                    <span class="error" *ngIf="default_SenderName.errors?.required">Default Sender Name is mandatory.</span>
                   </div>
                 </mat-form-field>
               </div>
