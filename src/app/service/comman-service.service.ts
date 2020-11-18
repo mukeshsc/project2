@@ -66,4 +66,31 @@ export class CommonServiceService {
 		return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}companyShowSMTP`, {headers}).pipe(map(res => <any>res));
   }
 
+  // Event get leave type
+  getleaveType() {
+		let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+		});
+		return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}leaveType `, {headers}).pipe(map(res => <any>res));
+  }
+
+  // Event get
+  getEvent() {
+		let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+		});
+
+    return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}companyShowCalendarEvent `, {headers}).pipe(map(res => <any>res));
+  }
+  // Event get
+  addEvent(formData) {
+		let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+		});
+		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyAddCalendarEvent `,formData, {headers}).pipe(map(res => <any>res));
+  }
+
 }
