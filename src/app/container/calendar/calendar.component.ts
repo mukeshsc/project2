@@ -9,7 +9,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {
   MatSnackBar
 } from '@angular/material/snack-bar';
-import moment from 'moment';
+import * as moment from 'moment';
 
 @Component({
   providers: [DayService, WeekService, WorkWeekService, MonthService],
@@ -77,8 +77,7 @@ async getEvent(){
         }
         this.data.push(obj)
       }
-      console.log(this.data)
-      this.eventSettings.dataSource = this.data;
+      this.scheduleObj.saveEvent(this.data);
       this.openSnackBar(response.message);
     }else{
       this.openSnackBar(response.message);
@@ -181,9 +180,9 @@ async onActionComplete(){
     if(this.data.length === 1){
       data =this.data[0]
     }else{
-      data = this.data[-1];
+      data = this.data.pop();
     }
-    // console.log(data)
+    console.log(data)
     let formData = {
       "event_Type":data.EventType,
       "event_StartDate":new Date(data.StartTime),
@@ -205,6 +204,7 @@ async onActionComplete(){
           this.openSnackBar(response.message);
         }
         console.log(res);
+        // this.getEvent();
       },err => {
         const error = err.error;
         this.openSnackBar(error.message);
@@ -220,6 +220,7 @@ async onActionComplete(){
           this.openSnackBar(response.message);
         }
         console.log(res);
+        // this.getEvent();
       },err => {
         const error = err.error;
         this.openSnackBar(error.message);
