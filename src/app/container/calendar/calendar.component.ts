@@ -9,6 +9,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {
   MatSnackBar
 } from '@angular/material/snack-bar';
+import moment from 'moment';
 
 @Component({
   providers: [DayService, WeekService, WorkWeekService, MonthService],
@@ -24,6 +25,7 @@ export class CalendarComponent implements OnInit {
   public eventSettings: EventSettingsModel = { dataSource: this.data };
   leaveData:any = [];
   files: File[] = [];
+  selectedEvent:any = []
 
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
@@ -192,21 +194,55 @@ async onActionComplete(){
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0
     }
-    await(this._api.addEvent(formData).subscribe(res => {
-      this.ngxService.stop();
-      const response: any = res;
-      if (response.success == true){
-        this.openSnackBar(response.message);
-      }else{
-        this.openSnackBar(response.message);
-      }
-      console.log(res);
-    },err => {
-      const error = err.error;
-      this.openSnackBar(error.message);
-      this.ngxService.stop();
-    }));
+    if(data.calendarEvent_id && data.calendarEvent_id != ''){
+      formData['calendarEvent_id'] = data.calendarEvent_id;
+      await(this._api.editEvent(formData).subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.openSnackBar(response.message);
+        }else{
+          this.openSnackBar(response.message);
+        }
+        console.log(res);
+      },err => {
+        const error = err.error;
+        this.openSnackBar(error.message);
+        this.ngxService.stop();
+      }));
+    }else{
+      await(this._api.addEvent(formData).subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.openSnackBar(response.message);
+        }else{
+          this.openSnackBar(response.message);
+        }
+        console.log(res);
+      },err => {
+        const error = err.error;
+        this.openSnackBar(error.message);
+        this.ngxService.stop();
+      }));
+    }
+
   }
+}
+// selectEvent
+onEventClick(event){
+  console.log(event)
+  this.selectedEvent = [event.event]
+}
+
+// for get only date from start date of selected event
+getDate(e){
+  return moment(e).format('DD MMM YYYY')
+}
+
+// for get only time from start date of selected event
+getTime(e){
+  return moment(e).format('HH:mm A')
 }
 
  // alert message after api response

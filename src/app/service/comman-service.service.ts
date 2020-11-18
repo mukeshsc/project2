@@ -93,4 +93,14 @@ export class CommonServiceService {
 		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyAddCalendarEvent `,formData, {headers}).pipe(map(res => <any>res));
   }
 
+  // Event edit
+  editEvent(formData){
+
+		let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+		});
+		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyUpdateCalendarEvent `,formData, {headers}).pipe(map(res => <any>res));
+  }
+
 }

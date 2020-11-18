@@ -37,7 +37,8 @@
     [selectedDate]="selectedDate"
     [eventSettings]="eventSettings"
     (popupOpen)="onPopupOpen($event)"
-    (actionComplete)="onActionComplete()" >
+    (actionComplete)="onActionComplete()"
+    (eventClick)="onEventClick($event)" >
       <e-views>
         <e-view option="Month"></e-view>
         <e-view option="Week"></e-view>
@@ -47,7 +48,7 @@
     <br />
     <span class="card-title">Management Meeting</span>
     <br />
-    <mat-card class="event-detail" *ngFor="let item of data">
+    <mat-card class="event-detail" *ngFor="let item of selectedEvent">
       <mat-card-header>
         <mat-card-title>{{item.Subject}}</mat-card-title>
       </mat-card-header>
@@ -59,11 +60,11 @@
             </span>
             <span class="target-detail">
               <span class="blue-txt">
-                {{item.StartTime}}
+                {{getDate(item.StartTime)}}
               </span>
               to
               <span class="blue-txt">
-                {{item.EndTime}}
+                {{getTime(item.StartTime)}}
               </span>
             </span>
           </div>
