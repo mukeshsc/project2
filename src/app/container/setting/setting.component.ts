@@ -16,6 +16,15 @@ export class SettingComponent implements OnInit {
   privacyPolicyData:any;
   themeDataSet:any;
   smtpDataSet:any;
+  workingDay = [
+    {id:1,day:'Sunday',inTime:'',outTime:'',OnOff:true},
+    {id:2,day:'Monday',inTime:'',outTime:'',OnOff:false},
+    {id:3,day:'Tuesday',inTime:'',outTime:'',OnOff:false},
+    {id:4,day:'Wednesday',inTime:'',outTime:'',OnOff:false},
+    {id:5,day:'Thursday',inTime:'',outTime:'',OnOff:false},
+    {id:6,day:'Friday',inTime:'',outTime:'',OnOff:false},
+    {id:7,day:'Saturday',inTime:'',outTime:'',OnOff:false},
+  ]
   themeData = {
     "company_Brand":"#000000" ,
     "ligth_logo": "",
@@ -203,5 +212,10 @@ async updateTheme(){
       horizontalPosition: 'right',
       verticalPosition: 'top',
     });
+  }
+
+  // employee working hour on off setup
+  setOnOff(e, id){
+    this.workingDay[id].OnOff = (e == 'true'?true:false)
   }
 }

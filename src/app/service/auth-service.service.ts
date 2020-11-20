@@ -29,4 +29,10 @@ export class AuthServiceService {
 		});
 		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}forgetPasswordReset`,formData).pipe(map(res => <any>res));
   }
+  setPassword(formData) {
+		let headers = new HttpHeaders({
+			'Content-Type': 'application/json'
+		});
+		return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}forgetPasswordReset`,formData).pipe(map(res => <any>res));
+  }
 }

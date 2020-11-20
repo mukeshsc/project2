@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiBaseUrl: 'http://e2aa095334ac.ngrok.io/',
-  // apiBaseUrl: 'http://157.245.104.180:4000/',
+  // apiBaseUrl: 'http://d2a40f97832c.ngrok.io/',
+  apiBaseUrl: 'http://157.245.104.180:4000/',
   apiPath: 'api/v1/hrAdmin/',
 };
 

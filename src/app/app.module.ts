@@ -23,6 +23,12 @@ import { FroalaEditorModule, FroalaViewModule } from 'angular-froala-wysiwyg';
 import { ChartsModule } from 'ng2-charts';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatRadioModule} from '@angular/material/radio';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -31,7 +37,11 @@ import { HeaderComponent } from './common/header/header.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
 import { DashboardComponent } from './container/dashboard/dashboard.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
+import { AccessComponent } from './container/roles-access/access/access.component';
+import { RoleAddComponent } from './container/roles-access/role-add/role-add.component';
+import { RoleEditComponent } from './container/roles-access/role-edit/role-edit.component';
 import { LoginComponent } from './auth/login/login.component';
+import { SetPasswordComponent } from './auth/set-password/set-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
 import { CalendarComponent } from './container/calendar/calendar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -42,9 +52,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuardService } from './service/auth-guard.service';
 import { EmployeesComponent } from './container/employees/employees.component';
 import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
+import { EmployeeAddComponent } from './container/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './container/employee-edit/employee-edit.component';
 import { SettingComponent } from './container/setting/setting.component';
 import { InsuranceComponent } from './container/insurance/insurance.component';
 import { EmployeeSalaryComponent } from './container/employee-salary/employee-salary.component';
+import { PayslipComponent } from './container/payslip/payslip.component';
+import { PayslipDetailComponent } from './container/payslip-detail/payslip-detail.component';
+import { ContractsComponent } from './container/documents/contracts/contracts.component';
 
 @NgModule({
   declarations: [
@@ -53,16 +68,25 @@ import { EmployeeSalaryComponent } from './container/employee-salary/employee-sa
     SidebarComponent,
     DashboardComponent,
     UserRolesComponent,
+    AccessComponent,
+    RoleAddComponent,
+    RoleEditComponent,
     LoginComponent,
+    SetPasswordComponent,
     ForgotPasswordComponent,
     CalendarComponent,
     ChatComponent,
     ResetPasswordComponent,
     EmployeesComponent,
     EmployeeDetailComponent,
+    EmployeeEditComponent,
+    EmployeeAddComponent,
     SettingComponent,
     InsuranceComponent,
-    EmployeeSalaryComponent
+    EmployeeSalaryComponent,
+    PayslipComponent,
+    PayslipDetailComponent,
+    ContractsComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +118,13 @@ import { EmployeeSalaryComponent } from './container/employee-salary/employee-sa
     FroalaViewModule.forRoot(),
     ChartsModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSelectModule,
+    MatTreeModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]

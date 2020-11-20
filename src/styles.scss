@@ -589,6 +589,27 @@ mat-radio-group.mat-radio-group {
   color:var(--unnamed-color-f44336);
   color:#f44336
 }
-app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting {
+.closeModal {
+  float: right;
+  cursor: pointer;
+}
+.cdk-overlay-pane{
+  max-width: 60vw !important;
+}
+.btn-large {
+  height: 59px;
+  min-width: 100px;
+}
+table.table {
+  width: 100%;
+  margin-top: 5px;
+  border-collapse: collapse;
+  th {
+    background: #4051b50f 0% 0% no-repeat padding-box;
+    border:none;
+    height: 50px;
+  }
+}
+app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts {
   width: 100%;
 }

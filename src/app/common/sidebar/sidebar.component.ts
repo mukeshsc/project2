@@ -46,17 +46,53 @@ export class SidebarComponent implements OnInit {
     },
     {
       title:'Roles & access',
-      url:'/user-roles',
+      url:'/*',
       open:false,
       icon:'sentiment_satisfied',
-      children:[]
+      children:[
+        {
+          title:'User roles',
+          url:'/user-roles',
+          open:false,
+          icon:'stop_circle',
+          children:[]
+        },
+        {
+          title:'Access',
+          url:'/access',
+          open:false,
+          icon:'stop_circle',
+          children:[]
+        },
+      ]
     },
     {
       title:'Documents',
       url:'/*',
       open:false,
       icon:'sentiment_satisfied',
-      children:[]
+      children:[
+        {
+          title:'Contracts',
+          url:'/contracts',
+          open:false,
+          icon:'stop_circle',
+          children:[]
+        },
+        {
+          title:'Ids',
+          url:'/',
+          open:false,
+          icon:'stop_circle',
+          children:[]
+        },
+        {
+          title:'Others',
+          url:'/',
+          open:false,
+          icon:'stop_circle',
+        }
+      ]
     },
     {
       title:'Announcements',
@@ -80,7 +116,7 @@ export class SidebarComponent implements OnInit {
         },
         {
           title:'Payslips',
-          url:'/',
+          url:'/payslip',
           open:false,
           icon:'stop_circle',
           children:[]

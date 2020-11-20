@@ -14,7 +14,7 @@
     <mat-card class="employee-tab">
       <mat-card-content>
         <mat-tab-group mat-align-tabs="start">
-          <mat-tab label="Theme Settings">
+          <mat-tab label="Theme Settings" fxflexfill fxLayoutGap="10px grid">
             <form name="ThemeForm" (ngSubmit)="updateTheme()" #ThemeForm="ngForm">
             <div fxLayout="row" class="theme-setting-inner">
               <div fxFlex="50">
@@ -94,7 +94,7 @@
           </form>
           </mat-tab>
           <mat-tab label="Notifications">
-            <div fxLayout="row" class="theme-setting-inner">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Lable</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -139,7 +139,7 @@
           </mat-tab>
           <mat-tab label="Security Settings">
             <form name="SecurityForm" (ngSubmit)="updatePassword()" #SecurityForm="ngForm">
-              <div fxLayout="row" class="theme-setting-inner">
+              <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">Change Password</span>
                   <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -183,7 +183,7 @@
             </form>
           </mat-tab>
           <mat-tab label="FAQs">
-            <div fxLayout="row" class="theme-setting-inner">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="100">
                 <mat-toolbar color="light">
                   <span class="mat-toolbar-title">FAQs</span>
@@ -218,7 +218,7 @@
             <div  [innerHTML]="privacyPolicyData">{{privacyPolicyData}}</div>
           </mat-tab>
           <mat-tab label="SMTP Settings">
-            <div fxLayout="row" class="theme-setting-inner">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Email Configurations</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -285,6 +285,46 @@
               <div fxFlex="50">
                 <button mat-raised-button class="big-btn block-btn" color="primary">Save Settings</button><br />
                 <button mat-raised-button class="big-btn block-btn" color="light">Send Test Mail</button>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab label="Working Day">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+              <div fxFlex="100">
+                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
+                  <table class="working">
+                    <thead>
+                      <tr>
+                        <th>
+                          Day
+                        </th>
+                        <th>In Time</th>
+                        <th>Out Time</th>
+                        <th>On/Off</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of workingDay;let i=index">
+                        <td>{{item.day}}</td>
+                        <td>
+                          <mat-form-field>
+                            <input matInput  type="time"  autocomplete="off" [(ngModel)]="item.inTime" name="inTime" [disabled]="item.OnOff" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <mat-form-field>
+                            <input matInput  type="time"  autocomplete="off" [(ngModel)]="item.outTime" name="outTime" [disabled]="item.OnOff" />
+                          </mat-form-field>
+                        </td>
+                        <td>
+                          <button mat-raised-button class="big-btn block-btn" color="warn" *ngIf="!item.OnOff" (click)="setOnOff('true', i)">Off</button>
+                          <button mat-raised-button class="big-btn block-btn" color="primary"  *ngIf="item.OnOff"  (click)="setOnOff('false', i)">On</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
               </div>
             </div>
           </mat-tab>

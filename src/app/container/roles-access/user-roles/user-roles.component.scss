@@ -1,3 +1,12 @@
-table {
-    width: 100%;
+.spacer {
+    flex: 1 1 auto;
   }
+  th {
+    background: #4051b50f 0% 0% no-repeat padding-box;
+  }
+  table.mat-table {
+    margin-top: 2px;
+}
+.cal-button {
+  margin-left: 30px;
+}
