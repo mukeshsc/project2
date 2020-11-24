@@ -11,6 +11,7 @@ import {
 } from '@angular/material/snack-bar';
 import { RoleEditComponent } from '../role-edit/role-edit.component';
 import { MatTableDataSource } from '@angular/material/table';
+import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 
 @Component({
   selector: 'app-user-roles',
@@ -18,7 +19,7 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./user-roles.component.scss']
 })
 export class UserRolesComponent implements OnInit , AfterViewInit  {
-  roleData = new MatTableDataSource(ELEMENT_DATA);
+  roleData = new MatTableDataSource([]);
   displayedColumns: string[] = ['role_Type', 'nouser', 'accesslevel', 'status', 'actionsrequired'];
 
   // table sorting and pagination
@@ -154,13 +155,22 @@ async deleteRole(id,status){
   });
 }
 
+// confirm message
+confirmDialog(id, status): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel("Confirm Action", message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: "400px",
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteRole(id,status);
+    }
+  });
 }
-export interface PeriodicElement {
-  userRole_id:number;
-  role_Type: string;
-  nouser: number;
-  accesslevel: string;
-  status: string;
-  actionsrequired: number;
+
 }
-const ELEMENT_DATA: PeriodicElement[] = [];

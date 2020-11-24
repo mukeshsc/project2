@@ -63,20 +63,20 @@
     <mat-card class="dashboard-detail" >
       <mat-card-content>
         <mat-toolbar color="light">
-          <span class="mat-toolbar-title">All Sub Admin</span>
+          <span class="mat-toolbar-title">All Employees</span>
           <span class="spacer"></span>
-          <mat-form-field class="search-field">
+          <mat-form-field class="search-field"  appearance="standard">
             <mat-icon matSuffix>search</mat-icon>
             <input matInput placeholder="Search" #input  (keyup)="applyFilter($event)">
           </mat-form-field>
-          <button mat-mini-fab color="primary" class="cal-button" (click)="openSubAddModal()"  aria-label="Add new" >
-            <mat-icon>add</mat-icon>
+          <button mat-mini-fab color="light" class="cal-button" aria-label="Sync">
+            <mat-icon>sync</mat-icon>
           </button>
           <button mat-mini-fab color="light" class="cal-button"  aria-label="Filter">
             <mat-icon>filter_list</mat-icon>
           </button>
-          <button mat-mini-fab color="light" class="cal-button" aria-label="Sync">
-            <mat-icon>sync</mat-icon>
+          <button mat-mini-fab color="primary" class="cal-button" (click)="openSubAddModal()"  aria-label="Add new" >
+            <mat-icon>add</mat-icon>
           </button>
         </mat-toolbar>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
@@ -116,9 +116,9 @@
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-raised-button class="round-btn" *ngIf="element.status == 1" color="light">Active</button>
-              <button mat-raised-button class="round-btn" *ngIf="element.status == 0" color="accent">Deactive</button>
-              <button mat-raised-button class="round-btn" *ngIf="element.status == 2" color="warn">Locked</button>
+              <button mat-flat-button class="round-btn" *ngIf="element.status == 1" color="light">Active</button>
+              <button mat-flat-button class="round-btn" *ngIf="element.status == 0" color="accent">OnLeave</button>
+              <button mat-flat-button class="round-btn" *ngIf="element.status == 2" color="warn">Locked</button>
             </td>
           </ng-container>
 
@@ -127,14 +127,16 @@
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="Deactivate" *ngIf="element.status != 0" color="primary" (click)="statusSubAdmin(element.id,'0')"><mat-icon>lock</mat-icon></button>
+              matTooltip="On Leave" *ngIf="element.status != 0" color="light" (click)="updateEmployeeStatus(element.id,'0')"><mat-icon color="accent">sick</mat-icon></button>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="Activate" *ngIf="element.status != 1" color="accent"  (click)="statusSubAdmin(element.id,'1')"><mat-icon>lock_open</mat-icon></button>
+              matTooltip="Activate" *ngIf="element.status != 1" color="light"  (click)="updateEmployeeStatus(element.id,'1')"><mat-icon  color="primary">lock_open</mat-icon></button>
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
+              matTooltip="Locked"  *ngIf="element.status != 2" color="light"  (click)="updateEmployeeStatus(element.userRole_id,'2')"><mat-icon  color="warn">lock</mat-icon></button>
 
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="Delete"   color="warn" (click)="deleteSubAdmin(element.id)"><mat-icon>delete</mat-icon></button>
+              matTooltip="Delete"   color="light" (click)="confirmDialog(element.id)"><mat-icon color="warn">delete</mat-icon></button>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(element)"
-              matTooltip="Edit"   color="primary"><mat-icon>edit</mat-icon></button>
+              matTooltip="Edit"   color="light"><mat-icon color="primary">edit</mat-icon></button>
             </td>
           </ng-container>
 

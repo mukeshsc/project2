@@ -3,7 +3,7 @@ import { CommonServiceService } from 'src/app/service/comman-service.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
-import { environment } from '../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 
 import {
   MatSnackBar
@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeAddComponent } from '../employee-add/employee-add.component';
+import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -28,6 +29,7 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
 
+  responseData:any = []
   constructor(public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -35,17 +37,18 @@ export class EmployeesComponent implements OnInit {
     this.getList();
   }
 
- // Get Sub Admin List
+ // Get Employee List
  async getList(){
   this.ngxService.start();
-  await(this._api.getSubAdmin().subscribe(res => {
+  await(this._api.getEmployee().subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
       console.log(response.data);
+      this.responseData = response.data;
       const arr = [];
       for (const item of response.data){
-        const obj = {position: `${environment.apiBaseUrl}${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.superAdmin_id,role_id:item.role.toString(), address:item.address,mobile:item.mobile};
+        const obj = {position: `${environment.apiBaseUrl}${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.user_id,};
         arr.push(obj);
       }
       this.dataSource = new MatTableDataSource([...arr]);
@@ -63,13 +66,14 @@ export class EmployeesComponent implements OnInit {
 }
 
 
-// Delete Sub Admin
-async deleteSubAdmin(id){
+// Delete Employee
+async deleteEmployee(id){
   this.ngxService.start();
   let formData = {
-    superAdmin_id:id
+    user_id:id,
+    company_id:JSON.parse(localStorage.getItem('userData')).company_id
   }
-  await(this._api.deleteSubAdmin(formData).subscribe(res => {
+  await(this._api.deleteEmployee(formData).subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
@@ -89,15 +93,15 @@ async deleteSubAdmin(id){
 
 }
 
-// Update Sub Admin status
-async statusSubAdmin(id,status){
+// Update Employee status
+async updateEmployeeStatus(id,status){
   this.ngxService.start();
   let formData = {
-    "superAdmin_id":id,
-    "status":status ,
-    "ip_Address":"1111"
+    user_id:id,
+    status:status ,
+    company_id:JSON.parse(localStorage.getItem('userData')).company_id
   }
-  await(this._api.updateSubAdminStatus(formData).subscribe(res => {
+  await(this._api.updateEmployeeStatus(formData).subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
@@ -117,7 +121,7 @@ async statusSubAdmin(id,status){
 
 }
 
-  // open add Sub Admin modal
+  // open add Employee modal
   openSubAddModal() {
     const dialogRef = this.dialog.open(EmployeeAddComponent);
 
@@ -127,11 +131,12 @@ async statusSubAdmin(id,status){
     });
   }
 
-  // open add Sub Admin modal
+  // open add Employee modal
   openSubEditModal(e) {
+    let data  = this.responseData.filter(item => e.id == item.user_id);
     const dialogRef = this.dialog.open(EmployeeEditComponent, {
       data: {
-        subAdmin: JSON.stringify(e)
+        employee: JSON.stringify(data[0])
       }});
 
     dialogRef.afterClosed().subscribe(result => {
@@ -153,6 +158,24 @@ openSnackBar(msg) {
     duration: 3000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
+  });
+}
+
+// confirm message
+confirmDialog(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteEmployee(id);
+    }
   });
 }
 

@@ -167,47 +167,48 @@ export class CommonServiceService {
 
 
 // Add subAdmin
-addSubAdmin(formData){
+addEmployee(formData){
   let headers = new HttpHeaders({
   'Content-Type': 'application/json',
   'Authorization': this.token
   });
-  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}register `,formData, {headers}).pipe(map(res => <any>res));
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addEmployee`,formData, {headers}).pipe(map(res => <any>res));
 }
 
-// get subAdmin list
-getSubAdmin(){
+// get Employee list
+getEmployee(){
  let headers = new HttpHeaders({
  'Content-Type': 'application/json',
  'Authorization': this.token
  });
- return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}getProfile `, {headers}).pipe(map(res => <any>res));
+ return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showEmployee `, {headers}).pipe(map(res => <any>res));
 }
 
 
-// get subAdmin list
-updateSubAdmin(formData){
+// update Employee
+updateEmployee(formData){
  let headers = new HttpHeaders({
  'Content-Type': 'application/json',
  'Authorization': this.token
  });
- return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateProfile `,formData, {headers}).pipe(map(res => <any>res));
+ return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}editEmployee `,formData, {headers}).pipe(map(res => <any>res));
 }
 
-deleteSubAdmin(formData){
+deleteEmployee(formData){
  let headers = new HttpHeaders({
  'Content-Type': 'application/json',
  'Authorization': this.token
  });
- return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteProfile `,formData, {headers}).pipe(map(res => <any>res));
+ return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteEmployee `,formData, {headers}).pipe(map(res => <any>res));
 }
 
-updateSubAdminStatus(formData){
+// employee status update
+updateEmployeeStatus(formData){
  let headers = new HttpHeaders({
  'Content-Type': 'application/json',
  'Authorization': this.token
  });
- return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}profileStatus `,formData, {headers}).pipe(map(res => <any>res));
+ return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}statusEmployee`,formData, {headers}).pipe(map(res => <any>res));
 }
 
 }

@@ -30,23 +30,33 @@ export class ResetPasswordComponent implements OnInit {
         this.openSnackBar(response.message);
         this.router.navigate(['/login']);
       }else{
-        this.openSnackBar(response.message);
+        this.openErrrorSnackBar(response.message);
       }
       console.log(res);
     },err => {
       const error = err.error;
       this.ngxService.stop();
-      this.openSnackBar(error.message);
+      this.openErrrorSnackBar(error.message);
     }));
   }
 
 
-  // alert message after api response
+  // alert message after api response success
   openSnackBar(msg) {
     this._snackBar.open(msg, 'Ok', {
       duration: 3000,
       horizontalPosition: 'right',
       verticalPosition: 'top',
+      panelClass: ['success-alert']
+    });
+  }
+  // alert message after api response failure
+  openErrrorSnackBar(msg) {
+    this._snackBar.open(msg, 'Ok', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+      panelClass: ['failure-alert']
     });
   }
 

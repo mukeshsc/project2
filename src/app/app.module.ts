@@ -35,7 +35,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './common/header/header.component';
 import { SidebarComponent } from './common/sidebar/sidebar.component';
-import { DashboardComponent } from './container/dashboard/dashboard.component';
+import { DashboardComponent } from './container/other/dashboard/dashboard.component';
 import { UserRolesComponent } from './container/roles-access/user-roles/user-roles.component';
 import { AccessComponent } from './container/roles-access/access/access.component';
 import { RoleAddComponent } from './container/roles-access/role-add/role-add.component';
@@ -43,23 +43,24 @@ import { RoleEditComponent } from './container/roles-access/role-edit/role-edit.
 import { LoginComponent } from './auth/login/login.component';
 import { SetPasswordComponent } from './auth/set-password/set-password.component';
 import { ForgotPasswordComponent } from './auth/forgot-password/forgot-password.component';
-import { CalendarComponent } from './container/calendar/calendar.component';
+import { CalendarComponent } from './container/other/calendar/calendar.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ChatComponent } from './container/chat/chat.component';
+import { ChatComponent } from './container/other/chat/chat.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuardService } from './service/auth-guard.service';
-import { EmployeesComponent } from './container/employees/employees.component';
-import { EmployeeDetailComponent } from './container/employee-detail/employee-detail.component';
-import { EmployeeAddComponent } from './container/employee-add/employee-add.component';
-import { EmployeeEditComponent } from './container/employee-edit/employee-edit.component';
-import { SettingComponent } from './container/setting/setting.component';
-import { InsuranceComponent } from './container/insurance/insurance.component';
-import { EmployeeSalaryComponent } from './container/employee-salary/employee-salary.component';
-import { PayslipComponent } from './container/payslip/payslip.component';
-import { PayslipDetailComponent } from './container/payslip-detail/payslip-detail.component';
+import { EmployeesComponent } from './container/employee/employees/employees.component';
+import { EmployeeDetailComponent } from './container/employee/employee-detail/employee-detail.component';
+import { EmployeeAddComponent } from './container/employee/employee-add/employee-add.component';
+import { EmployeeEditComponent } from './container/employee/employee-edit/employee-edit.component';
+import { SettingComponent } from './container/other/setting/setting.component';
+import { InsuranceComponent } from './container/other/insurance/insurance.component';
+import { EmployeeSalaryComponent } from './container/salary/employee-salary/employee-salary.component';
+import { PayslipComponent } from './container/salary/payslip/payslip.component';
+import { PayslipDetailComponent } from './container/salary/payslip-detail/payslip-detail.component';
 import { ContractsComponent } from './container/documents/contracts/contracts.component';
+import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 
 @NgModule({
   declarations: [
@@ -86,7 +87,8 @@ import { ContractsComponent } from './container/documents/contracts/contracts.co
     EmployeeSalaryComponent,
     PayslipComponent,
     PayslipDetailComponent,
-    ContractsComponent
+    ContractsComponent,
+    ConfirmBoxComponent
   ],
   imports: [
     BrowserModule,
