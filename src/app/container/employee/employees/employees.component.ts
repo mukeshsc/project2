@@ -13,6 +13,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeEditComponent } from '../employee-edit/employee-edit.component';
 import { EmployeeAddComponent } from '../employee-add/employee-add.component';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
+import { CsvUploadComponent } from '../csv-upload/csv-upload.component';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -138,6 +139,17 @@ async updateEmployeeStatus(id,status){
       data: {
         employee: JSON.stringify(data[0])
       }});
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.getList()
+    });
+  }
+
+  uploadCsv(){
+    const dialogRef = this.dialog.open(CsvUploadComponent,{
+      maxWidth: '500px',
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

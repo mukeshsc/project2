@@ -61,6 +61,7 @@ import { PayslipComponent } from './container/salary/payslip/payslip.component';
 import { PayslipDetailComponent } from './container/salary/payslip-detail/payslip-detail.component';
 import { ContractsComponent } from './container/documents/contracts/contracts.component';
 import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
+import { CsvUploadComponent } from './container/employee/csv-upload/csv-upload.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
     PayslipComponent,
     PayslipDetailComponent,
     ContractsComponent,
-    ConfirmBoxComponent
+    ConfirmBoxComponent,
+    CsvUploadComponent
   ],
   imports: [
     BrowserModule,

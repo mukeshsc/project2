@@ -20,10 +20,9 @@ export class CommonServiceService {
     const fileData: FormData = new FormData();
     fileData.append('file', file);
 
-		let headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': this.token
-		});
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
 		return this.http.post(`${environment.apiBaseUrl}api/v1/hrAdmin/uploadEventIcon`,fileData, {headers}).pipe(map(res => <any>res));
   }
 
@@ -209,6 +208,16 @@ updateEmployeeStatus(formData){
  'Authorization': this.token
  });
  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}statusEmployee`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+uploadEmployeeCsv(formData,param){
+  console.log(formData)
+  const fileData: FormData = new FormData();
+  fileData.append('', formData);
+  let headers = new HttpHeaders();
+  headers.append('Content-Type', 'multipart/form-data');
+  headers.append('Accept', 'application/json');
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}csvFileUpload?company_id=${param.company_id}&ip_Address=${param.ip}&userID=1`,fileData, {headers}).pipe(map(res => <any>res));
 }
 
 }
