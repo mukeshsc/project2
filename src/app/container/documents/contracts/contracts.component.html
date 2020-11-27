@@ -13,15 +13,12 @@
   <div fxFlex="100"  fxFlex.gt-xs="100">
     <mat-card class="upload-box" >
       <div class="dropzone">
-        <ngx-dropzone (change)="uploadDoc($event)" multiple="false" maxFileSize="36000">
+        <div (click)="openContractAddModal()" style="cursor:pointer" multiple="false" maxFileSize="36000">
           <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
             Upload Your Document<br />
             <small>drag & drop to upload the document</small>
           </ngx-dropzone-label>
-          <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
-        </ngx-dropzone>
+        </div>
       </div>
     </mat-card>
   </div>
@@ -37,13 +34,13 @@
             <mat-icon matSuffix>search</mat-icon>
             <input matInput placeholder="Search" #input >
           </mat-form-field>
-          <button mat-mini-fab mat-flat-button color="primary" class="cal-button"  aria-label="Add new" >
+          <button mat-mini-fab mat-flat-button color="primary" class="cal-button"  aria-label="Add new" (click)="openContractAddModal()" >
             <mat-icon>add</mat-icon>
           </button>
           <button mat-mini-fab mat-flat-button color="light" class="cal-button"  aria-label="Filter">
             <mat-icon>filter_list</mat-icon>
           </button>
-          <button mat-mini-fab mat-flat-button color="light" class="cal-button" aria-label="Sync">
+          <button mat-mini-fab mat-flat-button color="light" class="cal-button" aria-label="Sync" >
             <mat-icon>sync</mat-icon>
           </button>
         </mat-toolbar>

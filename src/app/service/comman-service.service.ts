@@ -38,6 +38,20 @@ export class CommonServiceService {
 		return this.http.post(`${environment.apiBaseUrl}api/v1/hrAdmin/companyThemeUpload?theme_Folder=${folder}`,fileData, {headers}).pipe(map(res => <any>res));
   }
 
+   // upload document
+
+   uploadDocDoc(file: File) {
+    console.log(file);
+    const fileData: FormData = new FormData();
+    fileData.append('file', file);
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+		return this.http.post(`${environment.apiBaseUrl}api/v1/hrAdmin/documentUpload`,fileData, {headers}).pipe(map(res => <any>res));
+  }
+
+
   //  Setting security udpate
    resetPassword(formData) {
 		let headers = new HttpHeaders({
@@ -285,6 +299,24 @@ smptypDetailUpdate(formData){
   'Authorization': this.token
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyUpdateSMTP `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+// get employee select list
+showEmployeeName(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showEmployeeName `, {headers}).pipe(map(res => <any>res));
+ }
+
+ // update smtp detail
+addDoc(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addEmpDocument `,formData, {headers}).pipe(map(res => <any>res));
  }
 
 }

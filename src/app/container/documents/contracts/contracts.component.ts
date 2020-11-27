@@ -67,8 +67,10 @@ onRemove(event) {
 }
 
 // open add Contracts modal
-openSubAddModal() {
-  const dialogRef = this.dialog.open(ContractsAddComponent);
+openContractAddModal() {
+  const dialogRef = this.dialog.open(ContractsAddComponent,{
+    maxWidth: '500px',
+  });
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);

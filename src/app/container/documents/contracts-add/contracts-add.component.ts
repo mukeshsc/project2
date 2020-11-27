@@ -15,49 +15,24 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ContractsAddComponent implements OnInit {
   formData = {
-    first_name:'',
-    last_name:'',
-    email:'',
-    reporting_Manager:'',
-    department:'',
-    role:null,
-    employee_joiningDate:'',
-    insurance_plan_name:'',
-
-    total: null,
-    basic: null,
-    home_Allowance: null,
-    transportation_Allowance: null,
-    other_Allowance: null,
-
-    maternity:null,
-    medical:null,
-    annual:null,
-    unpaid_Leaves:null,
-    others:null,
-
-    working_HoursTo:'',
-    working_HoursFrom:'',
-
-    company_id:null,
-    ip_Address:'123',
-	  created_By :'1',
-    updated_By:'1'
+    "userId":"",
+    "document_Title":"",
+    "file_Type":"",
+    "expiry_Date":"",
+    "file_Path":""
   };
+  files:File[]=[]
   roleData: any = [];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
 
   ngOnInit(): void {
-    this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
-    this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
-    this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;
-    this.getRole();
+    this.getEmployee();
   }
 
 // Get Role Type
-async getRole(){
+async getEmployee(){
   this.ngxService.start();
-  await(this._api.getRole().subscribe(res => {
+  await(this._api.showEmployeeName().subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
@@ -75,25 +50,55 @@ async getRole(){
 }
 
 
-  // add new Employee
-  async addEmployee(){
-    await(this._api.addEmployee(this.formData).subscribe(res => {
+// add new Doc
+async addDoc(){
+  await(this._api.addDoc(this.formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+    }else{
+      this.openSnackBar(response.message);
+    }
+    console.log(res);
+    this.dialogRef.close('Close');
+  }, err => {
+    const error = err.error;
+    this.openSnackBar(error.message);
+    this.ngxService.stop();
+  }));
+}
+
+// upload logo image
+async onSelect(event) {
+  console.log(event);
+  this.files = [...event.addedFiles];
+  if(event.addedFiles.length > 0){
+
+    await(this._api.uploadDocDoc(event.addedFiles[0]).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
       if (response.success == true){
-        this.openSnackBar(response.message);
+        this.formData.file_Path = response.data;
+
       }else{
         this.openSnackBar(response.message);
       }
       console.log(res);
-      this.dialogRef.close('Close');
-    }, err => {
+    },err => {
       const error = err.error;
-      this.openSnackBar(error.message);
+      this.openErrrorSnackBar(error.message);
       this.ngxService.stop();
     }));
+  }else{
+    this.openErrrorSnackBar('File size is too large');
   }
+}
 
+onRemove(event) {
+  console.log(event);
+  this.files.splice(this.files.indexOf(event), 1);
+}
 
 // alert message after api response success
 openSnackBar(msg) {
