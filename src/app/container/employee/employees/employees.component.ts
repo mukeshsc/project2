@@ -14,6 +14,7 @@ import { EmployeeEditComponent } from '../employee-edit/employee-edit.component'
 import { EmployeeAddComponent } from '../employee-add/employee-add.component';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { CsvUploadComponent } from '../csv-upload/csv-upload.component';
+import { AccessServiceService } from 'src/app/service/access-service.service';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -31,10 +32,12 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatSort,{static:false}) sort: MatSort;
 
   responseData:any = []
-  constructor(public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  accessPermission:boolean;
+  constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-
+//getting access permission
+    this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
     this.getList();
   }
 
@@ -81,14 +84,14 @@ async deleteEmployee(id){
       this.openSnackBar(response.message);
       this.getList();
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
 
 
     console.log(res);
   }, err => {
     const error = err.error;
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
     this.ngxService.stop();
   }));
 
@@ -109,14 +112,14 @@ async updateEmployeeStatus(id,status){
       this.openSnackBar(response.message);
       this.getList();
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
 
 
     console.log(res);
   }, err => {
     const error = err.error;
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
     this.ngxService.stop();
   }));
 
@@ -164,12 +167,22 @@ async updateEmployeeStatus(id,status){
     this.dataSource.filter = filterValue.trim().toLowerCase();
  }
 
-// alert message after api response
+// alert message after api response success
 openSnackBar(msg) {
   this._snackBar.open(msg, 'Ok', {
     duration: 3000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
+    panelClass: ['success-alert']
+  });
+}
+// alert message after api response failure
+openErrrorSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['failure-alert']
   });
 }
 

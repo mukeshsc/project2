@@ -15,6 +15,8 @@ export class SetPasswordComponent implements OnInit {
     newPassword: '',
     confirmPassword:'',
   }
+  fieldconPass:boolean;
+  fieldNewPass:boolean;
   constructor(public _auth: AuthServiceService, private ngxService: NgxUiLoaderService, private _snackBar: MatSnackBar, public router:Router) {
     let url = this.router.url.split('/');
     this.formData.otp = url.pop();

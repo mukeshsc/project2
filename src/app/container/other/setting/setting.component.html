@@ -14,9 +14,9 @@
     <mat-card class="employee-tab">
       <mat-card-content>
         <mat-tab-group mat-align-tabs="start">
-          <mat-tab label="Theme Settings" fxflexfill fxLayoutGap="10px grid">
+          <mat-tab label="Theme Settings" >
             <form name="ThemeForm" (ngSubmit)="updateTheme()" #ThemeForm="ngForm">
-            <div fxLayout="row" class="theme-setting-inner">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Lable</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -41,7 +41,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Logo and iconography</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
@@ -57,13 +57,13 @@
                       <small>drag & drop to upload the document</small>
                     </ngx-dropzone-label>
                     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                        <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        <ngx-dropzone-label [style]="'background:'+themeData.favicon">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
                 <br />
@@ -72,19 +72,19 @@
               <div fxFlex="50">
                 <mat-label>Favicon</mat-label>
                 <div class="dropzone">
-                  <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone (change)="onFaviSelect($event)">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
                       Upload Your Document<br />
                       <small>drag & drop to upload the document</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)">
                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" class="theme-setting-inner" *ngIf="accessPermission">
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
@@ -129,11 +129,11 @@
                 </section>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" class="theme-setting-inner"  *ngIf="accessPermission">
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
-                <button mat-raised-button class="big-btn block-btn" color="primary">Save Settings</button>
+                <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
               </div>
             </div>
           </mat-tab>
@@ -173,7 +173,7 @@
                   </div>
                 </div>
               </div>
-              <div fxLayout="row" class="theme-setting-inner" >
+              <div fxLayout="row" class="theme-setting-inner"  *ngIf="accessPermission">
                 <div fxFlex="50">
                 </div>
                 <div fxFlex="50">
@@ -215,10 +215,10 @@
             <mat-toolbar color="light">
               <span class="mat-toolbar-title">Privacy Plicy</span>
             </mat-toolbar>
-            <div  [innerHTML]="privacyPolicyData">{{privacyPolicyData}}</div>
+            <div >{{privacyPolicyData}}</div>
           </mat-tab>
           <mat-tab label="SMTP Settings">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid" *ngIf="smtpDataSet">
               <div fxFlex="50">
                 <span class="card-title">Email Configurations</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -283,7 +283,8 @@
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
-                <button mat-raised-button class="big-btn block-btn" color="primary">Save Settings</button><br />
+                <mat-label></mat-label>
+                <button mat-raised-button class="big-btn block-btn" color="primary" (click)="updateSmtp()" *ngIf="accessPermission">Save Settings</button><br />
                 <button mat-raised-button class="big-btn block-btn" color="light">Send Test Mail</button>
               </div>
             </div>
@@ -325,6 +326,14 @@
                   </table>
                 </div>
 
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+              </div>
+              <div fxFlex="50">
+                <mat-label></mat-label>
+                <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button>
               </div>
             </div>
           </mat-tab>

@@ -6,10 +6,10 @@
       <div fxFlex="100">
         <span class="card-title">Add Role</span>
         <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
-      
+
         <mat-label></mat-label>
         <mat-form-field>
-          <input matInput  type="text" #role_Type  name="role_Type" [(ngModel)]="formData.role_Type" required autocomplete="off" placeholder="Role name" />
+          <input matInput  type="text" #role_Type  name="role_Type" [(ngModel)]="formData.role_Type" maxlength="40" required autocomplete="off" placeholder="Role name" />
 
         </mat-form-field>
         <div *ngIf="role_Type.errors && role_Type.touched">

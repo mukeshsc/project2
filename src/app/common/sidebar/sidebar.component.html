@@ -8,16 +8,17 @@
 <div fxLayout="row" class="user-info" fxLayoutAlign="space-around center" >
   <div fxFlex="40" >
     <div fxLayout="column" fxLaoyutAlign="space-around center">
-      <img src="../../../assets/img/Ellipse_1_b.png" />
-      <h4 class="user-name">Emily Smith</h4>
-      <h6 class="usere-desig">Manager</h6>
+      <img src="../../../assets/img/Ellipse_1_b.png" *ngIf="!userData.profile_picture" />
+      <img [src]="userData.profile_picture" *ngIf="userData && userData.profile_picture" />
+      <h4 class="user-name">{{userData && userData.first_name}} {{userData && userData.last_name}} </h4>
+      <h6 class="usere-desig">{{userData && userData.roleName}}</h6>
     </div>
   </div>
 </div>
 <div fxLayout="row" class="side-nav" fxLayoutAlign="space-around center" >
   <div fxFlex="100" >
     <ng-container *ngFor="let p of pages">
-      <mat-list *ngIf="p.title !== 'divider'" >
+      <mat-list *ngIf="p.title !== 'divider' && p.access" >
         <mat-list-item [routerLink]="p.url" routerLinkActive="active" *ngIf="p.children.length === 0">
           <mat-icon mat-list-icon>{{p.icon}}</mat-icon>
           <div mat-line>{{p.title}}</div>
@@ -31,12 +32,14 @@
           </ng-container>
         </mat-list-item>
         <ng-container *ngIf="p.open" >
-          <mat-list *ngFor="let c of p.children" [ngClass]="p.open?'active-block':''">
-            <mat-list-item [routerLink]="c.url">
-              <mat-icon mat-list-icon>{{c.icon}}</mat-icon>
-              {{c.title}}
-            </mat-list-item>
-          </mat-list>
+          <ng-container *ngFor="let c of p.children">
+            <mat-list *ngIf="p.access" [ngClass]="p.open?'active-block':''">
+              <mat-list-item [routerLink]="c.url">
+                <mat-icon mat-list-icon>{{c.icon}}</mat-icon>
+                {{c.title}}
+              </mat-list-item>
+            </mat-list>
+          </ng-container>
         </ng-container>
         </mat-list>
       <mat-divider *ngIf="p.title === 'divider'"></mat-divider>

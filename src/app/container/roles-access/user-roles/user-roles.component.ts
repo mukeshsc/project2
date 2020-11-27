@@ -12,6 +12,7 @@ import {
 import { RoleEditComponent } from '../role-edit/role-edit.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
+import { AccessServiceService } from 'src/app/service/access-service.service';
 
 @Component({
   selector: 'app-user-roles',
@@ -26,12 +27,15 @@ export class UserRolesComponent implements OnInit , AfterViewInit  {
   @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
 
-  constructor(public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
+  accessPermission:boolean;
+  constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
 
   }
 
 
   ngOnInit(): void {
+    //getting access permission
+        this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   }
 
   ngAfterViewInit(){
@@ -80,12 +84,12 @@ async udpateStatus(id,status){
       this.openSnackBar(response.message);
       this.getRole();
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
     console.log(res);
   },err => {
     const error = err.error;
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
     this.ngxService.stop();
   }));
 
@@ -106,12 +110,12 @@ async deleteRole(id,status){
       this.openSnackBar(response.message);
       this.getRole();
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
     console.log(res);
   },err => {
     const error = err.error;
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
     this.ngxService.stop();
   }));
 
@@ -146,12 +150,22 @@ async deleteRole(id,status){
     this.roleData.filter = filterValue.trim().toLowerCase();
  }
 
- // alert message after api response
- openSnackBar(msg) {
+// alert message after api response success
+openSnackBar(msg) {
   this._snackBar.open(msg, 'Ok', {
     duration: 3000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
+    panelClass: ['success-alert']
+  });
+}
+// alert message after api response failure
+openErrrorSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['failure-alert']
   });
 }
 

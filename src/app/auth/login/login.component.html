@@ -38,16 +38,17 @@
               <form name="loginform" (ngSubmit)="login()" #loginform="ngForm">
                   <mat-label>Email Address</mat-label>
                   <mat-form-field appearance="standard">
-                    <input matInput type="email" #email [(ngModel)]="formData.email" name="email" required autocomplete="off" />
+                    <input matInput type="email" #email="ngModel" [(ngModel)]="formData.email" name="email" required autocomplete="off"  maxlength="100" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-                    <div *ngIf="email.errors && email.touched">
-											<span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
-										</div>
                   </mat-form-field>
+                  <div [hidden]="email.valid || email.untouched">
+                    <span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
+                    <span class="error"  *ngIf="email.errors?.pattern">Email is invalid</span>
+                  </div>
                   <mat-label>Password</mat-label>
                   <mat-form-field appearance="standard">
-                    <input matInput  type="password" #password [(ngModel)]="formData.password" name="password" required autocomplete="off" />
-                    <mat-icon matSuffix>vpn_key</mat-icon>
+                    <input matInput  [type]="fieldPasswordType ? 'text' : 'password'" #password [(ngModel)]="formData.password" maxlength="100" name="password" required autocomplete="off" />
+                    <mat-icon matSuffix (click)="fieldPasswordType = !fieldPasswordType" style="cursor: pointer;">{{fieldPasswordType?'visibility_off':'visibility'}}</mat-icon>
                     <div *ngIf="password.errors && password.touched">
 											<span class="password" *ngIf="password.errors?.required">Password is mandatory.</span>
 										</div>

@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   }
+  fieldPasswordType:boolean;
   constructor(public _auth: AuthServiceService, private ngxService: NgxUiLoaderService, private _snackBar: MatSnackBar, public router:Router) { }
 
   ngOnInit(): void {

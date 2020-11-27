@@ -15,6 +15,8 @@ export class ResetPasswordComponent implements OnInit {
     newPassword: '',
     confirmPassword:'',
   }
+  fieldconPass:boolean;
+  fieldNewPass:boolean;
   constructor(public _auth: AuthServiceService, private ngxService: NgxUiLoaderService, private _snackBar: MatSnackBar, public router:Router) { }
 
   ngOnInit(): void {

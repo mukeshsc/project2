@@ -7,12 +7,13 @@ import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+
 @Component({
-  selector: 'app-employee-add',
-  templateUrl: './employee-add.component.html',
-  styleUrls: ['./employee-add.component.scss']
+  selector: 'app-contracts-add',
+  templateUrl: './contracts-add.component.html',
+  styleUrls: ['./contracts-add.component.scss']
 })
-export class EmployeeAddComponent implements OnInit {
+export class ContractsAddComponent implements OnInit {
   formData = {
     first_name:'',
     last_name:'',
@@ -44,7 +45,7 @@ export class EmployeeAddComponent implements OnInit {
     updated_By:'1'
   };
   roleData: any = [];
-  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeAddComponent>) { }
+  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
 
   ngOnInit(): void {
     this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
@@ -82,13 +83,13 @@ async getRole(){
       if (response.success == true){
         this.openSnackBar(response.message);
       }else{
-        this.openErrrorSnackBar(response.message);
+        this.openSnackBar(response.message);
       }
       console.log(res);
       this.dialogRef.close('Close');
     }, err => {
       const error = err.error;
-      this.openErrrorSnackBar(error.message);
+      this.openSnackBar(error.message);
       this.ngxService.stop();
     }));
   }

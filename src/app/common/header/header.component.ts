@@ -7,10 +7,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  userData:any;
   @Output('toggleMenu') toggelMenu: EventEmitter<any> = new EventEmitter();
-  constructor(public router:Router) { }
+  constructor(public router:Router) {
+    this.userData = JSON.parse(localStorage.getItem('userData'))
+  }
 
   ngOnInit(): void {
+
   }
   toggelChild(): void{
     this.toggelMenu.emit();

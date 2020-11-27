@@ -75,10 +75,10 @@
           <button mat-mini-fab color="light" class="cal-button"  aria-label="Filter">
             <mat-icon>filter_list</mat-icon>
           </button>
-          <button mat-mini-fab color="primary" class="cal-button" (click)="openSubAddModal()"  aria-label="Add new" >
+          <button mat-mini-fab color="primary" class="cal-button" (click)="openSubAddModal()"  aria-label="Add new"  *ngIf="accessPermission">
             <mat-icon>add</mat-icon>
           </button>
-          <button mat-mini-fab color="primary" class="cal-button" (click)="uploadCsv()"  aria-label="Add new" >
+          <button mat-mini-fab color="primary" class="cal-button" (click)="uploadCsv()"  aria-label="Add new"  *ngIf="accessPermission">
             <mat-icon>attach_file</mat-icon>
           </button>
         </mat-toolbar>
@@ -120,8 +120,7 @@
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
             <td mat-cell *matCellDef="let element">
               <button mat-flat-button class="round-btn" *ngIf="element.status == 1" color="light">Active</button>
-              <button mat-flat-button class="round-btn" *ngIf="element.status == 0" color="accent">OnLeave</button>
-              <button mat-flat-button class="round-btn" *ngIf="element.status == 2" color="warn">Locked</button>
+              <button mat-flat-button class="round-btn" *ngIf="element.status == 0" color="accent">In Active</button>
             </td>
           </ng-container>
 
@@ -129,16 +128,15 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
+              <span *ngIf="!accessPermission">No Permission</span>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="On Leave" *ngIf="element.status != 0" color="light" (click)="updateEmployeeStatus(element.id,'0')"><mat-icon color="accent">sick</mat-icon></button>
+              matTooltip="On Leave" *ngIf="element.status != 0 && accessPermission" color="light" (click)="updateEmployeeStatus(element.id,'0')"><mat-icon color="accent">sick</mat-icon></button>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="Activate" *ngIf="element.status != 1" color="light"  (click)="updateEmployeeStatus(element.id,'1')"><mat-icon  color="primary">lock_open</mat-icon></button>
-              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-              matTooltip="Locked"  *ngIf="element.status != 2" color="light"  (click)="updateEmployeeStatus(element.userRole_id,'2')"><mat-icon  color="warn">lock</mat-icon></button>
+              matTooltip="Activate" *ngIf="element.status != 1 && accessPermission" color="light"  (click)="updateEmployeeStatus(element.id,'1')"><mat-icon  color="primary">lock_open</mat-icon></button>
 
-              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission"
               matTooltip="Delete"   color="light" (click)="confirmDialog(element.id)"><mat-icon color="warn">delete</mat-icon></button>
-              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(element)"
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(element)" *ngIf="accessPermission"
               matTooltip="Edit"   color="light"><mat-icon color="primary">edit</mat-icon></button>
             </td>
           </ng-container>

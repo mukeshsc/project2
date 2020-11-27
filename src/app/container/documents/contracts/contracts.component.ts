@@ -9,6 +9,7 @@ import {
 } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { ContractsAddComponent } from '../contracts-add/contracts-add.component';
 @Component({
   selector: 'app-contracts',
   templateUrl: './contracts.component.html',
@@ -63,5 +64,14 @@ async uploadDoc(event) {
 onRemove(event) {
   console.log(event);
   this.files.splice(this.files.indexOf(event), 1);
+}
+
+// open add Contracts modal
+openSubAddModal() {
+  const dialogRef = this.dialog.open(ContractsAddComponent);
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
 }
 }

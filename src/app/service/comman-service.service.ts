@@ -26,6 +26,18 @@ export class CommonServiceService {
 		return this.http.post(`${environment.apiBaseUrl}api/v1/hrAdmin/uploadEventIcon`,fileData, {headers}).pipe(map(res => <any>res));
   }
 
+  // upload theme doc
+  uploadThemeDoc(file: File,folder) {
+    console.log(file);
+    const fileData: FormData = new FormData();
+    fileData.append('file', file);
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+		return this.http.post(`${environment.apiBaseUrl}api/v1/hrAdmin/companyThemeUpload?theme_Folder=${folder}`,fileData, {headers}).pipe(map(res => <any>res));
+  }
+
   //  Setting security udpate
    resetPassword(formData) {
 		let headers = new HttpHeaders({
@@ -219,5 +231,60 @@ uploadEmployeeCsv(formData,param){
   headers.append('Accept', 'application/json');
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}csvFileUpload?company_id=${param.company_id}&ip_Address=${param.ip}&userID=1`,fileData, {headers}).pipe(map(res => <any>res));
 }
+
+// get access modules list
+accessModuleList(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}api/v1/superAdmin/accessModuleList `,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// get access module by role
+
+accessDetail(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}accessDetail `,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// update access allocation
+accessAllocation(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}accessAllocation `,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// getting company working day
+companyWorkingDay(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}companyWorkingDay `, {headers}).pipe(map(res => <any>res));
+ }
+
+ // getting company working day
+companyWorkingDaySet(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyWorkingDayUpdate `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+// update smtp detail
+smptypDetailUpdate(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}companyUpdateSMTP `,formData, {headers}).pipe(map(res => <any>res));
+ }
 
 }

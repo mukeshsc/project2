@@ -9,7 +9,7 @@
 
         <mat-label></mat-label>
         <mat-form-field>
-          <input matInput  type="text" #role_Type  name="role_Type" [(ngModel)]="formData.role_Type" required autocomplete="off" placeholder="Role name" />
+          <input matInput  type="text" #role_Type  name="role_Type" [(ngModel)]="formData.role_Type" maxlength="40" required autocomplete="off" placeholder="Role name" />
 
         </mat-form-field>
         <div *ngIf="role_Type.errors && role_Type.touched">

@@ -1,6 +1,11 @@
 .spacer {
     flex: 1 1 auto;
   }
+th{
+  text-align: left;
+  font-family: 'Poppins', sans-serif !important;
+  padding: 0 0 0 15px;
+}
 .selectField{
   max-width: 300px;
 }
@@ -11,6 +16,20 @@
   display: none;
 }
 
+.mat-tree-node{
+  border-bottom: 1px solid #E0E0E0;
+}
+span.node-text {
+  font-family: 'Poppins', sans-serif !important;
+  padding-left: 20px;
+  display: flex;
+  flex: 1;
+}
+span.node-perm {
+  padding: 0;
+    width: 104px;
+    display: inline-flex;
+}
 .example-tree ul,
 .example-tree li {
   margin-top: 0;

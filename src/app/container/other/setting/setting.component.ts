@@ -4,6 +4,7 @@ import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {
   MatSnackBar
 } from '@angular/material/snack-bar';
+import { AccessServiceService } from 'src/app/service/access-service.service';
 
 @Component({
   selector: 'app-setting',
@@ -12,26 +13,22 @@ import {
 })
 export class SettingComponent implements OnInit {
   files: File[] = [];
+  files2: File[] = [];
   faqData:any;
   privacyPolicyData:any;
   themeDataSet:any;
   smtpDataSet:any;
-  workingDay = [
-    {id:1,day:'Sunday',inTime:'',outTime:'',OnOff:true},
-    {id:2,day:'Monday',inTime:'',outTime:'',OnOff:false},
-    {id:3,day:'Tuesday',inTime:'',outTime:'',OnOff:false},
-    {id:4,day:'Wednesday',inTime:'',outTime:'',OnOff:false},
-    {id:5,day:'Thursday',inTime:'',outTime:'',OnOff:false},
-    {id:6,day:'Friday',inTime:'',outTime:'',OnOff:false},
-    {id:7,day:'Saturday',inTime:'',outTime:'',OnOff:false},
-  ]
+  smtpData = {}
+  workingDay = []
   themeData = {
     "company_Brand":"#000000" ,
     "ligth_logo": "",
     "favicon": "",
     "company_websiteName":"",
     "created_By":null,
-    "updated_By":null
+    "updated_By":null,
+    "themeId":null,
+    "ip_Address":"12.32.32.22",
   }
   passwordData = {
     "oldpassword": "",
@@ -39,13 +36,18 @@ export class SettingComponent implements OnInit {
     "confirmpassword":""
   }
   passNotMatched: boolean = false;
-  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  accessPermission:boolean;
+  constructor( public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+
+    //getting access permission
+    this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
     this.getFaq();
     this.getPrivacyPolicy();
     this.getTheme();
     this.getsmtp();
+    this.getWorkingDay();
   }
 
   // Security setting (Update password)
@@ -66,13 +68,13 @@ export class SettingComponent implements OnInit {
           "confirmpassword":""
           }
         }else{
-          this.openSnackBar(response.message);
+          this.openErrrorSnackBar(response.message);
         }
         console.log(res);
       },err => {
         const error = err.error;
         this.ngxService.stop();
-        this.openSnackBar(error.message);
+        this.openErrrorSnackBar(error.message);
       }));
     }
 
@@ -87,15 +89,14 @@ export class SettingComponent implements OnInit {
         if (response.success == true){
           console.log(JSON.parse(response.data))
           this.faqData = JSON.parse(response.data);
-          this.openSnackBar(response.message);
         }else{
-          this.openSnackBar(response.message);
+          this.openErrrorSnackBar(response.message);
         }
         console.log(res);
       },err => {
         const error = err.error;
         this.ngxService.stop();
-        this.openSnackBar(error.message);
+        this.openErrrorSnackBar(error.message);
       }));
 
   }
@@ -110,15 +111,14 @@ export class SettingComponent implements OnInit {
       if (response.success == true){
         this.privacyPolicyData = response.data.privacy_Policy;
         console.log(this.privacyPolicyData)
-        this.openSnackBar(response.message);
       }else{
-        this.openSnackBar(response.message);
+        this.openErrrorSnackBar(response.message);
       }
       console.log(res);
     },err => {
       const error = err.error;
       this.ngxService.stop();
-      this.openSnackBar(error.message);
+      this.openErrrorSnackBar(error.message);
     }));
 
 }
@@ -137,17 +137,63 @@ export class SettingComponent implements OnInit {
           "favicon": this.themeDataSet.favicon,
           "company_websiteName":this.themeDataSet.company_websiteName,
           "created_By":this.themeDataSet.created_By,
-          "updated_By":this.themeDataSet.updated_By
+          "updated_By":this.themeDataSet.updated_By,
+          "themeId":this.themeDataSet.theme_id,
+          "ip_Address":"12.32.32.22",
         }
-        this.openSnackBar(response.message);
       }else{
-        this.openSnackBar(response.message);
+        this.openErrrorSnackBar(response.message);
       }
       console.log(res);
     },err => {
       const error = err.error;
       this.ngxService.stop();
-      this.openSnackBar(error.message);
+      this.openErrrorSnackBar(error.message);
+    }));
+
+}
+
+async getWorkingDay(){
+  this.ngxService.start();
+    await(this._api.companyWorkingDay().subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        this.workingDay = response.data;
+      }else{
+        this.openErrrorSnackBar(response.message);
+      }
+      console.log(res);
+    },err => {
+      const error = err.error;
+      this.ngxService.stop();
+      this.openErrrorSnackBar(error.message);
+    }));
+
+}
+
+//update working day
+
+async companyWorkingDaySet(){
+  let data = {
+    "companyId": JSON.parse(localStorage.getItem('userData')).company_id,
+	  "workingDay":JSON.stringify(this.workingDay)
+  }
+  this.ngxService.start();
+    await(this._api.companyWorkingDaySet(data).subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        this.openSnackBar(response.message);
+        this.getWorkingDay()
+      }else{
+        this.openErrrorSnackBar(response.message);
+      }
+      console.log(res);
+    },err => {
+      const error = err.error;
+      this.ngxService.stop();
+      this.openErrrorSnackBar(error.message);
     }));
 
 }
@@ -163,13 +209,13 @@ async updateTheme(){
       this.openSnackBar(response.message);
       this.getTheme()
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
     console.log(res);
   },err => {
     const error = err.error;
     this.ngxService.stop();
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
   }));
 
 }
@@ -182,22 +228,75 @@ async updateTheme(){
     const response: any = res;
     if (response.success == true){
       this.smtpDataSet = response.data;
-      this.openSnackBar(response.message);
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
     console.log(res);
   },err => {
     const error = err.error;
     this.ngxService.stop();
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
   }));
 
 }
 
-  onSelect(event) {
+// update smptp
+
+async updateSmtp(){
+  let data = {
+    "smtpId":this.smtpDataSet.smtp_id,
+    "mail_Server":this.smtpDataSet.mail_Server,
+    "smtp_Port":this.smtpDataSet.smtp_Port,
+    "userName":this.smtpDataSet.userName,
+    "password":this.smtpDataSet.password,
+    "server_Security":this.smtpDataSet.server_Security,
+    "default_sender":this.smtpDataSet.default_Sender,
+    "default_SenderName":this.smtpDataSet.default_SenderName,
+    "ip_Address":"12.32.32.22",
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id
+  }
+  this.ngxService.start();
+  await(this._api.smptypDetailUpdate(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getsmtp();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+  // upload logo image
+  async onSelect(event) {
     console.log(event);
-    this.files.push(...event.addedFiles);
+    this.files = [...event.addedFiles];
+    if(event.addedFiles.length > 0){
+
+      await(this._api.uploadThemeDoc(event.addedFiles[0],'logo').subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.themeData.ligth_logo = response.data;
+
+        }else{
+          this.openSnackBar(response.message);
+        }
+        console.log(res);
+      },err => {
+        const error = err.error;
+        this.openErrrorSnackBar(error.message);
+        this.ngxService.stop();
+      }));
+    }else{
+      this.openErrrorSnackBar('File size is too large');
+    }
   }
 
   onRemove(event) {
@@ -205,15 +304,55 @@ async updateTheme(){
     this.files.splice(this.files.indexOf(event), 1);
   }
 
-   // alert message after api response
-   openSnackBar(msg) {
-    this._snackBar.open(msg, 'Ok', {
-      duration: 3000,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-    });
+  // upload favicon image
+  async onFaviSelect(event) {
+    console.log(event);
+    this.files2 = [...event.addedFiles];
+    if(event.addedFiles.length > 0){
+
+      await(this._api.uploadThemeDoc(event.addedFiles[0],'favicon').subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.themeData.favicon = response.data;
+
+        }else{
+          this.openSnackBar(response.message);
+        }
+        console.log(res);
+      },err => {
+        const error = err.error;
+        this.openErrrorSnackBar(error.message);
+        this.ngxService.stop();
+      }));
+    }else{
+      this.openErrrorSnackBar('File size is too large');
+    }
   }
 
+  onFaviRemove(event) {
+    console.log(event);
+    this.files2.splice(this.files.indexOf(event), 1);
+  }
+
+ // alert message after api response success
+openSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['success-alert']
+  });
+}
+// alert message after api response failure
+openErrrorSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['failure-alert']
+  });
+}
   // employee working hour on off setup
   setOnOff(e, id){
     this.workingDay[id].OnOff = (e == 'true'?true:false)
