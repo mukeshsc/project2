@@ -310,13 +310,40 @@ showEmployeeName(){
   return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showEmployeeName `, {headers}).pipe(map(res => <any>res));
  }
 
- // update smtp detail
+ // add doc
 addDoc(formData){
   let headers = new HttpHeaders({
   'Content-Type': 'application/json',
   'Authorization': this.token
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addEmpDocument `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+// show Doc
+showDoc(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showEmployeeDocument `, {headers}).pipe(map(res => <any>res));
+ }
+
+ // update doc status
+docStatusUpdate(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}statusEmployeeDocument `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+  // delete Docs
+docDelete(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteEmployeeDocument `,formData, {headers}).pipe(map(res => <any>res));
  }
 
 }
