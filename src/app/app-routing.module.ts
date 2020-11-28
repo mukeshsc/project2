@@ -18,6 +18,7 @@ import { EmployeeSalaryComponent } from './container/salary/employee-salary/empl
 import { PayslipComponent } from './container/salary/payslip/payslip.component';
 import { PayslipDetailComponent } from './container/salary/payslip-detail/payslip-detail.component';
 import { ContractsComponent } from './container/documents/contracts/contracts.component';
+import { SubscriptionPlanComponent } from './container/company/subscription-plan/subscription-plan.component';
 
 
 const routes: Routes = [
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'set-password/:key', component: SetPasswordComponent },
   { path: 'dashboard', component: DashboardComponent,canActivate: [AuthGuardService] },
   { path: 'calendar', component: CalendarComponent,canActivate: [AuthGuardService] },
+  { path: 'subscriptionplan', component: SubscriptionPlanComponent,canActivate: [AuthGuardService] },
   { path: 'chat', component: ChatComponent,canActivate: [AuthGuardService] },
   { path: 'employees', component: EmployeesComponent,canActivate: [AuthGuardService] },
   { path: 'employees/:id', component: EmployeeDetailComponent,canActivate: [AuthGuardService] },

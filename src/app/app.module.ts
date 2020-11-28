@@ -63,6 +63,7 @@ import { ContractsComponent } from './container/documents/contracts/contracts.co
 import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 import { CsvUploadComponent } from './container/employee/csv-upload/csv-upload.component';
 import { ContractsAddComponent } from './container/documents/contracts-add/contracts-add.component';
+import { SubscriptionPlanComponent } from './container/company/subscription-plan/subscription-plan.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { ContractsAddComponent } from './container/documents/contracts-add/contr
     ContractsComponent,
     ConfirmBoxComponent,
     CsvUploadComponent,
-    ContractsAddComponent
+    ContractsAddComponent,
+    SubscriptionPlanComponent
   ],
   imports: [
     BrowserModule,
