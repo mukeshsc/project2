@@ -65,6 +65,7 @@ import { CsvUploadComponent } from './container/employee/csv-upload/csv-upload.c
 import { ContractsAddComponent } from './container/documents/contracts-add/contracts-add.component';
 import { InsuranceEditComponent } from './container/other/insurance-edit/insurance-edit.component';
 import { InsuranceAddComponent } from './container/other/insurance-add/insurance-add.component';
+import { SubscriptionPlanComponent } from './container/company/subscription-plan/subscription-plan.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +97,8 @@ import { InsuranceAddComponent } from './container/other/insurance-add/insurance
     CsvUploadComponent,
     ContractsAddComponent,
     InsuranceAddComponent,
-    InsuranceEditComponent
+    InsuranceEditComponent,
+    SubscriptionPlanComponent
   ],
   imports: [
     BrowserModule,
