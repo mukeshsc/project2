@@ -17,42 +17,76 @@
         <mat-card-content>
           <mat-tab-group mat-align-tabs="start">
 
+            <div fxLayout="column">
             <mat-tab label="Company Profile">
               <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">General Information</span>
-                  <p>Just a bit of info about your company, and the default language your employees will see when invited.</p>
+                  <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
                 </div>
                 <div fxFlex="50">
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
+                  <h3> Company Name </h3>
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="Creat!ve Touch"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3> Company Domain </h3>                  
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="CreativeTouch.com"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3> Business Name </h3>
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="Creative Touch"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
                 </div>
-              </div>
+              </div><br>
+
+              <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                <div fxFlex="50">
+                  <span class="card-title">Language and Currency</span>
+                  <p class="fill">Configure language and currency of your company.</p>
+                </div>
+                <div fxFlex="50">
+                  <h3> Language </h3>
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="English"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3> Default Currency </h3>                  
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="US Dollar"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                </div>
+              </div><br>
+
+              <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                <div fxFlex="50">
+                  <span class="card-title">Address</span>
+                  <p class="conf">Fill in the legal address of the company</p>
+                </div>
+                <div fxFlex="50">
+                  <h3> Address Line </h3>
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="Address Line 1"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3>Country </h3>                  
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="United States"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3> City </h3>                  
+                  <mat-form-field>
+                    <input matInput  type="text" placeholder="New York City"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+                  <h3> Zip code </h3>                  
+                  <mat-form-field>
+                    <input matInput  type="number" placeholder="143 401"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  </mat-form-field>
+
+                </div>
+              </div><br>
+
+
+
+
+
               <div fxLayout="row" class="theme-setting-inner" > <!--*ngIf="accessPermission"-->
                 <div fxFlex="50">
                 </div>
@@ -62,6 +96,12 @@
               </div>
             </mat-tab>
 
+
+
+          </div>
+
+           
+           
             <mat-tab label="Working hours">
               <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">

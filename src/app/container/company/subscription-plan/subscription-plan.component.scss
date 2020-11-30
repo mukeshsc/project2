@@ -123,7 +123,15 @@
     text-transform: capitalize;
     opacity: 1;
   }
-  
+  p.just {
+    text-align: justify;
+  }
+  p.fill {
+    padding: 0 95px 0 0;
+  }
+  p.conf {
+    padding: 0 185px 0 0;
+  }
   
   p {
     text-align: center;
