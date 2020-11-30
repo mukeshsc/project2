@@ -68,7 +68,7 @@
 
           <!-- contractValidity Column -->
           <ng-container matColumnDef="contractValidity">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header>Contract Validity </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Contract Validity </th>
             <td mat-cell *matCellDef="let element"> {{element.expiry_Date}} </td>
           </ng-container>
 
@@ -93,7 +93,7 @@
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
               <ng-container *ngIf="element.selected">
-                <span *ngIf="!accessPermission">No Permission</span>
+                <span *ngIf="!accessPermission"> No Permission </span>
                 <iframe id="my_iframe" style="display:none;" src=""></iframe>
                 <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
                   matTooltip="In Active" *ngIf="element.status != 0 && accessPermission && getNegative(element.Action_Required) == 1" color="light" (click)="updateDocStatus(element.documentDetail_id,'0')"><mat-icon color="accent">lock</mat-icon></button>

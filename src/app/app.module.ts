@@ -63,6 +63,8 @@ import { ContractsComponent } from './container/documents/contracts/contracts.co
 import { ConfirmBoxComponent } from './confirm-box/confirm-box.component';
 import { CsvUploadComponent } from './container/employee/csv-upload/csv-upload.component';
 import { ContractsAddComponent } from './container/documents/contracts-add/contracts-add.component';
+import { InsuranceEditComponent } from './container/other/insurance-edit/insurance-edit.component';
+import { InsuranceAddComponent } from './container/other/insurance-add/insurance-add.component';
 
 @NgModule({
   declarations: [
@@ -92,7 +94,9 @@ import { ContractsAddComponent } from './container/documents/contracts-add/contr
     ContractsComponent,
     ConfirmBoxComponent,
     CsvUploadComponent,
-    ContractsAddComponent
+    ContractsAddComponent,
+    InsuranceAddComponent,
+    InsuranceEditComponent
   ],
   imports: [
     BrowserModule,

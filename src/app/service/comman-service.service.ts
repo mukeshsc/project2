@@ -346,4 +346,31 @@ docDelete(formData){
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteEmployeeDocument `,formData, {headers}).pipe(map(res => <any>res));
  }
 
+// Show Insurance List
+showInsurance(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showInsurance `, {headers}).pipe(map(res => <any>res));
+ }
+
+// Insurance add
+addInsurance(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addInsurance `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ // Delete Insurance
+deleteInsurance(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteInsurance `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
 }

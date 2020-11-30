@@ -46,7 +46,7 @@ import { InsuranceComponent } from './insurance/insurance.component';
     CalendarComponent,
     ChatComponent,
     SettingComponent,
-    InsuranceComponent
+    InsuranceComponent,
   ],
   imports: [
     CommonModule,
