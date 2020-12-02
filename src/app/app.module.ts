@@ -66,6 +66,7 @@ import { ContractsAddComponent } from './container/documents/contracts-add/contr
 import { InsuranceEditComponent } from './container/other/insurance-edit/insurance-edit.component';
 import { InsuranceAddComponent } from './container/other/insurance-add/insurance-add.component';
 import { SubscriptionPlanComponent } from './container/company/subscription-plan/subscription-plan.component';
+import { FilterComponent } from './container/employee/filter/filter.component';
 
 @NgModule({
   declarations: [
@@ -98,7 +99,8 @@ import { SubscriptionPlanComponent } from './container/company/subscription-plan
     ContractsAddComponent,
     InsuranceAddComponent,
     InsuranceEditComponent,
-    SubscriptionPlanComponent
+    SubscriptionPlanComponent,
+    FilterComponent
   ],
   imports: [
     BrowserModule,

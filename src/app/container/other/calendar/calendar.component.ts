@@ -77,6 +77,7 @@ async getEvent(){
         }
         this.data.push(obj)
       }
+      console.log(this.data)
       this.scheduleObj.saveEvent(this.data);
       this.openSnackBar(response.message);
     }else{
@@ -200,6 +201,7 @@ async onActionComplete(){
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
+          this.getEvent();
         }else{
           this.openSnackBar(response.message);
         }
@@ -216,6 +218,7 @@ async onActionComplete(){
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
+          this.getEvent();
         }else{
           this.openSnackBar(response.message);
         }

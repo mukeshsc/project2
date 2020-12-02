@@ -15,6 +15,7 @@ import { EmployeeAddComponent } from '../employee-add/employee-add.component';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { CsvUploadComponent } from '../csv-upload/csv-upload.component';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { FilterComponent } from '../filter/filter.component';
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -128,6 +129,17 @@ async updateEmployeeStatus(id,status){
   // open add Employee modal
   openSubAddModal() {
     const dialogRef = this.dialog.open(EmployeeAddComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+      this.getList()
+    });
+  }
+
+
+  // open filter modal
+  openfilterModal() {
+    const dialogRef = this.dialog.open(FilterComponent);
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

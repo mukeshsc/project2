@@ -118,6 +118,9 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
 
   }
 
+  .mat-icon.mat-green {
+    color: #1ec41e;
+  }
   .success-alert{
     background-color:  var(--unnamed-color-3f51b5) !important;
     color:#fff;
@@ -202,6 +205,9 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
 
 
 
+  ngx-dropzone-preview {
+    background-size: 100% 100%;
+}
 
   button.round-btn {
     border-radius: 20px;

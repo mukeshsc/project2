@@ -69,10 +69,10 @@
             <mat-icon matSuffix>search</mat-icon>
             <input matInput placeholder="Search" #input  (keyup)="applyFilter($event)">
           </mat-form-field>
-          <button mat-mini-fab color="light" class="cal-button" aria-label="Sync">
+          <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getList()">
             <mat-icon>sync</mat-icon>
           </button>
-          <button mat-mini-fab color="light" class="cal-button"  aria-label="Filter">
+          <button mat-mini-fab color="light" class="cal-button"  aria-label="Filter" (click)="openfilterModal()">
             <mat-icon>filter_list</mat-icon>
           </button>
           <button mat-mini-fab color="primary" class="cal-button" (click)="openSubAddModal()"  aria-label="Add new"  *ngIf="accessPermission">
