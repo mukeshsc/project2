@@ -5,6 +5,8 @@ import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-setting',
@@ -15,6 +17,12 @@ export class SettingComponent implements OnInit {
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;
+  departmentData:any = [];
+  departmentSet = {
+    "departmentType":"",
+    "ip_Address":"123.444.333.33",
+    "companyId":""
+  }
   smtpDataSet:any;
   smtpData = {}
   themeData = {
@@ -32,16 +40,26 @@ export class SettingComponent implements OnInit {
     "newpassword":"",
     "confirmpassword":""
   }
+  leaveDataSet = {
+    "leaveType":"",
+    "ip_Address":"12.43.33.33",
+    "companyId":""
+  }
+  leaveData:any = [];
   passNotMatched: boolean = false;
   accessPermission:boolean;
-  constructor( public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  constructor( public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
     //getting access permission
     this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
+    this.departmentSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+    this.leaveDataSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.getTheme();
     this.getsmtp();
+    this.getDepartment();
+    this.getLeave();
   }
 
   // Security setting (Update password)
@@ -102,6 +120,134 @@ export class SettingComponent implements OnInit {
       this.openErrrorSnackBar(error.message);
     }));
 
+}
+
+// Get Department
+async getDepartment(){
+  this.ngxService.start();
+  await(this._api.showDepartment().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.departmentData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+//add department
+async addDepartement(){
+  this.ngxService.start();
+  await(this._api.addDepartment(this.departmentSet).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getDepartment();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// delete departemnt
+async deleteDepartment(id){
+  let data ={
+    "departmentId":id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+    "ip_Address":"123.22.22.22"
+  }
+  this.ngxService.start();
+  await(this._api.deleteDepartment(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getDepartment();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// Get Leave
+async getLeave(){
+  this.ngxService.start();
+  await(this._api.showLeave().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.leaveData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+//add leave
+async addLeave(){
+  this.ngxService.start();
+  await(this._api.addLeave(this.departmentSet).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getLeave();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// delete leave
+async deleteLeave(id){
+  let data ={
+    "leaveTypeId":id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+    "ip_Address":"123.22.22.22"
+  }
+  this.ngxService.start();
+  await(this._api.deleteLeave(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getLeave();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
 }
 
 // Update Theme
@@ -257,6 +403,41 @@ openErrrorSnackBar(msg) {
     horizontalPosition: 'right',
     verticalPosition: 'top',
     panelClass: ['failure-alert']
+  });
+}
+
+// confirm message for delete department
+confirmDialog(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteDepartment(id);
+    }
+  });
+}
+// confirm message for delete leave
+confirmDialogLeave(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteLeave(id);
+    }
   });
 }
 

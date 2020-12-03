@@ -382,4 +382,57 @@ deleteInsurance(formData){
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}invitationLink `,formData, {headers}).pipe(map(res => <any>res));
  }
 
+ // Show Department List
+showDepartment(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showDepartment `, {headers}).pipe(map(res => <any>res));
+ }
+
+ //add departement
+ addDepartment(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addDepartment `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ //delete departement
+ deleteDepartment(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteDepartment `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+  // Show Leave List
+showLeave(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showLeave `, {headers}).pipe(map(res => <any>res));
+ }
+
+ //add leave
+ addLeave(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addLeave `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ //delete leave
+ deleteLeave(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteDepartment `,formData, {headers}).pipe(map(res => <any>res));
+ }
 }

@@ -29,6 +29,8 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -47,8 +49,6 @@ import { CalendarComponent } from './container/other/calendar/calendar.component
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ChatComponent } from './container/other/chat/chat.component';
 import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
-import { HttpClientModule } from '@angular/common/http';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { AuthGuardService } from './service/auth-guard.service';
 import { EmployeesComponent } from './container/employee/employees/employees.component';
 import { EmployeeDetailComponent } from './container/employee/employee-detail/employee-detail.component';
@@ -142,7 +142,7 @@ import { ProfileComponent } from './container/company/profile/profile.component'
     MatSelectModule,
     MatTreeModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
   bootstrap: [AppComponent]

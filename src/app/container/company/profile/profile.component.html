@@ -108,6 +108,7 @@
               <div fxFlex="40">
                 <span class="card-title">General Information</span>
                 <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
+                <br />
               </div>
               <div fxFlex="60">
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
@@ -136,8 +137,8 @@
                           </div>
                         </td>
                         <td>
-                          <button mat-raised-button class="big-btn block-btn" color="warn" *ngIf="!item.OnOff" (click)="setOnOff('true', i)">Off</button>
-                          <button mat-raised-button class="big-btn block-btn" color="primary"  *ngIf="item.OnOff"  (click)="setOnOff('false', i)">On</button>
+                          <button mat-mini-fab color="light" *ngIf="!item.OnOff" #tooltip="matTooltip" matTooltip="On" (click)="setOnOff('true', i)"><mat-icon color="primary">add</mat-icon></button>
+                          <button mat-mini-fab  color="light"  *ngIf="item.OnOff" #tooltip="matTooltip" matTooltip="Off" (click)="setOnOff('false', i)"><mat-icon color="warn">remove</mat-icon></button>
                         </td>
                       </tr>
                     </tbody>
@@ -147,9 +148,9 @@
               </div>
             </div>
             <div fxLayout="row" class="theme-setting-inner" >
-              <div fxFlex="50">
+              <div fxFlex="40">
               </div>
-              <div fxFlex="50">
+              <div fxFlex="60">
                 <mat-label></mat-label>
                 <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button>
               </div>

@@ -138,6 +138,7 @@ openContractAddModal() {
 
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
+    this.showDoc();
   });
 }
 

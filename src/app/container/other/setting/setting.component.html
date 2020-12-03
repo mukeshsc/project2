@@ -268,34 +268,183 @@
           <mat-tab label="Leaves">
 
             <div fxLayout="row" class="theme-setting-inner" >
-              <div fxFlex="50">
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">All Leaves</span>
+                  <span class="spacer"></span>
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getLeave()">
+                    <mat-icon>sync</mat-icon>
+                  </button>
+                </mat-toolbar>
               </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner"  >
               <div fxFlex="50">
-                <mat-label></mat-label>
-                <!-- <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button> -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Leave</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of leaveData">
+                      <td>{{d.leaveType_id}}</td>
+                      <td>{{d.leave_Type}}</td>
+                      <td>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogLeave(d.leaveType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="10"></div>
+              <div  fxFlex="40"  *ngIf="accessPermission">
+                <mat-card>
+                  <form name="LeaveForm" (ngSubmit)="addLeave()" #LeaveForm="ngForm">
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>Leave Type</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="leaveType.errors && leaveType.touched">
+                          <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner">
+                      <div fxFlex="100">
+                        <mat-label></mat-label>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Leave</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-card>
               </div>
             </div>
           </mat-tab>
           <mat-tab label="Department">
 
             <div fxLayout="row" class="theme-setting-inner" >
-              <div fxFlex="50">
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">All Departments</span>
+                  <span class="spacer"></span>
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getDepartment()">
+                    <mat-icon>sync</mat-icon>
+                  </button>
+                </mat-toolbar>
               </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner"  >
               <div fxFlex="50">
-                <mat-label></mat-label>
-                <!-- <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button> -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Deaprtment</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of departmentData">
+                      <td>{{d.department_id}}</td>
+                      <td>{{d.department_Type}}</td>
+                      <td>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialog(d.department_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="10"></div>
+              <div  fxFlex="40"  *ngIf="accessPermission">
+                <mat-card>
+                  <form name="DepartmentForm" (ngSubmit)="addDepartement()" #DepartmentForm="ngForm">
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>Department Name</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="text" #departmentType  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="departmentType.errors && departmentType.touched">
+                          <span class="error" *ngIf="departmentType.errors?.required">Department name is mandatory.</span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner">
+                      <div fxFlex="100">
+                        <mat-label></mat-label>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Department</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-card>
               </div>
             </div>
           </mat-tab>
 
           <mat-tab label="Holiday">
-
             <div fxLayout="row" class="theme-setting-inner" >
-              <div fxFlex="50">
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">All Holidays</span>
+                  <span class="spacer"></span>
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getLeave()">
+                    <mat-icon>sync</mat-icon>
+                  </button>
+                </mat-toolbar>
               </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner"  >
               <div fxFlex="50">
-                <mat-label></mat-label>
-                <!-- <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button> -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Leave</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of leaveData">
+                      <td>{{d.leaveType_id}}</td>
+                      <td>{{d.leave_Type}}</td>
+                      <td>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogLeave(d.leaveType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="10"></div>
+              <div  fxFlex="40"  *ngIf="accessPermission">
+                <mat-card>
+                  <form name="LeaveForm" (ngSubmit)="addLeave()" #LeaveForm="ngForm">
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>Leave Type</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="leaveType.errors && leaveType.touched">
+                          <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner">
+                      <div fxFlex="100">
+                        <mat-label></mat-label>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Leave</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-card>
               </div>
             </div>
           </mat-tab>
