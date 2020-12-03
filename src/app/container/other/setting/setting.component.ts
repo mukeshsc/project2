@@ -14,12 +14,9 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 export class SettingComponent implements OnInit {
   files: File[] = [];
   files2: File[] = [];
-  faqData:any;
-  privacyPolicyData:any;
   themeDataSet:any;
   smtpDataSet:any;
   smtpData = {}
-  workingDay = []
   themeData = {
     "company_Brand":"#000000" ,
     "ligth_logo": "",
@@ -43,11 +40,8 @@ export class SettingComponent implements OnInit {
 
     //getting access permission
     this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
-    this.getFaq();
-    this.getPrivacyPolicy();
     this.getTheme();
     this.getsmtp();
-    this.getWorkingDay();
   }
 
   // Security setting (Update password)
@@ -80,49 +74,6 @@ export class SettingComponent implements OnInit {
 
   }
 
-   // Get FAQ
-   async getFaq(){
-      this.ngxService.start();
-      await(this._api.faq().subscribe(res => {
-        this.ngxService.stop();
-        const response: any = res;
-        if (response.success == true){
-          console.log(JSON.parse(response.data))
-          this.faqData = JSON.parse(response.data);
-        }else{
-          this.openErrrorSnackBar(response.message);
-        }
-        console.log(res);
-      },err => {
-        const error = err.error;
-        this.ngxService.stop();
-        this.openErrrorSnackBar(error.message);
-      }));
-
-  }
-
-
-   // Get FAQ
-   async getPrivacyPolicy(){
-    this.ngxService.start();
-    await(this._api.privacyPolicy().subscribe(res => {
-      this.ngxService.stop();
-      const response: any = res;
-      if (response.success == true){
-        this.privacyPolicyData = response.data.privacy_Policy;
-        console.log(this.privacyPolicyData)
-      }else{
-        this.openErrrorSnackBar(response.message);
-      }
-      console.log(res);
-    },err => {
-      const error = err.error;
-      this.ngxService.stop();
-      this.openErrrorSnackBar(error.message);
-    }));
-
-}
-
   // Get Theme
   async getTheme(){
     this.ngxService.start();
@@ -141,51 +92,6 @@ export class SettingComponent implements OnInit {
           "themeId":this.themeDataSet.theme_id,
           "ip_Address":"12.32.32.22",
         }
-      }else{
-        this.openErrrorSnackBar(response.message);
-      }
-      console.log(res);
-    },err => {
-      const error = err.error;
-      this.ngxService.stop();
-      this.openErrrorSnackBar(error.message);
-    }));
-
-}
-
-async getWorkingDay(){
-  this.ngxService.start();
-    await(this._api.companyWorkingDay().subscribe(res => {
-      this.ngxService.stop();
-      const response: any = res;
-      if (response.success == true){
-        this.workingDay = response.data;
-      }else{
-        this.openErrrorSnackBar(response.message);
-      }
-      console.log(res);
-    },err => {
-      const error = err.error;
-      this.ngxService.stop();
-      this.openErrrorSnackBar(error.message);
-    }));
-
-}
-
-//update working day
-
-async companyWorkingDaySet(){
-  let data = {
-    "companyId": JSON.parse(localStorage.getItem('userData')).company_id,
-	  "workingDay":JSON.stringify(this.workingDay)
-  }
-  this.ngxService.start();
-    await(this._api.companyWorkingDaySet(data).subscribe(res => {
-      this.ngxService.stop();
-      const response: any = res;
-      if (response.success == true){
-        this.openSnackBar(response.message);
-        this.getWorkingDay()
       }else{
         this.openErrrorSnackBar(response.message);
       }
@@ -353,8 +259,5 @@ openErrrorSnackBar(msg) {
     panelClass: ['failure-alert']
   });
 }
-  // employee working hour on off setup
-  setOnOff(e, id){
-    this.workingDay[id].OnOff = (e == 'true'?true:false)
-  }
+
 }

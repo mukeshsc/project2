@@ -1,0 +1,21 @@
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+  <div fxFlex>
+    <h3 class="page-title">
+      FAQ
+    </h3>
+    <ul class="breadcrumb">
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li>FAQ</li>
+    </ul>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+  <div fxFlex="100">
+    <mat-card class="employee-tab">
+      <mat-toolbar color="light">
+        <span class="mat-toolbar-title">Privacy Plicy</span>
+      </mat-toolbar>
+      <mat-card-content [innerHTML]="privacyPolicyData"></mat-card-content>
+    </mat-card>
+  </div>
+</div>

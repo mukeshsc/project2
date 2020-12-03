@@ -278,7 +278,7 @@ export class SidebarComponent implements OnInit {
       access:false,
       children:[{
         title:'Profile',
-        url:'/dashboard',
+        url:'/profile',
         open:false,
         icon:'stop_circle',
         children:[],
@@ -286,12 +286,21 @@ export class SidebarComponent implements OnInit {
       },
       {
         title:'FAQs',
-        url:'/dashboard',
+        url:'/faq',
         open:false,
         icon:'stop_circle',
         children:[],
         access:false,
-      }]
+      },
+      {
+        title:'Privacy Policy',
+        url:'/privacy-policy',
+        open:false,
+        icon:'stop_circle',
+        children:[],
+        access:false,
+      },
+      ]
     },
     {
       title:'Settings',

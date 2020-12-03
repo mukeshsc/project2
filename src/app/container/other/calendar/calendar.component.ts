@@ -185,23 +185,24 @@ async onActionComplete(){
     }
     console.log(data)
     let formData = {
-      "event_Type":data.EventType,
+      "event_Type":data.EventType != null?data.EventType:this.leaveData[0].leaveType_id,
       "event_StartDate":new Date(data.StartTime),
       "event_EndDate":new Date(data.EndTime),
-      "target_Audeince":data.targetAudience,
+      "target_Audeince":data.targetAudience != null?data.targetAudience : 0,
       "event_Description":data.Description,
       "fileName":"",
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0
     }
-    if(data.calendarEvent_id && data.calendarEvent_id != ''){
+    if(data.calendarEvent_id && data.calendarEvent_id != '' ){
       formData['calendarEvent_id'] = data.calendarEvent_id;
       await(this._api.editEvent(formData).subscribe(res => {
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
-          this.getEvent();
+          // this.getEvent();
+
         }else{
           this.openSnackBar(response.message);
         }

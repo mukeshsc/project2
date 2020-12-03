@@ -126,6 +126,33 @@ async updateEmployeeStatus(id,status){
 
 }
 
+// send invitation link to employee
+async invitationLink(id){
+  this.ngxService.start();
+  let formData = {
+    user_id:id,
+    company_id:JSON.parse(localStorage.getItem('userData')).company_id
+  }
+  await(this._api.invitationLink(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getList();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+
+
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error.message);
+    this.ngxService.stop();
+  }));
+
+}
+
   // open add Employee modal
   openSubAddModal() {
     const dialogRef = this.dialog.open(EmployeeAddComponent);
@@ -214,6 +241,54 @@ confirmDialog(id): void {
       this.deleteEmployee(id);
     }
   });
+}
+
+// Download list in CSV
+export_table_to_csv() {
+  this.ngxService.start();
+  const html = document.getElementById('csvTable');
+  let csv = [];
+  let rows = html.querySelectorAll('table tr');
+
+  for (let i = 0; i < rows.length; i++) {
+    let row = [], cols = rows[i].querySelectorAll('td, th');
+
+    for (let j = 0; j < cols.length; j++) {
+        row.push(cols[j].textContent);
+    }
+
+    csv.push(row.join(','));
+  }
+
+  // Download CSV
+  this.download_csv(csv.join('\n'), 'Employee-List.csv');
+}
+
+download_csv(csv, filename) {
+  let csvFile;
+  let downloadLink;
+
+  // CSV FILE
+  csvFile = new Blob([csv], {type: 'text/csv'});
+
+  // Download link
+  downloadLink = document.createElement('a');
+
+  // File name
+  downloadLink.download = filename;
+
+  // We have to create a link to the file
+  downloadLink.href = window.URL.createObjectURL(csvFile);
+
+  // Make sure that the link is not displayed
+  downloadLink.style.display = 'none';
+
+  // Add the link to your DOM
+  document.body.appendChild(downloadLink);
+
+  // Lanzamos
+  downloadLink.click();
+  this.ngxService.stop();
 }
 
 }

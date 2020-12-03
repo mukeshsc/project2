@@ -65,8 +65,10 @@ import { CsvUploadComponent } from './container/employee/csv-upload/csv-upload.c
 import { ContractsAddComponent } from './container/documents/contracts-add/contracts-add.component';
 import { InsuranceEditComponent } from './container/other/insurance-edit/insurance-edit.component';
 import { InsuranceAddComponent } from './container/other/insurance-add/insurance-add.component';
-import { SubscriptionPlanComponent } from './container/company/subscription-plan/subscription-plan.component';
 import { FilterComponent } from './container/employee/filter/filter.component';
+import { FaqComponent } from './container/company/faq/faq.component';
+import { PrivacyPolicyComponent } from './container/company/privacy-policy/privacy-policy.component';
+import { ProfileComponent } from './container/company/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -99,8 +101,10 @@ import { FilterComponent } from './container/employee/filter/filter.component';
     ContractsAddComponent,
     InsuranceAddComponent,
     InsuranceEditComponent,
-    SubscriptionPlanComponent,
-    FilterComponent
+    ProfileComponent,
+    FilterComponent,
+    FaqComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,

@@ -132,7 +132,7 @@
   p.conf {
     padding: 0 185px 0 0;
   }
-  
+
   p {
     text-align: center;
   }
@@ -215,4 +215,57 @@ h2.for {
 }
 span.th {
   color: silver;
+}
+.theme-setting-inner{
+  margin-bottom:30px;
+}
+
+th{
+  text-align: left;
+}
+.mat-toolbar-title{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/27px var(--unnamed-font-family-poppins);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+text-align: left;
+font: normal normal 600 18px/27px Poppins;
+letter-spacing: 0px;
+color: #000000;
+text-transform: capitalize;
+opacity: 1;
+}
+.working{
+  width:100%;
+  tr{
+
+    th{
+      background: var(--unnamed-color-f5f6fb) 0% 0% no-repeat padding-box;
+      background: #F5F6FB 0% 0% no-repeat padding-box;
+      opacity: 1;
+      text-align: center;
+      &:first-child{
+        border-radius:10px 0 0px 0px
+      }
+      &:last-child{
+        border-radius:0 10px 0px 0px
+      }
+    }
+    td{
+      text-align: center;
+      .time-field {
+        background: #f5f6fb 0% 0% no-repeat padding-box;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        margin:10px;
+        .mat-form-field {
+          border: none;
+          text-align: center;
+        }
+        .mat-icon{
+          margin: 0 20px;
+        }
+      }
+    }
+  }
 }

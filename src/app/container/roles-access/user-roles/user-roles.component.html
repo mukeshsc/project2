@@ -60,13 +60,13 @@
           <td mat-cell *matCellDef="let element">
             <span *ngIf="!accessPermission"> No Permission</span>
             <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-            matTooltip="In Active" *ngIf="element.status != 0 && accessPermission" color="light" (click)="udpateStatus(element.userRole_id,'0')"><mat-icon color="warn">lock</mat-icon></button>
+            matTooltip="In Active" *ngIf="element.status != 0 && accessPermission" color="light" (click)="udpateStatus(element.userRole_id,'0')"><mat-icon color="primary">lock</mat-icon></button>
             <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
             matTooltip="Activate" *ngIf="element.status != 1 && accessPermission" color="light"  (click)="udpateStatus(element.userRole_id,'1')"><mat-icon color="primary">lock_open</mat-icon></button>
            <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission"
             matTooltip="Delete"   color="light"  (click)="confirmDialog(element.userRole_id,'2')"><mat-icon color="warn">delete</mat-icon></button>
             <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openRoleEditModal(element)" *ngIf="accessPermission"
-            matTooltip="Edit"   color="light"><mat-icon color="primary">edit</mat-icon></button>
+            matTooltip="Edit"   color="light"><mat-icon color="green">edit</mat-icon></button>
           </td>
         </ng-container>
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

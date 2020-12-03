@@ -29,7 +29,7 @@
                   <mat-form-field>
                     <input matInput  type="text" placeholder="Creat!ve Touch"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
-                  <h3> Company Domain </h3>                  
+                  <h3> Company Domain </h3>
                   <mat-form-field>
                     <input matInput  type="text" placeholder="CreativeTouch.com"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
@@ -50,7 +50,7 @@
                   <mat-form-field>
                     <input matInput  type="text" placeholder="English"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
-                  <h3> Default Currency </h3>                  
+                  <h3> Default Currency </h3>
                   <mat-form-field>
                     <input matInput  type="text" placeholder="US Dollar"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
@@ -67,15 +67,15 @@
                   <mat-form-field>
                     <input matInput  type="text" placeholder="Address Line 1"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
-                  <h3>Country </h3>                  
+                  <h3>Country </h3>
                   <mat-form-field>
                     <input matInput  type="text" placeholder="United States"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
-                  <h3> City </h3>                  
+                  <h3> City </h3>
                   <mat-form-field>
                     <input matInput  type="text" placeholder="New York City"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
-                  <h3> Zip code </h3>                  
+                  <h3> Zip code </h3>
                   <mat-form-field>
                     <input matInput  type="number" placeholder="143 401"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
@@ -100,60 +100,64 @@
 
           </div>
 
-           
-           
-            <mat-tab label="Working hours">
-              <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
-                <div fxFlex="50">
-                  <span class="card-title">General Information</span>
-                  <p>Just a bit of info about your company, and the default language your employees will see when invited.</p>
-                </div>
-                <div fxFlex="50">
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
-                  <section class="toggle-section">
-                    <mat-label>Employee & Long Title Goes Here</mat-label>
-                    <mat-slide-toggle
-                        class="example-margin"
-                        color="primary"
-                        checked="checked"
-                    >
-                    </mat-slide-toggle>
-                  </section>
-                </div>
-              </div>
-              <div fxLayout="row" class="theme-setting-inner" > <!--*ngIf="accessPermission"-->
-                <div fxFlex="50">
-                </div>
-                <div fxFlex="50">
-                  <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
-                </div>
-              </div>
-            </mat-tab>
 
-            <!-- <mat-tab label="Office">
-                <mat-toolbar color="light">
-                  <span class="mat-toolbar-title">Privacy Plicy</span>
-                </mat-toolbar>
-                <div ></div>
-              </mat-tab>   -->
-              <mat-tab class="colr" label="Second">  </mat-tab>
+
+
+          <mat-tab label="Working Hours">
+            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+              <div fxFlex="40">
+                <span class="card-title">General Information</span>
+                <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
+              </div>
+              <div fxFlex="60">
+                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
+                  <table class="working">
+                    <thead>
+                      <tr>
+                        <th>
+                          Week Days
+                        </th>
+                        <th colspan="2">Working Shifts</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of workingDay;let i=index">
+                        <td>{{item.day}}</td>
+                        <td colspan="2">
+                          <div class="time-field">
+                            <mat-form-field>
+                              <input matInput  type="time"  autocomplete="off" [(ngModel)]="item.inTime" name="inTime" [disabled]="item.OnOff" />
+                            </mat-form-field>
+                            <mat-icon>trending_flat</mat-icon>
+                            <mat-form-field>
+                              <input matInput  type="time"  autocomplete="off" [(ngModel)]="item.outTime" name="outTime" [disabled]="item.OnOff" />
+                            </mat-form-field>
+                          </div>
+                        </td>
+                        <td>
+                          <button mat-raised-button class="big-btn block-btn" color="warn" *ngIf="!item.OnOff" (click)="setOnOff('true', i)">Off</button>
+                          <button mat-raised-button class="big-btn block-btn" color="primary"  *ngIf="item.OnOff"  (click)="setOnOff('false', i)">On</button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="50">
+              </div>
+              <div fxFlex="50">
+                <mat-label></mat-label>
+                <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button>
+              </div>
+            </div>
+          </mat-tab>
+          <mat-tab class="colr" label="Offices">
+
+          </mat-tab>
 
 
 
@@ -172,7 +176,7 @@
                           <div class="round">
                             <div class="doll"> <mat-icon>shopping_bag</mat-icon><h2 class="twn"> $20.00</h2> <span class="th">per month</span></div>
                           </div>
-        
+
                           <div class="row mn">
                               <h3 class="ji">JitterBug </h3>
                           </div>
@@ -202,7 +206,7 @@
                                 <span class="col2">Role & Access </span>
                                 <span class="col2">Integration with wearables </span>
                               </p>
-        
+
                           </div>
                           <div>
                               <button mat-raised-button color="orange" class="but"> Select</button>
@@ -214,7 +218,7 @@
                         <div class="round">
                           <div class="doll"><mat-icon>local_florist</mat-icon> <h2 class="thr"> $30.00</h2> <span class="th">per month</span></div>
                         </div>
-        
+
                         <div class="row sw mn">
                             <h3 class="sw">Swing </h3>
                         </div>
@@ -258,7 +262,7 @@
                             <div class="round">
                               <div class="doll"><mat-icon>filter_vintage</mat-icon> <h2 class="for"> $40.00</h2> <span class="th">per month</span></div>
                             </div>
-        
+
                             <div class="row mn">
                                 <h3 class="jiv">Jive </h3>
                             </div>
@@ -296,8 +300,8 @@
                                 <button mat-raised-button color="orange" class="but"> Select</button>
                             </div>
                         </div>
-        
-        
+
+
                     </div>
                 </div>
 
@@ -310,9 +314,9 @@
                 <span class="mat-toolbar-title">Privacy Plicy</span>
               </mat-toolbar>
               <div ></div>
-            </mat-tab>           
-        
-        
+            </mat-tab>
+
+
         </mat-tab-group>
         </mat-card-content>
       </mat-card>
