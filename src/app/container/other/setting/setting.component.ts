@@ -17,6 +17,12 @@ export class SettingComponent implements OnInit {
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;
+  holidayData:any = [];
+  holidaySet = {
+    "salaryType":"",
+    "ip_Address":"12.43.33.33",
+    "companyId":""
+  }
   salaryData:any = [];
   salarySet = {
     "salaryType":"",
