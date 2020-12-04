@@ -490,6 +490,6 @@ showHoliday(){
   'Content-Type': 'application/json',
   'Authorization': this.token
   });
-  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteSalary `,formData, {headers}).pipe(map(res => <any>res));
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteHoliday `,formData, {headers}).pipe(map(res => <any>res));
  }
 }

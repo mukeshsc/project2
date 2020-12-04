@@ -19,9 +19,15 @@ export class SettingComponent implements OnInit {
   themeDataSet:any;
   holidayData:any = [];
   holidaySet = {
-    "salaryType":"",
-    "ip_Address":"12.43.33.33",
-    "companyId":""
+    "event_Type":"1",
+    "event_StartDate":"",
+    "event_EndDate":"",
+    "target_Audeince":"1",
+    "event_Description":"",
+    "fileName":"gergerge",
+    "event_Title":"",
+    "isAllday":"1",
+    "ip_Address":"123"
   }
   salaryData:any = [];
   salarySet = {
@@ -74,6 +80,7 @@ export class SettingComponent implements OnInit {
     this.getDepartment();
     this.getLeave();
     this.getSalary();
+    this.getHoliday();
   }
 
   // Security setting (Update password)
@@ -371,8 +378,7 @@ async addHoliday(){
 // delete Holiday
 async deleteHoliday(id){
   let data ={
-    "salaryTypeId":id,
-    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+    "calendarEvent_id":id,
     "ip_Address":"123.22.22.22"
   }
   this.ngxService.start();

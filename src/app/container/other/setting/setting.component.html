@@ -443,7 +443,7 @@
                 <mat-toolbar color="light">
                   <span class="mat-toolbar-title">All Holidays</span>
                   <span class="spacer"></span>
-                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getLeave()">
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getHoliday()">
                     <mat-icon>sync</mat-icon>
                   </button>
                 </mat-toolbar>
@@ -455,16 +455,20 @@
                   <thead>
                     <tr>
                       <th>ID</th>
-                      <th>Leave</th>
+                      <th>Event name</th>
+                      <th>From Date</th>
+                      <th>To Date</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let d of leaveData">
-                      <td>{{d.leaveType_id}}</td>
-                      <td>{{d.leave_Type}}</td>
+                    <tr *ngFor="let d of holidayData">
+                      <td>{{d.calendarEvent_id}}</td>
+                      <td>{{d.event_Title}}</td>
+                      <td>{{d.event_StartDate}}</td>
+                      <td>{{d.event_EndDate}}</td>
                       <td>
-                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogLeave(d.leaveType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogHoliday(d.calendarEvent_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
                       </td>
                     </tr>
                   </tbody>
@@ -473,23 +477,44 @@
               <div fxFlex="10"></div>
               <div  fxFlex="40"  *ngIf="accessPermission">
                 <mat-card>
-                  <form name="LeaveForm" (ngSubmit)="addLeave()" #LeaveForm="ngForm">
+                  <form name="holidayForm" (ngSubmit)="addHoliday()" #holidayForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Leave Type</mat-label>
+                        <mat-label>Event name</mat-label>
                         <mat-form-field>
-                          <input matInput  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                          <input matInput  type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
                         </mat-form-field>
-                        <div *ngIf="leaveType.errors && leaveType.touched">
-                          <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
+                        <div *ngIf="event_Title.errors && event_Title.touched">
+                          <span class="error" *ngIf="event_Title.errors?.required">Event name is mandatory.</span>
                         </div>
-
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>Start Date</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="date" #event_StartDate  [(ngModel)]="holidaySet.event_StartDate"  name="event_StartDate" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="event_StartDate.errors && event_StartDate.touched">
+                          <span class="error" *ngIf="event_StartDate.errors?.required">Event Start Date is mandatory.</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>End Date</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="date" #event_EndDate  [(ngModel)]="holidaySet.event_EndDate"  name="event_EndDate" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="event_StartDate.errors && event_StartDate.touched">
+                          <span class="error" *ngIf="event_StartDate.errors?.required">Event End Date is mandatory.</span>
+                        </div>
                       </div>
                     </div>
                     <div fxLayout="row" class="theme-setting-inner">
                       <div fxFlex="100">
                         <mat-label></mat-label>
-                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Leave</button>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Holiday</button>
                       </div>
                     </div>
                   </form>
