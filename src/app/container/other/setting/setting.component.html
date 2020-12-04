@@ -255,13 +255,62 @@
             </div>
           </mat-tab>
           <mat-tab label="Salary">
-
             <div fxLayout="row" class="theme-setting-inner" >
-              <div fxFlex="50">
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">All Salary Type</span>
+                  <span class="spacer"></span>
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getSalary()">
+                    <mat-icon>sync</mat-icon>
+                  </button>
+                </mat-toolbar>
               </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner"  >
               <div fxFlex="50">
-                <mat-label></mat-label>
-                <!-- <button mat-raised-button class="big-btn block-btn" color="primary" (click)="companyWorkingDaySet()"  *ngIf="accessPermission">Save Settings</button> -->
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Salary Type</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of salaryData">
+                      <td>{{d.salaryType_id}}</td>
+                      <td>{{d.salary_Type}}</td>
+                      <td>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogSalary(d.salaryType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="10"></div>
+              <div  fxFlex="40"  *ngIf="accessPermission">
+                <mat-card>
+                  <form name="SalaryForm" (ngSubmit)="addSalary()" #SalaryForm="ngForm">
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-label>Salary Type</mat-label>
+                        <mat-form-field>
+                          <input matInput  type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="salaryType.errors && salaryType.touched">
+                          <span class="error" *ngIf="salaryType.errors?.required">Salary Type is mandatory.</span>
+                        </div>
+
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner">
+                      <div fxFlex="100">
+                        <mat-label></mat-label>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Salary</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-card>
               </div>
             </div>
           </mat-tab>

@@ -435,4 +435,61 @@ showLeave(){
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteDepartment `,formData, {headers}).pipe(map(res => <any>res));
  }
+
+
+  // Show Salary breakdown List
+showSalary(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showSalary `, {headers}).pipe(map(res => <any>res));
+ }
+
+ //add salary type
+ addSalary(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addSalary `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ //delete salary type
+ deleteSalary(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteSalary `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+
+
+  // Show Holiday List
+showHoliday(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showHoliday `, {headers}).pipe(map(res => <any>res));
+ }
+
+ //add holiday
+ addHoliday(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addHoliday `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ //delete holiday
+ deleteHoliday(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteSalary `,formData, {headers}).pipe(map(res => <any>res));
+ }
 }

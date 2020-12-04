@@ -17,6 +17,12 @@ export class SettingComponent implements OnInit {
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;
+  salaryData:any = [];
+  salarySet = {
+    "salaryType":"",
+    "ip_Address":"12.43.33.33",
+    "companyId":""
+  }
   departmentData:any = [];
   departmentSet = {
     "departmentType":"",
@@ -56,10 +62,12 @@ export class SettingComponent implements OnInit {
     this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
     this.departmentSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.leaveDataSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+    this.salarySet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.getTheme();
     this.getsmtp();
     this.getDepartment();
     this.getLeave();
+    this.getSalary();
   }
 
   // Security setting (Update password)
@@ -239,6 +247,135 @@ async deleteLeave(id){
     if (response.success == true){
       this.openSnackBar(response.message);
       this.getLeave();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+
+// Get Salary breakdown
+async getSalary(){
+  this.ngxService.start();
+  await(this._api.showSalary().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.salaryData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+//add Salary type
+async addSalary(){
+  this.ngxService.start();
+  await(this._api.addSalary(this.salarySet).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getSalary();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// delete leave
+async deleteSalary(id){
+  let data ={
+    "salaryTypeId":id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+    "ip_Address":"123.22.22.22"
+  }
+  this.ngxService.start();
+  await(this._api.deleteSalary(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getSalary();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// Get Holiday
+async getHoliday(){
+  this.ngxService.start();
+  await(this._api.showHoliday().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.holidayData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+//add Holiday
+async addHoliday(){
+  this.ngxService.start();
+  await(this._api.addHoliday(this.holidaySet).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getHoliday();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// delete Holiday
+async deleteHoliday(id){
+  let data ={
+    "salaryTypeId":id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+    "ip_Address":"123.22.22.22"
+  }
+  this.ngxService.start();
+  await(this._api.deleteHoliday(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getHoliday();
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -437,6 +574,41 @@ confirmDialogLeave(id): void {
   dialogRef.afterClosed().subscribe(dialogResult => {
     if(dialogResult){
       this.deleteLeave(id);
+    }
+  });
+}
+// confirm message for delete salary type
+confirmDialogSalary(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteSalary(id);
+    }
+  });
+}
+
+// confirm message for delete holiday
+confirmDialogHoliday(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteHoliday(id);
     }
   });
 }
