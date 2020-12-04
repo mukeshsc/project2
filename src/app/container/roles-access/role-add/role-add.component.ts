@@ -16,7 +16,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class RoleAddComponent implements OnInit {
   formData = {
     role_Type :'',
-    status :'0',
+    status :'1',
     ip_Address:'3333',
     modules:[]
   }

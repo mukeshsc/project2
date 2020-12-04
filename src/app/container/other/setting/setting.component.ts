@@ -14,6 +14,9 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./setting.component.scss']
 })
 export class SettingComponent implements OnInit {
+  fieldconPass:boolean;
+  fieldNewPass:boolean;
+  fieldOldPass:boolean;
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;
@@ -623,6 +626,16 @@ confirmDialogHoliday(id): void {
       this.deleteHoliday(id);
     }
   });
+}
+
+//check negative number
+checkNegative(e){
+  if(e < 0){
+    console.log(e)
+    this.smtpDataSet.smtp_Port = 0
+  }else{
+    this.smtpDataSet.smtp_Port = e
+  }
 }
 
 }

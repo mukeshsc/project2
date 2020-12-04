@@ -88,6 +88,7 @@
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
+                <mat-label></mat-label>
                 <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
               </div>
             </div>
@@ -133,6 +134,7 @@
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
+                <mat-label></mat-label>
                 <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
               </div>
             </div>
@@ -147,23 +149,24 @@
                 <div fxFlex="50">
                   <mat-label></mat-label>
                   <mat-form-field>
-                    <input matInput  type="password" #oldpassword  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" placeholder="Old Password" />
-
+                    <input matInput   [type]="fieldOldPass ? 'text' : 'password'" #oldpassword  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" />
+                    <mat-icon matSuffix (click)="fieldOldPass = !fieldOldPass" style="cursor: pointer;">{{fieldOldPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="oldpassword.errors && oldpassword.touched">
                     <span class="error" *ngIf="oldpassword.errors?.required">Old Password is mandatory.</span>
                   </div>
                   <mat-label></mat-label>
                   <mat-form-field>
-                    <input matInput  type="password" #newpassword  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off" placeholder="New Password" />
-
+                    <input matInput   [type]="fieldNewPass ? 'text' : 'password'" #newpassword  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
+                    <mat-icon matSuffix (click)="fieldNewPass = !fieldNewPass" style="cursor: pointer;">{{fieldNewPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="newpassword.errors && newpassword.touched">
                     <span class="error" *ngIf="newpassword.errors?.required">New Password is mandatory.</span>
                   </div>
                   <mat-label></mat-label>
                   <mat-form-field>
-                    <input matInput  type="password" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" placeholder="Confirm Password" />
+                    <input matInput   [type]="fieldconPass ? 'text' : 'password'" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />
+                    <mat-icon matSuffix (click)="fieldconPass = !fieldconPass" style="cursor: pointer;">{{fieldconPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="confirmpassword.errors && confirmpassword.touched">
                     <span class="error" *ngIf="confirmpassword.errors?.required">confirmpassword Password is mandatory.</span>
@@ -177,6 +180,7 @@
                 <div fxFlex="50">
                 </div>
                 <div fxFlex="50">
+                  <mat-label></mat-label>
                   <button mat-raised-button class="big-btn block-btn"  color="primary">Update Password</button>
                 </div>
               </div>
@@ -199,7 +203,7 @@
 
                 <mat-label>SMTP Port</mat-label>
                 <mat-form-field>
-                  <input matInput  type="number" #smtp_Port  name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
+                  <input matInput  type="number" (ngModelChange)="checkNegative($event)" #smtp_Port min="0" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
                   <div *ngIf="smtp_Port.errors && smtp_Port.touched">
                     <span class="error" *ngIf="smtp_Port.errors?.required">SMTP Server is mandatory.</span>
                   </div>
@@ -306,7 +310,7 @@
                     <div fxLayout="row" class="theme-setting-inner">
                       <div fxFlex="100">
                         <mat-label></mat-label>
-                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Salary</button>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!SalaryForm.valid" >Save Salary</button>
                       </div>
                     </div>
                   </form>
@@ -367,7 +371,7 @@
                     <div fxLayout="row" class="theme-setting-inner">
                       <div fxFlex="100">
                         <mat-label></mat-label>
-                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Leave</button>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!LeaveForm.valid"  >Save Leave</button>
                       </div>
                     </div>
                   </form>
@@ -428,7 +432,7 @@
                     <div fxLayout="row" class="theme-setting-inner">
                       <div fxFlex="100">
                         <mat-label></mat-label>
-                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Department</button>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!DepartmentForm.valid"  >Save Department</button>
                       </div>
                     </div>
                   </form>
@@ -514,7 +518,7 @@
                     <div fxLayout="row" class="theme-setting-inner">
                       <div fxFlex="100">
                         <mat-label></mat-label>
-                        <button mat-raised-button class="big-btn block-btn" color="primary" >Save Holiday</button>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!holidayForm.valid" >Save Holiday</button>
                       </div>
                     </div>
                   </form>

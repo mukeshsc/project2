@@ -47,7 +47,7 @@
         </mat-form-field>
       </div>
       <div fxFlex="50">
-        <mat-label>Role</mat-label>
+        <mat-label>Designation</mat-label>
         <mat-form-field>
           <mat-select [(ngModel)]="formData.role" name="role" #role required>
             <mat-option *ngFor="let roled of roleData" [value]="roled.userRole_id">{{roled.role_Type}}</mat-option>
