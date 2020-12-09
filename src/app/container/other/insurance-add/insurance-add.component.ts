@@ -17,6 +17,7 @@ export interface DialogData {
   styleUrls: ['./insurance-add.component.scss']
 })
 export class InsuranceAddComponent implements OnInit {
+  currentDate = new Date();
   formData = {
     Insurance_Name:'',
     expiryDate:'',

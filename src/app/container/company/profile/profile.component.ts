@@ -12,6 +12,17 @@ import { CommonServiceService } from 'src/app/service/comman-service.service';
 export class ProfileComponent implements OnInit {
   accessPermission:boolean;
   workingDay = []
+  profileSet = {
+    company_websiteName:'',
+    company_domain:'',
+    business_name:'',
+    language:'',
+    currency:'',
+    address:'',
+    country:'',
+    city:'',
+    zip_Code:'',
+  }
   constructor( public _access:AccessServiceService, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
      //getting access permission
      this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);

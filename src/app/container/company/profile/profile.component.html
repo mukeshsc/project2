@@ -5,7 +5,7 @@
       </h3>
       <ul class="breadcrumb">
         <li><a routerLink="/dashboard">Dashboard</a></li>
-        <li> <a> Company</a></li>
+        <li> <a> Company Profile</a></li>
         <li>Profile</li>
       </ul>
     </div>
@@ -19,23 +19,24 @@
 
             <div fxLayout="column">
             <mat-tab label="Company Profile">
+              <form name="profileForm"  #profileForm="ngForm">
               <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">General Information</span>
-                  <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
+                  <p >Just a bit of info about your company, and the default language your employees will see when invited.</p>
                 </div>
                 <div fxFlex="50">
                   <h3> Company Name </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="Creat!ve Touch"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text" [(ngModel)]="profileSet.company_websiteName" name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3> Company Domain </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="CreativeTouch.com"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text" [(ngModel)]="profileSet.company_domain"   name="company_domain" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3> Business Name </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="Creative Touch"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text" [(ngModel)]="profileSet.business_name"   name="business_name" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                 </div>
               </div><br>
@@ -43,16 +44,16 @@
               <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">Language and Currency</span>
-                  <p class="fill">Configure language and currency of your company.</p>
+                  <p >Configure language and currency of your company.</p>
                 </div>
                 <div fxFlex="50">
                   <h3> Language </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="English"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text"  [(ngModel)]="profileSet.language"  name="language" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3> Default Currency </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="US Dollar"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text"  [(ngModel)]="profileSet.currency"  name="currency" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                 </div>
               </div><br>
@@ -60,24 +61,24 @@
               <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">Address</span>
-                  <p class="conf">Fill in the legal address of the company</p>
+                  <p >Fill in the legal address of the company</p>
                 </div>
                 <div fxFlex="50">
                   <h3> Address Line </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="Address Line 1"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text"  [(ngModel)]="profileSet.address"   name="address" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3>Country </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="United States"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text"  [(ngModel)]="profileSet.country"   name="country" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3> City </h3>
-                  <mat-form-field>
-                    <input matInput  type="text" placeholder="New York City"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="text"  [(ngModel)]="profileSet.city"   name="city" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
                   <h3> Zip code </h3>
-                  <mat-form-field>
-                    <input matInput  type="number" placeholder="143 401"  name="company_websiteName" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
+                  <mat-form-field appearance="standard">
+                    <input matInput  type="number"  [(ngModel)]="profileSet.zip_Code"   name="zip_Code" required autocomplete="off" /> <!--#company_websiteName  [(ngModel)]="themeData.company_websiteName"-->
                   </mat-form-field>
 
                 </div>
@@ -91,9 +92,10 @@
                 <div fxFlex="50">
                 </div>
                 <div fxFlex="50">
-                  <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
+                  <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!profileForm.valid">Save Settings</button>
                 </div>
               </div>
+            </form>
             </mat-tab>
 
 

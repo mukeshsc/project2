@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { CommonServiceService } from 'src/app/service/comman-service.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
+import * as moment from 'moment';
 
 import {
   MatSnackBar
@@ -23,6 +24,7 @@ export class ContractsAddComponent implements OnInit {
   };
   files:File[]=[]
   roleData: any = [];
+  currentDate = new Date;
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
 
   ngOnInit(): void {

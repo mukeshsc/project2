@@ -21,7 +21,7 @@
       <div fxFlex="100">
         <mat-label>Document Title</mat-label>
         <mat-form-field>
-          <input matInput  type="text" #document_Title  name="document_Title" [(ngModel)]="formData.document_Title"  required autocomplete="off"  />
+          <input matInput  type="text" #document_Title maxlength="40"  name="document_Title" [(ngModel)]="formData.document_Title"  required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="document_Title.errors && document_Title.touched">
           <span class="error" *ngIf="document_Title.errors?.required">Document Title is mandatory.</span>
@@ -45,7 +45,9 @@
       <div fxFlex="100">
         <mat-label>Add Expiry Date</mat-label>
         <mat-form-field>
-          <input matInput  type="date" #expiry_Date  name="expiry_Date" [(ngModel)]="formData.expiry_Date"  required autocomplete="off"  />
+          <input matInput  [matDatepicker]="picker" [min]="currentDate" #expiry_Date  name="expiry_Date" [(ngModel)]="formData.expiry_Date"  required autocomplete="off"  />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
     </div>

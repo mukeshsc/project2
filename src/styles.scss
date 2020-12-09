@@ -681,7 +681,22 @@ td {
 .cal-button {
   margin-right: 30px !important;
 }
-
+.mat-calendar-body-cell-content.mat-focus-indicator{
+  position:static !important;
+}
+.mat-calendar-table-header th {
+  padding: 0 0 0px 0 !important;
+}
+.mat-calendar-body-cell {
+  padding: 0 !important;
+  height: 40px !important;
+}
+mat-expansion-panel.mat-expansion-panel {
+  margin-top: 5px;
+}
+.mat-form-field-infix {
+    padding: 0 !important;
+}
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan {
   width: 100%;
 }

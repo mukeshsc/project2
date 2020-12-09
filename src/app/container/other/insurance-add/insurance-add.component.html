@@ -12,7 +12,7 @@
       <div fxFlex="100">
         <mat-label>Company Name</mat-label>
         <mat-form-field>
-          <input matInput  type="text" #Insurance_Name  name="Insurance_Name" [(ngModel)]="formData.Insurance_Name" required autocomplete="off"  />
+          <input matInput  type="text" #Insurance_Name maxlength="50"  name="Insurance_Name" [(ngModel)]="formData.Insurance_Name" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="Insurance_Name.errors && Insurance_Name.touched">
           <span class="error" *ngIf="Insurance_Name.errors?.required">Insurance Name is mandatory.</span>
@@ -23,7 +23,9 @@
       <div fxFlex="100">
         <mat-label>Expiry Date</mat-label>
         <mat-form-field>
-          <input matInput  type="date" #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
+          <input matInput  [matDatepicker]="pickerStart" [min]="currentDate" #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
+          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+          <mat-datepicker #pickerStart></mat-datepicker>
         </mat-form-field>
         <div *ngIf="expiryDate.errors && expiryDate.touched">
           <span class="error" *ngIf="expiryDate.errors?.required">Expiry Date is mandatory.</span>
@@ -34,7 +36,7 @@
       <div fxFlex="100">
         <mat-label>Plan Name</mat-label>
         <mat-form-field>
-          <input matInput  type="text" #Insurance_Plan  name="Insurance_Plan" [(ngModel)]="formData.Insurance_Plan" required autocomplete="off"  />
+          <input matInput  type="text" #Insurance_Plan maxlength="50"  name="Insurance_Plan" [(ngModel)]="formData.Insurance_Plan" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="Insurance_Plan.errors && Insurance_Plan.touched">
           <span class="error" *ngIf="Insurance_Plan.errors?.required">Insurance Plan Name is mandatory.</span>

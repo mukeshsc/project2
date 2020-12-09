@@ -157,11 +157,14 @@
                   </div>
                   <mat-label></mat-label>
                   <mat-form-field>
-                    <input matInput   [type]="fieldNewPass ? 'text' : 'password'" #newpassword  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
+                    <input matInput   [type]="fieldNewPass ? 'text' : 'password'" #newpassword (ngModelChange)="ChkOldNew($event)"  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
                     <mat-icon matSuffix (click)="fieldNewPass = !fieldNewPass" style="cursor: pointer;">{{fieldNewPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="newpassword.errors && newpassword.touched">
                     <span class="error" *ngIf="newpassword.errors?.required">New Password is mandatory.</span>
+                  </div>
+                  <div *ngIf="oldNewSame">
+                    <span class="error">Old & New Password can not be same.</span>
                   </div>
                   <mat-label></mat-label>
                   <mat-form-field>
@@ -181,12 +184,13 @@
                 </div>
                 <div fxFlex="50">
                   <mat-label></mat-label>
-                  <button mat-raised-button class="big-btn block-btn"  color="primary">Update Password</button>
+                  <button mat-raised-button class="big-btn block-btn" [disabled]="!SecurityForm.valid || oldNewSame"  color="primary">Update Password</button>
                 </div>
               </div>
             </form>
           </mat-tab>
           <mat-tab label="SMTP">
+            <form name="SmtpForm" (ngSubmit)="updateSmtp()" #SmtpForm="ngForm">
             <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid" *ngIf="smtpDataSet">
               <div fxFlex="50">
                 <span class="card-title">Email Configurations</span>
@@ -195,7 +199,7 @@
               <div fxFlex="50">
                 <mat-label>Mail Server</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #mail_Server  name="mail_Server" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
+                  <input matInput  type="text" #mail_Server  name="mail_Server" maxlength="50" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
                   <div *ngIf="mail_Server.errors && mail_Server.touched">
                     <span class="error" *ngIf="mail_Server.errors?.required">Mail Server is mandatory.</span>
                   </div>
@@ -203,7 +207,7 @@
 
                 <mat-label>SMTP Port</mat-label>
                 <mat-form-field>
-                  <input matInput  type="number" (ngModelChange)="checkNegative($event)" #smtp_Port min="0" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
+                  <input matInput  type="number" #smtp_Port min="0" maxlength="40" onkeypress="return event.charCode >= 48" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
                   <div *ngIf="smtp_Port.errors && smtp_Port.touched">
                     <span class="error" *ngIf="smtp_Port.errors?.required">SMTP Server is mandatory.</span>
                   </div>
@@ -211,7 +215,7 @@
 
                 <mat-label>Username</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #userName  name="userName" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
+                  <input matInput  type="text" #userName  name="userName" maxlength="50" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
                   <div *ngIf="userName.errors && userName.touched">
                     <span class="error" *ngIf="userName.errors?.required">Username is mandatory.</span>
                   </div>
@@ -219,7 +223,7 @@
 
                 <mat-label>Password</mat-label>
                 <mat-form-field>
-                  <input matInput  type="password" #password  name="password" [(ngModel)]="smtpDataSet.password" required autocomplete="off" />
+                  <input matInput  type="password" #password  name="password" maxlength="50" [(ngModel)]="smtpDataSet.password" required autocomplete="off" />
                   <div *ngIf="password.errors && password.touched">
                     <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
                   </div>
@@ -233,7 +237,7 @@
 
                 <mat-label>Default Sender</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #default_Sender  name="default_Sender" [(ngModel)]="smtpDataSet.default_Sender" required autocomplete="off" />
+                  <input matInput  type="text" #default_Sender  name="default_Sender" maxlength="50" [(ngModel)]="smtpDataSet.default_Sender" required autocomplete="off" />
                   <div *ngIf="default_Sender.errors && default_Sender.touched">
                     <span class="error" *ngIf="default_Sender.errors?.required">Default Sender is mandatory.</span>
                   </div>
@@ -241,7 +245,7 @@
 
                 <mat-label>Default Sender Name</mat-label>
                 <mat-form-field>
-                  <input matInput  type="text" #default_SenderName  [(ngModel)]="smtpDataSet.default_SenderName"  name="default_SenderName" required autocomplete="off" />
+                  <input matInput  type="text" #default_SenderName maxlength="50" [(ngModel)]="smtpDataSet.default_SenderName"  name="default_SenderName" required autocomplete="off" />
                   <div *ngIf="default_SenderName.errors && default_SenderName.touched">
                     <span class="error" *ngIf="default_SenderName.errors?.required">Default Sender Name is mandatory.</span>
                   </div>
@@ -253,10 +257,16 @@
               </div>
               <div fxFlex="50">
                 <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" color="primary" (click)="updateSmtp()" *ngIf="accessPermission">Save Settings</button><br />
-                <button mat-raised-button class="big-btn block-btn" color="light">Send Test Mail</button>
-              </div>
+                <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!SmtpForm.valid"  *ngIf="accessPermission">Save Settings</button></div>
             </div>
+          </form>
+          <div fxLayout="row" class="theme-setting-inner" >
+            <div fxFlex="50">
+            </div>
+            <div fxFlex="50">
+              <button mat-raised-button class="big-btn block-btn" color="light" [disabled]="!SmtpForm.valid" (click)="testEmail()">Send Test Mail</button>
+            </div>
+          </div>
           </mat-tab>
           <mat-tab label="Salary">
             <div fxLayout="row" class="theme-setting-inner" >
@@ -299,7 +309,7 @@
                       <div fxFlex="100">
                         <mat-label>Salary Type</mat-label>
                         <mat-form-field>
-                          <input matInput  type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
+                          <input matInput maxlength="40" type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="salaryType.errors && salaryType.touched">
                           <span class="error" *ngIf="salaryType.errors?.required">Salary Type is mandatory.</span>
@@ -360,7 +370,7 @@
                       <div fxFlex="100">
                         <mat-label>Leave Type</mat-label>
                         <mat-form-field>
-                          <input matInput  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                          <input matInput maxlength="40"  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="leaveType.errors && leaveType.touched">
                           <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
@@ -421,7 +431,7 @@
                       <div fxFlex="100">
                         <mat-label>Department Name</mat-label>
                         <mat-form-field>
-                          <input matInput  type="text" #departmentType  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
+                          <input matInput  type="text" #departmentType maxlength="50"  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="departmentType.errors && departmentType.touched">
                           <span class="error" *ngIf="departmentType.errors?.required">Department name is mandatory.</span>
@@ -486,7 +496,7 @@
                       <div fxFlex="100">
                         <mat-label>Event name</mat-label>
                         <mat-form-field>
-                          <input matInput  type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
+                          <input matInput maxlength="40"  type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="event_Title.errors && event_Title.touched">
                           <span class="error" *ngIf="event_Title.errors?.required">Event name is mandatory.</span>
@@ -497,7 +507,9 @@
                       <div fxFlex="100">
                         <mat-label>Start Date</mat-label>
                         <mat-form-field>
-                          <input matInput  type="date" #event_StartDate  [(ngModel)]="holidaySet.event_StartDate"  name="event_StartDate" required autocomplete="off" />
+                          <input matInput  [matDatepicker]="pickerStart" [min]="currentDate" #event_StartDate  [(ngModel)]="holidaySet.event_StartDate"  name="event_StartDate" required autocomplete="off" />
+                          <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerStart></mat-datepicker>
                         </mat-form-field>
                         <div *ngIf="event_StartDate.errors && event_StartDate.touched">
                           <span class="error" *ngIf="event_StartDate.errors?.required">Event Start Date is mandatory.</span>
@@ -508,7 +520,9 @@
                       <div fxFlex="100">
                         <mat-label>End Date</mat-label>
                         <mat-form-field>
-                          <input matInput  type="date" #event_EndDate  [(ngModel)]="holidaySet.event_EndDate"  name="event_EndDate" required autocomplete="off" />
+                          <input matInput    [matDatepicker]="pickerEnd" #event_EndDate [min]="currentDate" [(ngModel)]="holidaySet.event_EndDate"  name="event_EndDate" required autocomplete="off" />
+                          <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+                          <mat-datepicker #pickerEnd></mat-datepicker>
                         </mat-form-field>
                         <div *ngIf="event_StartDate.errors && event_StartDate.touched">
                           <span class="error" *ngIf="event_StartDate.errors?.required">Event End Date is mandatory.</span>

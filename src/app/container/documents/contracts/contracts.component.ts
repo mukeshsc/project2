@@ -149,6 +149,15 @@ getNegative(number){
 
 }
 
+removeChar(a){
+  if (a < 0) {
+    a = a * -1;
+    return a;
+  }else{
+    return a;
+  }
+}
+
 // document download
 Download(url) {
   (document.getElementById('my_iframe') as HTMLImageElement ).src = url;

@@ -7,6 +7,7 @@ import {
 import { AccessServiceService } from 'src/app/service/access-service.service';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-setting',
@@ -17,6 +18,7 @@ export class SettingComponent implements OnInit {
   fieldconPass:boolean;
   fieldNewPass:boolean;
   fieldOldPass:boolean;
+  oldNewSame:boolean;
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;
@@ -68,8 +70,9 @@ export class SettingComponent implements OnInit {
   }
   leaveData:any = [];
   passNotMatched: boolean = false;
+  currentDate = new Date();
   accessPermission:boolean;
-  constructor( public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  constructor( public router:Router, public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -98,11 +101,9 @@ export class SettingComponent implements OnInit {
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
-          this.passwordData ={
-          "oldpassword": "",
-          "newpassword":"",
-          "confirmpassword":""
-          }
+          localStorage.setItem('userData', undefined);
+          localStorage.setItem('token', undefined)
+          this.router.navigate(['/login']);
         }else{
           this.openErrrorSnackBar(response.message);
         }
@@ -174,6 +175,11 @@ async addDepartement(){
     if (response.success == true){
       this.openSnackBar(response.message);
       this.getDepartment();
+      this.departmentSet = {
+        "departmentType":"",
+        "ip_Address":"123.444.333.33",
+        "companyId":""
+      }
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -238,6 +244,11 @@ async addLeave(){
     if (response.success == true){
       this.openSnackBar(response.message);
       this.getLeave();
+      this.leaveDataSet = {
+        "leaveType":"",
+        "ip_Address":"12.43.33.33",
+        "companyId":""
+      }
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -302,6 +313,11 @@ async addSalary(){
     const response: any = res;
     if (response.success == true){
       this.openSnackBar(response.message);
+      this.salarySet = {
+        "salaryType":"",
+        "ip_Address":"12.43.33.33",
+        "companyId":""
+      }
       this.getSalary();
     }else{
       this.openErrrorSnackBar(response.message);
@@ -366,6 +382,17 @@ async addHoliday(){
     const response: any = res;
     if (response.success == true){
       this.openSnackBar(response.message);
+      this.holidaySet = {
+        "event_Type":"1",
+        "event_StartDate":"",
+        "event_EndDate":"",
+        "target_Audeince":"1",
+        "event_Description":"",
+        "fileName":"gergerge",
+        "event_Title":"",
+        "isAllday":"1",
+        "ip_Address":"123"
+      }
       this.getHoliday();
     }else{
       this.openErrrorSnackBar(response.message);
@@ -539,6 +566,33 @@ async updateSmtp(){
     this.files2.splice(this.files.indexOf(event), 1);
   }
 
+  // testing email
+
+  // Get Theme
+  async testEmail(){
+    let  data = {
+      user_id:JSON.parse(localStorage.getItem('userData')).user_id,
+      company_id:JSON.parse(localStorage.getItem('userData')).company_id,
+      email:JSON.parse(localStorage.getItem('userData')).email,
+    }
+    this.ngxService.start();
+    await(this._api.testEmail(data).subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        this.openSnackBar(response.message)
+      }else{
+        this.openErrrorSnackBar(response.message);
+      }
+      console.log(res);
+    },err => {
+      const error = err.error;
+      this.ngxService.stop();
+      this.openErrrorSnackBar(error.message);
+    }));
+
+}
+
  // alert message after api response success
 openSnackBar(msg) {
   this._snackBar.open(msg, 'Ok', {
@@ -628,13 +682,13 @@ confirmDialogHoliday(id): void {
   });
 }
 
-//check negative number
-checkNegative(e){
-  if(e < 0){
-    console.log(e)
-    this.smtpDataSet.smtp_Port = 0
+//check Old and New Password
+ChkOldNew(e){
+  if(this.passwordData.oldpassword == e){
+    console.log(e, this.passwordData.oldpassword)
+    this.oldNewSame = true;
   }else{
-    this.smtpDataSet.smtp_Port = e
+    this.oldNewSame = false;
   }
 }
 

@@ -32,21 +32,11 @@ import { MatSortModule } from '@angular/material/sort';
 
 
 import { OtherRoutingModule } from './other-routing.module';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { CalendarComponent } from './calendar/calendar.component';
-import { ChatComponent } from './chat/chat.component';
-import { SettingComponent } from './setting/setting.component';
-import { InsuranceComponent } from './insurance/insurance.component';
 
 
 
 @NgModule({
   declarations: [
-    DashboardComponent,
-    CalendarComponent,
-    ChatComponent,
-    SettingComponent,
-    InsuranceComponent,
   ],
   imports: [
     CommonModule,

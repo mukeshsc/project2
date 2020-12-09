@@ -31,6 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -69,6 +70,7 @@ import { FilterComponent } from './container/employee/filter/filter.component';
 import { FaqComponent } from './container/company/faq/faq.component';
 import { PrivacyPolicyComponent } from './container/company/privacy-policy/privacy-policy.component';
 import { ProfileComponent } from './container/company/profile/profile.component';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -143,8 +145,10 @@ import { ProfileComponent } from './container/company/profile/profile.component'
     MatTreeModule,
     MatPaginatorModule,
     MatSortModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
-  providers: [{ provide: AuthGuardService, useClass: AuthGuardService }],
+  providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
