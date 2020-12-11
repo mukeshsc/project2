@@ -433,7 +433,7 @@ showLeave(){
   'Content-Type': 'application/json',
   'Authorization': this.token
   });
-  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteDepartment `,formData, {headers}).pipe(map(res => <any>res));
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteLeave `,formData, {headers}).pipe(map(res => <any>res));
  }
 
 
