@@ -10,9 +10,8 @@
 
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
-        <mat-label>Company Name</mat-label>
-        <mat-form-field>
-          <input matInput  type="text" #Insurance_Name maxlength="50"  name="Insurance_Name" [(ngModel)]="formData.Insurance_Name" required autocomplete="off"  />
+        <mat-form-field class="form-fields">
+          <input matInput placeholder="Company Name" type="text" #Insurance_Name maxlength="50"  name="Insurance_Name" [(ngModel)]="formData.Insurance_Name" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="Insurance_Name.errors && Insurance_Name.touched">
           <span class="error" *ngIf="Insurance_Name.errors?.required">Insurance Name is mandatory.</span>
@@ -21,9 +20,8 @@
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
-        <mat-label>Expiry Date</mat-label>
-        <mat-form-field>
-          <input matInput  [matDatepicker]="pickerStart" [min]="currentDate" #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
+        <mat-form-field class="form-fields">
+          <input matInput placeholder="Expiry Date" [matDatepicker]="pickerStart" [min]="currentDate" #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
           <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
           <mat-datepicker #pickerStart></mat-datepicker>
         </mat-form-field>
@@ -34,9 +32,8 @@
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
-        <mat-label>Plan Name</mat-label>
-        <mat-form-field>
-          <input matInput  type="text" #Insurance_Plan maxlength="50"  name="Insurance_Plan" [(ngModel)]="formData.Insurance_Plan" required autocomplete="off"  />
+        <mat-form-field class="form-fields">
+          <input matInput placeholder="Plan Name" type="text" #Insurance_Plan maxlength="50"  name="Insurance_Plan" [(ngModel)]="formData.Insurance_Plan" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="Insurance_Plan.errors && Insurance_Plan.touched">
           <span class="error" *ngIf="Insurance_Plan.errors?.required">Insurance Plan Name is mandatory.</span>
@@ -45,9 +42,8 @@
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
-        <mat-label>Table of Benefit Type</mat-label>
-        <mat-form-field>
-          <mat-select [(ngModel)]="BenifitType" name="BenifitType" #role required>
+        <mat-form-field class="form-fields">
+          <mat-select [(ngModel)]="BenifitType" name="BenifitType" placeholder="Table of Benefit Type" #role required>
             <mat-option  value="0">Link</mat-option>
             <mat-option  value="1">Document</mat-option>
           </mat-select></mat-form-field>
@@ -55,9 +51,8 @@
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100" *ngIf="BenifitType == '0'">
-        <mat-label>Table of benifit link</mat-label>
-        <mat-form-field>
-          <input matInput  type="url"   name="Insurance_Benefit" [(ngModel)]="formData.Insurance_Benefit" autocomplete="off"  />
+        <mat-form-field class="form-fields">
+          <input matInput  type="url" placeholder="Table of Benefit Link"  name="Insurance_Benefit" [(ngModel)]="formData.Insurance_Benefit" autocomplete="off"  />
         </mat-form-field>
       </div>
       <div fxFlex="100" *ngIf="BenifitType == '1'">
@@ -77,9 +72,8 @@
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
-        <mat-label>Network Type</mat-label>
-        <mat-form-field>
-          <mat-select [(ngModel)]="NetworkType" name="NetworkType" #role required>
+        <mat-form-field class="form-fields">
+          <mat-select [(ngModel)]="NetworkType" placeholder="Network Type" name="NetworkType" #role required>
             <mat-option  value="0">Link</mat-option>
             <mat-option  value="1">Document</mat-option>
           </mat-select></mat-form-field>
@@ -87,9 +81,8 @@
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100" *ngIf="NetworkType == '0'">
-        <mat-label>Network link</mat-label>
-        <mat-form-field>
-          <input matInput  type="url"  name="Network" [(ngModel)]="formData.Network" placeholder="Network"  autocomplete="off"  />
+        <mat-form-field class="form-fields">
+          <input matInput placeholder="Network Link" type="url"  name="Network" [(ngModel)]="formData.Network" placeholder="Network"  autocomplete="off"  />
         </mat-form-field>
       </div>
       <div fxFlex="100" *ngIf="NetworkType == '1'">

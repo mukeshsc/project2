@@ -10,18 +10,16 @@
 
     <div fxLayout="row" class="">
       <div fxFlex="100">
-        <mat-label>Select Employee</mat-label>
-        <mat-form-field>
-          <mat-select [(ngModel)]="formData.userId" name="userId" #userId required>
+        <mat-form-field class="form-fields" >
+          <mat-select [(ngModel)]="formData.userId" name="userId" #userId required placeholder="Employee">
             <mat-option *ngFor="let roled of roleData" [value]="roled.user_id">{{roled.name}}</mat-option>
           </mat-select></mat-form-field>
       </div>
     </div>
     <div fxLayout="row" class="">
       <div fxFlex="100">
-        <mat-label>Document Title</mat-label>
-        <mat-form-field>
-          <input matInput  type="text" #document_Title maxlength="40"  name="document_Title" [(ngModel)]="formData.document_Title"  required autocomplete="off"  />
+        <mat-form-field class="form-fields" >
+          <input matInput placeholder="Document Title" type="text" #document_Title maxlength="40"  name="document_Title" [(ngModel)]="formData.document_Title"  required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="document_Title.errors && document_Title.touched">
           <span class="error" *ngIf="document_Title.errors?.required">Document Title is mandatory.</span>
@@ -30,9 +28,8 @@
     </div>
     <div fxLayout="row"  class="">
       <div fxFlex="100">
-        <mat-label>Select File Type</mat-label>
-        <mat-form-field>
-          <mat-select [(ngModel)]="formData.file_Type" name="file_Type" #file_Type required>
+        <mat-form-field class="form-fields" >
+          <mat-select [(ngModel)]="formData.file_Type" name="file_Type" #file_Type required placeholder="Document Type">
             <mat-option  value="png">Png</mat-option>
             <mat-option  value="jpeg">Jpeg</mat-option>
             <mat-option  value="pdf">Pdf</mat-option>
@@ -43,9 +40,8 @@
     </div>
     <div fxLayout="row"  class="">
       <div fxFlex="100">
-        <mat-label>Add Expiry Date</mat-label>
-        <mat-form-field>
-          <input matInput  [matDatepicker]="picker" [min]="currentDate" #expiry_Date  name="expiry_Date" [(ngModel)]="formData.expiry_Date"  required autocomplete="off"  />
+        <mat-form-field class="form-fields" >
+          <input matInput placeholder="Expiry Date" [matDatepicker]="picker" [min]="currentDate" #expiry_Date  name="expiry_Date" [(ngModel)]="formData.expiry_Date"  required autocomplete="off"  />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

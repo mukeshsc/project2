@@ -22,18 +22,16 @@
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
               </div>
               <div fxFlex="50">
-                <mat-label>Website Name</mat-label>
-                <mat-form-field>
-                  <input matInput  type="text" #company_websiteName  [(ngModel)]="themeData.company_websiteName"  name="company_websiteName" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput  type="text" placeholder="Company Website" #company_websiteName  [(ngModel)]="themeData.company_websiteName"  name="company_websiteName" required autocomplete="off" />
 
                 </mat-form-field>
                 <div *ngIf="company_websiteName.errors && company_websiteName.touched">
                   <span class="error" *ngIf="company_websiteName.errors?.required">Website is mandatory.</span>
                 </div>
 
-                <mat-label>Company Brand</mat-label>
-                <mat-form-field>
-                  <input matInput  type="color" #company_Brand  name="company_Brand" [(ngModel)]="themeData.company_Brand" [value]="themeData.company_Brand"  required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput  type="color" #company_Brand placeholder="Company Brand"  name="company_Brand" [(ngModel)]="themeData.company_Brand" [value]="themeData.company_Brand"  required autocomplete="off" />
 
                 </mat-form-field>
                 <div *ngIf="company_Brand.errors && company_Brand.touched">
@@ -53,8 +51,8 @@
                 <div class="dropzone">
                   <ngx-dropzone (change)="onSelect($event)">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
-                      Upload Your Document<br />
-                      <small>drag & drop to upload the document</small>
+                      Upload Your Logo<br />
+                      <small>drag & drop to upload the logo image</small>
                     </ngx-dropzone-label>
                     <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                         <ngx-dropzone-label [style]="'background:'+themeData.favicon">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
@@ -74,8 +72,8 @@
                 <div class="dropzone">
                   <ngx-dropzone (change)="onFaviSelect($event)">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
-                      Upload Your Document<br />
-                      <small>drag & drop to upload the document</small>
+                      Upload Your favicon<br />
+                      <small>drag & drop to upload the favicon image</small>
                     </ngx-dropzone-label>
                     <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)">
                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
@@ -147,17 +145,15 @@
                   <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
                 </div>
                 <div fxFlex="50">
-                  <mat-label></mat-label>
-                  <mat-form-field>
-                    <input matInput   [type]="fieldOldPass ? 'text' : 'password'" #oldpassword  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" />
+                  <mat-form-field class="form-fields">
+                    <input matInput placeholder="Old Password"   [type]="fieldOldPass ? 'text' : 'password'" #oldpassword  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" />
                     <mat-icon matSuffix (click)="fieldOldPass = !fieldOldPass" style="cursor: pointer;">{{fieldOldPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="oldpassword.errors && oldpassword.touched">
                     <span class="error" *ngIf="oldpassword.errors?.required">Old Password is mandatory.</span>
                   </div>
-                  <mat-label></mat-label>
-                  <mat-form-field>
-                    <input matInput   [type]="fieldNewPass ? 'text' : 'password'" #newpassword (ngModelChange)="ChkOldNew($event)"  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
+                  <mat-form-field class="form-fields">
+                    <input matInput  placeholder="New Password" [type]="fieldNewPass ? 'text' : 'password'" #newpassword (ngModelChange)="ChkOldNew($event)"  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
                     <mat-icon matSuffix (click)="fieldNewPass = !fieldNewPass" style="cursor: pointer;">{{fieldNewPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="newpassword.errors && newpassword.touched">
@@ -166,9 +162,8 @@
                   <div *ngIf="oldNewSame">
                     <span class="error">Old & New Password can not be same.</span>
                   </div>
-                  <mat-label></mat-label>
-                  <mat-form-field>
-                    <input matInput   [type]="fieldconPass ? 'text' : 'password'" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />
+                  <mat-form-field class="form-fields">
+                    <input matInput placeholder="Confirm Password" [type]="fieldconPass ? 'text' : 'password'" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />
                     <mat-icon matSuffix (click)="fieldconPass = !fieldconPass" style="cursor: pointer;">{{fieldconPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
                   <div *ngIf="confirmpassword.errors && confirmpassword.touched">
@@ -197,55 +192,48 @@
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
               </div>
               <div fxFlex="50">
-                <mat-label>Mail Server</mat-label>
-                <mat-form-field>
-                  <input matInput  type="text" #mail_Server  name="mail_Server" maxlength="50" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="Mail Server"  type="text" #mail_Server  name="mail_Server" maxlength="50" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
                   <div *ngIf="mail_Server.errors && mail_Server.touched">
                     <span class="error" *ngIf="mail_Server.errors?.required">Mail Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
-                <mat-label>SMTP Port</mat-label>
-                <mat-form-field>
-                  <input matInput  type="number" #smtp_Port min="0" maxlength="40" onkeypress="return event.charCode >= 48" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="SMTP Port"  type="number" #smtp_Port min="0" maxlength="40" onkeypress="return event.charCode >= 48" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
                   <div *ngIf="smtp_Port.errors && smtp_Port.touched">
                     <span class="error" *ngIf="smtp_Port.errors?.required">SMTP Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
-                <mat-label>Username</mat-label>
-                <mat-form-field>
-                  <input matInput  type="text" #userName  name="userName" maxlength="50" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="Username"  type="text" #userName  name="userName" maxlength="50" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
                   <div *ngIf="userName.errors && userName.touched">
                     <span class="error" *ngIf="userName.errors?.required">Username is mandatory.</span>
                   </div>
                 </mat-form-field>
 
-                <mat-label>Password</mat-label>
-                <mat-form-field>
-                  <input matInput  type="password" #password  name="password" maxlength="50" [(ngModel)]="smtpDataSet.password" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="Password" type="password" #password  name="password" maxlength="50" [(ngModel)]="smtpDataSet.password" required autocomplete="off" />
                   <div *ngIf="password.errors && password.touched">
                     <span class="error" *ngIf="password.errors?.required">Password is mandatory.</span>
                   </div>
                 </mat-form-field>
-
                 <mat-label>Server Security</mat-label>
                 <mat-radio-group aria-label="Select an option" [(ngModel)]="smtpDataSet.server_Security">
                   <mat-radio-button value="TLS">TLS</mat-radio-button>
                   <mat-radio-button value="SSL">SSL</mat-radio-button>
                 </mat-radio-group>
 
-                <mat-label>Default Sender</mat-label>
-                <mat-form-field>
-                  <input matInput  type="text" #default_Sender  name="default_Sender" maxlength="50" [(ngModel)]="smtpDataSet.default_Sender" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="Default Sender" type="text" #default_Sender  name="default_Sender" maxlength="50" [(ngModel)]="smtpDataSet.default_Sender" required autocomplete="off" />
                   <div *ngIf="default_Sender.errors && default_Sender.touched">
                     <span class="error" *ngIf="default_Sender.errors?.required">Default Sender is mandatory.</span>
                   </div>
                 </mat-form-field>
 
-                <mat-label>Default Sender Name</mat-label>
-                <mat-form-field>
-                  <input matInput  type="text" #default_SenderName maxlength="50" [(ngModel)]="smtpDataSet.default_SenderName"  name="default_SenderName" required autocomplete="off" />
+                <mat-form-field class="form-fields">
+                  <input matInput placeholder="Default Sender Name" type="text" #default_SenderName maxlength="50" [(ngModel)]="smtpDataSet.default_SenderName"  name="default_SenderName" required autocomplete="off" />
                   <div *ngIf="default_SenderName.errors && default_SenderName.touched">
                     <span class="error" *ngIf="default_SenderName.errors?.required">Default Sender Name is mandatory.</span>
                   </div>
@@ -307,9 +295,8 @@
                   <form name="SalaryForm" (ngSubmit)="addSalary()" #SalaryForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Salary Type</mat-label>
-                        <mat-form-field>
-                          <input matInput maxlength="40" type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input placeholder="Salary Type" matInput maxlength="40" type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="salaryType.errors && salaryType.touched">
                           <span class="error" *ngIf="salaryType.errors?.required">Salary Type is mandatory.</span>
@@ -368,9 +355,8 @@
                   <form name="LeaveForm" (ngSubmit)="addLeave()" #LeaveForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Leave Type</mat-label>
-                        <mat-form-field>
-                          <input matInput maxlength="40"  type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input matInput maxlength="40" placeholder="Leave Type" type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="leaveType.errors && leaveType.touched">
                           <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
@@ -429,9 +415,8 @@
                   <form name="DepartmentForm" (ngSubmit)="addDepartement()" #DepartmentForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Department Name</mat-label>
-                        <mat-form-field>
-                          <input matInput  type="text" #departmentType maxlength="50"  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input matInput  type="text" placeholder="Deaprtment" #departmentType maxlength="50"  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="departmentType.errors && departmentType.touched">
                           <span class="error" *ngIf="departmentType.errors?.required">Department name is mandatory.</span>
@@ -494,9 +479,8 @@
                   <form name="holidayForm" (ngSubmit)="addHoliday()" #holidayForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Event name</mat-label>
-                        <mat-form-field>
-                          <input matInput maxlength="40"  type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input matInput maxlength="40" placeholder="Holiday Title" type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
                         </mat-form-field>
                         <div *ngIf="event_Title.errors && event_Title.touched">
                           <span class="error" *ngIf="event_Title.errors?.required">Event name is mandatory.</span>
@@ -505,9 +489,8 @@
                     </div>
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>Start Date</mat-label>
-                        <mat-form-field>
-                          <input matInput  [matDatepicker]="pickerStart" [min]="currentDate" #event_StartDate  [(ngModel)]="holidaySet.event_StartDate"  name="event_StartDate" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input matInput placeholder="Start Date" [matDatepicker]="pickerStart" [min]="currentDate" #event_StartDate  [(ngModel)]="holidaySet.event_StartDate"  name="event_StartDate" required autocomplete="off" />
                           <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
                           <mat-datepicker #pickerStart></mat-datepicker>
                         </mat-form-field>
@@ -518,9 +501,8 @@
                     </div>
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
-                        <mat-label>End Date</mat-label>
-                        <mat-form-field>
-                          <input matInput    [matDatepicker]="pickerEnd" #event_EndDate [min]="currentDate" [(ngModel)]="holidaySet.event_EndDate"  name="event_EndDate" required autocomplete="off" />
+                        <mat-form-field class="form-fields">
+                          <input matInput  placeholder="End Date"  [matDatepicker]="pickerEnd" #event_EndDate [min]="currentDate" [(ngModel)]="holidaySet.event_EndDate"  name="event_EndDate" required autocomplete="off" />
                           <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
                           <mat-datepicker #pickerEnd></mat-datepicker>
                         </mat-form-field>

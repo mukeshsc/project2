@@ -33,7 +33,7 @@
         </mat-list-item>
         <ng-container *ngIf="p.open" >
           <ng-container *ngFor="let c of p.children">
-            <mat-list *ngIf="p.access" [ngClass]="p.open?'active-block':''">
+            <mat-list *ngIf="c.access" [ngClass]="p.open?'active-block':''">
               <mat-list-item [routerLink]="c.url">
                 <mat-icon mat-list-icon>{{c.icon}}</mat-icon>
                 {{c.title}}

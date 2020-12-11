@@ -47,6 +47,7 @@ export class EmployeeEditComponent implements OnInit {
 
   employeeData: any;
   roleData: any = [];
+  departmentData:any = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeEditComponent>) { }
 
   ngOnInit(): void {
@@ -80,6 +81,7 @@ export class EmployeeEditComponent implements OnInit {
       updated_By: JSON.parse(localStorage.getItem('userData')).user_id
     };
     this.getRole();
+    this.getDepartment();
   }
 
 // Get Role Type
@@ -102,6 +104,24 @@ async getRole(){
 
 }
 
+// Get Department
+async getDepartment(){
+  this.ngxService.start();
+  await(this._api.showDepartment().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.departmentData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
 
   // add new Sub Admin
   async editEmployee(){

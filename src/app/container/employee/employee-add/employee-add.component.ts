@@ -19,7 +19,7 @@ export class EmployeeAddComponent implements OnInit {
     email:'',
     reporting_Manager:'',
     department:'',
-    role:null,
+    role:'',
     employee_joiningDate:'',
     insurance_plan_name:'',
 
@@ -43,6 +43,8 @@ export class EmployeeAddComponent implements OnInit {
 	  created_By :'1',
     updated_By:'1'
   };
+
+  departmentData:any = [];
   roleData: any = [];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeAddComponent>) { }
 
@@ -51,6 +53,7 @@ export class EmployeeAddComponent implements OnInit {
     this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.getRole();
+    this.getDepartment();
   }
 
 // Get Role Type
@@ -73,6 +76,24 @@ async getRole(){
 
 }
 
+// Get Department
+async getDepartment(){
+  this.ngxService.start();
+  await(this._api.showDepartment().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.departmentData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
 
   // add new Employee
   async addEmployee(){
