@@ -21,7 +21,7 @@ export class RoleEditComponent implements OnInit {
   roleData:any;
   formData = {
     role_Type :'',
-    superadminRole_id :'0',
+    userRole_id :'0',
     ip_Address:'3333',
   }
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<RoleEditComponent>) { }
@@ -29,7 +29,7 @@ export class RoleEditComponent implements OnInit {
   ngOnInit(): void {
     this.roleData = JSON.parse(this.data.role)
     this.formData.role_Type = this.roleData.role_Type;
-    this.formData.superadminRole_id = this.roleData.superadminRole_id;
+    this.formData.userRole_id = this.roleData.userRole_id;
   }
 
 
