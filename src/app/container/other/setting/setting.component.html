@@ -464,8 +464,8 @@
                     <tr *ngFor="let d of holidayData">
                       <td>{{d.calendarEvent_id}}</td>
                       <td>{{d.event_Title}}</td>
-                      <td>{{d.event_StartDate}}</td>
-                      <td>{{d.event_EndDate}}</td>
+                      <td>{{formatDate(d.event_StartDate)}}</td>
+                      <td>{{formatDate(d.event_EndDate)}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogHoliday(d.calendarEvent_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
                       </td>

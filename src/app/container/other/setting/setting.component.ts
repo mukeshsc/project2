@@ -8,6 +8,7 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-setting',
@@ -690,6 +691,11 @@ ChkOldNew(e){
   }else{
     this.oldNewSame = false;
   }
+}
+
+// date formating
+formatDate(date){
+ return moment(date).format('MM/DD/YYYY')
 }
 
 }

@@ -35,6 +35,7 @@ export class RoleEditComponent implements OnInit {
 
   // add new role
   async editRole(){
+    this.ngxService.start()
     await(this._api.editRole(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;

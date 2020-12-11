@@ -82,6 +82,7 @@ getModuleDatainSequence(data){
 
   // add new role
   async addRole(){
+    this.ngxService.start()
     await(this._api.addRole(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
