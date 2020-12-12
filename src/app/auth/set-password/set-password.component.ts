@@ -18,6 +18,10 @@ export class SetPasswordComponent implements OnInit {
   fieldconPass:boolean;
   fieldNewPass:boolean;
   constructor(public _auth: AuthServiceService, private ngxService: NgxUiLoaderService, private _snackBar: MatSnackBar, public router:Router) {
+    if(localStorage.getItem('token')){
+      this.router.navigate(['/dashboard'])
+    }
+
     let url = this.router.url.split('/');
     this.formData.otp = url.pop();
   }

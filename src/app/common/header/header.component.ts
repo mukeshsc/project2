@@ -20,8 +20,8 @@ export class HeaderComponent implements OnInit {
     this.toggelMenu.emit();
   }
   logout(){
-    localStorage.setItem('userData', undefined);
-    localStorage.setItem('token', undefined)
+    localStorage.removeItem('userData');
+    localStorage.removeItem('token')
     this.router.navigate(['/login']);
   }
 }

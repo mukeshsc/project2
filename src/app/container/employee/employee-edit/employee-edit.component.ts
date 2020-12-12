@@ -106,7 +106,6 @@ async getRole(){
 
 // Get Department
 async getDepartment(){
-  this.ngxService.start();
   await(this._api.showDepartment().subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
@@ -125,6 +124,7 @@ async getDepartment(){
 
   // add new Sub Admin
   async editEmployee(){
+    this.ngxService.start();
     await(this._api.updateEmployee(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;

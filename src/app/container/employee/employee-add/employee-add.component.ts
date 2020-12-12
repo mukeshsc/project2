@@ -97,6 +97,7 @@ async getDepartment(){
 
   // add new Employee
   async addEmployee(){
+    this.ngxService.start();
     await(this._api.addEmployee(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
