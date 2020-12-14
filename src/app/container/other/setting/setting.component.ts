@@ -239,7 +239,7 @@ async getLeave(){
 //add leave
 async addLeave(){
   this.ngxService.start();
-  await(this._api.addLeave(this.departmentSet).subscribe(res => {
+  await(this._api.addLeave(this.leaveDataSet).subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
