@@ -26,6 +26,7 @@ export class SettingComponent implements OnInit {
   files2: File[] = [];
   themeDataSet:any;
   holidayData:any = [];
+  isCheck:boolean;
   holidaySet = {
     "event_Type":"1",
     "event_StartDate":"",
@@ -72,6 +73,14 @@ export class SettingComponent implements OnInit {
     "companyId":""
   }
   leaveData:any = [];
+
+  docTypeData:any = [];
+  docTypeSet = {
+    "documentType":"",
+    "isCheck":null,
+    "ip_Address":"12.32.33.22",
+    "companyId":""
+  }
   passNotMatched: boolean = false;
   currentDate = new Date();
   accessPermission:boolean;
@@ -84,12 +93,14 @@ export class SettingComponent implements OnInit {
     this.departmentSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.leaveDataSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.salarySet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+    this.docTypeSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.getTheme();
     this.getsmtp();
     this.getDepartment();
     this.getLeave();
     this.getSalary();
     this.getHoliday();
+    this.getDocType();
   }
 
   // Security setting (Update password)
@@ -432,6 +443,77 @@ async deleteHoliday(id){
   }));
 }
 
+// Get document type
+async getDocType(){
+  this.ngxService.start();
+  await(this._api.showDocType().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.docTypeData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+//add Document type
+async addDocType(){
+  this.ngxService.start();
+  await(this._api.addDocType(this.docTypeSet).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.docTypeSet = {
+        "documentType":"",
+        "isCheck":"",
+        "ip_Address":"",
+        "companyId":""
+      }
+      this.getDocType();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// delete Document
+async deleteDocType(id){
+  let data ={
+    "leaveTypeId":id,
+    "ip_Address":"123.22.22.22",
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id ,
+  }
+  this.ngxService.start();
+  await(this._api.deleteDocType(data).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message);
+      this.getDocType();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+
 // Update Theme
 async updateTheme(){
   this.ngxService.start();
@@ -685,6 +767,25 @@ confirmDialogHoliday(id): void {
   });
 }
 
+
+// confirm message for delete holiday
+confirmDialogDoc(id): void {
+  const message = `Are you sure you want to delete this?`;
+
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      this.deleteDocType(id);
+    }
+  });
+}
+
 //check Old and New Password
 ChkOldNew(e){
   if(this.passwordData.oldpassword == e){
@@ -698,6 +799,13 @@ ChkOldNew(e){
 // date formating
 formatDate(date){
  return moment(date).format('MM/DD/YYYY')
+}
+
+//Check mandat field
+CheckDocmandat(e){
+  console.log(e)
+  this.isCheck = e.checked;
+  this.docTypeSet.isCheck = e.checked?1:0;
 }
 
 }

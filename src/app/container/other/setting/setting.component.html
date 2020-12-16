@@ -517,6 +517,82 @@
             </div>
           </mat-tab>
 
+          <mat-tab label="Document">
+
+            <div fxLayout="row" class="theme-setting-inner" >
+              <div fxFlex="100">
+                <mat-toolbar color="light">
+                  <span class="mat-toolbar-title">All Document</span>
+                  <span class="spacer"></span>
+                  <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getDocType()">
+                    <mat-icon>sync</mat-icon>
+                  </button>
+                </mat-toolbar>
+              </div>
+            </div>
+            <div fxLayout="row" class="theme-setting-inner"  >
+              <div fxFlex="50">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>S.no</th>
+                      <th>Deaprtment</th>
+                      <th>Mandatory/Optional</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let d of docTypeData; let i= index;">
+                      <td>{{i+1}}</td>
+                      <td>{{d.document_Type}}</td>
+                      <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
+                      <td>
+                        <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div fxFlex="10"></div>
+              <div  fxFlex="40"  *ngIf="accessPermission">
+                <mat-card>
+                  <form name="DocForm" (ngSubmit)="addDocType()" #DocForm="ngForm">
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                        <mat-form-field class="form-fields">
+                          <input matInput  type="text" placeholder="documentType" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
+                        </mat-form-field>
+                        <div *ngIf="documentType.errors && documentType.touched">
+                          <span class="error" *ngIf="documentType.errors?.required">Document Type name is mandatory.</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                         <section class="toggle-section">
+                          <mat-label>Birthday / Anniversary</mat-label>
+                          <mat-slide-toggle
+                              class="example-margin"
+                              color="primary"
+                              [checked]="isCheck"
+                              (change)="CheckDocmandat($event)"
+                          >Mandatory
+                          </mat-slide-toggle>
+                        </section>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner">
+                      <div fxFlex="100">
+                        <mat-label></mat-label>
+                        <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!DocForm.valid"  >Save Document Type</button>
+                      </div>
+                    </div>
+                  </form>
+                </mat-card>
+              </div>
+            </div>
+          </mat-tab>
+
           <mat-tab label="Holiday">
             <div fxLayout="row" class="theme-setting-inner" >
               <div fxFlex="100">

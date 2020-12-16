@@ -504,6 +504,34 @@ showHoliday(){
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteHoliday `,formData, {headers}).pipe(map(res => <any>res));
  }
 
+
+  // Show Doc type List
+showDocType(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showDocumentType `, {headers}).pipe(map(res => <any>res));
+ }
+
+ //add Doc Type
+ addDocType(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addDocumentType `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+ //delete doc type
+ deleteDocType(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteDocumentType `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
  // test email
  testEmail(formData){
   let headers = new HttpHeaders({
