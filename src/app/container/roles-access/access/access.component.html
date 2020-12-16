@@ -32,21 +32,20 @@
                 <mat-toolbar color="light" class="tolbr">
                     <span class="mat-toolbar-title"> <b> Access </b> </span>
                     <span class="spacer"></span>
-                    <mat-form-field class="search-field inp">
+                    <mat-form-field class="search-field inp"  appearance="standard">
                       <mat-icon matSuffix>search</mat-icon>
-                      <input matInput placeholder="Search" >
+                      <input matInput placeholder="Search"  #myInput placeholder="Item name..." [(ngModel)]="name" (input)="filterItem(myInput.value)">
                       <!-- #myInput [(ngModel)]="name" (input)="filterItem(myInput.value)" -->
                     </mat-form-field>
                 </mat-toolbar>
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th width="50%">Modules</th>
-                            <th>Permission</th>
-                            <th>Read</th>
-                            <th>Write</th>
-                            <th>Both</th>
+                          <th width="50%">Modules</th>
+                          <th></th>
+                          <th width="100px">Read</th>
+                          <th width="100px">Write</th>
+                          <th width="100px">Both</th>
                         </tr>
                     </thead>
                     <tbody>

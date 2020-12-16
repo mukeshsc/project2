@@ -373,6 +373,17 @@ deleteInsurance(formData){
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}deleteInsurance `,formData, {headers}).pipe(map(res => <any>res));
  }
 
+ // Edit insurance
+
+ editInsurance(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateInsurance `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
+
  //invitation link for employee
  invitationLink(formData){
   let headers = new HttpHeaders({

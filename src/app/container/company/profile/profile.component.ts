@@ -55,26 +55,40 @@ export class ProfileComponent implements OnInit {
   //update working day
 
   async companyWorkingDaySet(){
-    let data = {
-      "companyId": JSON.parse(localStorage.getItem('userData')).company_id,
-      "workingDay":JSON.stringify(this.workingDay)
-    }
-    this.ngxService.start();
-      await(this._api.companyWorkingDaySet(data).subscribe(res => {
-        this.ngxService.stop();
-        const response: any = res;
-        if (response.success == true){
-          this.openSnackBar(response.message);
-          this.getWorkingDay()
-        }else{
-          this.openErrrorSnackBar(response.message);
+    let d = false;
+    for(let item of this.workingDay){
+      if(!item.OnOff){
+        if(item.inTime === '' || item.outTime=== ''){
+          d = true;
         }
-        console.log(res);
-      },err => {
-        const error = err.error;
-        this.ngxService.stop();
-        this.openErrrorSnackBar(error.message);
-      }));
+      }
+    }
+    if(!d){
+
+      let data = {
+        "companyId": JSON.parse(localStorage.getItem('userData')).company_id,
+        "workingDay":JSON.stringify(this.workingDay)
+      }
+      this.ngxService.start();
+        await(this._api.companyWorkingDaySet(data).subscribe(res => {
+          this.ngxService.stop();
+          const response: any = res;
+          if (response.success == true){
+            this.openSnackBar(response.message);
+            this.getWorkingDay()
+          }else{
+            this.openErrrorSnackBar(response.message);
+          }
+          console.log(res);
+        },err => {
+          const error = err.error;
+          this.ngxService.stop();
+          this.openErrrorSnackBar(error.message);
+        }));
+    }else{
+      this.openErrrorSnackBar('Please fill the field of the day in which working are on.');
+    }
+
 
   }
  // employee working hour on off setup

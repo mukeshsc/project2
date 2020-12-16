@@ -24,6 +24,7 @@ interface ModuleNode {
   styleUrls: ['./access.component.scss']
 })
 export class AccessComponent implements OnInit {
+  name:'';
   formData = {
     "role":"",
     "modules":[],
@@ -137,12 +138,18 @@ updateParent(t,v,e,d){
   t.map(item=>{
     if(item.name == e.name){
       item[v] = d;
+      if(item.read && item.write){
+        item.both = true
+      }else{
+        item.both = false;
+      }
       this.moduleSet.push(item)
       if(item.children){
         return this.updateChildren(item.children,v,e,d)
       }else{
         return;
       }
+
     }else if(item.children){
       return this.updateParent(item.children,v,e,d)
     }else{
@@ -160,6 +167,17 @@ updateChildren(t,v,e,d){
       return;
     }
   })
+}
+
+
+//Searching
+filterItem(value){
+  if(!value){
+      this.getAccessModulebyRole();
+  } // when nothing has typed
+  this.dataSource.data = Object.assign([], this.accessModuleData).filter(
+     item => item.name.toLowerCase().indexOf(value.toLowerCase()) > -1
+  )
 }
 // alert message after api response success
 openSnackBar(msg) {

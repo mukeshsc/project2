@@ -94,6 +94,7 @@ async deleteInsurance(id){
   // open add Employee modal
   openSubAddModal(name,date) {
     const dialogRef = this.dialog.open(InsuranceAddComponent, {
+      width:'40%',
       data: {
         insurance: JSON.stringify({name:name,date:date})
       }});
@@ -105,11 +106,11 @@ async deleteInsurance(id){
   }
 
   // open add Employee modal
-  openSubEditModal(e) {
-    let data  = this.responseData.filter(item => e.id == item.user_id);
+  openSubEditModal(e,data) {
     const dialogRef = this.dialog.open(InsuranceEditComponent, {
+      width:'40%',
       data: {
-        employee: JSON.stringify(data[0])
+        insurance: JSON.stringify({main:e,sub:data})
       }});
 
     dialogRef.afterClosed().subscribe(result => {

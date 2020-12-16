@@ -34,12 +34,12 @@
           <table class="table">
             <thead>
               <tr>
-                <th>Plan Id</th>
-                <th>Name of Plan</th>
-                <th>Members</th>
-                <th>Table of benefits</th>
-                <th>Network</th>
-                <th>Action Required</th>
+                <th width="10%">Plan Id</th>
+                <th width="10%">Name of Plan</th>
+                <th width="10%">Members</th>
+                <th width="15%">Table of benefits</th>
+                <th width="15%">Network</th>
+                <th width="25%">Action Required</th>
               </tr>
             </thead>
             <tbody>
@@ -50,7 +50,10 @@
                 <td><a href="{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
                 <td><a href="{{sub.network}}" target="_blank">{{sub.network}}</a></td>
                 <td><button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn">delete</mat-icon></button></td>
+                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn">delete</mat-icon></button>
+                  <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(item,sub)"
+                  matTooltip="Edit"   color="light"><mat-icon color="green">edit</mat-icon></button>
+                </td>
               </tr>
             </tbody>
           </table>

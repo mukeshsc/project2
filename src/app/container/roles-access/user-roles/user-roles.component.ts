@@ -51,7 +51,7 @@ export class UserRolesComponent implements OnInit , AfterViewInit  {
       console.log(response.data)
       let arr = []
       for(let item of response.data){
-        let obj = {userRole_id:item.userRole_id,role_Type: item.role_Type, nouser: 0, accesslevel: "Full Access", status: item.status, actionsrequired:4}
+        let obj = {userRole_id:item.userRole_id,role_Type: item.role_Type, nouser: item.userCount, accesslevel: item.accessLevel, status: item.status, actionsrequired:4}
         arr.push(obj);
       }
       this.roleData = new MatTableDataSource([...arr]);
@@ -123,7 +123,9 @@ async deleteRole(id,status){
 
   // open add role modal
   openRoleAddModal() {
-    const dialogRef = this.dialog.open(RoleAddComponent);
+    const dialogRef = this.dialog.open(RoleAddComponent,{
+      width:'40%'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -134,6 +136,7 @@ async deleteRole(id,status){
   // open add role modal
   openRoleEditModal(e) {
     const dialogRef = this.dialog.open(RoleEditComponent,{
+      width:'40%',
       data: {
         role: JSON.stringify(e)
       }});

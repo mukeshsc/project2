@@ -52,7 +52,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100" *ngIf="BenifitType == '0'">
         <mat-form-field class="form-fields">
-          <input matInput  type="url" placeholder="Table of Benefit Link"  name="Insurance_Benefit" [(ngModel)]="formData.Insurance_Benefit" autocomplete="off"  />
+          <input matInput  type="url" placeholder="Table of Benefit Link"  name="Insurance_Benefit" [(ngModel)]="formData.Insurance_Benefit" autocomplete="off" required />
         </mat-form-field>
       </div>
       <div fxFlex="100" *ngIf="BenifitType == '1'">
@@ -64,7 +64,7 @@
               <small>drag & drop to upload the document</small>
             </ngx-dropzone-label>
             <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                <ngx-dropzone-label >{{ f.name }} </ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>
         </div>
@@ -82,7 +82,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100" *ngIf="NetworkType == '0'">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Network Link" type="url"  name="Network" [(ngModel)]="formData.Network" placeholder="Network"  autocomplete="off"  />
+          <input matInput placeholder="Network Link" type="url"  name="Network" [(ngModel)]="formData.Network" placeholder="Network"  autocomplete="off" required />
         </mat-form-field>
       </div>
       <div fxFlex="100" *ngIf="NetworkType == '1'">
@@ -94,7 +94,7 @@
               <small>drag & drop to upload the document</small>
             </ngx-dropzone-label>
             <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
-                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>
         </div>

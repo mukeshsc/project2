@@ -9,6 +9,7 @@ import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/con
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-setting',
@@ -20,6 +21,7 @@ export class SettingComponent implements OnInit {
   fieldNewPass:boolean;
   fieldOldPass:boolean;
   oldNewSame:boolean;
+  imgPath = environment.apiBaseUrl
   files: File[] = [];
   files2: File[] = [];
   themeDataSet:any;

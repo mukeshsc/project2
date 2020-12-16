@@ -23,11 +23,12 @@
               </div>
               <div fxFlex="50">
                 <mat-form-field class="form-fields">
-                  <input matInput  type="text" placeholder="Company Website" #company_websiteName  [(ngModel)]="themeData.company_websiteName"  name="company_websiteName" required autocomplete="off" />
+                  <input matInput  type="url" placeholder="Company Website" #company_websiteName="ngModel"  [(ngModel)]="themeData.company_websiteName"  name="company_websiteName" required autocomplete="off" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" />
 
                 </mat-form-field>
-                <div *ngIf="company_websiteName.errors && company_websiteName.touched">
+                <div *ngIf="company_websiteName.valid || company_websiteName.untouched">
                   <span class="error" *ngIf="company_websiteName.errors?.required">Website is mandatory.</span>
+                  <span class="error" *ngIf="company_websiteName.errors?.pattern">Website name is not in proper format.</span>
                 </div>
 
                 <mat-form-field class="form-fields">
@@ -54,7 +55,7 @@
                       Upload Your Logo<br />
                       <small>drag & drop to upload the logo image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{themeData.ligth_logo}});">
                         <ngx-dropzone-label [style]="'background:'+themeData.favicon">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
@@ -75,7 +76,7 @@
                       Upload Your favicon<br />
                       <small>drag & drop to upload the favicon image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)">
+                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)" style="background-image: url({{themeData.favicon}});">
                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
@@ -100,30 +101,108 @@
               </div>
               <div fxFlex="50">
                 <section class="toggle-section">
-                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-label>Leave Request</mat-label>
                   <mat-slide-toggle
                       class="example-margin"
                       color="primary"
                       checked="checked"
-                  >
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-label>Chat</mat-label>
                   <mat-slide-toggle
                       class="example-margin"
                       color="primary"
                       checked="checked"
-                  >
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Employee & Long Title Goes Here</mat-label>
+                  <mat-label>Document Expiry</mat-label>
                   <mat-slide-toggle
                       class="example-margin"
                       color="primary"
                       checked="checked"
-                  >
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Survey Completed</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Reward Reddemed</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Calendar & Events</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
+                  </mat-slide-toggle>
+                </section>
+                <section class="toggle-section">
+                  <mat-label>Birthday / Anniversary</mat-label>
+                  <mat-slide-toggle
+                      class="example-margin"
+                      color="primary"
+                      checked="checked"
+                  >Portal
+                  </mat-slide-toggle>
+                  <mat-slide-toggle
+                  class="example-margin"
+                  color="primary"
+                  checked="checked"
+                  >Email
                   </mat-slide-toggle>
                 </section>
               </div>
@@ -273,14 +352,14 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>S.no</th>
                       <th>Salary Type</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let d of salaryData">
-                      <td>{{d.salaryType_id}}</td>
+                    <tr *ngFor="let d of salaryData;let i = index;">
+                      <td>{{i+1}}</td>
                       <td>{{d.salary_Type}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogSalary(d.salaryType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
@@ -333,14 +412,14 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>S.no</th>
                       <th>Leave</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let d of leaveData">
-                      <td>{{d.leaveType_id}}</td>
+                    <tr *ngFor="let d of leaveData; let i = index;">
+                      <td>{{i+1}}</td>
                       <td>{{d.leave_Type}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogLeave(d.leaveType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
@@ -393,13 +472,15 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>S.no</th>
+                      <th>ID (For CSV upload use)</th>
                       <th>Deaprtment</th>
                       <th>Action</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let d of departmentData">
+                    <tr *ngFor="let d of departmentData; let i= index;">
+                      <td>{{i+1}}</td>
                       <td>{{d.department_id}}</td>
                       <td>{{d.department_Type}}</td>
                       <td>
@@ -453,7 +534,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th>ID</th>
+                      <th>S.no</th>
                       <th>Event name</th>
                       <th>From Date</th>
                       <th>To Date</th>
@@ -461,8 +542,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let d of holidayData">
-                      <td>{{d.calendarEvent_id}}</td>
+                    <tr *ngFor="let d of holidayData;let i = index">
+                      <td>{{i+1}}</td>
                       <td>{{d.event_Title}}</td>
                       <td>{{formatDate(d.event_StartDate)}}</td>
                       <td>{{formatDate(d.event_EndDate)}}</td>
