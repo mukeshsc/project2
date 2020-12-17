@@ -26,16 +26,8 @@ export class EmployeeEditComponent implements OnInit {
     department: '',
     employee_joiningDate: '',
     insurance_plan_name: '',
-    total: 0,
-    basic: 0,
-    home_Allowance: 0,
-    transportation_Allowance: 0,
-    other_Allowance: 0,
-    maternity: '',
-    medical: '',
-    annual: '',
-    unpaid_Leaves: '',
-    others: '',
+    leave:[],
+    salary:[],
     working_HoursTo: '' ,
     working_HoursFrom: '',
     company_id: null,
@@ -48,6 +40,8 @@ export class EmployeeEditComponent implements OnInit {
   employeeData: any;
   roleData: any = [];
   departmentData:any = [];
+  leaveData:any =[];
+  salaryData:any = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeEditComponent>) { }
 
   ngOnInit(): void {
@@ -62,16 +56,8 @@ export class EmployeeEditComponent implements OnInit {
       department: this.employeeData.department,
       employee_joiningDate: this.employeeData.employee_joiningDate,
       insurance_plan_name: this.employeeData.insurance_plan_name,
-      total: this.employeeData.total,
-      basic: this.employeeData.basic,
-      home_Allowance: this.employeeData.home_Allowance,
-      transportation_Allowance: this.employeeData.transportation_Allowance,
-      other_Allowance: this.employeeData.other_Allowance,
-      maternity: this.employeeData.maternity,
-      medical: this.employeeData.medical,
-      annual: this.employeeData.annual,
-      unpaid_Leaves: this.employeeData.unpaid_Leaves,
-      others: this.employeeData.others,
+      salary:this.employeeData.salary?this.employeeData.salary:[],
+      leave: this.employeeData.leave?this.employeeData.leave:[],
       working_HoursTo: this.employeeData.working_HoursTo,
       working_HoursFrom: this.employeeData.working_HoursFrom,
       company_id: this.employeeData.company_id,
@@ -82,7 +68,87 @@ export class EmployeeEditComponent implements OnInit {
     };
     this.getRole();
     this.getDepartment();
+    this.getLeave();
+    this.getSalary();
   }
+
+
+
+// Get Leave
+async getLeave(){
+  console.log(this.formData.leave)
+  this.ngxService.start();
+  await(this._api.showLeave().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.leaveData = response.data;
+      for(let item of this.leaveData){
+        let obj = {};
+        obj[item.leave_Type] = '';
+        this.formData.leave.push(obj);
+      }
+
+      console.log(this.formData.leave)
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// Get Salary breakdown
+async getSalary(){
+  this.ngxService.start();
+  await(this._api.showSalary().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.salaryData = response.data;
+      if(this.formData.salary.length > 0){
+        for(let item of this.salaryData){
+          for(let s of Object.keys(this.formData.salary)){
+            if(s == item.salary_Type){
+              let obj = {};
+              obj[item.salary_Type] = this.formData.salary[s];
+              this.formData.salary.push(obj);
+            }else{
+              let obj = {};
+              obj[item.salary_Type] = '';
+              this.formData.salary.push(obj);
+            }
+          }
+        }
+        let obj = {};
+
+        for ( var i=0, len=this.formData.salary.length; i < len; i++ )
+            obj[this.formData.salary[i][this.salaryData[i].salary_Type]] = this.formData.salary[i];
+
+        this.formData.salary = new Array();
+        for ( var key in obj )
+            this.formData.salary.push(obj[key]);
+      }else{
+        for(let item of this.salaryData){
+          let obj = {};
+          obj[item.salary_Type] = '';
+          this.formData.salary.push(obj);
+        }
+      }
+
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
 
 // Get Role Type
 async getRole(){
