@@ -239,7 +239,7 @@
                     <span class="error" *ngIf="newpassword.errors?.required">New Password is mandatory.</span>
                   </div>
                   <div *ngIf="oldNewSame">
-                    <span class="error">Old & New Password can not be same.</span>
+                    <span class="error">Old password an new password can not be same </span>
                   </div>
                   <mat-form-field class="form-fields">
                     <input matInput placeholder="Confirm Password" [type]="fieldconPass ? 'text' : 'password'" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />

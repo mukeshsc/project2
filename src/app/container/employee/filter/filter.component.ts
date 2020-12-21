@@ -17,21 +17,24 @@ export class FilterComponent implements OnInit {
     email:'',
     reporting_Manager:'',
     department:'',
-    role:null,
+    role:'',
     employee_joiningDate:'',
     insurance_plan_name:'',
 
-    total: null,
-    basic: null,
-    home_Allowance: null,
-    transportation_Allowance: null,
-    other_Allowance: null,
+    // total: null,
+    // basic: null,
+    // home_Allowance: null,
+    // transportation_Allowance: null,
+    // other_Allowance: null,
 
-    maternity:null,
-    medical:null,
-    annual:null,
-    unpaid_Leaves:null,
-    others:null,
+    // maternity:null,
+    // medical:null,
+    // annual:null,
+    // unpaid_Leaves:null,
+    // others:null,
+
+    salary:[],
+    leaves:[],
 
     working_HoursTo:'',
     working_HoursFrom:'',
@@ -74,6 +77,7 @@ async getRole(){
 
   // add new Employee
   async addEmployee(){
+    this.ngxService.start();
     await(this._api.addEmployee(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
