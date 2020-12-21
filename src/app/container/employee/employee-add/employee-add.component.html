@@ -55,7 +55,9 @@
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="date" #employee_joiningDate  name="employee_joiningDate" [(ngModel)]="formData.employee_joiningDate" placeholder="Employee Joining Date" required autocomplete="off"  />
+          <input matInput placeholder="Employee Joining Date" [matDatepicker]="picker" format="DD/MM/YYYY"  #employee_joiningDate  name="employee_joiningDate" [(ngModel)]="formData.employee_joiningDate"  required autocomplete="off"  />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
     </div>
@@ -91,7 +93,7 @@
     <div fxLayout="column"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50" *ngFor="let l of leaveData;let i = index">
         <mat-form-field class="form-fields">
-          <input matInput  type="text" #leave  name="leave" [(ngModel)]="formData.leave[i][l.leave_Type]" [placeholder]="l.leave_Type" required autocomplete="off"  />
+          <input matInput  type="text" #leaves  name="leaves" [(ngModel)]="formData.leaves[i][l.leave_Type]" [placeholder]="l.leave_Type" required autocomplete="off"  />
         </mat-form-field>
       </div>
     </div>

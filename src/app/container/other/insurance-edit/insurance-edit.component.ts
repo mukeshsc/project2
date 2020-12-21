@@ -7,6 +7,35 @@ import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogData {
+  employee: string;
+}
+
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {defaultFormat as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 
 export interface DialogData {
   insurance: string;
@@ -15,7 +44,16 @@ export interface DialogData {
 @Component({
   selector: 'app-insurance-edit',
   templateUrl: './insurance-edit.component.html',
-  styleUrls: ['./insurance-edit.component.scss']
+  styleUrls: ['./insurance-edit.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class InsuranceEditComponent implements OnInit {
   currentDate = new Date();
@@ -37,7 +75,7 @@ export class InsuranceEditComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<InsuranceEditComponent>) { }
 
   ngOnInit(): void {
-    console.log(this.data.insurance)
+    console.log(JSON.parse(this.data.insurance).main.date)
     // this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.insurance_Name = JSON.parse(this.data.insurance).main.insuranceName;
     this.formData.expiryDate = JSON.parse(this.data.insurance).main.date;

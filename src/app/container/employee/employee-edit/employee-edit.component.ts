@@ -11,10 +11,44 @@ export interface DialogData {
   employee: string;
 }
 
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {defaultFormat as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-employee-edit',
   templateUrl: './employee-edit.component.html',
-  styleUrls: ['./employee-edit.component.scss']
+  styleUrls: ['./employee-edit.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class EmployeeEditComponent implements OnInit {
   formData = {
@@ -26,7 +60,7 @@ export class EmployeeEditComponent implements OnInit {
     department: '',
     employee_joiningDate: '',
     insurance_plan_name: '',
-    leave:[],
+    leaves:[],
     salary:[],
     working_HoursTo: '' ,
     working_HoursFrom: '',
@@ -56,8 +90,8 @@ export class EmployeeEditComponent implements OnInit {
       department: this.employeeData.department,
       employee_joiningDate: this.employeeData.employee_joiningDate,
       insurance_plan_name: this.employeeData.insurance_plan_name,
-      salary:this.employeeData.salary?this.employeeData.salary:[],
-      leave: this.employeeData.leave?this.employeeData.leave:[],
+      salary:this.employeeData.salary?JSON.parse(this.employeeData.salary):[],
+      leaves: this.employeeData.leaves?JSON.parse(this.employeeData.leaves):[],
       working_HoursTo: this.employeeData.working_HoursTo,
       working_HoursFrom: this.employeeData.working_HoursFrom,
       company_id: this.employeeData.company_id,
@@ -76,20 +110,45 @@ export class EmployeeEditComponent implements OnInit {
 
 // Get Leave
 async getLeave(){
-  console.log(this.formData.leave)
+  // console.log(this.formData.leaves)
   this.ngxService.start();
   await(this._api.showLeave().subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
       this.leaveData = response.data;
+      if(this.formData.leaves.length > 0){
+        for(let item of this.leaveData){
+          for(let s of Object.keys(this.formData.leaves)){
+            if(s == item.leave_Type){
+              let obj = {};
+              obj[item.leave_Type] = this.formData.leaves[s];
+              this.formData.leaves.push(obj);
+            }else{
+              let obj = {};
+              obj[item.leave_Type] = '';
+              this.formData.leaves.push(obj);
+            }
+          }
+        }
+        let obj = {};
+
+        for ( var i=0, len=this.formData.leaves.length; i < len; i++ )
+            obj[this.formData.leaves[i][this.leaveData[i].leave_Type]] = this.formData.leaves[i];
+
+        this.formData.leaves = new Array();
+        for ( var key in obj )
+            this.formData.leaves.push(obj[key])
+      }else{
       for(let item of this.leaveData){
         let obj = {};
         obj[item.leave_Type] = '';
-        this.formData.leave.push(obj);
+        this.formData.leaves.push(obj);
       }
 
-      console.log(this.formData.leave)
+    }
+
+      console.log(this.formData.leaves)
     }else{
       this.openErrrorSnackBar(response.message);
     }

@@ -21,7 +21,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Expiry Date" [matDatepicker]="pickerStart" [min]="currentDate" #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
+          <input matInput placeholder="Expiry Date" [matDatepicker]="pickerStart"  #expiryDate  name="expiryDate" [(ngModel)]="formData.expiryDate" required autocomplete="off"  />
           <mat-datepicker-toggle matSuffix [for]="pickerStart"></mat-datepicker-toggle>
           <mat-datepicker #pickerStart></mat-datepicker>
         </mat-form-field>

@@ -7,10 +7,45 @@ import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import { MatDialogRef } from '@angular/material/dialog';
+
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {defaultFormat as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-employee-add',
   templateUrl: './employee-add.component.html',
-  styleUrls: ['./employee-add.component.scss']
+  styleUrls: ['./employee-add.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class EmployeeAddComponent implements OnInit {
   formData = {
@@ -36,7 +71,7 @@ export class EmployeeAddComponent implements OnInit {
     // others:null,
 
     salary:[],
-    leave:[],
+    leaves:[],
 
     working_HoursTo:'',
     working_HoursFrom:'',
@@ -76,7 +111,7 @@ async getLeave(){
       for(let item of this.leaveData){
         let obj = {};
         obj[item.leave_Type] = '';
-        this.formData.leave.push(obj);
+        this.formData.leaves.push(obj);
       }
     }else{
       this.openErrrorSnackBar(response.message);
