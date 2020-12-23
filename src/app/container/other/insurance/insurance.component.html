@@ -47,8 +47,8 @@
                 <td>{{sub.insuranceDetail_id}}</td>
                 <td>{{sub.insurance_Plan}}</td>
                 <td>{{sub.member}}</td>
-                <td><a href="{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
-                <td><a href="{{sub.network}}" target="_blank">{{sub.network}}</a></td>
+                <td><a href="http://{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
+                <td><a href="http://{{sub.network}}" target="_blank">{{sub.network}}</a></td>
                 <td><button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
                   matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn">delete</mat-icon></button>
                   <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(item,sub)"

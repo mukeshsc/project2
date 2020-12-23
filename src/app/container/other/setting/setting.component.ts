@@ -27,6 +27,8 @@ export class SettingComponent implements OnInit {
   themeDataSet:any;
   holidayData:any = [];
   isCheck:boolean;
+  isCheck1:boolean;
+  isCheck2:boolean;
   holidaySet = {
     "event_Type":"1",
     "event_StartDate":"",
@@ -77,7 +79,9 @@ export class SettingComponent implements OnInit {
   docTypeData:any = [];
   docTypeSet = {
     "documentType":"",
-    "isCheck":null,
+    "dependent":0,
+    "expires":0,
+    "isCheck":0,
     "ip_Address":"12.32.33.22",
     "companyId":""
   }
@@ -472,7 +476,9 @@ async addDocType(){
       this.openSnackBar(response.message);
       this.docTypeSet = {
         "documentType":"",
-        "isCheck":"",
+        "dependent":0,
+        "expires":0,
+        "isCheck":0,
         "ip_Address":"",
         "companyId":""
       }
@@ -806,6 +812,18 @@ CheckDocmandat(e){
   console.log(e)
   this.isCheck = e.checked;
   this.docTypeSet.isCheck = e.checked?1:0;
+}
+//Check mandat dependent field
+CheckDocmandatdep(e){
+  console.log(e)
+  this.isCheck1 = e.checked;
+  this.docTypeSet['dependent'] = e.checked?1:0;
+}
+//Check expiry field
+CheckExpiry(e){
+  console.log(e)
+  this.isCheck2 = e.checked;
+  this.docTypeSet.expires = e.checked?1:0;
 }
 
 }

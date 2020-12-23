@@ -31,13 +31,13 @@
                   <span class="error" *ngIf="company_websiteName.errors?.pattern">Website name is not in proper format.</span>
                 </div>
 
-                <mat-form-field class="form-fields">
+                <!-- <mat-form-field class="form-fields">
                   <input matInput  type="color" #company_Brand placeholder="Company Brand"  name="company_Brand" [(ngModel)]="themeData.company_Brand" [value]="themeData.company_Brand"  required autocomplete="off" />
 
                 </mat-form-field>
                 <div *ngIf="company_Brand.errors && company_Brand.touched">
                   <span class="error" *ngIf="company_Brand.errors?.required">Brand is mandatory.</span>
-                </div>
+                </div> -->
               </div>
             </div>
             <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
@@ -50,13 +50,16 @@
               <div fxFlex="50">
                 <mat-label>Light Logo</mat-label>
                 <div class="dropzone">
-                  <ngx-dropzone (change)="onSelect($event)">
+                  <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
                       Upload Your Logo<br />
                       <small>drag & drop to upload the logo image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{themeData.ligth_logo}});">
-                        <ngx-dropzone-label [style]="'background:'+themeData.favicon">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{imgPath}}{{themeData.ligth_logo}});">
+                        <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                    <ngx-dropzone-preview *ngIf="files.length == 0 && themeData.ligth_logo != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.ligth_logo}});">
+                      <ngx-dropzone-label ></ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
                 </div>
@@ -71,13 +74,16 @@
               <div fxFlex="50">
                 <mat-label>Favicon</mat-label>
                 <div class="dropzone">
-                  <ngx-dropzone (change)="onFaviSelect($event)">
+                  <ngx-dropzone (change)="onFaviSelect($event)" accept="image/jpeg,image/jpg,image/png">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
                       Upload Your favicon<br />
                       <small>drag & drop to upload the favicon image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)" style="background-image: url({{themeData.favicon}});">
+                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)" style="background-image: url({{imgPath}}{{themeData.favicon}});">
                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                    <ngx-dropzone-preview *ngIf="files2.length == 0 && themeData.favicon != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.favicon}});">
+                      <ngx-dropzone-label ></ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
                 </div>
@@ -88,7 +94,7 @@
               </div>
               <div fxFlex="50">
                 <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" color="primary" >Save Settings</button>
+                <button mat-raised-button class="big-btn block-btn" color="primary"  [disabled]="!ThemeForm.valid ">Save Settings</button>
               </div>
             </div>
           </form>
@@ -225,27 +231,27 @@
                 </div>
                 <div fxFlex="50">
                   <mat-form-field class="form-fields">
-                    <input matInput placeholder="Old Password"   [type]="fieldOldPass ? 'text' : 'password'" #oldpassword  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" />
+                    <input matInput placeholder="Old Password"   [type]="fieldOldPass ? 'text' : 'password'" #oldpassword="ngModel"  name="oldpassword" [(ngModel)]="passwordData.oldpassword" required autocomplete="off" />
                     <mat-icon matSuffix (click)="fieldOldPass = !fieldOldPass" style="cursor: pointer;">{{fieldOldPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
-                  <div *ngIf="oldpassword.errors && oldpassword.touched">
+                  <div [hidden]="oldpassword.valid || oldpassword.untouched">
                     <span class="error" *ngIf="oldpassword.errors?.required">Old Password is mandatory.</span>
                   </div>
                   <mat-form-field class="form-fields">
-                    <input matInput  placeholder="New Password" [type]="fieldNewPass ? 'text' : 'password'" #newpassword (ngModelChange)="ChkOldNew($event)"  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
+                    <input matInput  placeholder="New Password" [type]="fieldNewPass ? 'text' : 'password'" #newpassword="ngModel" (ngModelChange)="ChkOldNew($event)"  name="newpassword"  [(ngModel)]="passwordData.newpassword" required autocomplete="off"  />
                     <mat-icon matSuffix (click)="fieldNewPass = !fieldNewPass" style="cursor: pointer;">{{fieldNewPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
-                  <div *ngIf="newpassword.errors && newpassword.touched">
+                  <div [hidden]="newpassword.valid || newpassword.untouched">
                     <span class="error" *ngIf="newpassword.errors?.required">New Password is mandatory.</span>
                   </div>
                   <div *ngIf="oldNewSame">
                     <span class="error">Old password an new password can not be same </span>
                   </div>
                   <mat-form-field class="form-fields">
-                    <input matInput placeholder="Confirm Password" [type]="fieldconPass ? 'text' : 'password'" #confirmpassword  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />
+                    <input matInput placeholder="Confirm Password" [type]="fieldconPass ? 'text' : 'password'" #confirmpassword="ngModel"  name="confirmpassword"  [(ngModel)]="passwordData.confirmpassword" required autocomplete="off" />
                     <mat-icon matSuffix (click)="fieldconPass = !fieldconPass" style="cursor: pointer;">{{fieldconPass?'visibility_off':'visibility'}}</mat-icon>
                   </mat-form-field>
-                  <div *ngIf="confirmpassword.errors && confirmpassword.touched">
+                  <div [hidden]="confirmpassword.valid || confirmpassword.untouched">
                     <span class="error" *ngIf="confirmpassword.errors?.required">confirmpassword Password is mandatory.</span>
                   </div>
                   <div *ngIf="passNotMatched">
@@ -353,7 +359,7 @@
                   <thead>
                     <tr>
                       <th>S.no</th>
-                      <th>Salary Type</th>
+                      <th width="70%">Salary Type</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -413,7 +419,7 @@
                   <thead>
                     <tr>
                       <th>S.no</th>
-                      <th>Leave</th>
+                      <th width="70%">Leave</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -473,8 +479,8 @@
                   <thead>
                     <tr>
                       <th>S.no</th>
-                      <th>ID (For CSV upload use)</th>
-                      <th>Deaprtment</th>
+                      <th>ID (For CSV use)</th>
+                      <th width="50%">Deaprtment</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -536,8 +542,10 @@
                   <thead>
                     <tr>
                       <th>S.no</th>
-                      <th>Deaprtment</th>
-                      <th>Mandatory/Optional</th>
+                      <th width="40%">Document</th>
+                      <th width="30%">Employee(M/O)</th>
+                      <th width="30%">Dependent(M/O)</th>
+                      <th width="30%">Expiry</th>
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -546,6 +554,8 @@
                       <td>{{i+1}}</td>
                       <td>{{d.document_Type}}</td>
                       <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
+                      <td>{{d.dependent == 1?'Mandatory':'Optional'}}</td>
+                      <td>{{d.expires == 1?'Expirable':'Not Expirable'}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
                       </td>
@@ -570,13 +580,41 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                          <section class="toggle-section">
-                          <mat-label>Birthday / Anniversary</mat-label>
+                          <mat-label>For Employee</mat-label>
                           <mat-slide-toggle
                               class="example-margin"
                               color="primary"
                               [checked]="isCheck"
                               (change)="CheckDocmandat($event)"
                           >Mandatory
+                          </mat-slide-toggle>
+                        </section>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                         <section class="toggle-section">
+                          <mat-label>For Dependent</mat-label>
+                          <mat-slide-toggle
+                              class="example-margin"
+                              color="primary"
+                              [checked]="isCheck1"
+                              (change)="CheckDocmandatdep($event)"
+                          >Mandatory
+                          </mat-slide-toggle>
+                        </section>
+                      </div>
+                    </div>
+                    <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex="100">
+                         <section class="toggle-section">
+                          <mat-label>Expirable</mat-label>
+                          <mat-slide-toggle
+                              class="example-margin"
+                              color="primary"
+                              [checked]="isCheck2"
+                              (change)="CheckExpiry($event)"
+                          >Expirable
                           </mat-slide-toggle>
                         </section>
                       </div>
@@ -611,7 +649,7 @@
                   <thead>
                     <tr>
                       <th>S.no</th>
-                      <th>Event name</th>
+                      <th width="30%">Event name</th>
                       <th>From Date</th>
                       <th>To Date</th>
                       <th>Action</th>
