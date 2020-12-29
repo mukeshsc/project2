@@ -21,6 +21,7 @@ import { ContractsComponent } from './container/documents/contracts/contracts.co
 import { FaqComponent } from './container/company/faq/faq.component';
 import { PrivacyPolicyComponent } from './container/company/privacy-policy/privacy-policy.component';
 import { ProfileComponent } from './container/company/profile/profile.component';
+import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-admin-list.component';
 
 
 const routes: Routes = [
@@ -45,6 +46,7 @@ const routes: Routes = [
   { path: 'faq', component: FaqComponent,canActivate: [AuthGuardService] },
   { path: 'profile', component: ProfileComponent,canActivate: [AuthGuardService] },
   { path: 'privacy-policy', component: PrivacyPolicyComponent,canActivate: [AuthGuardService] },
+  { path: 'sub-admin', component: SubAdminListComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

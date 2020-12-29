@@ -60,7 +60,7 @@ export class InsuranceEditComponent implements OnInit {
   formData = {
     insuranceDetail_id:'',
     insurance_Name:'',
-    expiryDate:'',
+    expiryDate:new Date(),
     insurance_Plan:'',
     insurance_Benefit:'',
     network:'',
@@ -75,14 +75,15 @@ export class InsuranceEditComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<InsuranceEditComponent>) { }
 
   ngOnInit(): void {
-    console.log(JSON.parse(this.data.insurance).main.date)
     // this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.insurance_Name = JSON.parse(this.data.insurance).main.insuranceName;
-    this.formData.expiryDate = JSON.parse(this.data.insurance).main.date;
+    let d = (JSON.parse(this.data.insurance).main.date).split('/')
+    this.formData.expiryDate = new Date(d[1]+'-'+d[0]+'-'+d[2]);
     this.formData.insurance_Plan = JSON.parse(this.data.insurance).sub.insurance_Plan;
     this.formData.insurance_Benefit = JSON.parse(this.data.insurance).sub.insurance_Benefit;
     this.formData.network = JSON.parse(this.data.insurance).sub.network;
     this.formData.insuranceDetail_id = JSON.parse(this.data.insurance).sub.insuranceDetail_id;
+    console.log(this.formData.expiryDate)
   }
 
 

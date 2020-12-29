@@ -71,6 +71,10 @@ import { FaqComponent } from './container/company/faq/faq.component';
 import { PrivacyPolicyComponent } from './container/company/privacy-policy/privacy-policy.component';
 import { ProfileComponent } from './container/company/profile/profile.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-admin-list.component';
+import { SubAdminAddComponent } from './container/sub-admin/sub-admin-add/sub-admin-add.component';
+import { SubAdminEditComponent } from './container/sub-admin/sub-admin-edit/sub-admin-edit.component';
+import { MissingListComponent } from './container/documents/missing-list/missing-list.component';
 
 @NgModule({
   declarations: [
@@ -106,7 +110,11 @@ import { MatNativeDateModule } from '@angular/material/core';
     ProfileComponent,
     FilterComponent,
     FaqComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    SubAdminListComponent,
+    SubAdminAddComponent,
+    SubAdminEditComponent,
+    MissingListComponent
   ],
   imports: [
     BrowserModule,

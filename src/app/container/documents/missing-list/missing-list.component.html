@@ -1,0 +1,16 @@
+
+<mat-icon class="closeModal" mat-dialog-close>close</mat-icon>
+<div class="modal-box">
+  <div fxLayout="row" class="">
+    <div fxFlex="100">
+      <span class="card-title">Missing Documents</span></div>
+  </div>
+  <mat-dialog-content class="mat-typography">
+    <mat-list>
+      <mat-list-item *ngFor="let emp of employeeData">
+        <mat-icon mat-list-icon>fiber_manual_record</mat-icon>
+        <div mat-line>{{emp.document_Type}}</div>
+      </mat-list-item>
+    </mat-list>
+  </mat-dialog-content>
+</div>

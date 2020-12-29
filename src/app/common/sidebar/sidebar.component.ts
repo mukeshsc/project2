@@ -58,6 +58,14 @@ export class SidebarComponent implements OnInit {
       access:false,
     },
     {
+      title:'Sub Admin',
+      url:'/sub-admin',
+      open:false,
+      icon:'sentiment_satisfied',
+      children:[],
+      access:true,
+    },
+    {
       title:'Roles & access',
       url:'/dashboard',
       open:false,

@@ -29,11 +29,21 @@
     <div fxLayout="row"  class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields" >
-          <mat-select [(ngModel)]="formData.file_Type" name="file_Type" #file_Type required placeholder="Document Type">
+          <mat-select [(ngModel)]="formData.file_Type" name="file_Type" #file_Type required placeholder="Document Format">
             <mat-option  value="png">Png</mat-option>
             <mat-option  value="jpeg">Jpeg</mat-option>
             <mat-option  value="pdf">Pdf</mat-option>
             <mat-option  value="doc">Doc</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div fxLayout="row"  class="">
+      <div fxFlex="100">
+        <mat-form-field class="form-fields" >
+          <mat-select [(ngModel)]="formData.DocType" name="DocType" #file_Type required placeholder="Document Type">
+            <mat-option *ngFor="let d of docData" [value]="d.documentType_id">{{d.document_Type}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

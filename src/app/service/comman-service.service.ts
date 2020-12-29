@@ -320,12 +320,12 @@ addDoc(formData){
  }
 
 // show Doc
-showDoc(){
+showDoc(formData){
   let headers = new HttpHeaders({
   'Content-Type': 'application/json',
   'Authorization': this.token
   });
-  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showEmployeeDocument `, {headers}).pipe(map(res => <any>res));
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showEmployeeDocument `, formData, {headers}).pipe(map(res => <any>res));
  }
 
  // update doc status
@@ -540,4 +540,44 @@ showDocType(){
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}testmailSMTP `,formData, {headers}).pipe(map(res => <any>res));
  }
+
+
+
+  // get subAdmin list
+  getSubAdmin(){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}subAdminHrList `, {headers}).pipe(map(res => <any>res));
+  }
+
+
+  // update sub admin
+  updateSubAdminStatus(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}profileStatus `,formData, {headers}).pipe(map(res => <any>res));
+  }
+
+  // employee notification for doucment related
+  notifyUser(formData){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+      });
+      return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}employeeNotification `,formData, {headers}).pipe(map(res => <any>res));
+  }
+  // employee missing doc list
+  missingDoc(formData){
+    let headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': this.token
+      });
+      return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}employeeDocMissingList `,formData, {headers}).pipe(map(res => <any>res));
+  }
 }
+
+

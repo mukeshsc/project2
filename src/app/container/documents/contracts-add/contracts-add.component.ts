@@ -37,23 +37,35 @@ import { MatDialogRef } from '@angular/material/dialog';
 @Component({
   selector: 'app-contracts-add',
   templateUrl: './contracts-add.component.html',
-  styleUrls: ['./contracts-add.component.scss']
+  styleUrls: ['./contracts-add.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class ContractsAddComponent implements OnInit {
   formData = {
     "userId":"",
     "document_Title":"",
     "file_Type":"",
+    "DocType":"",
     "expiry_Date":"",
     "file_Path":""
   };
   files:File[]=[]
   roleData: any = [];
+  docData:any = [];
   currentDate = new Date;
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
 
   ngOnInit(): void {
     this.getEmployee();
+    this.getDocType();
   }
 
 // Get Role Type
@@ -69,6 +81,24 @@ async getEmployee(){
     }else{
     }
     console.log(res);
+  }, err => {
+    const error = err.error;
+    this.ngxService.stop();
+  }));
+
+}
+
+// Get Doc Type
+async getDocType(){
+  this.ngxService.start();
+  await(this._api.showDocType().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data);
+      this.docData = response.data;
+    }else{
+    }
   }, err => {
     const error = err.error;
     this.ngxService.stop();
@@ -106,7 +136,8 @@ async onSelect(event) {
       this.ngxService.stop();
       const response: any = res;
       if (response.success == true){
-        this.formData.file_Path = response.data;
+        console.log(response.data[0])
+        this.formData.file_Path = response.data[0];
 
       }else{
         this.openSnackBar(response.message);

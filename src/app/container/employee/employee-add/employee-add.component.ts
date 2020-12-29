@@ -70,8 +70,8 @@ export class EmployeeAddComponent implements OnInit {
     // unpaid_Leaves:null,
     // others:null,
 
-    salary:[],
-    leaves:[],
+    salaryBalance:[],
+    leaveBalance:[],
 
     working_HoursTo:'',
     working_HoursFrom:'',
@@ -79,7 +79,8 @@ export class EmployeeAddComponent implements OnInit {
     company_id:null,
     ip_Address:'123',
 	  created_By :'1',
-    updated_By:'1'
+    updated_By:'1',
+    isType:0,
   };
 
   departmentData:any = [];
@@ -111,7 +112,7 @@ async getLeave(){
       for(let item of this.leaveData){
         let obj = {};
         obj[item.leave_Type] = '';
-        this.formData.leaves.push(obj);
+        this.formData.leaveBalance.push(obj);
       }
     }else{
       this.openErrrorSnackBar(response.message);
@@ -135,7 +136,7 @@ async getSalary(){
       for(let item of this.salaryData){
         let obj = {};
         obj[item.salary_Type] = '';
-        this.formData.salary.push(obj);
+        this.formData.salaryBalance.push(obj);
       }
     }else{
       this.openErrrorSnackBar(response.message);

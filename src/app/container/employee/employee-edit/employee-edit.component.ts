@@ -60,15 +60,16 @@ export class EmployeeEditComponent implements OnInit {
     department: '',
     employee_joiningDate: '',
     insurance_plan_name: '',
-    leaves:[],
-    salary:[],
+    leaveBalance:[],
+    salaryBalance:[],
     working_HoursTo: '' ,
     working_HoursFrom: '',
     company_id: null,
     role: null,
     ip_Address: '123',
     created_By : '',
-    updated_By: ''
+    updated_By: '',
+    isType:0
   };
 
   employeeData: any;
@@ -90,15 +91,16 @@ export class EmployeeEditComponent implements OnInit {
       department: this.employeeData.department,
       employee_joiningDate: this.employeeData.employee_joiningDate,
       insurance_plan_name: this.employeeData.insurance_plan_name,
-      salary:this.employeeData.salary?JSON.parse(this.employeeData.salary):[],
-      leaves: this.employeeData.leaves?JSON.parse(this.employeeData.leaves):[],
+      salaryBalance:this.employeeData.salaryBalance?JSON.parse(this.employeeData.salaryBalance):[],
+      leaveBalance: this.employeeData.leaveBalance?JSON.parse(this.employeeData.leaveBalance):[],
       working_HoursTo: this.employeeData.working_HoursTo,
       working_HoursFrom: this.employeeData.working_HoursFrom,
       company_id: this.employeeData.company_id,
       role: Number(this.employeeData.role),
       ip_Address: '123',
       created_By : JSON.parse(localStorage.getItem('userData')).user_id,
-      updated_By: JSON.parse(localStorage.getItem('userData')).user_id
+      updated_By: JSON.parse(localStorage.getItem('userData')).user_id,
+      isType:this.employeeData.isType
     };
     this.getRole();
     this.getDepartment();
@@ -117,38 +119,38 @@ async getLeave(){
     const response: any = res;
     if (response.success == true){
       this.leaveData = response.data;
-      if(this.formData.leaves.length > 0){
+      if(this.formData.leaveBalance.length > 0){
         for(let item of this.leaveData){
-          for(let s of Object.keys(this.formData.leaves)){
+          for(let s of Object.keys(this.formData.leaveBalance)){
             if(s == item.leave_Type){
               let obj = {};
-              obj[item.leave_Type] = this.formData.leaves[s];
-              this.formData.leaves.push(obj);
+              obj[item.leave_Type] = this.formData.leaveBalance[s];
+              this.formData.leaveBalance.push(obj);
             }else{
               let obj = {};
               obj[item.leave_Type] = '';
-              this.formData.leaves.push(obj);
+              this.formData.leaveBalance.push(obj);
             }
           }
         }
         let obj = {};
 
-        for ( var i=0, len=this.formData.leaves.length; i < len; i++ )
-            obj[this.formData.leaves[i][this.leaveData[i].leave_Type]] = this.formData.leaves[i];
+        for ( var i=0, len=this.formData.leaveBalance.length; i < len; i++ )
+            obj[this.formData.leaveBalance[i][this.leaveData[i].leave_Type]] = this.formData.leaveBalance[i];
 
-        this.formData.leaves = new Array();
+        this.formData.leaveBalance = new Array();
         for ( var key in obj )
-            this.formData.leaves.push(obj[key])
+            this.formData.leaveBalance.push(obj[key])
       }else{
       for(let item of this.leaveData){
         let obj = {};
         obj[item.leave_Type] = '';
-        this.formData.leaves.push(obj);
+        this.formData.leaveBalance.push(obj);
       }
 
     }
 
-      console.log(this.formData.leaves)
+      console.log(this.formData.leaveBalance)
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -168,33 +170,33 @@ async getSalary(){
     const response: any = res;
     if (response.success == true){
       this.salaryData = response.data;
-      if(this.formData.salary.length > 0){
+      if(this.formData.salaryBalance.length > 0){
         for(let item of this.salaryData){
-          for(let s of Object.keys(this.formData.salary)){
+          for(let s of Object.keys(this.formData.salaryBalance)){
             if(s == item.salary_Type){
               let obj = {};
-              obj[item.salary_Type] = this.formData.salary[s];
-              this.formData.salary.push(obj);
+              obj[item.salary_Type] = this.formData.salaryBalance[s];
+              this.formData.salaryBalance.push(obj);
             }else{
               let obj = {};
               obj[item.salary_Type] = '';
-              this.formData.salary.push(obj);
+              this.formData.salaryBalance.push(obj);
             }
           }
         }
         let obj = {};
 
-        for ( var i=0, len=this.formData.salary.length; i < len; i++ )
-            obj[this.formData.salary[i][this.salaryData[i].salary_Type]] = this.formData.salary[i];
+        for ( var i=0, len=this.formData.salaryBalance.length; i < len; i++ )
+            obj[this.formData.salaryBalance[i][this.salaryData[i].salary_Type]] = this.formData.salaryBalance[i];
 
-        this.formData.salary = new Array();
+        this.formData.salaryBalance = new Array();
         for ( var key in obj )
-            this.formData.salary.push(obj[key]);
+            this.formData.salaryBalance.push(obj[key]);
       }else{
         for(let item of this.salaryData){
           let obj = {};
           obj[item.salary_Type] = '';
-          this.formData.salary.push(obj);
+          this.formData.salaryBalance.push(obj);
         }
       }
 
