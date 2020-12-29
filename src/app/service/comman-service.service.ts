@@ -578,6 +578,15 @@ showDocType(){
       });
       return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}employeeDocMissingList `,formData, {headers}).pipe(map(res => <any>res));
   }
+
+  // download sample csv
+  getSampleCsv(){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}csvColumn`, {headers}).pipe(map(res => <any>res));
+    }
 }
 
 

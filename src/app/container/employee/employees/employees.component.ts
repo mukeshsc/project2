@@ -32,7 +32,8 @@ export class EmployeesComponent implements OnInit {
   @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
 
-  responseData:any = []
+  responseData:any = [];
+  csvFile:any = '';
   accessPermission:boolean;
   constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
@@ -40,6 +41,7 @@ export class EmployeesComponent implements OnInit {
 //getting access permission
     this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
     this.getList();
+    this.getSampleCsv()
   }
 
  // Get Employee List
@@ -125,6 +127,30 @@ async updateEmployeeStatus(id,status){
   }));
 
 }
+
+// Get sample csv
+async getSampleCsv(){
+  this.ngxService.start();
+  await(this._api.getSampleCsv().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      // this.openSnackBar(response.message);
+      this.csvFile = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+
+
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error.message);
+    this.ngxService.stop();
+  }));
+
+}
+
 
 // send invitation link to employee
 async invitationLink(id){
@@ -262,6 +288,28 @@ export_table_to_csv() {
 
   // Download CSV
   this.download_csv(csv.join('\n'), 'Employee-List.csv');
+}
+
+
+// Download list in CSV
+sampleCsv() {
+  this.ngxService.start();
+  const html = document.getElementById('sampleCsv');
+  let csv = [];
+  let rows = html.querySelectorAll('table tr');
+
+  for (let i = 0; i < rows.length; i++) {
+    let row = [], cols = rows[i].querySelectorAll('td, th');
+
+    for (let j = 0; j < cols.length; j++) {
+        row.push(cols[j].textContent);
+    }
+
+    csv.push(row.join(','));
+  }
+
+  // Download CSV
+  this.download_csv(csv.join('\n'), 'Sample.csv');
 }
 
 download_csv(csv, filename) {

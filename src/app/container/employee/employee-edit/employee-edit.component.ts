@@ -104,112 +104,111 @@ export class EmployeeEditComponent implements OnInit {
     };
     this.getRole();
     this.getDepartment();
-    this.getLeave();
-    this.getSalary();
+    // this.getLeave();
+    // this.getSalary();
   }
 
 
 
 // Get Leave
-async getLeave(){
-  // console.log(this.formData.leaves)
-  this.ngxService.start();
-  await(this._api.showLeave().subscribe(res => {
-    this.ngxService.stop();
-    const response: any = res;
-    if (response.success == true){
-      this.leaveData = response.data;
-      if(this.formData.leaveBalance.length > 0){
-        for(let item of this.leaveData){
-          for(let s of Object.keys(this.formData.leaveBalance)){
-            if(s == item.leave_Type){
-              let obj = {};
-              obj[item.leave_Type] = this.formData.leaveBalance[s];
-              this.formData.leaveBalance.push(obj);
-            }else{
-              let obj = {};
-              obj[item.leave_Type] = '';
-              this.formData.leaveBalance.push(obj);
-            }
-          }
-        }
-        let obj = {};
+// async getLeave(){
+//   // console.log(this.formData.leaves)
+//   this.ngxService.start();
+//   await(this._api.showLeave().subscribe(res => {
+//     this.ngxService.stop();
+//     const response: any = res;
+//     if (response.success == true){
+//       this.leaveData = response.data;
+//       if(this.formData.leaveBalance.length > 0){
+//         for(let item of this.leaveData){
+//           for(let s of Object.keys(this.formData.leaveBalance)){
+//             if(s == item.leave_Type){
+//               let obj = {};
+//               obj[item.leave_Type] = this.formData.leaveBalance[s];
+//               this.formData.leaveBalance.push(obj);
+//             }else{
+//               let obj = {};
+//               obj[item.leave_Type] = '';
+//               this.formData.leaveBalance.push(obj);
+//             }
+//           }
+//         }
+//         let obj = {};
 
-        for ( var i=0, len=this.formData.leaveBalance.length; i < len; i++ )
-            obj[this.formData.leaveBalance[i][this.leaveData[i].leave_Type]] = this.formData.leaveBalance[i];
+//         for ( var i=0, len=this.formData.leaveBalance.length; i < len; i++ )
+//             obj[this.formData.leaveBalance[i][this.leaveData[i].leave_Type]] = this.formData.leaveBalance[i];
 
-        this.formData.leaveBalance = new Array();
-        for ( var key in obj )
-            this.formData.leaveBalance.push(obj[key])
-      }else{
-      for(let item of this.leaveData){
-        let obj = {};
-        obj[item.leave_Type] = '';
-        this.formData.leaveBalance.push(obj);
-      }
+//         this.formData.leaveBalance = new Array();
+//         for ( var key in obj )
+//             this.formData.leaveBalance.push(obj[key])
+//       }else{
+//       for(let item of this.leaveData){
+//         let obj = {};
+//         obj[item.leave_Type] = '';
+//         this.formData.leaveBalance.push(obj);
+//       }
 
-    }
+//     }
 
-      console.log(this.formData.leaveBalance)
-    }else{
-      this.openErrrorSnackBar(response.message);
-    }
-    console.log(res);
-  },err => {
-    const error = err.error;
-    this.ngxService.stop();
-    this.openErrrorSnackBar(error.message);
-  }));
-}
+//       console.log(this.formData.leaveBalance)
+//     }else{
+//       this.openErrrorSnackBar(response.message);
+//     }
+//     console.log(res);
+//   },err => {
+//     const error = err.error;
+//     this.ngxService.stop();
+//     this.openErrrorSnackBar(error.message);
+//   }));
+// }
 
 // Get Salary breakdown
-async getSalary(){
-  this.ngxService.start();
-  await(this._api.showSalary().subscribe(res => {
-    this.ngxService.stop();
-    const response: any = res;
-    if (response.success == true){
-      this.salaryData = response.data;
-      if(this.formData.salaryBalance.length > 0){
-        for(let item of this.salaryData){
-          for(let s of Object.keys(this.formData.salaryBalance)){
-            if(s == item.salary_Type){
-              let obj = {};
-              obj[item.salary_Type] = this.formData.salaryBalance[s];
-              this.formData.salaryBalance.push(obj);
-            }else{
-              let obj = {};
-              obj[item.salary_Type] = '';
-              this.formData.salaryBalance.push(obj);
-            }
-          }
-        }
-        let obj = {};
+// async getSalary(){
+//   this.ngxService.start();
+//   await(this._api.showSalary().subscribe(res => {
+//     this.ngxService.stop();
+//     const response: any = res;
+//     if (response.success == true){
+//       this.salaryData = response.data;
+//       if(this.formData.salaryBalance.length > 0){
+//         // for(let item of this.salaryData){
+//         //   for(let s of Object.keys(this.formData.salaryBalance)){
+//         //     if(s != item.salary_Type){
+//         //       let obj = {};
+//         //       obj[item.salary_Type] = '';
+//         //       this.formData.salaryBalance.push(obj);
+//         //     }
+//         //   }
+//         // }
+//         let filteredData;
+//           filteredData = (Object.keys(this.formData.salaryBalance)).filter((o1) =>{
+//             //filter out (!) items in arr2
+//             return  this.formData.salaryBalance.some((o2) => {
+//               console.log(o1)
+//                 return o1 !== o2.salary_Type;
+//             });
+//         });
 
-        for ( var i=0, len=this.formData.salaryBalance.length; i < len; i++ )
-            obj[this.formData.salaryBalance[i][this.salaryData[i].salary_Type]] = this.formData.salaryBalance[i];
+//         console.log(filteredData);
+//         console.log(this.formData.salaryBalance)
+//       }else{
+//         for(let item of this.salaryData){
+//           let obj = {};
+//           obj[item.salary_Type] = '';
+//           this.formData.salaryBalance.push(obj);
+//         }
+//       }
 
-        this.formData.salaryBalance = new Array();
-        for ( var key in obj )
-            this.formData.salaryBalance.push(obj[key]);
-      }else{
-        for(let item of this.salaryData){
-          let obj = {};
-          obj[item.salary_Type] = '';
-          this.formData.salaryBalance.push(obj);
-        }
-      }
-
-    }else{
-      this.openErrrorSnackBar(response.message);
-    }
-    console.log(res);
-  },err => {
-    const error = err.error;
-    this.ngxService.stop();
-    this.openErrrorSnackBar(error.message);
-  }));
-}
+//     }else{
+//       this.openErrrorSnackBar(response.message);
+//     }
+//     console.log(res);
+//   },err => {
+//     const error = err.error;
+//     this.ngxService.stop();
+//     this.openErrrorSnackBar(error.message);
+//   }));
+// }
 
 // Get Role Type
 async getRole(){
