@@ -587,6 +587,14 @@ showDocType(){
     });
     return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}csvColumn`, {headers}).pipe(map(res => <any>res));
     }
+  //get leave data
+  getLeave(formData){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showLeaveEmployeeList`, formData,{headers}).pipe(map(res => <any>res));
+  }
 }
 
 

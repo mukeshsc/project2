@@ -205,6 +205,32 @@ export class SidebarComponent implements OnInit {
       children:[],
       access:false,
     },
+
+    {
+      title:'Leave management',
+      url:'/dashboard',
+      open:false,
+      icon:'sentiment_satisfied',
+      access:true,
+      children:[
+        {
+          title:'Leave Request',
+          url:'/leaves',
+          open:true,
+          icon:'stop_circle',
+          children:[],
+          access:true,
+        },
+        {
+          title:'Assign A Leave',
+          url:'/dashboard',
+          open:true,
+          icon:'stop_circle',
+          children:[],
+          access:true,
+        }
+      ]
+    },
     {
       title:'divider',
       url:'/dashboard',

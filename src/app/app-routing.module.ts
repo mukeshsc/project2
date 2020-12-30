@@ -22,6 +22,7 @@ import { FaqComponent } from './container/company/faq/faq.component';
 import { PrivacyPolicyComponent } from './container/company/privacy-policy/privacy-policy.component';
 import { ProfileComponent } from './container/company/profile/profile.component';
 import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-admin-list.component';
+import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
 
 
 const routes: Routes = [
@@ -47,6 +48,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent,canActivate: [AuthGuardService] },
   { path: 'privacy-policy', component: PrivacyPolicyComponent,canActivate: [AuthGuardService] },
   { path: 'sub-admin', component: SubAdminListComponent,canActivate: [AuthGuardService] },
+  { path: 'leaves', component: LeavesListComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

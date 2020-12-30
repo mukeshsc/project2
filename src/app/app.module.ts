@@ -75,6 +75,7 @@ import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-
 import { SubAdminAddComponent } from './container/sub-admin/sub-admin-add/sub-admin-add.component';
 import { SubAdminEditComponent } from './container/sub-admin/sub-admin-edit/sub-admin-edit.component';
 import { MissingListComponent } from './container/documents/missing-list/missing-list.component';
+import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
 
 @NgModule({
   declarations: [
@@ -114,7 +115,8 @@ import { MissingListComponent } from './container/documents/missing-list/missing
     SubAdminListComponent,
     SubAdminAddComponent,
     SubAdminEditComponent,
-    MissingListComponent
+    MissingListComponent,
+    LeavesListComponent
   ],
   imports: [
     BrowserModule,
