@@ -12,7 +12,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { AccessServiceService } from 'src/app/service/access-service.service';
-
+import { LeaveFilterComponent } from '../leave-filter/leave-filter.component';
+import * as moment from 'moment';
+import { ManageLeavesComponent } from '../manage-leaves/manage-leaves.component';
 @Component({
   selector: 'app-leaves-list',
   templateUrl: './leaves-list.component.html',
@@ -35,18 +37,16 @@ csvFile:any = '';
 newRequest:number = 0;
 accessPermission:boolean;
 formData = {
-  "companyId":"1",
-	"userId":"",
-	"date":"",
-	"weekly":"",
-	"month":"",
-	"dateRange":"",
-	"allemployees":"",
-	"department":"",
+  "companyId":"",
+  "userId":"",
+  "employee":"",
+  "department":"",
+  "byWhich":{"startDate":'',"endDate":''}
 }
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
+  this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
@@ -55,6 +55,10 @@ ngOnInit(): void {
 // Get Leave List
 async getList(){
 this.ngxService.start();
+if(this.formData.byWhich.startDate != ''){
+
+  this.formData.byWhich = {startDate:moment(this.formData.byWhich.startDate).format('YYYY-MM-DD'),endDate:moment(this.formData.byWhich.endDate).format('YYYY-MM-DD')}
+}
 await(this._api.getLeave(this.formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
@@ -80,115 +84,64 @@ await(this._api.getLeave(this.formData).subscribe(res => {
 
 }
 
+async updateLeaveRequest(id,leaveType,status){
 
-// Delete Employee
-async deleteEmployee(id){
-this.ngxService.start();
-let formData = {
-  user_id:id,
-  company_id:JSON.parse(localStorage.getItem('userData')).company_id
-}
-await(this._api.deleteEmployee(formData).subscribe(res => {
+  let formData = {
+    "leaveDetailsId":id,
+    "userId":JSON.parse(localStorage.getItem('userData')).user_id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "isLeave":status,
+    "ip_Address":"12.32.33.22",
+    "leaveType_Id":leaveType
+  }
+  this.ngxService.start();
+await(this._api.requestEmployeeleave(formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
-    this.openSnackBar(response.message);
+    this.openSnackBar(response.messsage)
     this.getList();
   }else{
-    this.openErrrorSnackBar(response.message);
+    this.openErrrorSnackBar(response.messsage)
   }
-
-
   console.log(res);
 }, err => {
   const error = err.error;
-  this.openErrrorSnackBar(error.message);
+  this.openErrrorSnackBar(error)
   this.ngxService.stop();
 }));
 
 }
 
-// Update Employee status
-async updateEmployeeStatus(id,status){
-this.ngxService.start();
-let formData = {
-  user_id:id,
-  status:status ,
-  company_id:JSON.parse(localStorage.getItem('userData')).company_id
-}
-await(this._api.updateEmployeeStatus(formData).subscribe(res => {
-  this.ngxService.stop();
-  const response: any = res;
-  if (response.success == true){
-    this.openSnackBar(response.message);
-    this.getList();
-  }else{
-    this.openErrrorSnackBar(response.message);
-  }
+// open filter modal
+openFilterModal() {
+  const dialogRef = this.dialog.open(LeaveFilterComponent, {
+    width:'50%',
+    data: {
+      leaveFilter: JSON.stringify(this.formData)
+    }});
 
-
-  console.log(res);
-}, err => {
-  const error = err.error;
-  this.openErrrorSnackBar(error.message);
-  this.ngxService.stop();
-}));
-
-}
-
-// Get sample csv
-async getSampleCsv(){
-this.ngxService.start();
-await(this._api.getSampleCsv().subscribe(res => {
-  this.ngxService.stop();
-  const response: any = res;
-  if (response.success == true){
-    // this.openSnackBar(response.message);
-    this.csvFile = response.data;
-  }else{
-    this.openErrrorSnackBar(response.message);
-  }
-
-
-  console.log(res);
-}, err => {
-  const error = err.error;
-  this.openErrrorSnackBar(error.message);
-  this.ngxService.stop();
-}));
-
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.formData = JSON.parse(result);
+    this.getList()
+  });
 }
 
 
-// send invitation link to employee
-async invitationLink(id){
-this.ngxService.start();
-let formData = {
-  user_id:id,
-  company_id:JSON.parse(localStorage.getItem('userData')).company_id
+// open modify leave modal
+openModifyModal(e) {
+  const dialogRef = this.dialog.open(ManageLeavesComponent, {
+    width:'50%',
+    data: {
+      leaveData: JSON.stringify(e)
+    }});
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.getList()
+  });
 }
-await(this._api.invitationLink(formData).subscribe(res => {
-  this.ngxService.stop();
-  const response: any = res;
-  if (response.success == true){
-    this.openSnackBar(response.message);
-    this.getList();
-  }else{
-    this.openErrrorSnackBar(response.message);
-  }
-
-
-  console.log(res);
-}, err => {
-  const error = err.error;
-  this.openErrrorSnackBar(error.message);
-  this.ngxService.stop();
-}));
-
-}
-
-
-
 
 //Searching
 applyFilter(event: Event){
@@ -214,10 +167,9 @@ this._snackBar.open(msg, 'Ok', {
   panelClass: ['failure-alert']
 });
 }
-
 // confirm message
-confirmDialog(id): void {
-  const message = `Are you sure you want to delete this?`;
+confirmDialog(id,leaveType,status): void {
+  const message = `Are you sure you want to do this?`;
 
   const dialogData = new ConfirmDialogModel('Confirm Action', message);
 
@@ -228,7 +180,7 @@ confirmDialog(id): void {
 
   dialogRef.afterClosed().subscribe(dialogResult => {
     if(dialogResult){
-      this.deleteEmployee(id);
+      this.updateLeaveRequest(id,leaveType,status);
     }
   });
 }

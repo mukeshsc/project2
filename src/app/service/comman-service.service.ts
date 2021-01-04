@@ -595,6 +595,26 @@ showDocType(){
     });
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showLeaveEmployeeList`, formData,{headers}).pipe(map(res => <any>res));
   }
+
+  // manage leave
+  modifyEmployeeleave(formData){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}modifyEmployeeleave`, formData,{headers}).pipe(map(res => <any>res));
+  }
+
+  //Accept reject leave request
+  requestEmployeeleave(formData){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}requestEmployeeleave`, formData,{headers}).pipe(map(res => <any>res));
+  }
+
+
 }
 
 

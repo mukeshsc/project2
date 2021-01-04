@@ -32,6 +32,7 @@ import {MatSortModule} from '@angular/material/sort';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
+import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -76,6 +77,8 @@ import { SubAdminAddComponent } from './container/sub-admin/sub-admin-add/sub-ad
 import { SubAdminEditComponent } from './container/sub-admin/sub-admin-edit/sub-admin-edit.component';
 import { MissingListComponent } from './container/documents/missing-list/missing-list.component';
 import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
+import { LeaveFilterComponent } from './container/leaves/leave-filter/leave-filter.component';
+import { ManageLeavesComponent } from './container/leaves/manage-leaves/manage-leaves.component';
 
 @NgModule({
   declarations: [
@@ -116,7 +119,9 @@ import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.
     SubAdminAddComponent,
     SubAdminEditComponent,
     MissingListComponent,
-    LeavesListComponent
+    LeavesListComponent,
+    LeaveFilterComponent,
+    ManageLeavesComponent
   ],
   imports: [
     BrowserModule,
@@ -157,6 +162,7 @@ import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    NgxDaterangepickerMd.forRoot()
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule],
   bootstrap: [AppComponent]
