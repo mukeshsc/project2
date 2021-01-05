@@ -196,7 +196,7 @@ async addDepartement(){
       this.departmentSet = {
         "departmentType":"",
         "ip_Address":"123.444.333.33",
-        "companyId":""
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id
       }
     }else{
       this.openErrrorSnackBar(response.message);
@@ -265,7 +265,7 @@ async addLeave(){
       this.leaveDataSet = {
         "leaveType":"",
         "ip_Address":"12.43.33.33",
-        "companyId":""
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id
       }
     }else{
       this.openErrrorSnackBar(response.message);
@@ -334,7 +334,7 @@ async addSalary(){
       this.salarySet = {
         "salaryType":"",
         "ip_Address":"12.43.33.33",
-        "companyId":""
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id
       }
       this.getSalary();
     }else{
@@ -479,8 +479,8 @@ async addDocType(){
         "dependent":0,
         "expires":0,
         "isCheck":0,
-        "ip_Address":"",
-        "companyId":""
+        "ip_Address":"121212",
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id
       }
       this.getDocType();
     }else{

@@ -15,6 +15,8 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 import { LeaveFilterComponent } from '../leave-filter/leave-filter.component';
 import * as moment from 'moment';
 import { ManageLeavesComponent } from '../manage-leaves/manage-leaves.component';
+import { LeaveAddComponent } from '../leave-add/leave-add.component';
+import { EmployeeLeaveManageComponent } from '../employee-leave-manage/employee-leave-manage.component';
 @Component({
   selector: 'app-leaves-list',
   templateUrl: './leaves-list.component.html',
@@ -43,6 +45,7 @@ formData = {
   "department":"",
   "byWhich":{"startDate":'',"endDate":''}
 }
+
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
@@ -111,6 +114,39 @@ await(this._api.requestEmployeeleave(formData).subscribe(res => {
   this.ngxService.stop();
 }));
 
+}
+
+
+
+
+// open filter modal
+openManageLeaveModal(id,leaveBalance) {
+  const dialogRef = this.dialog.open(EmployeeLeaveManageComponent, {
+    width:'50%',
+    data: {
+      userId: id,
+      leaveBalance:JSON.stringify(leaveBalance)
+    }
+   });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.getList()
+  });
+}
+
+
+
+// open filter modal
+openAddLeaveModal() {
+  const dialogRef = this.dialog.open(LeaveAddComponent, {
+    width:'50%',
+   });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.getList()
+  });
 }
 
 // open filter modal
@@ -183,5 +219,52 @@ confirmDialog(id,leaveType,status): void {
       this.updateLeaveRequest(id,leaveType,status);
     }
   });
+}
+// Download list in CSV
+export_table_to_csv() {
+  this.ngxService.start();
+  const html = document.getElementById('csvTable');
+  let csv = [];
+  let rows = html.querySelectorAll('table tr');
+
+  for (let i = 0; i < rows.length; i++) {
+    let row = [], cols = rows[i].querySelectorAll('td, th');
+
+    for (let j = 0; j < cols.length; j++) {
+        row.push(cols[j].textContent);
+    }
+
+    csv.push(row.join(','));
+  }
+
+  // Download CSV
+  this.download_csv(csv.join('\n'), 'Leave-List.csv');
+}
+
+download_csv(csv, filename) {
+  let csvFile;
+  let downloadLink;
+
+  // CSV FILE
+  csvFile = new Blob([csv], {type: 'text/csv'});
+
+  // Download link
+  downloadLink = document.createElement('a');
+
+  // File name
+  downloadLink.download = filename;
+
+  // We have to create a link to the file
+  downloadLink.href = window.URL.createObjectURL(csvFile);
+
+  // Make sure that the link is not displayed
+  downloadLink.style.display = 'none';
+
+  // Add the link to your DOM
+  document.body.appendChild(downloadLink);
+
+  // Lanzamos
+  downloadLink.click();
+  this.ngxService.stop();
 }
 }

@@ -1,0 +1,30 @@
+
+<mat-icon class="closeModal" mat-dialog-close>close</mat-icon>
+<div class="modal-box">
+  <div fxLayout="row" class="">
+    <div fxFlex="100">
+      <span class="card-title">Manage Leave</span></div>
+  </div>
+  <mat-dialog-content class="mat-typography">
+<form name="filterForm" (ngSubmit)="manageEmployeeleaveBalance()" #filterForm="ngForm">
+    <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="" *ngFor="let item of formData.leaveBalace;let i = index;">
+      <ng-container *ngFor="let keyVal of item | keyvalue; let ik = index">
+        <div fxFlex="30">
+          <mat-label>{{keyVal.key}}</mat-label>
+        </div>
+        <div fxFlex="70">
+          <mat-form-field class="form-fields">
+            <input matInput  type="text" name="leaveBalace" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="formData.leaveBalace[i][keyVal.key]" autocomplete="off" [placeholder]="keyVal.key" />
+          </mat-form-field>
+        </div>
+      </ng-container>
+    </div>
+    <div fxLayout="row" class="" >
+      <div fxFlex="100">
+        <mat-label></mat-label>
+        <button mat-raised-button class="big-btn block-btn"  color="primary">SUBMIT</button>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+</div>

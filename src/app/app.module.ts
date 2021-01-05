@@ -79,6 +79,8 @@ import { MissingListComponent } from './container/documents/missing-list/missing
 import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
 import { LeaveFilterComponent } from './container/leaves/leave-filter/leave-filter.component';
 import { ManageLeavesComponent } from './container/leaves/manage-leaves/manage-leaves.component';
+import { LeaveAddComponent } from './container/leaves/leave-add/leave-add.component';
+import { EmployeeLeaveManageComponent } from './container/leaves/employee-leave-manage/employee-leave-manage.component';
 
 @NgModule({
   declarations: [
@@ -121,7 +123,9 @@ import { ManageLeavesComponent } from './container/leaves/manage-leaves/manage-l
     MissingListComponent,
     LeavesListComponent,
     LeaveFilterComponent,
-    ManageLeavesComponent
+    ManageLeavesComponent,
+    LeaveAddComponent,
+    EmployeeLeaveManageComponent
   ],
   imports: [
     BrowserModule,

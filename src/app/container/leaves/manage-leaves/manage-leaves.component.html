@@ -17,14 +17,14 @@
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Employee Joining Date" [matDatepicker]="picker" format="DD/MM/YYYY"  #leaveFrom  name="leaveFrom" [(ngModel)]="formData.leaveFrom"  required autocomplete="off"  />
+          <input matInput placeholder="From" [matDatepicker]="picker" format="DD/MM/YYYY"  #leaveFrom  name="leaveFrom" [(ngModel)]="formData.leaveFrom"  required autocomplete="off"  />
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Employee Joining Date" [matDatepicker]="picker1" format="DD/MM/YYYY"  #leaveTo  name="leaveTo" [(ngModel)]="formData.leaveTo"  required autocomplete="off"  />
+          <input matInput placeholder="To" [matDatepicker]="picker1" format="DD/MM/YYYY"  #leaveTo  name="leaveTo" [(ngModel)]="formData.leaveTo"  required autocomplete="off"  />
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
         </mat-form-field>

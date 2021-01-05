@@ -92,36 +92,11 @@ export class SidebarComponent implements OnInit {
     },
     {
       title:'Documents',
-      url:'/dashboard',
+      url:'/contracts',
       open:false,
       icon:'sentiment_satisfied',
       access:false,
-      children:[
-        {
-          title:'Contracts',
-          url:'/contracts',
-          open:false,
-          icon:'stop_circle',
-          children:[],
-          access:false,
-        },
-        {
-          title:'Ids',
-          url:'/dashboard',
-          open:false,
-          icon:'stop_circle',
-          children:[],
-          access:false,
-        },
-        {
-          title:'Others',
-          url:'/dashboard',
-          open:false,
-          icon:'stop_circle',
-          children:[],
-          access:false,
-        }
-      ]
+      children:[]
     },
     {
       title:'Announcements',

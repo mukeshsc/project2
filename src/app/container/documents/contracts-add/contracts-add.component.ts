@@ -49,6 +49,7 @@ import { MatDialogRef } from '@angular/material/dialog';
   ]
 })
 export class ContractsAddComponent implements OnInit {
+  isExpire = false;
   formData = {
     "userId":"",
     "document_Title":"",
@@ -175,5 +176,16 @@ openErrrorSnackBar(msg) {
     verticalPosition: 'top',
     panelClass: ['failure-alert']
   });
+}
+docCheck(e){
+  for(let item of this.docData){
+    if(item.documentType_id == e){
+      if(item.expires == 1){
+        this.isExpire = true
+      }else{
+        this.isExpire = false
+      }
+    }
+  }
 }
 }

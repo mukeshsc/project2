@@ -63,8 +63,8 @@ export class ManageLeavesComponent implements OnInit {
     "leaveDescription":"" ,
     "leaveFrom":'' ,
     "leaveTo":'' ,
-    "fromHour":"" ,
-    "toHour":"",
+    "fromHour": "00:00:00",
+    "toHour": "00:00:00",
     "hrReason":"NA"
     };
 
