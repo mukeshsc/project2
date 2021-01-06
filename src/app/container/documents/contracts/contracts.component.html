@@ -125,6 +125,7 @@
               <ng-container *ngIf="!element.selected">
                 <span *ngIf="getNegative(element.Action_Required) == 1" class="blue-txt" >Expiring in {{removeChar(element.Action_Required)}} days</span>
                 <span *ngIf="getNegative(element.Action_Required) == -1" class="red-txt" >Expired  {{removeChar(element.Action_Required)}} days ago</span>
+                <span *ngIf="element.Action_Required == '-'" class="green-txt" >Not Expirable</span>
               </ng-container>
             </td>
           </ng-container>
