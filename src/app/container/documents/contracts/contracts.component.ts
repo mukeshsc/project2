@@ -21,7 +21,7 @@ import { MissingListComponent } from '../missing-list/missing-list.component';
 })
 export class ContractsComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['checkedBod','position', 'name', 'contractValidity', 'category','view', 'status', 'Action'];
+displayedColumns: string[] = ['checkedBod','position', 'name', 'expiry_Date', 'DocType','view', 'Action'];
 
 // set static data for table
 dataSource = new MatTableDataSource([]);
@@ -234,7 +234,7 @@ async deleteDoc(id){
 // open add Contracts modal
 openContractAddModal() {
   const dialogRef = this.dialog.open(ContractsAddComponent, {
-    maxWidth: '500px',
+    width: '50%',
   });
 
   dialogRef.afterClosed().subscribe(result => {
@@ -260,27 +260,27 @@ removeChar(a){
 }
 
 // // document download
-// Download() {
-//   this.ngxService.start();
-//   for(let item of this.responseData){
-//     if(item.selected){
-//       setTimeout(() => {
-//         var element = document.createElement('a');
-//         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${environment.apiBaseUrl}${item.file_Path}`));
-//         element.setAttribute('download', item.file_Path);
+Download(e) {
+  this.ngxService.start();
+  for(let item of this.responseData){
+    if(item.selected){
+      setTimeout(() => {
+        var element = document.createElement('a');
+        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${environment.apiBaseUrl}${e}`));
+        element.setAttribute('download', item.file_Path);
 
-//         element.style.display = 'none';
-//         document.body.appendChild(element);
+        element.style.display = 'none';
+        document.body.appendChild(element);
 
-//         element.click();
+        element.click();
 
-//         document.body.removeChild(element);
-//       },1000)
+        document.body.removeChild(element);
+      },1000)
 
-//     }
-//   }
-//   this.ngxService.stop();
-// }
+    }
+  }
+  this.ngxService.stop();
+}
 
 //filter
 onChange(e,t){

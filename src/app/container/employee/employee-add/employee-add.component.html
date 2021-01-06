@@ -11,7 +11,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="text" #first_name  name="first_name" [(ngModel)]="formData.first_name" placeholder="First name" required autocomplete="off"  />
+          <input matInput maxlength="250" type="text" #first_name  name="first_name" [(ngModel)]="formData.first_name" placeholder="First name" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="first_name.errors && first_name.touched">
           <span class="error" *ngIf="first_name.errors?.required">First name is mandatory.</span>
@@ -19,7 +19,7 @@
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="text" #last_name  name="last_name" [(ngModel)]="formData.last_name" placeholder="Last name" required autocomplete="off"  />
+          <input matInput maxlength="250"  type="text" #last_name  name="last_name" [(ngModel)]="formData.last_name" placeholder="Last name" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="last_name.errors && last_name.touched">
           <span class="error" *ngIf="last_name.errors?.required">Last name is mandatory.</span>
@@ -29,7 +29,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="email" #email  name="email" [(ngModel)]="formData.email" placeholder="Email" required autocomplete="off"  />
+          <input matInput maxlength="250"  type="email" #email  name="email" [(ngModel)]="formData.email" placeholder="Email" required autocomplete="off"  />
         </mat-form-field>
         <div *ngIf="email.errors && email.touched">
           <span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
@@ -46,8 +46,43 @@
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="formData.role" name="role" #role required placeholder="Designation">
-            <mat-option *ngFor="let roled of roleData" [value]="roled.userRole_id">{{roled.role_Type}}</mat-option>
+          <mat-select [(ngModel)]="formData.designation" name="designation" #role required placeholder="Designation">
+            <mat-option  value="President">President</mat-option>
+            <mat-option  value="Chairman Chief">Chairman Chief</mat-option>
+            <mat-option  value="Executive Officer">Executive Officer</mat-option>
+            <mat-option  value="Managing Director">Managing Director</mat-option>
+            <mat-option  value="General Manager">General Manager</mat-option>
+            <mat-option  value="Director">Director</mat-option>
+            <mat-option  value="Vice President">Vice President</mat-option>
+            <mat-option  value="Asst General Manager">Asst General Manager</mat-option>
+            <mat-option  value="Chief Operating Officer">Chief Operating Officer</mat-option>
+            <mat-option  value="Chief Marketing Officer">Chief Marketing Officer</mat-option>
+            <mat-option  value="Chief Technology Officer">Chief Technology Officer</mat-option>
+            <mat-option  value="Chief People Officer">Chief People Officer</mat-option>
+            <mat-option  value="Chief Innovation Officer">Chief Innovation Officer</mat-option>
+            <mat-option  value="Asst General Manager">Asst General Manager</mat-option>
+            <mat-option  value="Asst Director">Asst Director</mat-option>
+            <mat-option  value="Asst Vice President">Asst Vice President</mat-option>
+            <mat-option  value="Finance Manager">Finance Manager</mat-option>
+            <mat-option  value="Purchasing Manager">Purchasing Manager</mat-option>
+            <mat-option  value="Operating Manager">Operating Manager</mat-option>
+            <mat-option  value="HR & Admin Manager">HR & Admin Manager</mat-option>
+            <mat-option  value="Sales Manager">Sales Manager</mat-option>
+            <mat-option  value="Marketing Manager">Marketing Manager</mat-option>
+            <mat-option  value="Business Development Manager">Business Development Manager</mat-option>
+            <mat-option  value="Transformation Officer">Transformation Officer</mat-option>
+            <mat-option  value="Manager">Manager</mat-option>
+            <mat-option  value="Head of the Department">Head of the Department</mat-option>
+            <mat-option  value="Team Leader">Team Leader</mat-option>
+            <mat-option  value="Asst Manager">Asst Manager</mat-option>
+            <mat-option  value="Asst Manager Finance">Asst Manager Finance</mat-option>
+            <mat-option  value="Asst Manager HR & Admin">Asst Manager HR & Admin</mat-option>
+            <mat-option  value="Senior Engineer">Senior Engineer</mat-option>
+            <mat-option  value="Accountant">Accountant</mat-option>
+            <mat-option  value="Senior Accountant">Senior Accountant</mat-option>
+            <mat-option  value="HR & Admin Executive">HR & Admin Executive</mat-option>
+            <mat-option  value="Personal Assistant">Personal Assistant</mat-option>
+            <mat-option  value="Executive">Executive</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -64,12 +99,16 @@
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="text" #reporting_Manager  name="reporting_Manager" [(ngModel)]="formData.reporting_Manager" placeholder="Reporting Manager" required autocomplete="off"  />
+          <mat-select [(ngModel)]="formData.reporting_Manager" name="reporting_Manager" #reporting_Manager required  placeholder="Reporting Manager">
+            <mat-option *ngFor="let emp of employeeList" [value]="emp.user_id">{{emp.first_name}} {{emp.last_name}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput  type="text" #insurance_plan_name  name="insurance_plan_name" [(ngModel)]="formData.insurance_plan_name" placeholder="Insurance Plan Name" required autocomplete="off"  />
+          <mat-select [(ngModel)]="formData.insurance_plan_name" name="insurance_plan_name" #insurance_plan_name required placeholder="Insurance Plan Name">
+            <mat-option *ngFor="let emp of insuranceData" [value]="emp.insurance_Plan">{{emp.insurance_Plan}}</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>

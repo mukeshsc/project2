@@ -21,6 +21,7 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
   styleUrls: ['./sub-admin-list.component.scss']
 })
 export class SubAdminListComponent implements OnInit {
+  responseData:any = [];
   imgPath = `${environment.apiBaseUrl}`;
   // set header column
   displayedColumns: string[] = ['position', 'name', 'email', 'designation', 'status', 'action'];
@@ -49,9 +50,10 @@ export class SubAdminListComponent implements OnInit {
     const response: any = res;
     if (response.success == true){
       console.log(response.data);
+      this.responseData = response.data;
       const arr = [];
       for (const item of response.data){
-        const obj = {position: `${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.superAdmin_id,role:item.role, address:item.address,mobile:item.mobile};
+        const obj = {position: `${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.user_id,role:item.role, address:item.address,mobile:item.mobile};
         arr.push(obj);
       }
       this.dataSource = new MatTableDataSource([...arr]);
@@ -71,15 +73,37 @@ export class SubAdminListComponent implements OnInit {
 
 // Delete Sub Admin
 async deleteSubAdmin(id){
-  this.ngxService.start();
-  let formData = {
-    superAdmin_id:id
+  let fromData = {}
+  for(let item of this.responseData){
+    if(item.user_id == id){
+      fromData = {
+        user_id: item.user_id,
+        first_name: item.first_name,
+        last_name: item.last_name,
+        email: item.email,
+        reporting_Manager: item.reporting_Manager,
+        department: item.department,
+        employee_joiningDate: item.employee_joiningDate,
+        insurance_plan_name: item.insurance_plan_name,
+        salaryBalance:item.salaryBalance?JSON.parse(item.salaryBalance):[],
+        leaveBalance: item.leaveBalance?JSON.parse(item.leaveBalance):[],
+        working_HoursTo: item.working_HoursTo,
+        working_HoursFrom: item.working_HoursFrom,
+        designation:item.designation,
+        company_id: item.company_id,
+        role: 0,
+        ip_Address: '123',
+        created_By : JSON.parse(localStorage.getItem('userData')).user_id,
+        updated_By: JSON.parse(localStorage.getItem('userData')).user_id,
+        isType:0}
+    }
   }
-  await(this._api.deleteEmployee(formData).subscribe(res => {
+  this.ngxService.start();
+  await(this._api.updateEmployee(fromData).subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
-      this.openSnackBar(response.message);
+      this.openSnackBar('Sub admin removed successfully. You can check this employee detail in employee list.');
       this.getList();
     }else{
       this.openErrrorSnackBar(response.message);
@@ -125,7 +149,9 @@ async statusSubAdmin(id,status){
 
   // open add Sub Admin modal
   openSubAddModal() {
-    const dialogRef = this.dialog.open(SubAdminAddComponent);
+    const dialogRef = this.dialog.open(SubAdminAddComponent,{
+      width:'50%'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -136,6 +162,7 @@ async statusSubAdmin(id,status){
   // open add Sub Admin modal
   openSubEditModal(e) {
     const dialogRef = this.dialog.open(SubAdminEditComponent, {
+      width:'50%',
       data: {
         subAdmin: JSON.stringify(e)
       }});

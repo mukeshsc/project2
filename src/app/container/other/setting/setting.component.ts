@@ -8,13 +8,45 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import * as moment from 'moment';
-import { environment } from '../../../../environments/environment';
 
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+import * as _moment from 'moment';
+import { environment } from '../../../../environments/environment';
+// tslint:disable-next-line:no-duplicate-imports
+import {defaultFormat as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss']
+  styleUrls: ['./setting.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class SettingComponent implements OnInit {
   fieldconPass:boolean;
@@ -79,6 +111,7 @@ export class SettingComponent implements OnInit {
   docTypeData:any = [];
   docTypeSet = {
     "documentType":"",
+    "docImage":"",
     "dependent":0,
     "expires":0,
     "isCheck":0,
@@ -88,6 +121,7 @@ export class SettingComponent implements OnInit {
   passNotMatched: boolean = false;
   currentDate = new Date();
   accessPermission:boolean;
+  getDocumentTypeData:any = []
   constructor( public router:Router, public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
@@ -105,6 +139,7 @@ export class SettingComponent implements OnInit {
     this.getSalary();
     this.getHoliday();
     this.getDocType();
+    this.getDocumentType();
   }
 
   // Security setting (Update password)
@@ -476,6 +511,7 @@ async addDocType(){
       this.openSnackBar(response.message);
       this.docTypeSet = {
         "documentType":"",
+        "docImage":"",
         "dependent":0,
         "expires":0,
         "isCheck":0,
@@ -684,6 +720,38 @@ async updateSmtp(){
 
 }
 
+
+// Get Document Type
+async getDocumentType(){
+  this.ngxService.start();
+  await(this._api.documentTypeList().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.getDocumentTypeData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+
+}
+
+//doucment type data set
+setDocImage(event){
+  for(let item of this.getDocumentTypeData){
+    if(item.DocType == event){
+      this.docTypeSet.docImage = item.imagePath
+    }else{
+      this.docTypeSet.docImage = '';
+    }
+  }
+}
+
  // alert message after api response success
 openSnackBar(msg) {
   this._snackBar.open(msg, 'Ok', {
@@ -804,7 +872,7 @@ ChkOldNew(e){
 
 // date formating
 formatDate(date){
- return moment(date).format('MM/DD/YYYY')
+ return _moment(date).format('MM/DD/YYYY')
 }
 
 //Check mandat field

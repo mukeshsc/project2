@@ -54,7 +54,8 @@ export class EmployeeAddComponent implements OnInit {
     email:'',
     reporting_Manager:'',
     department:'',
-    role:'',
+    role:0,
+    designation:'',
     employee_joiningDate:'',
     insurance_plan_name:'',
 
@@ -87,6 +88,8 @@ export class EmployeeAddComponent implements OnInit {
   roleData: any = [];
   leaveData:any =[];
   salaryData:any = [];
+  employeeList:any = [];
+  insuranceData:any = [];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeAddComponent>) { }
 
   ngOnInit(): void {
@@ -97,6 +100,8 @@ export class EmployeeAddComponent implements OnInit {
     this.getDepartment();
     this.getLeave();
     this.getSalary();
+    this.getList();
+    this.getInsuranceList();
   }
 
 
@@ -148,6 +153,47 @@ async getSalary(){
     this.openErrrorSnackBar(error.message);
   }));
 }
+
+// Get Employee List
+async getList(){
+  this.ngxService.start();
+  await(this._api.getEmployee().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data);
+      this.employeeList = response.data;
+    }else{
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.ngxService.stop();
+  }));
+}
+
+
+  // Get Insurance List
+  async getInsuranceList(){
+    this.ngxService.start();
+    await(this._api.showInsurance().subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        console.log(response.data);
+
+        this.insuranceData = response.data;
+        console.log(this.insuranceData);
+      }else{
+      }
+      console.log(res);
+    }, err => {
+      const error = err.error;
+      this.ngxService.stop();
+    }));
+
+  }
+
 
 // Get Role Type
 async getRole(){

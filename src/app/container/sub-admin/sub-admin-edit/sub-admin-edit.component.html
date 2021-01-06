@@ -12,31 +12,21 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="First Name" type="text" #first_name  name="first_name" [(ngModel)]="formData.first_name" maxlength="40" required autocomplete="off"  />
+          <input matInput placeholder="First Name" readonly type="text" #first_name  name="first_name" [(ngModel)]="formData.first_name" maxlength="40" required autocomplete="off"  />
         </mat-form-field>
-        <div *ngIf="first_name.errors && first_name.touched">
-          <span class="error" *ngIf="first_name.errors?.required">First name is mandatory.</span>
-        </div>
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Last Name" type="text" #last_name  name="last_name" [(ngModel)]="formData.last_name" maxlength="40" required autocomplete="off"  />
+          <input matInput placeholder="Last Name" readonly type="text" #last_name  name="last_name" [(ngModel)]="formData.last_name" maxlength="40" required autocomplete="off"  />
         </mat-form-field>
-        <div *ngIf="last_name.errors && last_name.touched">
-          <span class="error" *ngIf="last_name.errors?.required">Last name is mandatory.</span>
-        </div>
       </div>
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Email" type="email" #email  name="email" [(ngModel)]="formData.email" maxlength="40" required autocomplete="off" disabled  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+          <input matInput placeholder="Email" type="email" #email  name="email" [(ngModel)]="formData.email" maxlength="40" required autocomplete="off" readonly  pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
 
         </mat-form-field>
-        <div [hidden]="email.valid || email.untouched">
-          <span class="error" *ngIf="email.errors?.required">Email is mandatory.</span>
-          <span class="error"  *ngIf="email.errors?.pattern">Email is invalid</span>
-        </div>
       </div>
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">

@@ -23,7 +23,7 @@ import { FilterComponent } from '../filter/filter.component';
 })
 export class EmployeesComponent implements OnInit {
   // set header column
-  displayedColumns: string[] = ['position', 'name', 'email', 'designation', 'status', 'action'];
+  displayedColumns: string[] = ['position', 'name', 'email', 'designation', 'id', 'status', 'action'];
 
   //set static data for table
   dataSource = new MatTableDataSource([]);
@@ -55,7 +55,7 @@ export class EmployeesComponent implements OnInit {
       this.responseData = response.data;
       const arr = [];
       for (const item of response.data){
-        const obj = {position: `${environment.apiBaseUrl}${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.user_id,};
+        const obj = {position: `${environment.apiBaseUrl}${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.designation, status: item.status,id:item.user_id,};
         arr.push(obj);
       }
       this.dataSource = new MatTableDataSource([...arr]);

@@ -243,9 +243,12 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
     span.mat-select-placeholder {
       font-size: 14px;
     }
-    span.mat-option-text {
-      font-size: 14px;
+    .mat-datepicker-toggle button.mat-focus-indicator {
+      width: 10px;
+      height: 10px;
+      bottom: -3px;
     }
+
     .mat-select-value-text span {
       font-size: 14px;
     }
@@ -755,6 +758,12 @@ td.mat-cell,td{
   &:first-child{
     text-align: left !important;
   }
+}
+.mat-option {
+  height:2em !important;
+}
+span.mat-option-text {
+font-size: 12px;
 }
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list {
   width: 100%;

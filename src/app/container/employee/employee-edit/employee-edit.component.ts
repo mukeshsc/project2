@@ -65,7 +65,8 @@ export class EmployeeEditComponent implements OnInit {
     working_HoursTo: '' ,
     working_HoursFrom: '',
     company_id: null,
-    role: null,
+    role: 0,
+    designation:'',
     ip_Address: '123',
     created_By : '',
     updated_By: '',
@@ -77,6 +78,8 @@ export class EmployeeEditComponent implements OnInit {
   departmentData:any = [];
   leaveData:any =[];
   salaryData:any = [];
+  employeeList:any = [];
+  insuranceData:any=[]
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeEditComponent>) { }
 
   ngOnInit(): void {
@@ -95,19 +98,42 @@ export class EmployeeEditComponent implements OnInit {
       leaveBalance: this.employeeData.leaveBalance?JSON.parse(this.employeeData.leaveBalance):[],
       working_HoursTo: this.employeeData.working_HoursTo,
       working_HoursFrom: this.employeeData.working_HoursFrom,
+      designation:this.employeeData.designation,
       company_id: this.employeeData.company_id,
-      role: Number(this.employeeData.role),
+      role:0,
       ip_Address: '123',
       created_By : JSON.parse(localStorage.getItem('userData')).user_id,
       updated_By: JSON.parse(localStorage.getItem('userData')).user_id,
-      isType:this.employeeData.isType
+      isType:0
     };
     this.getRole();
     this.getDepartment();
     this.getLeave();
     this.getSalary();
+    this.getList()
+    this.getInsuranceList()
   }
 
+// Get Insurance List
+async getInsuranceList(){
+  this.ngxService.start();
+  await(this._api.showInsurance().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data);
+
+      this.insuranceData = response.data;
+      console.log(this.insuranceData);
+    }else{
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.ngxService.stop();
+  }));
+
+}
 
 
 // Get Leave
@@ -166,7 +192,23 @@ async getSalary(){
     this.openErrrorSnackBar(error.message);
   }));
 }
-
+// Get Employee List
+async getList(){
+  this.ngxService.start();
+  await(this._api.getEmployee().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data);
+      this.employeeList = response.data;
+    }else{
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.ngxService.stop();
+  }));
+}
 // Get Role Type
 async getRole(){
   this.ngxService.start();

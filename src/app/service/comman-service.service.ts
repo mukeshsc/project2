@@ -634,6 +634,16 @@ showDocType(){
   }
 
 
+  //doucment type list
+  documentTypeList(){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}documentTypeList`, {headers}).pipe(map(res => <any>res));
+    }
+
+
 }
 
 

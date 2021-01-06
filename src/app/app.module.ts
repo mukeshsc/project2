@@ -34,6 +34,8 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -166,7 +168,8 @@ import { EmployeeLeaveManageComponent } from './container/leaves/employee-leave-
     MatSortModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    NgxDaterangepickerMd.forRoot()
+    NgxDaterangepickerMd.forRoot(),
+    NgxMatSelectSearchModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule],
   bootstrap: [AppComponent]

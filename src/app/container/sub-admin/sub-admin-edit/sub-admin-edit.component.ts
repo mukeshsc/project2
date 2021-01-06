@@ -36,7 +36,7 @@ export class SubAdminEditComponent implements OnInit {
 
     working_HoursTo:'',
     working_HoursFrom:'',
-
+    designation:'',
     company_id:null,
     ip_Address:'123',
 	  created_By :'1',
@@ -53,28 +53,26 @@ export class SubAdminEditComponent implements OnInit {
     this.userData = JSON.parse(this.data.subAdmin);
     console.log(this.userData)
     this.formData = {
-      "user_id"   : this.userData.id,
-      "first_name"      : (this.userData.name.split(' '))[0],
-      "last_name"       : (this.userData.name.split(' '))[1],
-      "email"           : this.userData.email,
-      "role"            : Number(this.userData.role),
-      "ip_Address"      : "12345",
-      reporting_Manager:'',
-      department:'',
-      employee_joiningDate:'',
-      insurance_plan_name:'',
-
-      salaryBalance:[],
-      leaveBalance:[],
-
-      working_HoursTo:'',
-      working_HoursFrom:'',
-
-      company_id:null,
-      created_By :'1',
-      updated_By:'1',
-      isType:1,
-    }
+      user_id: this.userData.user_id,
+      first_name: this.userData.first_name,
+      last_name: this.userData.last_name,
+      email: this.userData.email,
+      reporting_Manager: this.userData.reporting_Manager,
+      department: this.userData.department,
+      employee_joiningDate: this.userData.employee_joiningDate,
+      insurance_plan_name: this.userData.insurance_plan_name,
+      salaryBalance:this.userData.salaryBalance?JSON.parse(this.userData.salaryBalance):[],
+      leaveBalance: this.userData.leaveBalance?JSON.parse(this.userData.leaveBalance):[],
+      working_HoursTo: this.userData.working_HoursTo,
+      working_HoursFrom: this.userData.working_HoursFrom,
+      designation:this.userData.designation,
+      company_id: this.userData.company_id,
+      role: this.userData.role,
+      ip_Address: '123',
+      created_By : JSON.parse(localStorage.getItem('userData')).user_id,
+      updated_By: JSON.parse(localStorage.getItem('userData')).user_id,
+      isType:1
+    };
     this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;

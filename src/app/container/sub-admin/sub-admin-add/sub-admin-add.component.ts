@@ -14,13 +14,16 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./sub-admin-add.component.scss']
 })
 export class SubAdminAddComponent implements OnInit {
+  user:any;
   formData = {
+    user_id: '',
     first_name:'',
     last_name:'',
     email:'',
     reporting_Manager:'',
     department:'',
-    role:'',
+    role:null,
+    designation:'',
     employee_joiningDate:'',
     insurance_plan_name:'',
 
@@ -38,6 +41,7 @@ export class SubAdminAddComponent implements OnInit {
   }
   files: File[] = [];
   roleData:any= [];
+  employeeList:any = [];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<SubAdminAddComponent>) { }
 
   ngOnInit(): void {
@@ -45,6 +49,7 @@ export class SubAdminAddComponent implements OnInit {
     this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.getRole();
+    this.getList()
   }
 
 // Get Role Type
@@ -67,11 +72,54 @@ async getRole(){
 
 }
 
+// Get Employee List
+async getList(){
+  this.ngxService.start();
+  await(this._api.getEmployee().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data);
+      this.employeeList = response.data;
+    }else{
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.ngxService.stop();
+  }));
+
+}
+
+//set user data
+getUserDetail(event){
+  this.formData = {
+    user_id: event.user_id,
+    first_name: event.first_name,
+    last_name: event.last_name,
+    email: event.email,
+    reporting_Manager: event.reporting_Manager,
+    department: event.department,
+    employee_joiningDate: event.employee_joiningDate,
+    insurance_plan_name: event.insurance_plan_name,
+    salaryBalance:event.salaryBalance?JSON.parse(event.salaryBalance):[],
+    leaveBalance: event.leaveBalance?JSON.parse(event.leaveBalance):[],
+    working_HoursTo: event.working_HoursTo,
+    working_HoursFrom: event.working_HoursFrom,
+    designation:event.designation,
+    company_id: event.company_id,
+    role: this.formData.role,
+    ip_Address: '123',
+    created_By : JSON.parse(localStorage.getItem('userData')).user_id,
+    updated_By: JSON.parse(localStorage.getItem('userData')).user_id,
+    isType:1
+  };
+}
 
   // add new Sub Admin
   async addSubAdmin(){
     this.ngxService.start();
-    await(this._api.addEmployee(this.formData).subscribe(res => {
+    await(this._api.updateEmployee(this.formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
       if (response.success == true){

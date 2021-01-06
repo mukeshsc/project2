@@ -23,7 +23,7 @@ export class InsuranceComponent implements OnInit {
     this.getList()
   }
 
-  // Get Employee List
+  // Get Insurance List
  async getList(){
   this.ngxService.start();
   await(this._api.showInsurance().subscribe(res => {

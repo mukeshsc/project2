@@ -570,7 +570,10 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput  type="text" placeholder="documentType" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
+                          <input matInput  type="text" list="documentTypeList" (ngModelChange)="setDocImage($event)" placeholder="documentType" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
+                          <datalist id="documentTypeList">
+                            <option *ngFor="let item of getDocumentTypeData"  [value]="item.DocType">
+                          </datalist>
                         </mat-form-field>
                         <div *ngIf="documentType.errors && documentType.touched">
                           <span class="error" *ngIf="documentType.errors?.required">Document Type name is mandatory.</span>
