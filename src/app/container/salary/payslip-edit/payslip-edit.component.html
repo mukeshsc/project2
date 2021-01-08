@@ -1,0 +1,50 @@
+<div fxLayout="row" fxLayoutAlign="space-around left" >
+  <div fxFlex>
+    <h3 class="page-title">
+      Payslips
+    </h3>
+    <ul class="breadcrumb">
+      <li><a routerLink="/dashboard">Dashboard</a></li>
+      <li><a>Salary Management</a></li>
+      <li>Payslips</li>
+    </ul>
+  </div>
+</div>
+<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+  <div fxFlex="100">
+    <mat-card>
+      <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
+        <div fxFlex="30">
+          <span class="card-title">Create Template</span>
+          <p>Fill out the data and generate completely customized reports</p>
+          <span class="paySlipHead">Payslip Preferences</span>
+          <mat-card class="selectSalaryFieldCard">
+            <mat-checkbox color="primary" [(ngModel)]="data.address" name="address"  class="example-margin" ><span [ngClass]="data.address?'primary-txt':''" >Show Work Location</span></mat-checkbox>
+          </mat-card>
+          <mat-card class="selectSalaryFieldCard">
+            <mat-checkbox color="primary" [(ngModel)]="data.department" name="department" class="example-margin" ><span [ngClass]="data.department?'primary-txt':''" >Show Department</span></mat-checkbox>
+          </mat-card>
+          <mat-card class="selectSalaryFieldCard">
+            <mat-checkbox color="primary" [(ngModel)]="data.designation" name="designation" class="example-margin" ><span [ngClass]="data.designation?'primary-txt':''" >Show Designation</span></mat-checkbox>
+          </mat-card>
+          <mat-card class="selectSalaryFieldCard">
+            <mat-checkbox color="primary" class="example-margin" [(ngModel)]="data.passport" name="passport"><span [ngClass]="data.passport?'primary-txt':''" >Show Passport</span></mat-checkbox>
+          </mat-card>
+          <mat-card class="selectSalaryFieldCard">
+            <mat-checkbox color="primary" class="example-margin" [(ngModel)]="data.template" name="template"><span [ngClass]="data.template?'primary-txt':''" >Set As Default Template</span></mat-checkbox>
+          </mat-card>
+          <div fxLayout="row" class="theme-setting-inner"  >
+            <div fxFlex="100">
+              <mat-label></mat-label>
+              <button mat-raised-button class="big-btn block-btn" color="primary" (click)="editPaySlip()" >Save Template</button>
+            </div>
+          </div>
+        </div>
+        <div fxFlex="70">
+          <app-payslip-one [data]="data"></app-payslip-one>
+          <span class="show-preview" (click)="showTemplate(1)">Full screen preview</span>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>

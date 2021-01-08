@@ -23,6 +23,8 @@ import { PrivacyPolicyComponent } from './container/company/privacy-policy/priva
 import { ProfileComponent } from './container/company/profile/profile.component';
 import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-admin-list.component';
 import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
+import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
+import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
 
 
 const routes: Routes = [
@@ -43,6 +45,8 @@ const routes: Routes = [
   { path: 'employee-salary', component: EmployeeSalaryComponent,canActivate: [AuthGuardService] },
   { path: 'payslip', component: PayslipComponent,canActivate: [AuthGuardService] },
   { path: 'payslip/:id', component: PayslipDetailComponent,canActivate: [AuthGuardService] },
+  { path: 'payslip-edit/:id', component: PayslipEditComponent,canActivate: [AuthGuardService] },
+  { path: 'payslip-generate', component: PayslipGenerateComponent,canActivate: [AuthGuardService] },
   { path: 'contracts', component: ContractsComponent,canActivate: [AuthGuardService] },
   { path: 'faq', component: FaqComponent,canActivate: [AuthGuardService] },
   { path: 'profile', component: ProfileComponent,canActivate: [AuthGuardService] },

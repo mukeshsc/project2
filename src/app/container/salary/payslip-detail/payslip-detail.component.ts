@@ -1,15 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogData {
+  tempNo: string;
+  tempData: string;
+}
 @Component({
   selector: 'app-payslip-detail',
   templateUrl: './payslip-detail.component.html',
   styleUrls: ['./payslip-detail.component.scss']
 })
 export class PayslipDetailComponent implements OnInit {
-
-  constructor() { }
+  tempData:any;
+  tempNo:any;
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,public dialogRef: MatDialogRef<PayslipDetailComponent>) { }
 
   ngOnInit(): void {
+    this.tempData = JSON.parse(this.data.tempData);
+    this.tempNo = this.data.tempNo;
   }
 
 }

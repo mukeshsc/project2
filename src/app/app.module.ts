@@ -83,6 +83,9 @@ import { LeaveFilterComponent } from './container/leaves/leave-filter/leave-filt
 import { ManageLeavesComponent } from './container/leaves/manage-leaves/manage-leaves.component';
 import { LeaveAddComponent } from './container/leaves/leave-add/leave-add.component';
 import { EmployeeLeaveManageComponent } from './container/leaves/employee-leave-manage/employee-leave-manage.component';
+import { PayslipOneComponent } from './container/salary/payslip-one/payslip-one.component';
+import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
+import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
 
 @NgModule({
   declarations: [
@@ -127,7 +130,10 @@ import { EmployeeLeaveManageComponent } from './container/leaves/employee-leave-
     LeaveFilterComponent,
     ManageLeavesComponent,
     LeaveAddComponent,
-    EmployeeLeaveManageComponent
+    EmployeeLeaveManageComponent,
+    PayslipOneComponent,
+    PayslipEditComponent,
+    PayslipGenerateComponent
   ],
   imports: [
     BrowserModule,
