@@ -15,9 +15,14 @@ export class PayslipOneComponent implements OnInit {
   demoData:any;
   salData:any = [];
   currentDate = moment().format('DD MMM YYYY')
-  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  currentMonth = moment().format('MMM YYYY');
+  count = 0
+  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
+
+  }
 
   ngOnInit(): void {
+    this.count = this.data && this.data.count;
     this.allData = this.data;
     this.getEmployeeList();
   }
@@ -29,7 +34,13 @@ export class PayslipOneComponent implements OnInit {
       const response: any = res;
       if (response.success == true){
         console.log(response.data);
-        this.responseData = response.data;
+        let arr = []
+      for(let item of response.data){
+        if(item.status == 1){
+          arr.push(item)
+        }
+      }
+      this.responseData = arr;
         for(let item of this.responseData){
           let total = 0
           let salAr = [];
@@ -46,7 +57,7 @@ export class PayslipOneComponent implements OnInit {
           item['salary'] = total;
           item['salaryArray'] = salAr;
         }
-        this.demoData = this.responseData[this.responseData.length - 1];
+        this.demoData = this.responseData[this.count];
         console.log(this.demoData)
       }else{
       }
@@ -56,5 +67,15 @@ export class PayslipOneComponent implements OnInit {
       this.ngxService.stop();
     }));
 
+    }
+    getCount(){
+      if(this.count < (this.responseData.length-1)){
+        this.count++
+        this.demoData = this.responseData[this.count]
+        console.log(this.count)
+      }
+    }
+    getJoinDate(d){
+      return moment(d).format('DD/MM/YYYY')
     }
 }

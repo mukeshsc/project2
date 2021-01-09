@@ -11,6 +11,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { PayslipDetailComponent } from '../payslip-detail/payslip-detail.component';
 @Component({
   selector: 'app-employee-salary',
   templateUrl: './employee-salary.component.html',
@@ -35,7 +36,8 @@ data={
   department:true,
   designation:true,
   passport:true,
-  template:true
+  template:true,
+  count:0
 }
 responseData:any = [];
 csvFile:any = '';
@@ -82,7 +84,13 @@ await(this._api.getEmployee().subscribe(res => {
   const response: any = res;
   if (response.success == true){
     console.log(response.data);
-    this.responseData = response.data;
+    let arr = []
+    for(let item of response.data){
+      if(item.status == 1){
+        arr.push(item)
+      }
+    }
+    this.responseData = arr;
     for(let item of this.responseData){
       let total = 0
       if(item.salaryBalance != null){
@@ -111,6 +119,21 @@ await(this._api.getEmployee().subscribe(res => {
 
 }
 
+showTemplate(tempNo, count){
+  console.log(count)
+  this.data.count = count
+  const dialogRef = this.dialog.open(PayslipDetailComponent,{
+    width:'100%',
+    data: {
+      tempNo: tempNo,
+      tempData:JSON.stringify(this.data)
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+  });
+}
 
 //Searching
 applyFilter(event: Event){

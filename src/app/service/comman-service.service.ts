@@ -660,6 +660,15 @@ showDocType(){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}editCompensationTemplate`, formData,{headers}).pipe(map(res => <any>res));
   }
 
+  //generate pay slip
+  addPatSlip(formData){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addPatSlip`, formData,{headers}).pipe(map(res => <any>res));
+  }
+
 
 }
 

@@ -19,7 +19,7 @@
         <div fxFlex="100" fxFlex.gt-sm="100" >
           <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
             <div fxFlex="100">
-              <span class="header-heading">Payslip for the month of May 2020</span>
+              <span class="header-heading">Payslip for the month of {{currentMonth}}</span>
             </div>
           </div>
           <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
@@ -40,7 +40,7 @@
                   </tr>
                   <tr>
                     <th>Date of joining</th>
-                    <td>{{demoData && demoData.employee_joiningDate}}</td>
+                    <td>{{demoData && getJoinDate(demoData.employee_joiningDate)}}</td>
                   </tr>
                   <tr *ngIf="data.address">
                     <th>work location</th>
