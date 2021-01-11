@@ -14,7 +14,7 @@
         </div>
         <div fxFlex="70">
           <mat-form-field class="form-fields">
-            <input matInput  type="text" name="leaveBalace" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="formData.leaveBalace[i][keyVal.key]" autocomplete="off" [placeholder]="keyVal.key" />
+            <input matInput  type="text" name="leaveBalace{{i}}" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="formData.leaveBalace[i][keyVal.key]" autocomplete="off" [placeholder]="keyVal.key" />
           </mat-form-field>
         </div>
       </ng-container>
