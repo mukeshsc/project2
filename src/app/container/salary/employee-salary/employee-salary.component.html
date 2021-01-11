@@ -123,6 +123,8 @@
               <span *ngIf="!accessPermission">No Permission</span>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="showTemplate(1,this.paginator.pageIndex == 0 ? i + 1 : 1 + i + this.paginator.pageIndex * this.paginator.pageSize)" *ngIf="accessPermission"
               matTooltip="Preview"   color="light"><mat-icon color="green">preview</mat-icon></button>
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="mailPaySlip(element.user_id)" *ngIf="accessPermission"
+              matTooltip="Send salary slip"   color="light"><mat-icon color="accent">send</mat-icon></button>
             </td>
           </ng-container>
 

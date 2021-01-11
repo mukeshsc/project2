@@ -666,10 +666,26 @@ showDocType(){
     'Content-Type': 'application/json',
     'Authorization': this.token
     });
-    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addPatSlip`, formData,{headers}).pipe(map(res => <any>res));
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addPaySlip`, formData,{headers}).pipe(map(res => <any>res));
   }
 
+  //Payslip id
+  showLastPaySlipId(){
+    let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showLastPaySlipId`, {headers}).pipe(map(res => <any>res));
+    }
 
+//mail Payslip
+payslipMail(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}payslipMail`, formData,{headers}).pipe(map(res => <any>res));
+}
 }
 
 

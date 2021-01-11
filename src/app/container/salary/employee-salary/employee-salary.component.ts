@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
 import { PayslipDetailComponent } from '../payslip-detail/payslip-detail.component';
+import * as moment from 'moment';
 @Component({
   selector: 'app-employee-salary',
   templateUrl: './employee-salary.component.html',
@@ -119,6 +120,8 @@ await(this._api.getEmployee().subscribe(res => {
 
 }
 
+
+
 showTemplate(tempNo, count){
   console.log(count)
   this.data.count = count
@@ -133,6 +136,31 @@ showTemplate(tempNo, count){
   dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result: ${result}`);
   });
+}
+
+
+ // mail pay slip
+ async mailPaySlip(user_id){
+  let formData = {
+    "currentMonth":moment().format('M'),
+    "userID":user_id
+}
+  this.ngxService.start();
+  await(this._api.payslipMail(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message)
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
+
 }
 
 //Searching

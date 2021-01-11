@@ -6,6 +6,7 @@ import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
 import * as moment from 'moment';
 import { PayslipOneComponent } from '../payslip-one/payslip-one.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-payslip-generate',
@@ -27,11 +28,30 @@ export class PayslipGenerateComponent implements OnInit {
   employeeData :any;
   responseData:any = [];
   salarySlipId = 1000;
-  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  constructor(public router:Router, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    this.getPayslipId()
     this.getList()
     this.getEmployeeList()
+  }
+
+
+  //Get last payslip id
+  async getPayslipId(){
+    this.ngxService.start();
+    await(this._api.showLastPaySlipId().subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        this.salarySlipId = parseInt(response.data)
+      }else{
+      }
+      console.log(res);
+    }, err => {
+      const error = err.error;
+      this.ngxService.stop();
+    }));
   }
 
   // Get compansation List
@@ -100,7 +120,6 @@ async getEmployeeList(){
 
 }
 async generateSlip(){
-  let formData = [];
 
   this.ngxService.start();
   if(this.responseData){
@@ -131,26 +150,44 @@ async generateSlip(){
         })
       }
       console.log(obj.paySlipImage)
-      formData.push(obj)
-      this.payslipeone.getCount();
+      await(this._api.addPatSlip(obj).subscribe(res => {
+
+        const response: any = res;
+        if (response.success == true){
+          this.payslipeone.getCount();
+        }else{
+          this.openErrrorSnackBar(response.msg)
+          return;
+        }
+        console.log(res);
+      }, err => {
+        const error = err.error;
+
+        this.ngxService.stop();
+      }));
     }
-    await(this._api.addPatSlip(formData).subscribe(res => {
-      this.ngxService.stop();
-      const response: any = res;
-      if (response.success == true){
 
-      }else{
-      }
-      console.log(res);
-    }, err => {
-      const error = err.error;
-      this.ngxService.stop();
-    }));
   }
-
+  this.openSnackBar('SalarySlip Generated successfully');
+  this.ngxService.stop();
+  this.router.navigate(['/employee-salary'])
 }
-
-// generatePDF() {
-//   ;
-// }
+// alert message after api response success
+openSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['success-alert']
+  });
+}
+// alert message after api response failure
+openErrrorSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['failure-alert']
+  });
+}
 }
