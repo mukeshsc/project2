@@ -1,8 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
-  tempNo: string;
-  tempData: string;
+  img: string;
 }
 @Component({
   selector: 'app-payslip-detail',
@@ -15,8 +14,7 @@ export class PayslipDetailComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,public dialogRef: MatDialogRef<PayslipDetailComponent>) { }
 
   ngOnInit(): void {
-    this.tempData = JSON.parse(this.data.tempData);
-    this.tempNo = this.data.tempNo;
+    this.tempData = this.data.img;
   }
 
 }

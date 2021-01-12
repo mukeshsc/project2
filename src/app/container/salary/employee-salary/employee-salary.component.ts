@@ -104,7 +104,7 @@ await(this._api.getEmployee().subscribe(res => {
         }
       }
 
-      item['salary'] = total;
+      item['salary'] = isNaN(total)?0:total;
     }
     this.dataSource = new MatTableDataSource([...this.responseData]);
     this.dataSource.paginator = this.paginator;
@@ -121,29 +121,49 @@ await(this._api.getEmployee().subscribe(res => {
 }
 
 
+async showTemplate(tempNo, user_id){
+  let formData = {
+    "currentMonth":moment().format('MM'),
+    "userID":user_id,
+    "isType":"0"
+}
+  this.ngxService.start();
+  await(this._api.payslipMail(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data[0].paySlip_Image)
+      const dialogRef = this.dialog.open(PayslipDetailComponent,{
+        width:'100%',
+        data: {
+          img:response.data[0].paySlip_Image
+        }
+      });
 
-showTemplate(tempNo, count){
-  console.log(count)
-  this.data.count = count
-  const dialogRef = this.dialog.open(PayslipDetailComponent,{
-    width:'100%',
-    data: {
-      tempNo: tempNo,
-      tempData:JSON.stringify(this.data)
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+      });
+    }else{
+      this.openErrrorSnackBar(response.message)
     }
-  });
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-  });
+
+
 }
 
 
  // mail pay slip
  async mailPaySlip(user_id){
   let formData = {
-    "currentMonth":moment().format('M'),
-    "userID":user_id
+    "currentMonth":moment().format('MM'),
+    "userID":user_id,
+    "isType":"1"
 }
   this.ngxService.start();
   await(this._api.payslipMail(formData).subscribe(res => {

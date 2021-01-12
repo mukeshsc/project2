@@ -106,7 +106,7 @@ async getEmployeeList(){
           }
         }
 
-        item['salary'] = total;
+        item['salary'] =  isNaN(total)?0:total;
         item['salaryArray'] = salAr;
       }
     }else{
@@ -134,7 +134,7 @@ async generateSlip(){
       this.data.address && userDetail.push({key:'workLocation',value:''})
       this.data.passport && userDetail.push({key:'passport',value:item.passport})
       let obj = {
-        "userId":"2",
+        "userId":item.user_id,
         "userDetail":userDetail,
         "userEarning":item.salaryArray,
         "userDeduction":[],

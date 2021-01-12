@@ -95,7 +95,8 @@ async updateLeaveRequest(id,leaveType,status){
     "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
     "isLeave":status,
     "ip_Address":"12.32.33.22",
-    "leaveType_Id":leaveType
+    "leaveType_Id":leaveType,
+    "hrReason":'NA'
   }
   this.ngxService.start();
 await(this._api.requestEmployeeleave(formData).subscribe(res => {

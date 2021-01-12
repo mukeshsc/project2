@@ -17,24 +17,13 @@ export class FilterComponent implements OnInit {
     email:'',
     reporting_Manager:'',
     department:'',
-    role:'',
+    role:0,
+    designation:'',
     employee_joiningDate:'',
     insurance_plan_name:'',
 
-    // total: null,
-    // basic: null,
-    // home_Allowance: null,
-    // transportation_Allowance: null,
-    // other_Allowance: null,
-
-    // maternity:null,
-    // medical:null,
-    // annual:null,
-    // unpaid_Leaves:null,
-    // others:null,
-
-    salary:[],
-    leaves:[],
+    salaryBalance:[],
+    leaveBalance:[],
 
     working_HoursTo:'',
     working_HoursFrom:'',
@@ -42,9 +31,12 @@ export class FilterComponent implements OnInit {
     company_id:null,
     ip_Address:'123',
 	  created_By :'1',
-    updated_By:'1'
+    updated_By:'1',
+    isType:0,
   };
   roleData: any = [];
+  leaveData:any = [];
+  salaryData:any = [];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<FilterComponent>) { }
 
   ngOnInit(): void {
@@ -52,6 +44,8 @@ export class FilterComponent implements OnInit {
     this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.getRole();
+    this.getLeave();
+    this.getSalary();
   }
 
 // Get Role Type
@@ -74,6 +68,53 @@ async getRole(){
 
 }
 
+// Get Leave
+async getLeave(){
+  this.ngxService.start();
+  await(this._api.showLeave().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.leaveData = response.data;
+      for(let item of this.leaveData){
+        let obj = {};
+        obj[item.leave_Type] = '';
+        this.formData.leaveBalance.push(obj);
+      }
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
+// Get Salary breakdown
+async getSalary(){
+  this.ngxService.start();
+  await(this._api.showSalary().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.salaryData = response.data;
+      for(let item of this.salaryData){
+        let obj = {};
+        obj[item.salary_Type] = '';
+        this.formData.salaryBalance.push(obj);
+      }
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
 
   // add new Employee
   async addEmployee(){

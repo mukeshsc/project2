@@ -59,18 +59,6 @@ export class EmployeeAddComponent implements OnInit {
     employee_joiningDate:'',
     insurance_plan_name:'',
 
-    // total: null,
-    // basic: null,
-    // home_Allowance: null,
-    // transportation_Allowance: null,
-    // other_Allowance: null,
-
-    // maternity:null,
-    // medical:null,
-    // annual:null,
-    // unpaid_Leaves:null,
-    // others:null,
-
     salaryBalance:[],
     leaveBalance:[],
 

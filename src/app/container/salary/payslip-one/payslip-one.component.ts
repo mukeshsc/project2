@@ -54,7 +54,7 @@ export class PayslipOneComponent implements OnInit {
             }
           }
 
-          item['salary'] = total;
+          item['salary'] =  isNaN(total)?0:total;
           item['salaryArray'] = salAr;
         }
         this.demoData = this.responseData[this.count];

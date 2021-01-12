@@ -518,6 +518,9 @@ async addDocType(){
         "ip_Address":"121212",
         "companyId":JSON.parse(localStorage.getItem('userData')).company_id
       }
+      this.isCheck = false;
+      this.isCheck1 = false;
+      this.isCheck2 = false;
       this.getDocType();
     }else{
       this.openErrrorSnackBar(response.message);

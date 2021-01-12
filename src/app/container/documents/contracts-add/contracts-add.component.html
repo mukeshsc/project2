@@ -39,10 +39,10 @@
       <div fxFlex="100">
         <mat-label></mat-label>
         <div class="dropzone">
-          <ngx-dropzone (change)="onSelect($event)">
+          <ngx-dropzone (change)="onSelect($event)" >
             <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
               Upload Your Document<br />
-              <small>drag & drop to upload the document</small>
+              <small>drag & drop to upload the document (Pdf, jpeg, png, doc, xlsx )</small>
             </ngx-dropzone-label>
             <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
                 <ngx-dropzone-label [style]="'background:'+formData.file_Path">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>

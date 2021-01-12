@@ -21,7 +21,7 @@ import { MissingListComponent } from '../missing-list/missing-list.component';
 })
 export class ContractsComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['checkedBod','position', 'name', 'expiry_Date', 'DocType','view', 'Action'];
+displayedColumns: string[] = ['checkedBod','position', 'name', 'expiry_Date', 'DocTypeName','view', 'Action'];
 
 // set static data for table
 dataSource = new MatTableDataSource([]);
@@ -261,13 +261,10 @@ removeChar(a){
 
 // // document download
 Download(e) {
-  this.ngxService.start();
-  for(let item of this.responseData){
-    if(item.selected){
-      setTimeout(() => {
+      this.ngxService.start();
         var element = document.createElement('a');
         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${environment.apiBaseUrl}${e}`));
-        element.setAttribute('download', item.file_Path);
+        element.setAttribute('download', e);
 
         element.style.display = 'none';
         document.body.appendChild(element);
@@ -275,11 +272,7 @@ Download(e) {
         element.click();
 
         document.body.removeChild(element);
-      },1000)
-
-    }
-  }
-  this.ngxService.stop();
+      this.ngxService.stop();
 }
 
 //filter
