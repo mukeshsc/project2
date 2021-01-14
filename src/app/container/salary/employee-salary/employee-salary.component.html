@@ -48,6 +48,13 @@
             <mat-icon matSuffix>search</mat-icon>
             <input matInput placeholder="Search" #input  (keyup)="applyFilter($event)">
           </mat-form-field>
+          <mat-form-field class="search-field"  appearance="standard"  >
+            <mat-select [(ngModel)]="formData.isType" name="isType" placeholder="Generate Report" (ngModelChange)="GenerateReport($event)">
+              <mat-option  value="month">Current Month</mat-option>
+              <mat-option  value="halfYear">Half year</mat-option>
+              <mat-option  value="year">Full Year</mat-option>
+            </mat-select>
+          </mat-form-field>
           <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getList()">
             <mat-icon>sync</mat-icon>
           </button>
@@ -118,4 +125,40 @@
       </mat-card-content>
     </mat-card>
   </div>
+</div>
+<div id="sampleCsv" style="display:none" *ngIf="reportData.length > 0">
+  <table >
+    <thead>
+      <tr>
+        <td colspan="13" >
+          <h5 class="mb-0" style="font-size: 13px;">
+           Salary Report
+          </h5>
+        </td>
+      </tr>
+      <tr style="text-align: left;">
+        <th ><b>Sno</b></th>
+        <th><b>Payslip Id</b></th>
+        <th ><b>Department</b></th>
+        <th *ngFor="let user of reportData[0].userDetail"><b>{{user.key}}</b></th>
+        <th *ngFor="let sal of reportData[0].userEarning"><b>{{sal.label}}</b></th>
+        <th><b>Net Salary</b></th>
+        <th><b>Month</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reportData;let i = index">
+        <td>{{i+1}}</td>
+        <td>{{item.paySlipId}}</td>
+        <td>{{item.department}}</td>
+        <td *ngFor="let user of item.userDetail">{{user.value}}</td>
+        <td *ngFor="let sal of item.userEarning">{{sal.value}}</td>
+        <td>{{item.netSalary}}</td>
+        <td>{{getDate(item.salaryDate)}}</td>
+        <td>joh@gmail.com</td>
+
+      </tr>
+    </tbody>
+  </table>
+
 </div>

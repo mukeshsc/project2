@@ -695,6 +695,15 @@ showPaySliptemplate(formData){
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showPaySliptemplate`, formData,{headers}).pipe(map(res => <any>res));
 }
+
+//payslip report
+showPaySlipReport(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showPaySlipReport`, formData,{headers}).pipe(map(res => <any>res));
+}
 }
 
 

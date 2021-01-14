@@ -45,9 +45,15 @@ csvFile:any = '';
 accessPermission:boolean;
 filePath = environment.apiBaseUrl
 graphData:any
+formData = {
+  "companyId":"1",
+  "isType":""
+}
+reportData:any =[];
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
+  this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
@@ -123,6 +129,34 @@ await(this._api.getEmployee().subscribe(res => {
   this.ngxService.stop();
 }));
 
+}
+
+async GenerateReport(e){
+  this.formData.isType = e;
+  this.ngxService.start();
+  await(this._api.showPaySlipReport(this.formData).subscribe(res => {
+    const response: any = res;
+    if (response.success == true){
+      this.reportData = response.data;
+      for(let item of this.reportData){
+       item.userDetail = JSON.parse(item.userDetail)
+
+       item.userEarning = JSON.parse(item.userEarning)
+      }
+      console.log(this.reportData)
+      setTimeout(()=>{
+        this.sampleCsv()
+      },2000)
+    }else{
+      this.ngxService.stop();
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
 }
 
 
@@ -212,6 +246,56 @@ this._snackBar.open(msg, 'Ok', {
   panelClass: ['failure-alert']
 });
 }
+// Download list in CSV
+sampleCsv() {
+  this.ngxService.start();
+  const html = document.getElementById('sampleCsv');
+  let csv = [];
+  let rows = html.querySelectorAll('table tr');
 
+  for (let i = 0; i < rows.length; i++) {
+    let row = [], cols = rows[i].querySelectorAll('td, th');
+
+    for (let j = 0; j < cols.length; j++) {
+        row.push(cols[j].textContent);
+    }
+
+    csv.push(row.join(','));
+  }
+
+  // Download CSV
+  this.download_csv(csv.join('\n'), 'SalaryReport.csv');
+}
+
+download_csv(csv, filename) {
+  let csvFile;
+  let downloadLink;
+
+  // CSV FILE
+  csvFile = new Blob([csv], {type: 'text/csv'});
+
+  // Download link
+  downloadLink = document.createElement('a');
+
+  // File name
+  downloadLink.download = filename;
+
+  // We have to create a link to the file
+  downloadLink.href = window.URL.createObjectURL(csvFile);
+
+  // Make sure that the link is not displayed
+  downloadLink.style.display = 'none';
+
+  // Add the link to your DOM
+  document.body.appendChild(downloadLink);
+
+  // Lanzamos
+  downloadLink.click();
+  this.ngxService.stop();
+}
+
+getDate(d){
+  return moment(d).format('MM/YYYY')
+}
 
 }
