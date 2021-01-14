@@ -7,17 +7,15 @@
   </div>
   <mat-dialog-content class="mat-typography">
 <form name="filterForm" (ngSubmit)="manageEmployeeleaveBalance()" #filterForm="ngForm">
-    <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="" *ngFor="let item of formData.leaveBalace;let i = index;">
-      <ng-container *ngFor="let keyVal of item | keyvalue; let ik = index">
+    <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="" *ngFor="let item of leaveBalance;let i = index;">
         <div fxFlex="30">
-          <mat-label>{{keyVal.key}}</mat-label>
+          <mat-label>{{item.label}}</mat-label>
         </div>
         <div fxFlex="70">
           <mat-form-field class="form-fields">
-            <input matInput  type="text" name="leaveBalace{{i}}" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="formData.leaveBalace[i][keyVal.key]" autocomplete="off" [placeholder]="keyVal.key" />
+            <input matInput  type="text" name="salary{{i}}"  [(ngModel)]="item.value" autocomplete="off" [placeholder]="item.label" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" />
           </mat-form-field>
         </div>
-      </ng-container>
     </div>
     <div fxLayout="row" class="" >
       <div fxFlex="100">

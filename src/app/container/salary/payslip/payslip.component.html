@@ -16,114 +16,116 @@
       <mat-toolbar color="light">
         <span class="mat-toolbar-title">Payslips</span>
       </mat-toolbar>
-      <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="payslip-row">
-        <div fxFlex="100">
-          <div fxLayout="row"  fxflexfill fxLayoutGap="15px grid">
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip-edit/1">Edit</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light">Edit</button>
+      <mat-radio-group aria-label="Select an option"  (change)="selectPayslip($event)">
+        <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="payslip-row">
+          <div fxFlex="100">
+            <div fxLayout="row"  fxflexfill fxLayoutGap="15px grid">
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip-edit/1">Edit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <mat-radio-button value="1" [checked]="payslipNo == 1">Use Template 1</mat-radio-button>
               </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light">Edit</button>
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light">Edit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <mat-radio-button value="2" [checked]="payslipNo == 2" >Use Template 2</mat-radio-button>
               </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light">Edit</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <mat-radio-button value="3"  [checked]="payslipNo == 3">Use Template 3</mat-radio-button>
+              </div>
 
 
-          </div>
-          <div fxLayout="row"  fxflexfill fxLayoutGap="15px grid">
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light">Edit</button>
+            </div>
+            <div fxLayout="row"  fxflexfill fxLayoutGap="15px grid">
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light">Edit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <mat-radio-button value="4"  [checked]="payslipNo == 4">Use Template 4</mat-radio-button>
               </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light">Edit</button>
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light">Edit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <mat-radio-button value="5"  [checked]="payslipNo == 6">Use Template 5</mat-radio-button>
               </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
-            <div fxFlex="33">
-              <div class="payslip-holder">
-                <img src="../../../assets/img/payslip.png" />
-                <div class="payslip-action">
-                  <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
-                    </div>
-                    <div fxFlex>
-                      <button mat-raised-button class="round-btn" color="light">Edit</button>
+              <div fxFlex="33">
+                <div class="payslip-holder">
+                  <img src="../../../assets/img/payslip.png" />
+                  <div class="payslip-action">
+                    <div fxLayout="column" fxflexfill fxLayoutGap="10px grid">
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light" routerLink="/payslip/1">Preview</button>
+                      </div>
+                      <div fxFlex>
+                        <button mat-raised-button class="round-btn" color="light">Edit</button>
+                      </div>
                     </div>
                   </div>
                 </div>
+                <mat-radio-button value="6"  [checked]="payslipNo == 7">Use Template 6</mat-radio-button>
               </div>
-              <mat-radio-button value="1">Use Template 1</mat-radio-button>
-            </div>
 
 
+            </div>
           </div>
         </div>
-      </div>
+    </mat-radio-group>
     </mat-card>
   </div>
 </div>

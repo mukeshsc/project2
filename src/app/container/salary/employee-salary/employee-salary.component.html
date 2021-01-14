@@ -9,49 +9,28 @@
     </ul>
   </div>
 </div>
-<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
-  <div fxFlex="25"  fxFlex.gt-xs="100">
-    <mat-card class="dashboard-count">
-      <h4>Active Employees</h4>
-      <h2>100 / 150</h2>
-      <img src="./assets/img/Image_7.png" />
-    </mat-card>
-  </div>
-  <div fxFlex="25" fxFlex.gt-xs="100">
-    <mat-card class="dashboard-count">
-      <h4>Late Coming</h4>
-      <h2>20</h2>
-      <img src="./assets/img/Image_2.png" />
-    </mat-card>
-  </div>
-  <div fxFlex="25" fxFlex.gt-xs="100">
-    <mat-card class="dashboard-count">
-      <h4>Working From Home</h4>
-      <h2>100</h2>
-      <img src="./assets/img/Image_2.png" />
-    </mat-card>
-  </div>
-  <div fxFlex="25" fxFlex.gt-xs="100">
-    <mat-card class="dashboard-count">
-      <h4>On leave</h4>
-      <h2>100</h2>
-      <img src="./assets/img/Image_2.png" />
-    </mat-card>
-  </div>
-</div>
 <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
   <div fxFlex="100"  fxFlex.gt-xs="100">
     <mat-card class="dashboard-detail">
-      <mat-card-header>
-        <mat-card-title>Stats</mat-card-title>
-      </mat-card-header>
       <mat-card-content>
-        <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
-          <div fxFlex="70"  fxFlex.gt-xs="100">
-            <img src="./assets/img/Image_3.png" />
+        <div fxLayout="row">
+          <div fxFlex="15">
+            <span class="card-subtitle">
+              total salaries
+            </span><br />
+            <span class="card-title">
+              $20K
+            </span><br />
+            <span class="card-info">
+              <mat-icon >south</mat-icon>
+              5.27%
+            </span><br />
+            <span class="card-subtitle">
+              Since last month
+            </span>
           </div>
-          <div fxFlex="30"  fxFlex.gt-xs="100">
-            <img src="./assets/img/echarts_1.png" />
+          <div fxFlex="20">
+            <app-doughnut *ngIf="graphData" [data]="graphData"></app-doughnut>
           </div>
         </div>
       </mat-card-content>

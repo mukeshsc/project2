@@ -436,6 +436,28 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
   text-transform: capitalize;
   opacity: 0.5;
 }
+.card-info{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-12)/var(--unnamed-line-spacing-18) var(--unnamed-font-family-poppins);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-3d3d3d);
+  text-align: left;
+  font: normal normal normal 12px/18px Poppins;
+  letter-spacing: 0px;
+  color: #3D3D3D;
+  text-transform: capitalize;
+  opacity: 1;
+  .mat-icon{
+    color: var(--unnamed-color-f44336);
+    text-align: left;
+    letter-spacing: 0px;
+    color: #F44336;
+    opacity: 1;
+    font-size: 12px;
+    width: 11px;
+    height: 10px;
+  }
+}
+.arrow-down-red
 .mat-tab-group{
   font-family: var(--unnamed-font-family-poppins);
 }

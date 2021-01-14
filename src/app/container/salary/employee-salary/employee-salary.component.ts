@@ -44,6 +44,7 @@ responseData:any = [];
 csvFile:any = '';
 accessPermission:boolean;
 filePath = environment.apiBaseUrl
+graphData:any
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
@@ -51,6 +52,8 @@ ngOnInit(): void {
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
   this.getComapnsationList();
+  let graphdata = {percentage:[20,30,40,70,80],colors:['#15C1DC','#FF4081','#C86CE6','#F44336','#FFAA00']}
+  this.graphData = JSON.stringify(graphdata);
 }
 
   // Get com[asation] List
@@ -98,8 +101,10 @@ await(this._api.getEmployee().subscribe(res => {
         let sal = JSON.parse(item.salaryBalance)
         for(let i =0;i< sal.length;i++){
           for (var key in sal[i]) {
-            console.log(sal[i][key])
-            total+= parseInt(sal[i][key]);
+            if(sal[i][key] != ''){
+              console.log(sal[i][key])
+              total+= parseInt(sal[i][key]);
+            }
           }
         }
       }

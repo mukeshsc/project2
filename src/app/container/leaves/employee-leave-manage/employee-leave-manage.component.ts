@@ -28,17 +28,31 @@ export class EmployeeLeaveManageComponent implements OnInit {
     "ip_Address":"12.21.44.22",
     "leaveBalace":[]
   }
+  leaveBalance:any = [];
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeLeaveManageComponent>) { }
 
   ngOnInit(): void {
     this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.userId = JSON.parse(this.data.userId);
-    this.formData.leaveBalace = JSON.parse(this.data.leaveBalance)
+    if(JSON.parse(this.data.leaveBalance)){
+      let sal = JSON.parse(this.data.leaveBalance)
+      for(let i =0;i< sal.length;i++){
+        for (var key in sal[i]) {
+          console.log(sal[i])
+          this.leaveBalance.push({label:key,value:sal[i][key]})
+        }
+      }
+    }
   }
 
 
 
 async manageEmployeeleaveBalance(){
+  for(let item of this.leaveBalance){
+    let obj = {}
+    obj[item.label] = item.value
+    this.formData.leaveBalace.push(obj)
+  }
   this.ngxService.start();
   await(this._api.manageEmployeeleaveBalance(this.formData).subscribe(res => {
     this.ngxService.stop();

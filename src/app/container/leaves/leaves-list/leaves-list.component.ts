@@ -103,10 +103,10 @@ await(this._api.requestEmployeeleave(formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
-    this.openSnackBar(response.messsage)
+    this.openSnackBar(response.message)
     this.getList();
   }else{
-    this.openErrrorSnackBar(response.messsage)
+    this.openErrrorSnackBar(response.message)
   }
   console.log(res);
 }, err => {

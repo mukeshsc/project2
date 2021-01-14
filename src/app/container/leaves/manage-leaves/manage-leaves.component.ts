@@ -80,7 +80,7 @@ export class ManageLeavesComponent implements OnInit {
     this.formData.leaveFrom = _moment(this.getAllData.leave_From).format('');
     this.formData.leaveTo = _moment(this.getAllData.leave_To).format('');
     this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
-    this.formData.userId = JSON.parse(localStorage.getItem('userData')).user_id;
+    this.formData.userId = this.getAllData.user_Id;
   }
 
 

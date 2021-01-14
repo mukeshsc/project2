@@ -39,7 +39,7 @@
       <div fxFlex="100">
         <mat-label></mat-label>
         <div class="dropzone">
-          <ngx-dropzone (change)="onSelect($event)" >
+          <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,application/pdf, application/vnd.ms-excel">
             <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
               Upload Your Document<br />
               <small>drag & drop to upload the document (Pdf, jpeg, png, doc, xlsx )</small>

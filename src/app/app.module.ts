@@ -86,6 +86,7 @@ import { EmployeeLeaveManageComponent } from './container/leaves/employee-leave-
 import { PayslipOneComponent } from './container/salary/payslip-one/payslip-one.component';
 import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
 import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
+import { DoughnutComponent } from './helpers/chart/doughnut/doughnut.component';
 
 @NgModule({
   declarations: [
@@ -133,7 +134,8 @@ import { PayslipGenerateComponent } from './container/salary/payslip-generate/pa
     EmployeeLeaveManageComponent,
     PayslipOneComponent,
     PayslipEditComponent,
-    PayslipGenerateComponent
+    PayslipGenerateComponent,
+    DoughnutComponent
   ],
   imports: [
     BrowserModule,
