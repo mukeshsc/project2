@@ -50,6 +50,8 @@ formData = {
   "isType":""
 }
 reportData:any =[];
+totalPercent:any;
+percentData:any = []
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
@@ -58,8 +60,8 @@ ngOnInit(): void {
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
   this.getComapnsationList();
-  let graphdata = {percentage:[20,30,40,70,80],colors:['#15C1DC','#FF4081','#C86CE6','#F44336','#FFAA00']}
-  this.graphData = JSON.stringify(graphdata);
+  this.showDepartmentSalary();
+
 }
 
   // Get com[asation] List
@@ -195,6 +197,41 @@ async showTemplate(tempNo, user_id){
 
 
 }
+
+async showDepartmentSalary(){
+  this.ngxService.start();
+  await(this._api.showDepartmentSalary().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data)
+      this.totalPercent = response.total[0];
+      this.percentData = response.data;
+      let graphdata = {label:[],percentage:[],colors:['#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC']}
+      let count = 0;
+      for(let item of this.percentData){
+        graphdata.label.push(item.department)
+        let per = (parseInt(this.totalPercent.total) *100)/parseInt(item.current)
+        console.log(per)
+        graphdata.percentage.push(per)
+        item['color'] = graphdata.colors[count]
+        count++;
+      }
+      this.graphData = JSON.stringify(graphdata);
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
+
+
+
+}
+
 
 
  // mail pay slip

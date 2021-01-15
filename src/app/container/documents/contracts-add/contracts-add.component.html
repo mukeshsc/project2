@@ -55,7 +55,7 @@
     <div fxLayout="row" class="" >
       <div fxFlex="100">
         <mat-label></mat-label>
-        <button mat-raised-button class="big-btn block-btn"  [disabled]="!registerForm.valid"  color="primary">Add Document</button>
+        <button mat-raised-button class="big-btn block-btn"  [disabled]="!registerForm.valid || files.length == 0"  color="primary">Add Document</button>
       </div>
     </div>
   </form>

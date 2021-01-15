@@ -19,11 +19,12 @@
               total salaries
             </span><br />
             <span class="card-title">
-              $20K
+              ${{totalPercent && totalPercent.total}}
             </span><br />
             <span class="card-info">
-              <mat-icon >south</mat-icon>
-              5.27%
+              <mat-icon class="blue-txt" *ngIf="totalPercent && totalPercent.sign == '+'">north</mat-icon>
+              <mat-icon class="red-txt" *ngIf="totalPercent && totalPercent.sign == '-'">south</mat-icon>
+              {{totalPercent && totalPercent.percent}}%
             </span><br />
             <span class="card-subtitle">
               Since last month
@@ -31,6 +32,26 @@
           </div>
           <div fxFlex="20">
             <app-doughnut *ngIf="graphData" [data]="graphData"></app-doughnut>
+          </div>
+          <div fxFlex="65">
+            <div class="scroller">
+              <div class="scroll-x">
+              <div class="department-detail-separation" *ngFor="let item of percentData">
+                <span class="bar" [ngStyle]="{background: item.color}"></span><br />
+                <span class="card-subtitle">
+                  {{item.department}}
+                </span><br />
+                <span class="card-title">
+                  ${{item.current}}
+                </span><br />
+                <span class="card-info">
+                  <mat-icon class="blue-txt" *ngIf="item.sign == '+'">north</mat-icon>
+                  <mat-icon class="red-txt" *ngIf="item.sign == '-'">south</mat-icon>
+                  {{item.percent}}%
+                </span>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
       </mat-card-content>

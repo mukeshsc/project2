@@ -10,7 +10,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="formData.user_Id" name="user_Id"  placeholder="Select Employee">
+          <mat-select [(ngModel)]="formData.user_Id" name="user_Id"  placeholder="Select Employee" required>
             <mat-option *ngFor="let emp of employeeList" [value]="emp.user_id">{{emp.first_name}} {{emp.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>
@@ -19,7 +19,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="leaveType" name="leaveType" (ngModelChange)="getLeaveType($event)"  placeholder="Select Leave Type">
+          <mat-select [(ngModel)]="leaveType" name="leaveType" (ngModelChange)="getLeaveType($event)"  placeholder="Select Leave Type" required>
             <mat-option *ngFor="let emp of leaveData" [value]="emp">{{emp.leave_Type}}</mat-option>
           </mat-select>
         </mat-form-field>

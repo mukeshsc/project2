@@ -226,7 +226,6 @@
         <th><b>Email</b></th>
         <th><b>Department</b></th>
         <th><b>Designation </b></th>
-        <th><b>Gender</b></th>
         <th><b>Insurance Plan</b></th>
         <th><b>Status</b></th>
       </tr>
@@ -237,8 +236,7 @@
             <td>{{itemData && itemData.first_name}} {{itemData && itemData.last_name}}</td>
             <td>{{itemData && itemData.email}}</td>
             <td>{{itemData && itemData.department}}</td>
-            <td>{{itemData && itemData.roleName}}</td>
-            <td>{{itemData && itemData.gender}}</td>
+            <td>{{itemData && itemData.designation}}</td>
             <td>{{itemData && itemData.insurance_plan_name}}</td>
             <td>
               <button mat-flat-button class="round-btn" *ngIf="itemData && itemData.status == 1" color="light">Active</button>

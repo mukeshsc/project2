@@ -704,6 +704,15 @@ showPaySlipReport(formData){
   });
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showPaySlipReport`, formData,{headers}).pipe(map(res => <any>res));
 }
+
+//barchart data
+showDepartmentSalary(){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showDepartmentSalary`, {headers}).pipe(map(res => <any>res));
+}
 }
 
 

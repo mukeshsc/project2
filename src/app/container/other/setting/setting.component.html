@@ -381,7 +381,16 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input placeholder="Salary Type" matInput maxlength="40" type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
+                          <input placeholder="Salary Type" list="salaryTypeList" matInput maxlength="40" type="text" #salaryType  [(ngModel)]="salarySet.salaryType"  name="salaryType" required autocomplete="off" />
+                          <datalist id="salaryTypeList">
+                            <option value="Basic Pay">
+                            <option value="Accommodation Allowance">
+                            <option value="Travel Allowance">
+                            <option value="Communication Allowance">
+                            <option value="Food Allowance">
+                            <option value="Schooling Allowance">
+                            <option value="Other Allowance">
+                          </datalist>
                         </mat-form-field>
                         <div *ngIf="salaryType.errors && salaryType.touched">
                           <span class="error" *ngIf="salaryType.errors?.required">Salary Type is mandatory.</span>
@@ -441,7 +450,17 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput maxlength="40" placeholder="Leave Type" type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                          <input matInput maxlength="40" list="leaveTypeList" placeholder="Leave Type" type="text" #leaveType  [(ngModel)]="leaveDataSet.leaveType"  name="leaveType" required autocomplete="off" />
+                          <datalist id="leaveTypeList">
+                            <option value="Annual leave">
+                            <option value="Medical leave">
+                            <option value="Study leave">
+                            <option value="Maternity/ Paternity leave">
+                            <option value="Compassionate leave">
+                            <option value="Hajj and Umrah leave">
+                            <option value="Leave without pay">
+                            <option value="National service & Reserve leave">
+                          </datalist>
                         </mat-form-field>
                         <div *ngIf="leaveType.errors && leaveType.touched">
                           <span class="error" *ngIf="leaveType.errors?.required">leave Type is mandatory.</span>
@@ -503,7 +522,25 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput  type="text" placeholder="Deaprtment" #departmentType maxlength="50"  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
+                          <input matInput  type="text" list="departmentTypeList" placeholder="Deaprtment" #departmentType maxlength="50"  [(ngModel)]="departmentSet.departmentType"  name="departmentType" required autocomplete="off" />
+                          <datalist id="departmentTypeList">
+                            <option value="Accounting & Finance">
+                            <option value="Administration">
+                            <option value="Compliance">
+                            <option value="Customer Service">
+                            <option value="Distribution">
+                            <option value="Human Resource">
+                            <option value="Information Technology">
+                            <option value="Legal">
+                            <option value="Management">
+                            <option value="Marketing">
+                            <option value="Office Support">
+                            <option value="Operations">
+                            <option value="Productions">
+                            <option value="Research and Development">
+                            <option value="Sales">
+                            <option value="Transformation">
+                          </datalist>
                         </mat-form-field>
                         <div *ngIf="departmentType.errors && departmentType.touched">
                           <span class="error" *ngIf="departmentType.errors?.required">Department name is mandatory.</span>
@@ -678,7 +715,16 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput maxlength="40" placeholder="Holiday Title" type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
+                          <input matInput maxlength="40" list="holidayTypeList" placeholder="Holiday Title" type="text" #event_Title  [(ngModel)]="holidaySet.event_Title"  name="event_Title" required autocomplete="off" />
+                          <datalist id="holidayTypeList">
+                            <option value="Commemoration Day">
+                            <option value="Eid al-Adha">
+                            <option value="Eid al-Fitr">
+                            <option value="Islamic New Year">
+                            <option value="National Day">
+                            <option value="New Year's Day">
+                            <option value="Prophet's Birthday">
+                          </datalist>
                         </mat-form-field>
                         <div *ngIf="event_Title.errors && event_Title.touched">
                           <span class="error" *ngIf="event_Title.errors?.required">Event name is mandatory.</span>
