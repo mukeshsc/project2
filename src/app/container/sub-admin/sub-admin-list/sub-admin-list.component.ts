@@ -24,7 +24,7 @@ export class SubAdminListComponent implements OnInit {
   responseData:any = [];
   imgPath = `${environment.apiBaseUrl}`;
   // set header column
-  displayedColumns: string[] = ['position', 'name', 'email', 'designation', 'status', 'action'];
+  displayedColumns: string[] = ['profile_picture', 'first_name', 'email', 'roleName', 'status', 'action'];
 
   //set static data for table
   dataSource = new MatTableDataSource([]);
@@ -51,12 +51,7 @@ export class SubAdminListComponent implements OnInit {
     if (response.success == true){
       console.log(response.data);
       this.responseData = response.data;
-      const arr = [];
-      for (const item of response.data){
-        const obj = {position: `${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.roleName, status: item.status,id:item.user_id,role:item.role, address:item.address,mobile:item.mobile};
-        arr.push(obj);
-      }
-      this.dataSource = new MatTableDataSource([...arr]);
+      this.dataSource = new MatTableDataSource([...this.responseData]);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
       console.log(this.dataSource);

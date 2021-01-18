@@ -74,7 +74,7 @@
               <button mat-flat-button class="round-btn" *ngIf="element.is_leave == 1" color="light">Approved</button>
               <button mat-flat-button class="round-btn" *ngIf="element.is_leave == 0" color="accent">Pending</button>
               <button mat-flat-button class="round-btn" *ngIf="element.is_leave == 2" color="warn">Rejected</button>
-              <button mat-flat-button class="round-btn" *ngIf="element.is_leave == 4" color="warn">Cancelled</button>
+              <button mat-flat-button class="round-btn" *ngIf="element.is_leave == 3" color="warn">Cancelled</button>
             </td>
           </ng-container>
 
@@ -83,7 +83,8 @@
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
               <span *ngIf="!accessPermission">No Permission</span>
-              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"  *ngIf="accessPermission  && element.is_leave != 1"
+              <span class="blue-txt" *ngIf="element.is_leave != 0">{{element.leave_From}} to {{element.leave_To}}&nbsp;&nbsp;</span>
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"  *ngIf="accessPermission  && element.is_leave == 0"
               matTooltip="Modify" (click)="openModifyModal(element)"  color="light"><mat-icon color="green">update</mat-icon></button>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"  *ngIf="accessPermission && element.is_leave == 0"
               matTooltip="Approve" (click)="confirmDialog(element.leaveDetails_id,element.leaveType_Id,'1')"  color="light"><mat-icon color="primary">check</mat-icon></button>

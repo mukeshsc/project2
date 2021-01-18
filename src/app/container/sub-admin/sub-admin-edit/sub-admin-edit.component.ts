@@ -67,7 +67,7 @@ export class SubAdminEditComponent implements OnInit {
       working_HoursFrom: this.userData.working_HoursFrom,
       designation:this.userData.designation,
       company_id: this.userData.company_id,
-      role: this.userData.role,
+      role: parseInt(this.userData.role),
       ip_Address: '123',
       created_By : JSON.parse(localStorage.getItem('userData')).user_id,
       updated_By: JSON.parse(localStorage.getItem('userData')).user_id,

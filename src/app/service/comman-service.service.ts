@@ -713,6 +713,23 @@ showDepartmentSalary(){
     });
     return this.http.get(`${environment.apiBaseUrl}${environment.apiPath}showDepartmentSalary`, {headers}).pipe(map(res => <any>res));
 }
+
+//get company by id
+showCompanyByID(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}api/v1/superAdmin/showCompanyByID`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+// edit company
+editCompany(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}editCompany`,formData, {headers}).pipe(map(res => <any>res));
+}
 
+}
