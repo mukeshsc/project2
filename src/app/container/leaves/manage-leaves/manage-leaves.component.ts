@@ -65,7 +65,8 @@ export class ManageLeavesComponent implements OnInit {
     "leaveTo":'' ,
     "fromHour": "00:00:00",
     "toHour": "00:00:00",
-    "hrReason":"NA"
+    "hrReason":"NA",
+    "isLeave":null
     };
 
   employeeList:any= [];
