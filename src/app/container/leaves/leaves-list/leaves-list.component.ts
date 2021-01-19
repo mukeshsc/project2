@@ -24,7 +24,7 @@ import { EmployeeLeaveManageComponent } from '../employee-leave-manage/employee-
 })
 export class LeavesListComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['profile_picture', 'name', 'email', 'department', 'is_leave', 'action'];
+displayedColumns: string[] = ['profile_picture', 'name', 'email', 'department','leave_From', 'is_leave', 'action'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
@@ -82,36 +82,6 @@ await(this._api.getLeave(this.formData).subscribe(res => {
   console.log(res);
 }, err => {
   const error = err.error;
-  this.ngxService.stop();
-}));
-
-}
-
-async updateLeaveRequest(id,leaveType,status){
-
-  let formData = {
-    "leaveDetailsId":id,
-    "userId":JSON.parse(localStorage.getItem('userData')).user_id,
-    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
-    "isLeave":status,
-    "ip_Address":"12.32.33.22",
-    "leaveType_Id":leaveType,
-    "hrReason":'NA'
-  }
-  this.ngxService.start();
-await(this._api.requestEmployeeleave(formData).subscribe(res => {
-  this.ngxService.stop();
-  const response: any = res;
-  if (response.success == true){
-    this.openSnackBar(response.message)
-    this.getList();
-  }else{
-    this.openErrrorSnackBar(response.message)
-  }
-  console.log(res);
-}, err => {
-  const error = err.error;
-  this.openErrrorSnackBar(error)
   this.ngxService.stop();
 }));
 

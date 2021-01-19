@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs } from '@syncfusion/ej2-angular-schedule';
 import { createElement, extend } from '@syncfusion/ej2-base';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 
@@ -23,35 +23,16 @@ export class CalendarComponent implements OnInit {
   public data: any = [];
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel = { dataSource: this.data };
-  leaveData:any = [];
+  leaveData:any = [{label:'Event',value:'event'},{label:'Holiday',value:'holiday'}];
   files: File[] = [];
   selectedEvent:any = []
-
+  callApi:boolean;
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getLeaveType();
     this.getEvent();
   }
 
- // Get Leave Type
- async getLeaveType(){
-  this.ngxService.start();
-  await(this._api.getleaveType().subscribe(res => {
-    this.ngxService.stop();
-    const response: any = res;
-    if (response.success == true){
-      console.log(response.data)
-      this.leaveData = response.data;
-    }else{
-    }
-    console.log(res);
-  },err => {
-    const error = err.error;
-    this.ngxService.stop();
-  }));
-
-}
 
 //Get event
 async getEvent(){
@@ -59,10 +40,17 @@ async getEvent(){
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
-      // console.log(response.data)
-      let count = 0
+      console.log(response.data)
+      let colors = ['#3F51B5', ' #FFAA00', '#C86CE6', '#FF4081', '#15C1DC']
+      let count = 0;
       for(let item of response.data){
         count++;
+        let color = '#3F51B5';
+        if(item.isType == 'holiday'){
+          color = '#F44336';
+        }else{
+          color = colors[Math.floor(Math.random() * colors.length)]
+        }
         let obj = {
           Id: count,
           Subject: item.event_Title,
@@ -73,20 +61,23 @@ async getEvent(){
           icon:item.fileName,
           EventType:item.event_Type,
           targetAudience:item.target_Audeince,
-          calendarEvent_id:item.calendarEvent_id
+          calendarEvent_id:item.calendarEvent_id,
+          IsType:item.isType,
+          CategoryColor: color
         }
         this.data.push(obj)
       }
       console.log(this.data)
-      this.scheduleObj.saveEvent(this.data);
-      this.openSnackBar(response.message);
+        this.scheduleObj.saveEvent(this.data);
+        this.callApi = false;
+        this.scheduleObj.refresh();
+
     }else{
-      this.openSnackBar(response.message);
+      this.openErrrorSnackBar(response.message);
     }
-    console.log(res);
   },err => {
     const error = err.error;
-    this.openSnackBar(error.message);
+    this.openErrrorSnackBar(error.message);
     this.ngxService.stop();
   }));
 }
@@ -103,7 +94,7 @@ async addNew() {
 
 // add custome field on event add modal
 onPopupOpen(args: PopupOpenEventArgs): void {
-  // console.log(args);
+  this.callApi = true;
   if (args.type === 'Editor') {
       // Create required custom elements in initial time
       if (!args.element.querySelector('.custom-field-row')) {
@@ -119,7 +110,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           row.appendChild(container);
           let drowDownList: DropDownList = new DropDownList({
               dataSource:this.leaveData,
-              fields: { text: 'leave_Type', value: 'leaveType_id' },
+              fields: { text: 'label', value: 'value' },
               value: (args.data as { [key: string]: Object }).EventType as string,
               floatLabelType: 'Always', placeholder: 'Select Event Type'
           });
@@ -174,9 +165,31 @@ onPopupOpen(args: PopupOpenEventArgs): void {
 }
 
 // add new event
-async onActionComplete(){
-  if(this.data && this.data.length > 0){
-    console.log(this.data)
+async onActionComplete(event){
+  if(this.callApi){
+  if(event.requestType == "eventRemoved"){
+    let formData = {
+      calendarEvent_id:event.data[0].calendarEvent_id
+    }
+    await(this._api.companyDeleteCalendarEvent(formData).subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        this.openSnackBar(response.message);
+        this.getEvent();
+
+      }else{
+        this.openErrrorSnackBar(response.message);
+      }
+      console.log(res);
+      // this.getEvent();
+    },err => {
+      const error = err.error;
+      this.openErrrorSnackBar(error.message);
+      this.ngxService.stop();
+    }));
+  }else{
+    if(this.data && this.data.length > 0){
     let data;
     if(this.data.length === 1){
       data =this.data[0]
@@ -201,16 +214,14 @@ async onActionComplete(){
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
-          // this.getEvent();
-
         }else{
-          this.openSnackBar(response.message);
+          this.openErrrorSnackBar(response.message);
         }
         console.log(res);
-        // this.getEvent();
+        this.getEvent();
       },err => {
         const error = err.error;
-        this.openSnackBar(error.message);
+        this.openErrrorSnackBar(error.message);
         this.ngxService.stop();
       }));
     }else{
@@ -219,19 +230,21 @@ async onActionComplete(){
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
-          this.getEvent();
         }else{
-          this.openSnackBar(response.message);
+          this.openErrrorSnackBar(response.message);
         }
         console.log(res);
-        // this.getEvent();
+        this.getEvent();
       },err => {
         const error = err.error;
-        this.openSnackBar(error.message);
+        this.openErrrorSnackBar(error.message);
         this.ngxService.stop();
       }));
     }
 
+
+    }
+  }
   }
 }
 // selectEvent
@@ -250,12 +263,35 @@ getTime(e){
   return moment(e).format('HH:mm A')
 }
 
- // alert message after api response
- openSnackBar(msg) {
+oneventRendered(args: EventRenderedArgs): void {
+  let categoryColor: string = args.data.CategoryColor as string;
+  if (!args.element || !categoryColor) {
+      return;
+  }
+  if (this.scheduleObj.currentView === 'Agenda') {
+      (args.element.firstChild as HTMLElement).style.borderLeftColor = categoryColor;
+  } else {
+      args.element.style.backgroundColor = categoryColor;
+  }
+}
+
+// alert message after api response success
+openSnackBar(msg) {
   this._snackBar.open(msg, 'Ok', {
     duration: 3000,
     horizontalPosition: 'right',
     verticalPosition: 'top',
+    panelClass: ['success-alert']
   });
 }
+// alert message after api response failure
+openErrrorSnackBar(msg) {
+  this._snackBar.open(msg, 'Ok', {
+    duration: 3000,
+    horizontalPosition: 'right',
+    verticalPosition: 'top',
+    panelClass: ['failure-alert']
+  });
+}
+
 }

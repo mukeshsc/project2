@@ -15,15 +15,8 @@
     <mat-toolbar color="light">
       <span class="mat-toolbar-title">Calendar</span>
       <span class="spacer"></span>
-      <mat-form-field class="search-field">
-        <mat-icon matSuffix>search</mat-icon>
-        <input matInput placeholder="Search">
-      </mat-form-field>
       <button mat-mini-fab color="primary" class="cal-button"  aria-label="Add new"  #addButton ejs-button id="addButton" (click)="addNew()" >
         <mat-icon>add</mat-icon>
-      </button>
-      <button mat-mini-fab color="light" class="cal-button"  aria-label="Filter">
-        <mat-icon>filter_list</mat-icon>
       </button>
       <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getEvent()">
         <mat-icon>sync</mat-icon>
@@ -37,7 +30,8 @@
     [selectedDate]="selectedDate"
     [eventSettings]="eventSettings"
     (popupOpen)="onPopupOpen($event)"
-    (actionComplete)="onActionComplete()"
+    (eventRendered)="oneventRendered($event)"
+    (actionComplete)="onActionComplete($event)"
     (eventClick)="onEventClick($event)" >
       <e-views>
         <e-view option="Month"></e-view>

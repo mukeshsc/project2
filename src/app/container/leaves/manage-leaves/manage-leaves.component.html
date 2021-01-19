@@ -3,7 +3,7 @@
 <div class="modal-box">
   <div fxLayout="row" class="">
     <div fxFlex="100">
-      <span class="card-title">Filter</span></div>
+      <span class="card-title">Update request</span></div>
   </div>
   <mat-dialog-content class="mat-typography">
 <form name="filterForm" (ngSubmit)="updateLeave()" #filterForm="ngForm">
@@ -36,6 +36,8 @@
           <mat-select [(ngModel)]="formData.isType" name="isType"  placeholder="Action">
             <mat-option value="modify">Modify</mat-option>
             <mat-option value="cancel">Cancel</mat-option>
+            <mat-option value="reject">Reject</mat-option>
+            <mat-option value="accept">Accept</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

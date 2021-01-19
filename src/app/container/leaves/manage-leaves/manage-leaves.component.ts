@@ -66,7 +66,8 @@ export class ManageLeavesComponent implements OnInit {
     "fromHour": "00:00:00",
     "toHour": "00:00:00",
     "hrReason":"NA",
-    "isLeave":null
+    "isLeave":null,
+    "leaveType_Id":''
     };
 
   employeeList:any= [];
@@ -82,6 +83,7 @@ export class ManageLeavesComponent implements OnInit {
     this.formData.leaveTo = _moment(this.getAllData.leave_To).format('');
     this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.userId = this.getAllData.user_Id;
+    this.formData.leaveType_Id = this.getAllData.leaveType_Id;
   }
 
 
@@ -90,6 +92,9 @@ async updateLeave(){
   if(this.formData.isType == ''){
     this.openErrrorSnackBar('Please select Action type to update this request')
   }else{
+    this.formData.isLeave = this.formData.isType == 'reject' && 2;
+    this.formData.isLeave = this.formData.isType == 'accept' && 1;
+    this.formData.isType = (this.formData.isType == 'reject' || this.formData.isType == 'accept')?'request':this.formData.isType;
     this.ngxService.start();
     await(this._api.modifyEmployeeleave(this.formData).subscribe(res => {
       this.ngxService.stop();
