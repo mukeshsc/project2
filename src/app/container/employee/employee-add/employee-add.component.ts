@@ -78,12 +78,15 @@ export class EmployeeAddComponent implements OnInit {
   salaryData:any = [];
   employeeList:any = [];
   insuranceData:any = [];
+  hrAdmin:any= ''
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<EmployeeAddComponent>) { }
 
   ngOnInit(): void {
+    this.hrAdmin = JSON.parse(localStorage.getItem('userData')).user_id
     this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.created_By = JSON.parse(localStorage.getItem('userData')).user_id;
     this.formData.updated_By = JSON.parse(localStorage.getItem('userData')).user_id;
+    this.formData.reporting_Manager =  JSON.parse(localStorage.getItem('userData')).user_id;
     this.getRole();
     this.getDepartment();
     this.getLeave();

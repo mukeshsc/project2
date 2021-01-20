@@ -38,7 +38,7 @@
               <form name="loginform" (ngSubmit)="login()" #loginform="ngForm">
                   <mat-label>Email Address</mat-label>
                   <mat-form-field appearance="standard">
-                    <input matInput type="email" #email="ngModel" [(ngModel)]="formData.email" name="email" required autocomplete="off"  maxlength="50" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" />
+                    <input matInput type="email" #email="ngModel" [(ngModel)]="formData.email" name="email" required autocomplete="off"  maxlength="50" pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" />
                     <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
                   </mat-form-field>
                   <div [hidden]="email.valid || email.untouched">
