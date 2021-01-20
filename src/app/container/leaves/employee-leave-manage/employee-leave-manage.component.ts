@@ -2,12 +2,11 @@ import { Component, Inject, OnInit } from '@angular/core';
 
 import { CommonServiceService } from 'src/app/service/comman-service.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
-
+import * as _moment from 'moment';
 import {
   MatSnackBar
 } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import * as moment from 'moment';
 
 export interface DialogData {
   userId: string;

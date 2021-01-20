@@ -656,7 +656,7 @@ async updateSmtp(){
         this.ngxService.stop();
       }));
     }else{
-      this.openErrrorSnackBar('File size is too large');
+      this.openErrrorSnackBar('Please select jpg, png, gif, jpeg input file type');
     }
   }
 
@@ -687,7 +687,7 @@ async updateSmtp(){
         this.ngxService.stop();
       }));
     }else{
-      this.openErrrorSnackBar('File size is too large');
+      this.openErrrorSnackBar('Please select jpg, png, gif, jpeg input file type');
     }
   }
 
@@ -875,7 +875,7 @@ ChkOldNew(e){
 
 // date formating
 formatDate(date){
- return _moment(date).format('MM/DD/YYYY')
+ return _moment(date).format('DD/MM/YYYY')
 }
 
 //Check mandat field

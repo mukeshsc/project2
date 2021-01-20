@@ -174,23 +174,11 @@ this._snackBar.open(msg, 'Ok', {
   panelClass: ['failure-alert']
 });
 }
-// // confirm message
-// confirmDialog(id,leaveType,status): void {
-//   const message = `Are you sure you want to do this?`;
+// date formating
+formatDate(date){
+  return moment(date).format('DD-MM-YYYY')
+ }
 
-//   const dialogData = new ConfirmDialogModel('Confirm Action', message);
-
-//   const dialogRef = this.dialog.open(ConfirmBoxComponent, {
-//     maxWidth: '400px',
-//     data: dialogData
-//   });
-
-//   dialogRef.afterClosed().subscribe(dialogResult => {
-//     if(dialogResult){
-//       this.updateLeaveRequest(id,leaveType,status);
-//     }
-//   });
-// }
 // Download list in CSV
 export_table_to_csv() {
   this.ngxService.start();
