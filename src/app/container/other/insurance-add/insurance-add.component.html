@@ -43,19 +43,19 @@
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="BenifitType" name="BenifitType" placeholder="Table of Benefit Type" #role required>
+          <mat-select [(ngModel)]="formData.benefitType" name="benefitType" placeholder="Table of Benefit Type" #role required>
             <mat-option  value="0">Link</mat-option>
             <mat-option  value="1">Document</mat-option>
           </mat-select></mat-form-field>
       </div>
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
-      <div fxFlex="100" *ngIf="BenifitType == '0'">
+      <div fxFlex="100" *ngIf="formData.benefitType == '0'">
         <mat-form-field class="form-fields">
           <input matInput  type="url" placeholder="Table of Benefit Link"  name="Insurance_Benefit" [(ngModel)]="formData.Insurance_Benefit" autocomplete="off" required />
         </mat-form-field>
       </div>
-      <div fxFlex="100" *ngIf="BenifitType == '1'">
+      <div fxFlex="100" *ngIf="formData.benefitType == '1'">
         <mat-label>Table of Benefit Document</mat-label>
         <div class="dropzone">
           <ngx-dropzone (change)="onSelect($event)">
@@ -73,19 +73,19 @@
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="NetworkType" placeholder="Network Type" name="NetworkType" #role required>
+          <mat-select [(ngModel)]="formData.networkType" placeholder="Network Type" name="networkType" #role required>
             <mat-option  value="0">Link</mat-option>
             <mat-option  value="1">Document</mat-option>
           </mat-select></mat-form-field>
       </div>
     </div>
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
-      <div fxFlex="100" *ngIf="NetworkType == '0'">
+      <div fxFlex="100" *ngIf="formData.networkType == '0'">
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Network Link" type="url"  name="Network" [(ngModel)]="formData.Network" placeholder="Network"  autocomplete="off" required />
+          <input matInput placeholder="Network Link" type="url"  name="Network" [(ngModel)]="formData.Network"  autocomplete="off" required />
         </mat-form-field>
       </div>
-      <div fxFlex="100" *ngIf="NetworkType == '1'">
+      <div fxFlex="100" *ngIf="formData.networkType == '1'">
         <mat-label>Network Document</mat-label>
         <div class="dropzone">
           <ngx-dropzone (change)="onSelect1($event)">
@@ -98,6 +98,14 @@
             </ngx-dropzone-preview>
           </ngx-dropzone>
         </div>
+      </div>
+    </div>
+
+    <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
+      <div fxFlex="100" >
+        <mat-form-field class="form-fields">
+          <textarea matInput  name="description" [(ngModel)]="formData.description" placeholder="Description"  autocomplete="off" required ></textarea>
+        </mat-form-field>
       </div>
     </div>
 

@@ -65,10 +65,10 @@ export class InsuranceEditComponent implements OnInit {
     insurance_Benefit:'',
     network:'',
     ip_Address:'123',
-    // company_id: null,
+    "description" :'',
+    "networkType" :'0',
+    "benefitType":'0'
   };
-  BenifitType = '0';
-  NetworkType = '0';
   roleData: any = [];
   files:any=[];
   files1:any=[];
@@ -83,6 +83,9 @@ export class InsuranceEditComponent implements OnInit {
     this.formData.insurance_Benefit = JSON.parse(this.data.insurance).sub.insurance_Benefit;
     this.formData.network = JSON.parse(this.data.insurance).sub.network;
     this.formData.insuranceDetail_id = JSON.parse(this.data.insurance).sub.insuranceDetail_id;
+    this.formData.description = JSON.parse(this.data.insurance).sub.description;
+    this.formData.networkType = JSON.parse(this.data.insurance).sub.networkType;
+    this.formData.benefitType = JSON.parse(this.data.insurance).sub.benefitType;
     console.log(this.formData.expiryDate)
   }
 

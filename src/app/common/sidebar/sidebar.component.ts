@@ -140,7 +140,7 @@ export class SidebarComponent implements OnInit {
       children:[
         {
           title:'Active Survey',
-          url:'/dashboard',
+          url:'/active-survey',
           open:false,
           icon:'stop_circle',
           children:[],
@@ -183,28 +183,11 @@ export class SidebarComponent implements OnInit {
 
     {
       title:'Leave management',
-      url:'/dashboard',
+      url:'/leaves',
       open:false,
       icon:'sentiment_satisfied',
       access:true,
-      children:[
-        {
-          title:'Leave Request',
-          url:'/leaves',
-          open:true,
-          icon:'stop_circle',
-          children:[],
-          access:true,
-        },
-        {
-          title:'Assign A Leave',
-          url:'/dashboard',
-          open:true,
-          icon:'stop_circle',
-          children:[],
-          access:true,
-        }
-      ]
+      children:[]
     },
     {
       title:'divider',

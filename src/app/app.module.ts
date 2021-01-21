@@ -87,6 +87,7 @@ import { PayslipOneComponent } from './container/salary/payslip-one/payslip-one.
 import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
 import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
 import { DoughnutComponent } from './helpers/chart/doughnut/doughnut.component';
+import { ActiveServeyComponent } from './container/survey/active-servey/active-servey.component';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { DoughnutComponent } from './helpers/chart/doughnut/doughnut.component';
     PayslipOneComponent,
     PayslipEditComponent,
     PayslipGenerateComponent,
-    DoughnutComponent
+    DoughnutComponent,
+    ActiveServeyComponent
   ],
   imports: [
     BrowserModule,

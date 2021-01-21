@@ -25,6 +25,7 @@ import { SubAdminListComponent } from './container/sub-admin/sub-admin-list/sub-
 import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.component';
 import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
 import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
+import { ActiveServeyComponent } from './container/survey/active-servey/active-servey.component';
 
 
 const routes: Routes = [
@@ -53,6 +54,7 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent,canActivate: [AuthGuardService] },
   { path: 'sub-admin', component: SubAdminListComponent,canActivate: [AuthGuardService] },
   { path: 'leaves', component: LeavesListComponent,canActivate: [AuthGuardService] },
+  { path: 'active-survey', component: ActiveServeyComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

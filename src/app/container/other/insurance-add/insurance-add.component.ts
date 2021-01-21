@@ -61,10 +61,10 @@ export class InsuranceAddComponent implements OnInit {
     Insurance_Benefit:'',
     Network:'',
     ip_Address:'123',
-    // company_id: null,
+    "description" :'',
+    "networkType" :'0',
+    "benefitType":'0'
   };
-  BenifitType = '0';
-  NetworkType = '0';
   roleData: any = [];
   files:any=[];
   files1:any=[];
