@@ -197,13 +197,33 @@ async onActionComplete(event){
       data = this.data.pop();
     }
     console.log(data)
+    let repeatArr = [];
+    let repeat = data.RecurrenceRule.split(';');
+    for(let item of repeat){
+      let param = item.split('=');
+      let obj  = {key:param[0],value:param[1]}
+      repeatArr.push(obj)
+    }
+    let repeatType = 0
+    if(repeatArr[0].value == 'WEEKLY'){
+      repeatType = 2
+    }else if(repeatArr[0].value == 'DAILY'){
+      repeatType = 1
+    }else if(repeatArr[0].value == 'MONTHLY'){
+      repeatType = 3
+    }else if(repeatArr[0].value == 'YEARLY'){
+      repeatType = 4
+    }
+
     let formData = {
-      "event_Type":data.EventType != null?data.EventType:this.leaveData[0].leaveType_id,
+      "event_Type":data.EventType != null?data.EventType:'event',
       "event_StartDate":new Date(data.StartTime),
       "event_EndDate":new Date(data.EndTime),
       "target_Audeince":data.targetAudience != null?data.targetAudience : 0,
       "event_Description":data.Description,
       "fileName":"",
+      "repeatType":repeatType,
+      "repeatArray":repeatArr,
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0
     }

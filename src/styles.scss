@@ -200,6 +200,19 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
     text-transform: capitalize;
     opacity: 0.5;
   }
+  .mat-drawer-content.mat-drawer-content.example-is-mobile {
+    margin-left: 0 !important;
+  }
+  .example-is-mobile {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+  }
+  .example-is-mobile  {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+  }
   .mat-drawer-inner-container {
     max-height: calc(100vh - 50px);
     padding: 20px;
@@ -805,6 +818,34 @@ font-size: 12px;
       margin-bottom:10px;
     }
   }
+}
+.current-time{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-35) var(--unnamed-font-family-poppins);
+  letter-spacing: var(--unnamed-character-spacing-0);
+  color: var(--unnamed-color-ffaa00);
+  text-align: left;
+  font: normal normal 600 24px/35px Poppins;
+  letter-spacing: 0px;
+  color: #FFAA00;
+  text-transform: capitalize;
+  opacity: 1;
+}
+.current-status-survey{
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-35) var(--unnamed-font-family-poppins);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-000000);
+text-align: left;
+font: normal normal 600 24px/35px Poppins;
+letter-spacing: 0px;
+color: #000000;
+text-transform: capitalize;
+opacity: 1;
+}
+.surve-time-col {
+  background: #fafafa;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom: 10px !important;
 }
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey {
   width: 100%;
