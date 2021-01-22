@@ -35,6 +35,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -88,6 +89,11 @@ import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-ed
 import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
 import { DoughnutComponent } from './helpers/chart/doughnut/doughnut.component';
 import { ActiveServeyComponent } from './container/survey/active-servey/active-servey.component';
+import { AddSurveyComponent } from './container/survey/add-survey/add-survey.component';
+import { ViewSurveyComponent } from './container/survey/view-survey/view-survey.component';
+import { ListSurveyComponent } from './container/survey/list-survey/list-survey.component';
+import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
+import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.component';
 
 @NgModule({
   declarations: [
@@ -137,7 +143,12 @@ import { ActiveServeyComponent } from './container/survey/active-servey/active-s
     PayslipEditComponent,
     PayslipGenerateComponent,
     DoughnutComponent,
-    ActiveServeyComponent
+    ActiveServeyComponent,
+    AddSurveyComponent,
+    ViewSurveyComponent,
+    ListSurveyComponent,
+    DetailSurveyComponent,
+    VerticalBarComponent
   ],
   imports: [
     BrowserModule,
@@ -179,7 +190,8 @@ import { ActiveServeyComponent } from './container/survey/active-servey/active-s
     MatDatepickerModule,
     MatNativeDateModule,
     NgxDaterangepickerMd.forRoot(),
-    NgxMatSelectSearchModule
+    NgxMatSelectSearchModule,
+    MatProgressSpinnerModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule],
   bootstrap: [AppComponent]

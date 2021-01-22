@@ -99,7 +99,7 @@
       <div fxFlex="50">
         <mat-form-field class="form-fields">
           <mat-select [(ngModel)]="formData.reporting_Manager" name="reporting_Manager" #reporting_Manager  placeholder="Reporting Manager">
-            <mat-option *ngFor="let emp of employeeList" [value]="emp.user_id">{{emp.first_name}} {{emp.last_name}}</mat-option>
+            <mat-option *ngFor="let emp of employeeList" value="{{emp.first_name}} {{emp.last_name}}">{{emp.first_name}} {{emp.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

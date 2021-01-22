@@ -109,7 +109,10 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
   color: var(--unnamed-color-000000);
   text-transform: var(--unnamed-text-transform-titlecase);
   }
-
+  .mat-toolbar.mat-primary {
+    background: #3F51B5 !important;
+    color: #fff;
+  }
   .primary-txt{
     color:var(--unnamed-color-3f51b5);
     color:#3f51b5
@@ -133,7 +136,9 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
     color:var(--unnamed-color-3f51b5) !important;
 
   }
-
+  .mat-flat-button.mat-green, .mat-raised-button.mat-green, .mat-fab.mat-green, .mat-mini-fab.mat-green {
+    background-color: #1ec41e;color:#fff;
+  }
   .mat-icon.mat-green {
     color: #1ec41e;
   }
@@ -183,6 +188,59 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
         }
       }
 
+    }
+  }
+  .quesOption {
+    flex-direction: column;
+    border: none;
+    width: 100%;
+    padding: 0;
+
+    .mat-radio-container {
+      height: 100%;
+      margin-top: 67px;
+      margin-left: 23px;
+    }
+  }
+  .toolbox {
+    background: #0190FF;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    right: -80px;
+    padding: 10px 0;
+    color: #fff;
+    border-radius: 10px;
+    mat-icon{
+      margin:20px;
+    }
+  }
+  .form-ques {
+    background: #fff;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 0 15px;
+    .mat-form-field {
+      border: none !important;
+    }
+    mat-label {
+      padding: 10px 15px 0px !important;
+      font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-normal) var(--unnamed-font-size-15)/21px var(--unnamed-font-family-poppins);
+      letter-spacing: var(--unnamed-character-spacing-0);
+      text-align: left;
+      font: normal normal normal 15px/21px Poppins;
+      letter-spacing: 0px;
+      color: #99A7B0;
+      text-transform: capitalize;
+      opacity: 1;
+    }
+    .mat-form-field-infix {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    .mat-form-field-wrapper {
+      padding-bottom: 10px !important;
     }
   }
   mat-card {
@@ -847,6 +905,74 @@ opacity: 1;
   border-radius: 10px;
   margin-bottom: 10px !important;
 }
-app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey {
+.row-title {
+  font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/27px var(--unnamed-font-family-poppins);
+letter-spacing: var(--unnamed-character-spacing-0);
+color: var(--unnamed-color-3d3d3d);
+text-align: left;
+font: normal normal 600 18px/27px Poppins;
+letter-spacing: 0px;
+color: #3D3D3D;
+opacity: 1;
+}
+.question-section {
+  background: #F5F6FB;
+  padding: 20px;
+  margin-bottom: 10px !important;
+
+}
+.progress-bar-detail{
+  position:relative;
+
+  .mat-progress-spinner {
+    width: 60px !important;
+    height: 60px !important;
+    svg {
+      width: 50px !important;
+      height: 50px !important;
+    }
+  }
+  span.spinner-value {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    font-size: 12px;
+  }
+  p {
+    text-align: revert;
+  }
+}
+ul.paginations {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  align-items: center;
+  li{
+    font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) 18px/27px var(--unnamed-font-family-poppins);
+    letter-spacing: var(--unnamed-character-spacing-0);
+    color: var(--unnamed-color-000000);
+    text-align: center;
+    font: normal normal 600 18px/27px Poppins;
+    letter-spacing: 0px;
+    color: #bababa;
+    text-transform: capitalize;
+    list-style: none;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #E0E0E0;
+    margin: 0 5px;
+    text-align: center;
+    border-radius: 100%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    cursor: pointer;
+  }
+  .active-page{
+    background: #FFAA00;
+    color:#fff;
+  }
+}
+app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey, app-add-survey,app-view-survey, app-list-survey, app-detail-survey {
   width: 100%;
 }

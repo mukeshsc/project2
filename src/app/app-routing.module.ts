@@ -26,6 +26,9 @@ import { LeavesListComponent } from './container/leaves/leaves-list/leaves-list.
 import { PayslipEditComponent } from './container/salary/payslip-edit/payslip-edit.component';
 import { PayslipGenerateComponent } from './container/salary/payslip-generate/payslip-generate.component';
 import { ActiveServeyComponent } from './container/survey/active-servey/active-servey.component';
+import { AddSurveyComponent } from './container/survey/add-survey/add-survey.component';
+import { ListSurveyComponent } from './container/survey/list-survey/list-survey.component';
+import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
 
 
 const routes: Routes = [
@@ -55,6 +58,9 @@ const routes: Routes = [
   { path: 'sub-admin', component: SubAdminListComponent,canActivate: [AuthGuardService] },
   { path: 'leaves', component: LeavesListComponent,canActivate: [AuthGuardService] },
   { path: 'active-survey', component: ActiveServeyComponent,canActivate: [AuthGuardService] },
+  { path: 'add-survey', component: AddSurveyComponent,canActivate: [AuthGuardService] },
+  { path: 'survey-list', component: ListSurveyComponent,canActivate: [AuthGuardService] },
+  { path: 'survey-detail/:id', component: DetailSurveyComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

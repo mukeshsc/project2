@@ -23,7 +23,7 @@ export class DoughnutComponent implements OnInit {
     this.doughnutChartColors =  [{ // all colors in order
       backgroundColor: graphData.colors
     }];
-    // this.doughnutChartLabels = graphData.label
+    this.doughnutChartLabels = graphData.label
     // for(let item of graphData.colors){
     //   this.doughnutChartColors.push({
     //     borderColor: item,

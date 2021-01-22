@@ -27,7 +27,7 @@
       <div fxFlex="40">
         <div fxLayout="column" fxflexfill class="" fxLayoutGap="10px grid">
           <div fxFlex>
-            <div fxLayout="row" fxflexfill class="surve-time-col" fxLayoutGap="10px grid" >
+            <div fxLayout="row" fxflexfill class="surve-time-col" fxLayoutGap="10px grid" [routerLink]="['/survey-list']">
               <div fxFlex="50">
                 <span class="current-time">{{currentTime()}}</span><br />
                 <span>Time Left</span>
@@ -69,7 +69,7 @@
           <button mat-mini-fab color="light" class="cal-button" aria-label="Sync">
             <mat-icon>filter_list</mat-icon>
           </button>
-          <button mat-mini-fab color="primary" class="cal-button"   aria-label="Add new"  *ngIf="accessPermission">
+          <button mat-mini-fab color="primary" class="cal-button"   aria-label="Add new" [routerLink]="['/add-survey']"  *ngIf="accessPermission">
             <mat-icon>add</mat-icon>
           </button>
         </mat-toolbar>
