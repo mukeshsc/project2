@@ -65,7 +65,7 @@ export class ManageLeavesComponent implements OnInit {
     "leaveTo":'' ,
     "fromHour": "00:00:00",
     "toHour": "00:00:00",
-    "hrReason":"NA",
+    "hrReason":"",
     "isLeave":null,
     "leaveType_Id":''
     };
@@ -94,6 +94,8 @@ async updateLeave(){
   }else{
     this.formData.isLeave = this.formData.isType == 'reject' && 2;
     this.formData.isLeave = this.formData.isType == 'accept' && 1;
+    this.formData.isLeave = this.formData.isType == 'cancel' && 3;
+    this.formData.isLeave = this.formData.isType == 'modify' && 0;
     this.formData.isType = (this.formData.isType == 'reject' || this.formData.isType == 'accept')?'request':this.formData.isType;
     this.ngxService.start();
     await(this._api.modifyEmployeeleave(this.formData).subscribe(res => {

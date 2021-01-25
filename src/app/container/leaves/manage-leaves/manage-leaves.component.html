@@ -45,7 +45,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <textarea matInput name="hrReason"  #hrReason="ngModel" [(ngModel)]="formData.hrReason"  autocomplete="off" placeholder="HR Reason"></textarea>
+          <textarea matInput name="hrReason"  #hrReason="ngModel" [(ngModel)]="formData.hrReason"  autocomplete="off" placeholder="HR Reason" required></textarea>
         </mat-form-field>
         <div [hidden]="hrReason.valid || hrReason.untouched">
           <span class="error" *ngIf="hrReason.errors?.required">Reasone is mandatory.</span>

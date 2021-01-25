@@ -81,7 +81,7 @@
                 matTooltip="Activate" *ngIf="element.status != 1 && accessPermission" color="light"  (click)="statusSubAdmin(element.id,'1')"><mat-icon color="primary">lock_open</mat-icon></button>
 
                 <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-                matTooltip="Delete" *ngIf="accessPermission"  color="light" (click)="confirmDialog(element.id)"><mat-icon color="warn">delete</mat-icon></button>
+                matTooltip="Delete" *ngIf="accessPermission"  color="light" (click)="confirmDialog(element.user_id)"><mat-icon color="warn">delete</mat-icon></button>
                 <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(element)"
                 matTooltip="Edit"  *ngIf="accessPermission" color="light"><mat-icon color="green">edit</mat-icon></button>
               </td>

@@ -122,11 +122,6 @@
             <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
           </ng-container>
 
-          <!-- id for csv use Column -->
-          <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header> User Id (CSV use) </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
@@ -171,13 +166,6 @@
 <div id="sampleCsv" style="display:none">
   <table >
     <thead>
-      <tr>
-        <td colspan=13 >
-          <h5 class="mb-0" style="font-size: 13px;">
-           Set your data in this csv as per header column
-          </h5>
-        </td>
-      </tr>
       <tr style="text-align: left;">
         <th *ngFor="let c of csvFile"><b>{{c}}</b></th>
       </tr>
@@ -190,7 +178,7 @@
         <td>joh@gmail.com</td>
         <td>set department id here from setting panel</td>
         <td>set designation(choose from President / Chairman Chief / Executive Officer / Managing Director / General Manager / Director / Vice President / Asst General Manager / Chief Operating Officer / Chief Markeing Officer / Chief Technology Officer / Chief People Officer / Chief Innovation Officer / Asst General Manager / Asst Director / Asst Vice President / Finance Manager / Purchasing Manager / Operating Manager / HR & Admin Manager / Sales Manager / Marketing Manager / Business Development Manager / Transformation Officer / Manager / Head of the Department / Team Leader / Asst Manager / Asst Manager Finance / Asst Manager HR & Admin / Senior Engineer / Accountant / Senior Accountant / HR & Admin Executive / Personal Assistant / Executive)</td>
-        <td>Select id from employee table (id for csv)</td>
+        <td>Name here</td>
         <td>YYYY-MM-DD HH:mm:ss</td>
         <td>Plan name (select from isurance plan table)</td>
         <td>type in number</td>
@@ -216,7 +204,7 @@
       <tr>
         <td colspan=13 >
           <h5 class="mb-0" style="font-size: 13px;">
-           Comapny List
+           Employee List
           </h5>
         </td>
       </tr>

@@ -47,9 +47,6 @@
             <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
-          <button mat-mini-fab mat-flat-button color="primary" class="cal-button" *ngIf="accessPermission"  aria-label="Add new" (click)="openContractAddModal('')" >
-            <mat-icon>add</mat-icon>
-          </button>
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Download" mat-flat-button  color="light" (click)="export_table_to_csv()" ><mat-icon color="primary" >cloud_download</mat-icon></button>
                 <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
@@ -57,6 +54,10 @@
 
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission && eanbled" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Edit"   color="light"><mat-icon color="warn" (click)="confirmDialog()">delete</mat-icon></button>
+
+          <button mat-mini-fab mat-flat-button color="primary" class="cal-button" *ngIf="accessPermission"  aria-label="Add new" (click)="openContractAddModal('')" >
+            <mat-icon>add</mat-icon>
+          </button>
         </mat-toolbar>
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -88,7 +89,7 @@
 
           <!-- contractValidity Column -->
           <ng-container matColumnDef="expiry_Date">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Contract Validity </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Expiry Date </th>
             <td mat-cell *matCellDef="let element"> {{element.expiry_Date}} </td>
           </ng-container>
 

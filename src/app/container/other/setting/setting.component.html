@@ -590,9 +590,9 @@
                     <tr *ngFor="let d of docTypeData; let i= index;">
                       <td>{{i+1}}</td>
                       <td>{{d.document_Type}}</td>
-                      <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
-                      <td>{{d.dependent == 1?'Mandatory':'Optional'}}</td>
-                      <td>{{d.expires == 1?'Expirable':'Not Expirable'}}</td>
+                      <td>{{d.isCheck == 1?'Yes':'No'}}</td>
+                      <td>{{d.dependent == 1?'Yes':'No'}}</td>
+                      <td>{{d.expires == 1?'Yes':'No'}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
                       </td>
@@ -607,7 +607,7 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput  type="text" list="documentTypeList" (ngModelChange)="setDocImage($event)" placeholder="documentType" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
+                          <input matInput  type="text" list="documentTypeList" (ngModelChange)="setDocImage($event)" placeholder="Document Type Name" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
                           <datalist id="documentTypeList">
                             <option *ngFor="let item of getDocumentTypeData"  [value]="item.DocType">
                           </datalist>
@@ -654,7 +654,7 @@
                               color="primary"
                               [checked]="isCheck2"
                               (change)="CheckExpiry($event)"
-                          >Expirable
+                          >Yes
                           </mat-slide-toggle>
                         </section>
                       </div>

@@ -130,7 +130,11 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           let drowDownList1: DropDownList = new DropDownList({
             dataSource:[
               {
-                text:'Group 1',value:'1'
+                text:'All',value:'all'
+              },{
+                text:'Male',value:'male'
+              },{
+                text:'Female',value:'female'
               }
             ],
             fields: { text: 'text', value: 'value' },
@@ -140,23 +144,23 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           drowDownList1.appendTo(inputEle2);
           inputEle2.setAttribute('name', 'targetAudience');
 
-        // Custom Icon upload field
-          let row1: HTMLElement = createElement('div', { className: 'dropzone' });
-          let formElement1: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-          formElement1.lastChild.appendChild(row1);
-          let container1: HTMLElement = createElement('div', { className: 'dropzone-inner' });
-          let inputLabel: HTMLElement = createElement('h2', {className: 'uplaod-Label'})
-          inputLabel.innerHTML = 'Upload Icon (Optional)';
-          let inputLabelSub: HTMLElement = createElement('span', {className: 'uplaod-Label-sub'})
-          inputLabelSub.innerHTML = 'drag & drop to upload the document';
+        // // Custom Icon upload field
+        //   let row1: HTMLElement = createElement('div', { className: 'dropzone' });
+        //   let formElement1: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
+        //   formElement1.lastChild.appendChild(row1);
+        //   let container1: HTMLElement = createElement('div', { className: 'dropzone-inner' });
+        //   let inputLabel: HTMLElement = createElement('h2', {className: 'uplaod-Label'})
+        //   inputLabel.innerHTML = 'Upload Icon (Optional)';
+        //   let inputLabelSub: HTMLElement = createElement('span', {className: 'uplaod-Label-sub'})
+        //   inputLabelSub.innerHTML = 'drag & drop to upload the document';
 
-          let inputEle1: HTMLInputElement = createElement('input', {
-            className: 'e-field-upload', attrs: { name: 'EventIcon', type: 'file' }
-        }) as HTMLInputElement;
-          container1.appendChild(inputLabel);
-          container1.appendChild(inputLabelSub);
-          container1.appendChild(inputEle1);
-          row1.appendChild(container1);
+        //   let inputEle1: HTMLInputElement = createElement('input', {
+        //     className: 'e-field-upload', attrs: { name: 'EventIcon', type: 'file' }
+        // }) as HTMLInputElement;
+        //   container1.appendChild(inputLabel);
+        //   container1.appendChild(inputLabelSub);
+        //   container1.appendChild(inputEle1);
+        //   row1.appendChild(container1);
 
         // inputEle1.setAttribute('name', 'EventIcon');
     }

@@ -68,6 +68,7 @@ export class SubAdminListComponent implements OnInit {
 
 // Delete Sub Admin
 async deleteSubAdmin(id){
+  console.log(id)
   let fromData = {}
   for(let item of this.responseData){
     if(item.user_id == id){

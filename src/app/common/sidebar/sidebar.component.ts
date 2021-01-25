@@ -58,39 +58,6 @@ export class SidebarComponent implements OnInit {
       access:false,
     },
     {
-      title:'Sub Admin',
-      url:'/sub-admin',
-      open:false,
-      icon:'sentiment_satisfied',
-      children:[],
-      access:true,
-    },
-    {
-      title:'Roles & access',
-      url:'/dashboard',
-      open:false,
-      icon:'sentiment_satisfied',
-      access:false,
-      children:[
-        {
-          title:'User roles',
-          url:'/user-roles',
-          open:false,
-          icon:'stop_circle',
-          children:[],
-          access:false,
-        },
-        {
-          title:'Access',
-          url:'/access',
-          open:false,
-          icon:'stop_circle',
-          children:[],
-          access:false,
-        },
-      ]
-    },
-    {
       title:'Documents',
       url:'/contracts',
       open:false,
@@ -293,6 +260,39 @@ export class SidebarComponent implements OnInit {
         access:false,
       },
       ]
+    },
+    {
+      title:'Roles & access',
+      url:'/dashboard',
+      open:false,
+      icon:'sentiment_satisfied',
+      access:false,
+      children:[
+        {
+          title:'User roles',
+          url:'/user-roles',
+          open:false,
+          icon:'stop_circle',
+          children:[],
+          access:false,
+        },
+        {
+          title:'Access',
+          url:'/access',
+          open:false,
+          icon:'stop_circle',
+          children:[],
+          access:false,
+        },
+      ]
+    },
+    {
+      title:'Sub Admin',
+      url:'/sub-admin',
+      open:false,
+      icon:'sentiment_satisfied',
+      children:[],
+      access:true,
     },
     {
       title:'Settings',

@@ -11,7 +11,7 @@
     <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
       <div fxFlex="100">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="user" name="user" (ngModelChange)="getUserDetail($event)"  placeholder="Perticular Employee">
+          <mat-select [(ngModel)]="user" name="user" (ngModelChange)="getUserDetail($event)"  placeholder="Employee">
             <mat-option *ngFor="let emp of employeeList" [value]="emp">{{emp.first_name}} {{emp.last_name}}</mat-option>
           </mat-select>
         </mat-form-field>

@@ -108,7 +108,7 @@
       <div fxFlex="50">
         <mat-form-field class="form-fields">
           <mat-select [(ngModel)]="formData.insurance_plan_name" name="insurance_plan_name" #insurance_plan_name required placeholder="Insurance Plan Name">
-            <mat-option *ngFor="let emp of insuranceData" [value]="emp.insuranceDetail_id">{{emp.insurance_Plan}}</mat-option>
+            <mat-option *ngFor="let emp of insuranceData" [value]="emp.insuranceDetail_id">{{emp.insurance_Plan}} ({{emp.insurance_Name}})</mat-option>
           </mat-select>
         </mat-form-field>
       </div>

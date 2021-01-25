@@ -973,6 +973,18 @@ ul.paginations {
     color:#fff;
   }
 }
+.e-time-zone-container {
+  display: none;
+}
+.e-input-wrapper-side.e-end-on.e-form-left {
+  display: none;
+}
+.e-input-wrapper-side.e-days.e-form-left {
+  display: none;
+}
+.e-input-wrapper-side.e-non-week.e-form-left {
+  display: none;
+}
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey, app-add-survey,app-view-survey, app-list-survey, app-detail-survey {
   width: 100%;
 }

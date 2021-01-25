@@ -124,7 +124,7 @@ async deleteRole(id,status){
   // open add role modal
   openRoleAddModal() {
     const dialogRef = this.dialog.open(RoleAddComponent,{
-      width:'40%'
+      width:'50%'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -136,7 +136,7 @@ async deleteRole(id,status){
   // open add role modal
   openRoleEditModal(e) {
     const dialogRef = this.dialog.open(RoleEditComponent,{
-      width:'40%',
+      width:'50%',
       data: {
         role: JSON.stringify(e)
       }});

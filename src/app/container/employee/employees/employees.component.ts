@@ -23,7 +23,7 @@ import { FilterComponent } from '../filter/filter.component';
 })
 export class EmployeesComponent implements OnInit {
   // set header column
-  displayedColumns: string[] = ['position', 'name', 'email', 'designation', 'id', 'status', 'action'];
+  displayedColumns: string[] = ['position', 'name', 'email', 'designation',  'status', 'action'];
 
   //set static data for table
   dataSource = new MatTableDataSource([]);
