@@ -36,6 +36,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -94,6 +95,7 @@ import { ViewSurveyComponent } from './container/survey/view-survey/view-survey.
 import { ListSurveyComponent } from './container/survey/list-survey/list-survey.component';
 import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
 import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.component';
+import { SharedService } from './service/shared.service';
 
 @NgModule({
   declarations: [
@@ -191,9 +193,10 @@ import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.
     MatNativeDateModule,
     NgxDaterangepickerMd.forRoot(),
     NgxMatSelectSearchModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatButtonToggleModule
   ],
-  providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule],
+  providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule,SharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

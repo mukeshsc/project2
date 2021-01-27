@@ -77,7 +77,7 @@ export class InsuranceEditComponent implements OnInit {
   ngOnInit(): void {
     // this.formData.company_id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.insurance_Name = JSON.parse(this.data.insurance).main.insuranceName;
-    let d = (JSON.parse(this.data.insurance).main.date).split('/')
+    let d = (JSON.parse(this.data.insurance).sub.expiry_Date).split('/')
     this.formData.expiryDate = new Date(d[1]+'-'+d[0]+'-'+d[2]);
     this.formData.insurance_Plan = JSON.parse(this.data.insurance).sub.insurance_Plan;
     this.formData.insurance_Benefit = JSON.parse(this.data.insurance).sub.insurance_Benefit;

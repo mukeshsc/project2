@@ -23,12 +23,12 @@
               </div>
               <div fxFlex="50">
                 <mat-form-field class="form-fields">
-                  <input matInput  type="url" placeholder="Company Website" #company_websiteName="ngModel"  [(ngModel)]="themeData.company_websiteName"  name="company_websiteName" required autocomplete="off" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" />
+                  <input matInput  type="url" placeholder="Company Website" #company_Website="ngModel"  [(ngModel)]="themeData.company_Website"  name="company_Website" required autocomplete="off" pattern="^(https?:\/\/)?(www\.)?([a-zA-Z0-9]+(-?[a-zA-Z0-9])*\.)+[\w]{2,}(\/\S*)?$" />
 
                 </mat-form-field>
-                <div *ngIf="company_websiteName.valid || company_websiteName.untouched">
-                  <span class="error" *ngIf="company_websiteName.errors?.required">Website is mandatory.</span>
-                  <span class="error" *ngIf="company_websiteName.errors?.pattern">Website name is not in proper format.</span>
+                <div *ngIf="company_Website.valid || company_Website.untouched">
+                  <span class="error" *ngIf="company_Website.errors?.required">Website is mandatory.</span>
+                  <span class="error" *ngIf="company_Website.errors?.pattern">Website name is not in proper format.</span>
                 </div>
 
                 <!-- <mat-form-field class="form-fields">
@@ -55,10 +55,10 @@
                       Upload Your Logo<br />
                       <small>drag & drop to upload the logo image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{imgPath}}{{themeData.ligth_logo}});">
+                    <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{imgPath}}{{themeData.company_Logo}});">
                         <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
-                    <ngx-dropzone-preview *ngIf="files.length == 0 && themeData.ligth_logo != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.ligth_logo}});">
+                    <ngx-dropzone-preview *ngIf="files.length == 0 && themeData.company_Logo != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.company_Logo}});">
                       <ngx-dropzone-label ></ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
@@ -72,17 +72,17 @@
                 <p>Recommended image size is 40px x 40px</p>
               </div>
               <div fxFlex="50">
-                <mat-label>Favicon</mat-label>
+                <mat-label>company_favicon</mat-label>
                 <div class="dropzone">
                   <ngx-dropzone (change)="onFaviSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
-                      Upload Your favicon<br />
-                      <small>drag & drop to upload the favicon image</small>
+                      Upload Your company_favicon<br />
+                      <small>drag & drop to upload the company_favicon image</small>
                     </ngx-dropzone-label>
-                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)" style="background-image: url({{imgPath}}{{themeData.favicon}});">
+                    <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onFaviRemove(f)" style="background-image: url({{imgPath}}{{themeData.company_favicon}});">
                         <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
                     </ngx-dropzone-preview>
-                    <ngx-dropzone-preview *ngIf="files2.length == 0 && themeData.favicon != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.favicon}});">
+                    <ngx-dropzone-preview *ngIf="files2.length == 0 && themeData.company_favicon != ''" [removable]="true"  style="background-image: url({{imgPath}}{{themeData.company_favicon}});">
                       <ngx-dropzone-label ></ngx-dropzone-label>
                     </ngx-dropzone-preview>
                   </ngx-dropzone>
@@ -590,8 +590,8 @@
                     <tr *ngFor="let d of docTypeData; let i= index;">
                       <td>{{i+1}}</td>
                       <td>{{d.document_Type}}</td>
-                      <td>{{d.isCheck == 1?'Yes':'No'}}</td>
-                      <td>{{d.dependent == 1?'Yes':'No'}}</td>
+                      <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
+                      <td>{{d.dependent == 1?'Mandatory':'Optional'}}</td>
                       <td>{{d.expires == 1?'Yes':'No'}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>

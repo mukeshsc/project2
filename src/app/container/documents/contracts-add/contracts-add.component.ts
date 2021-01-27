@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 
 import { CommonServiceService } from 'src/app/service/comman-service.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import { environment } from '../../../../environments/environment';
 // Depending on whether rollup is used, moment needs to be imported differently.
 // Since Moment.js doesn't have a default export, we normally need to import using the `* as`
 // syntax. However, rollup creates a synthetic default module and we thus need to import it using
@@ -32,8 +33,10 @@ export const MY_FORMATS = {
 import {
   MatSnackBar
 } from '@angular/material/snack-bar';
-import { MatDialogRef } from '@angular/material/dialog';
-
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogData {
+  file: string;
+}
 @Component({
   selector: 'app-contracts-add',
   templateUrl: './contracts-add.component.html',
@@ -50,21 +53,25 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class ContractsAddComponent implements OnInit {
   isExpire = false;
+  filePath = environment.apiBaseUrl;
   formData = {
     "userId":"",
     "document_Title":"",
     "file_Type":"",
     "DocType":"",
     "expiry_Date":"",
-    "file_Path":""
+    "file_Path":"",
+    "dependentType":'0',
   };
   files:File[]=[]
   roleData: any = [];
   docData:any = [];
   currentDate = new Date;
-  constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
+  constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<ContractsAddComponent>) { }
 
   ngOnInit(): void {
+    this.formData.file_Path = this.data.file;
+    console.log(this.formData.file_Path)
     this.getEmployee();
     this.getDocType();
   }
