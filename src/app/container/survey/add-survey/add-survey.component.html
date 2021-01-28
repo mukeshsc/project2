@@ -70,6 +70,17 @@
                 </div>
               </div>
             </div>
+            
+            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
+              <div fxFlex="100">
+                <div class="form-ques">
+                  <mat-label>Description <span class="red-txt">*</span> </mat-label>
+                  <mat-form-field>
+                    <textarea matInput maxlength="500"  name="description" [(ngModel)]="q.description"  ></textarea>
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
             <ng-container *ngIf="q.type == 'text' || q.type == 'textarea'">
               <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="" >
                 <div fxFlex="100">

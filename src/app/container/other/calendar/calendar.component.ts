@@ -33,7 +33,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     for(let i = 0;100 > i;i++){
-      this.ageColumn.push({text:i,value:i})
+      this.ageColumn.push({text:i.toString(),value:i.toString()})
     }
     this.getEvent();
     this.getDepartment();
@@ -148,7 +148,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           formElement2.insertBefore(row2, formElement2.childNodes[1]);
           let container2: HTMLElement = createElement('div', { className: 'custom-field-container' });
           let inputEle2: HTMLInputElement = createElement('input', {
-            className: 'e-field', attrs: { name: 'age' }
+            className: 'e-field', attrs: { name: 'gender' }
         }) as HTMLInputElement;
           container2.appendChild(inputEle2);
           row2.appendChild(container2);
@@ -164,15 +164,15 @@ onPopupOpen(args: PopupOpenEventArgs): void {
             ],
             fields: { text: 'text', value: 'value' },
             value: (args.data as { [key: string]: Object }).EventType as string,
-            floatLabelType: 'Always', placeholder: 'Target Audience Age'
+            floatLabelType: 'Always', placeholder: 'Target Audience Gender'
         });
           drowDownList1.appendTo(inputEle2);
-          inputEle2.setAttribute('name', 'age');
+          inputEle2.setAttribute('name', 'gender');
 
         // Custom audience trigger field
         let row3: HTMLElement = createElement('div', { className: 'custom-field-row' });
         let formElement3: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        formElement3.insertBefore(row3, formElement3.childNodes[1]);
+        formElement3.insertBefore(row3, formElement3.childNodes[2]);
         let container3: HTMLElement = createElement('div', { className: 'custom-field-container' });
         let inputEle3: HTMLInputElement = createElement('input', {
           className: 'e-field', attrs: { name: 'department' }
@@ -191,54 +191,46 @@ onPopupOpen(args: PopupOpenEventArgs): void {
         // Custom audience trigger field
         let row4: HTMLElement = createElement('div', { className: 'custom-field-row' });
         let formElement4: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        formElement4.insertBefore(row4, formElement4.childNodes[1]);
+        formElement4.insertBefore(row4, formElement4.childNodes[3]);
         let container4: HTMLElement = createElement('div', { className: 'custom-field-container' });
         let inputEle4: HTMLInputElement = createElement('input', {
           className: 'e-field', attrs: { name: 'ageFrom' }
-      }) as HTMLInputElement;
-      let inputEle5: HTMLInputElement = createElement('input', {
-        className: 'e-field', attrs: { name: 'ageTo' }
-    }) as HTMLInputElement;
+        }) as HTMLInputElement;
+
         container4.appendChild(inputEle4);
-        container4.appendChild(inputEle5);
         row4.appendChild(container4);
+
+
         let drowDownList3: DropDownList = new DropDownList({
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
           floatLabelType: 'Always', placeholder: 'Target Audience Age From'
-      });
+        });
         drowDownList3.appendTo(inputEle4);
-        inputEle4.setAttribute('name', 'ageTo');
+        inputEle4.setAttribute('name', 'ageFrom');
 
+
+        // Custom audience trigger field
+        let row5: HTMLElement = createElement('div', { className: 'custom-field-row' });
+        let formElement5: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
+        formElement5.insertBefore(row5, formElement5.childNodes[4]);
+        let container5: HTMLElement = createElement('div', { className: 'custom-field-container' })
+        let inputEle5: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'ageTo' }
+        }) as HTMLInputElement;
+
+        container5.appendChild(inputEle5);
+        row5.appendChild(container5);
         let drowDownList4: DropDownList = new DropDownList({
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
           floatLabelType: 'Always', placeholder: 'Target Audience Age To'
-      });
+        });
         drowDownList4.appendTo(inputEle5);
         inputEle5.setAttribute('name', 'ageTo');
 
-        // // Custom Icon upload field
-        //   let row1: HTMLElement = createElement('div', { className: 'dropzone' });
-        //   let formElement1: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        //   formElement1.lastChild.appendChild(row1);
-        //   let container1: HTMLElement = createElement('div', { className: 'dropzone-inner' });
-        //   let inputLabel: HTMLElement = createElement('h2', {className: 'uplaod-Label'})
-        //   inputLabel.innerHTML = 'Upload Icon (Optional)';
-        //   let inputLabelSub: HTMLElement = createElement('span', {className: 'uplaod-Label-sub'})
-        //   inputLabelSub.innerHTML = 'drag & drop to upload the document';
-
-        //   let inputEle1: HTMLInputElement = createElement('input', {
-        //     className: 'e-field-upload', attrs: { name: 'EventIcon', type: 'file' }
-        // }) as HTMLInputElement;
-        //   container1.appendChild(inputLabel);
-        //   container1.appendChild(inputLabelSub);
-        //   container1.appendChild(inputEle1);
-        //   row1.appendChild(container1);
-
-        // inputEle1.setAttribute('name', 'EventIcon');
     }
 
   }
@@ -285,6 +277,7 @@ async onActionComplete(event){
       repeatArr.push(obj)
     }
     let repeatType = 0
+    let repeatted = 0
     if(repeatArr[0].value == 'WEEKLY'){
       repeatType = 2
     }else if(repeatArr[0].value == 'DAILY'){
@@ -294,18 +287,31 @@ async onActionComplete(event){
     }else if(repeatArr[0].value == 'YEARLY'){
       repeatType = 4
     }
+    for(let item of repeatArr){
+      if(item.key == 'INTERVAL'){
+        repeatted = item.value;
+      }
+    }
 
+    let sDate = new Date(data.StartTime);
+    let eDate = new Date(data.EndTime)
     let formData = {
-      "event_Type":data.EventType != null?data.EventType:'event',
-      "event_StartDate":new Date(data.StartTime),
-      "event_EndDate":new Date(data.EndTime),
-      "target_Audeince":data.targetAudience != null?data.targetAudience : 0,
+      "event_Type":data.EventType != null?(data.EventType == 'holiday'?'1':'0'):'0',
+      "event_StartDate":moment(sDate).format('YYYY-MM-DD'),
+      "event_EndDate":moment(eDate).format('YYYY-MM-DD'),
       "event_Description":data.Description,
       "fileName":"",
-      "repeatType":repeatType,
-      "repeatArray":repeatArr,
       "event_Title":data.Subject,
-      "isAllday":data.IsAllDay ? 1 : 0
+      "isAllday":data.IsAllDay ? 1 : 0,
+      "repeatType": repeatType,
+      "repeateTime":repeatted,
+      "eventstartTime":moment(sDate).format('HH:mm'),
+      "eventendTime":moment(eDate).format('HH:mm'),
+      "department":data.department,
+      "ageFrom":parseInt(data.ageFrom),
+      "ageTo":parseInt(data.ageTo),
+      "gender":data.gender
+
     }
     if(data.calendarEvent_id && data.calendarEvent_id != '' ){
       formData['calendarEvent_id'] = data.calendarEvent_id;
