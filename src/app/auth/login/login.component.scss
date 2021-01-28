@@ -1,1 +1,20 @@
 @import "./../auth.scss";
+
+// Responsive
+@media (max-width: 414px) {
+    h1.font {
+        display: none;
+    }
+    p.fnt {
+        display: none;
+    }
+    .fnt {
+        display: none;
+    }
+    .size {
+        margin: 0 13% 0 9px;
+    }
+    a.fo {
+        font-size: 9px !important;
+    }
+}
