@@ -232,15 +232,43 @@ async deleteDoc(id){
 }
 
 // open add Contracts modal
-openContractAddModal() {
-  const dialogRef = this.dialog.open(ContractsAddComponent, {
-    width: '50%',
-  });
+async openContractAddModal(event) {
+  console.log(event);
+  this.files = [...event.addedFiles];
+  if(event.addedFiles.length > 0){
 
-  dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog result: ${result}`);
-    this.showDoc();
-  });
+    await(this._api.uploadDocDoc(event.addedFiles[0]).subscribe(res => {
+      this.ngxService.stop();
+      const response: any = res;
+      if (response.success == true){
+        console.log(response.data[0])
+        const dialogRef = this.dialog.open(ContractsAddComponent, {
+          data:{
+            file:response.data[0]
+          },
+          width: '50%',
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+          console.log(`Dialog result: ${result}`);
+          this.showDoc();
+        });
+
+      }else{
+        this.openSnackBar(response.message);
+      }
+      console.log(res);
+    },err => {
+      const error = err.error;
+      this.openErrrorSnackBar(error.message);
+      this.ngxService.stop();
+    }));
+  }else{
+    this.openErrrorSnackBar('File size is too large');
+  }
+
+
+
 }
 
 // Check day is negative or positive
@@ -262,16 +290,20 @@ removeChar(a){
 // // document download
 Download(e) {
       this.ngxService.start();
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${environment.apiBaseUrl}${e}`));
-        element.setAttribute('download', e);
+      var element = document.createElement('a');
+      // element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(`${environment.apiBaseUrl}${e}`));
+      let type = 'text/pdf';
+      element.href = window.URL.createObjectURL(
+        new Blob([`${environment.apiBaseUrl}${e}`], {type: 'image/png'})
+      );
+      element.setAttribute('download', e);
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
+      element.style.display = 'none';
+      document.body.appendChild(element);
 
-        element.click();
+      element.click();
 
-        document.body.removeChild(element);
+      document.body.removeChild(element);
       this.ngxService.stop();
 }
 

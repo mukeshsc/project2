@@ -27,13 +27,38 @@ export class CalendarComponent implements OnInit {
   files: File[] = [];
   selectedEvent:any = []
   callApi:boolean;
+  ageColumn:any = [{text:'All',value:'all'}];
+  departmentData:any = [{text:'All',value:'all'}];
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+    for(let i = 0;100 > i;i++){
+      this.ageColumn.push({text:i,value:i})
+    }
     this.getEvent();
+    this.getDepartment();
   }
 
-
+// Get Department
+async getDepartment(){
+  this.ngxService.start();
+  await(this._api.showDepartment().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+       for(let item of response.data){
+        this.departmentData.push({text:item.department_Type,value:item.department_Type})
+       };
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
 //Get event
 async getEvent(){
   await(this._api.getEvent().subscribe(res => {
@@ -123,7 +148,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           formElement2.insertBefore(row2, formElement2.childNodes[1]);
           let container2: HTMLElement = createElement('div', { className: 'custom-field-container' });
           let inputEle2: HTMLInputElement = createElement('input', {
-            className: 'e-field', attrs: { name: 'targetAudience' }
+            className: 'e-field', attrs: { name: 'age' }
         }) as HTMLInputElement;
           container2.appendChild(inputEle2);
           row2.appendChild(container2);
@@ -139,10 +164,61 @@ onPopupOpen(args: PopupOpenEventArgs): void {
             ],
             fields: { text: 'text', value: 'value' },
             value: (args.data as { [key: string]: Object }).EventType as string,
-            floatLabelType: 'Always', placeholder: 'Target Audience'
+            floatLabelType: 'Always', placeholder: 'Target Audience Age'
         });
           drowDownList1.appendTo(inputEle2);
-          inputEle2.setAttribute('name', 'targetAudience');
+          inputEle2.setAttribute('name', 'age');
+
+        // Custom audience trigger field
+        let row3: HTMLElement = createElement('div', { className: 'custom-field-row' });
+        let formElement3: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
+        formElement3.insertBefore(row3, formElement3.childNodes[1]);
+        let container3: HTMLElement = createElement('div', { className: 'custom-field-container' });
+        let inputEle3: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'department' }
+      }) as HTMLInputElement;
+        container3.appendChild(inputEle3);
+        row3.appendChild(container3);
+        let drowDownList2: DropDownList = new DropDownList({
+          dataSource:[...this.departmentData],
+          fields: { text: 'text', value: 'value' },
+          value: (args.data as { [key: string]: Object }).EventType as string,
+          floatLabelType: 'Always', placeholder: 'Target Audience Department'
+      });
+        drowDownList2.appendTo(inputEle3);
+        inputEle3.setAttribute('name', 'department');
+
+        // Custom audience trigger field
+        let row4: HTMLElement = createElement('div', { className: 'custom-field-row' });
+        let formElement4: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
+        formElement4.insertBefore(row4, formElement4.childNodes[1]);
+        let container4: HTMLElement = createElement('div', { className: 'custom-field-container' });
+        let inputEle4: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'ageFrom' }
+      }) as HTMLInputElement;
+      let inputEle5: HTMLInputElement = createElement('input', {
+        className: 'e-field', attrs: { name: 'ageTo' }
+    }) as HTMLInputElement;
+        container4.appendChild(inputEle4);
+        container4.appendChild(inputEle5);
+        row4.appendChild(container4);
+        let drowDownList3: DropDownList = new DropDownList({
+          dataSource:[...this.ageColumn],
+          fields: { text: 'text', value: 'value' },
+          value: (args.data as { [key: string]: Object }).EventType as string,
+          floatLabelType: 'Always', placeholder: 'Target Audience Age From'
+      });
+        drowDownList3.appendTo(inputEle4);
+        inputEle4.setAttribute('name', 'ageTo');
+
+        let drowDownList4: DropDownList = new DropDownList({
+          dataSource:[...this.ageColumn],
+          fields: { text: 'text', value: 'value' },
+          value: (args.data as { [key: string]: Object }).EventType as string,
+          floatLabelType: 'Always', placeholder: 'Target Audience Age To'
+      });
+        drowDownList4.appendTo(inputEle5);
+        inputEle5.setAttribute('name', 'ageTo');
 
         // // Custom Icon upload field
         //   let row1: HTMLElement = createElement('div', { className: 'dropzone' });

@@ -145,14 +145,14 @@ async getLeave(){
     const response: any = res;
     if (response.success == true){
       this.leaveData = response.data;
-      let t = this.leaveData.length - this.formData.leaveBalance.length;
-      console.log(t)
-      for(let i = (this.leaveData.length - t); i <= this.leaveData.length; i++){
-        let obj = {};
-        obj[this.leaveData[i-1].leave_Type] = '';
-        this.formData.leaveBalance.push(obj);
-      }
-      console.log(this.formData.leaveBalance)
+      // let t = this.leaveData.length - this.formData.leaveBalance.length;
+      // console.log(t)
+      // for(let i = (this.leaveData.length - t); i <= this.leaveData.length; i++){
+      //   let obj = {};
+      //   obj[this.leaveData[i-1].leave_Type] = '';
+      //   this.formData.leaveBalance.push(obj);
+      // }
+      // console.log(this.formData.leaveBalance)
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -173,14 +173,14 @@ async getSalary(){
     if (response.success == true){
       this.salaryData = response.data;
 
-      let t = this.salaryData.length - this.formData.salaryBalance.length;
-      console.log(t)
-      for(let i = (this.salaryData.length - t); i <= this.salaryData.length; i++){
-        let obj = {};
-        obj[this.salaryData[i-1].salary_Type] = '';
-        this.formData.salaryBalance.push(obj);
-      }
-      console.log(this.formData.salaryBalance)
+      // let t = this.salaryData.length - this.formData.salaryBalance.length;
+      // console.log(t)
+      // for(let i = (this.salaryData.length - t); i <= this.salaryData.length; i++){
+      //   let obj = {};
+      //   obj[this.salaryData[i-1].salary_Type] = '';
+      //   this.formData.salaryBalance.push(obj);
+      // }
+      // console.log(this.formData.salaryBalance)
 
     }else{
       this.openErrrorSnackBar(response.message);

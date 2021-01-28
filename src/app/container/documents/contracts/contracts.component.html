@@ -13,10 +13,10 @@
   <div fxFlex="100"  fxFlex.gt-xs="100">
     <mat-card class="upload-box" >
       <div class="dropzone">
-        <ngx-dropzone (change)="openContractAddModal()" >
+        <ngx-dropzone (change)="openContractAddModal($event)" accept="image/jpeg,image/jpg,image/png,application/pdf, application/vnd.ms-excel">
           <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
             Upload Your Document<br />
-            <small>drag & drop to upload the document</small>
+            <small>drag & drop to upload the document (Pdf, jpeg, png, doc, xlsx )</small>
           </ngx-dropzone-label>
         </ngx-dropzone>
       </div>
@@ -50,7 +50,7 @@
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Download" mat-flat-button  color="light" (click)="export_table_to_csv()" ><mat-icon color="primary" >cloud_download</mat-icon></button>
                 <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
-                matTooltip="Download" mat-flat-button  color="light" (click)="showDoc()" ><mat-icon color="primary" >sync</mat-icon></button>
+                matTooltip="sync" mat-flat-button  color="light" (click)="showDoc()" ><mat-icon color="primary" >sync</mat-icon></button>
 
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission && eanbled" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Edit"   color="light"><mat-icon color="warn" (click)="confirmDialog()">delete</mat-icon></button>
@@ -103,9 +103,9 @@
           <ng-container matColumnDef="view">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> View Doc </th>
             <td mat-cell *matCellDef="let element">
-              <button mat-mini-fab  class="round-btn" color="light" (click)="Download(element.file_Path)" #tooltip="matTooltip" matTooltip="Download File">
-                <mat-icon  color="primary">download</mat-icon>
-              </button>
+              <a href="{{filePath}}{{element.file_Path}}" download target="_blank">
+                  <mat-icon  color="primary">download</mat-icon>
+              </a>
             </td>
           </ng-container>
 

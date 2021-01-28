@@ -18,6 +18,7 @@ import * as _moment from 'moment';
 import { environment } from '../../../../environments/environment';
 // tslint:disable-next-line:no-duplicate-imports
 import {defaultFormat as _rollupMoment} from 'moment';
+import { SharedService } from 'src/app/service/shared.service';
 
 const moment = _rollupMoment || _moment;
 
@@ -87,14 +88,13 @@ export class SettingComponent implements OnInit {
   smtpDataSet:any;
   smtpData = {}
   themeData = {
-    "company_Brand":"#000000" ,
-    "ligth_logo": "",
-    "favicon": "",
-    "company_websiteName":"",
-    "created_By":null,
-    "updated_By":null,
-    "themeId":null,
-    "ip_Address":"12.32.32.22",
+    "comapnyId":"",
+    "company_Logo":"",
+    "company_favicon":"",
+    "ip_Address":"123.43.233.433",
+    "company_Website":"www.test.com",
+    "created_By":"",
+    "updated_By":""
   }
   passwordData = {
     "oldpassword": "",
@@ -122,7 +122,7 @@ export class SettingComponent implements OnInit {
   currentDate = new Date();
   accessPermission:boolean;
   getDocumentTypeData:any = []
-  constructor( public router:Router, public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+  constructor( public sharedService:SharedService,public router:Router, public dialog: MatDialog, public _access:AccessServiceService,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
 
@@ -132,6 +132,7 @@ export class SettingComponent implements OnInit {
     this.leaveDataSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.salarySet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.docTypeSet.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+    this.themeData.comapnyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.getTheme();
     this.getsmtp();
     this.getDepartment();
@@ -179,13 +180,12 @@ export class SettingComponent implements OnInit {
       if (response.success == true){
         this.themeDataSet = response.data;
         this.themeData = {
-          "company_Brand":this.themeDataSet.company_Brand ,
-          "ligth_logo":this.themeDataSet.ligth_logo,
-          "favicon": this.themeDataSet.favicon,
-          "company_websiteName":this.themeDataSet.company_websiteName,
-          "created_By":this.themeDataSet.created_By,
-          "updated_By":this.themeDataSet.updated_By,
-          "themeId":this.themeDataSet.theme_id,
+          "comapnyId":JSON.parse(localStorage.getItem('userData')).company_id,
+          "company_Logo":this.themeDataSet.company_Logo,
+          "company_favicon": this.themeDataSet.company_favicon,
+          "company_Website":this.themeDataSet.company_Website,
+          "created_By":'1',
+          "updated_By":'1',
           "ip_Address":"12.32.32.22",
         }
       }else{
@@ -198,6 +198,33 @@ export class SettingComponent implements OnInit {
       this.openErrrorSnackBar(error.message);
     }));
 
+}
+
+// get company by id
+async getComapny() {
+  this.ngxService.stop();
+  let formData = {
+    companyId:JSON.parse(localStorage.getItem('userData')).company_id
+  }
+  await(this._api.showCompanyByID(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      // this.themeData = response.data[0];
+      console.log(response.data[0])
+      localStorage.setItem('userData',JSON.stringify(response.data[0]))
+      this.sharedService.changeUser(JSON.stringify(response.data[0]));
+
+    }else{
+      this.ngxService.stop();
+      this.openSnackBar(response.message);
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error.message);
+    this.ngxService.stop();
+  }));
 }
 
 // Get Department
@@ -569,6 +596,8 @@ async updateTheme(){
       this.themeData = response.data;
       this.openSnackBar(response.message);
       this.getTheme()
+
+      this.getComapny();
     }else{
       this.openErrrorSnackBar(response.message);
     }
@@ -644,7 +673,7 @@ async updateSmtp(){
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
-          this.themeData.ligth_logo = response.data;
+          this.themeData.company_Logo = response.data;
 
         }else{
           this.openSnackBar(response.message);
@@ -675,7 +704,7 @@ async updateSmtp(){
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
-          this.themeData.favicon = response.data;
+          this.themeData.company_favicon = response.data[0];
 
         }else{
           this.openSnackBar(response.message);

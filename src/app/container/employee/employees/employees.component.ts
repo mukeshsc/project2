@@ -31,7 +31,28 @@ export class EmployeesComponent implements OnInit {
   // table sorting and pagination
   @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;
   @ViewChild(MatSort,{static:false}) sort: MatSort;
+  formData = {
+    user_id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+    reporting_Manager: '',
+    department: '',
+    employee_joiningDate: '',
+    insurance_plan_name: '',
+    working_HoursTo: '' ,
+    working_HoursFrom: '',
+    company_id: null,
+    role: 0,
+    designation:'',
+    ip_Address: '123',
+    created_By : '',
+    updated_By: '',
+    isType:0
+  };
 
+  leaveBalance = [];
+  salaryBalance = [];
   responseData:any = [];
   csvFile:any = '';
   accessPermission:boolean;
@@ -52,15 +73,39 @@ export class EmployeesComponent implements OnInit {
     const response: any = res;
     if (response.success == true){
       console.log(response.data);
-      this.responseData = response.data;
       const arr = [];
       for (const item of response.data){
+      item['salarys'] = [];
+      item['leaves'] = []
+      let sal = JSON.parse(item.salaryBalance);
+      if(sal != null){
+        for(let i =0;i< sal.length;i++){
+          for (var key in sal[i]) {
+            item.salarys.push({label:key,value:sal[i][key]})
+          }
+        }
+      }
+
+      let lea = JSON.parse(item.leaveBalance);
+      if(lea != null){
+
+        for(let i =0;i< lea.length;i++){
+          for (var key in lea[i]) {
+            item.leaves.push({label:key,value:lea[i][key]})
+          }
+        }
+      }
+
         const obj = {position: `${environment.apiBaseUrl}${item.profile_picture}`, name: item.first_name + ' ' + item.last_name, email: item.email, designation: item.designation, status: item.status,id:item.user_id,};
         arr.push(obj);
       }
+
+      this.responseData = response.data;
       this.dataSource = new MatTableDataSource([...arr]);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      this.leaveBalance = this.responseData[0].leaves;
+      this.salaryBalance = this.responseData[0].salarys
       console.log(this.dataSource);
     }else{
     }

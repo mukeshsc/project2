@@ -1,7 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" >
   <div fxFlex="40" >
     <h3 class="logo">
-      Company <br /><span>Logo</span>
+      <span *ngIf="!userData && !userData.company_Logo">
+        Company <br /><span>Logo</span>
+      </span>
+      <img src="{{imgPath}}{{userData.company_Logo}}" *ngIf="userData && userData.company_Logo" [alt]="userData && userData.company_Logo"/>
     </h3>
   </div>
 </div>

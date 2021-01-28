@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SharedService } from 'src/app/service/shared.service';
+import {environment} from './../../../environments/environment'
 
 @Component({
   selector: 'app-sidebar',
@@ -9,12 +11,19 @@ import { Router } from '@angular/router';
 export class SidebarComponent implements OnInit {
   userData:any;
   moduleData:any = [];
-  constructor(public router:Router) {
+  imgPath = environment.apiBaseUrl;
+  constructor(public router:Router, public sharedService:SharedService) {
     if(localStorage.getItem('userData')){
         this.userData = JSON.parse(localStorage.getItem('userData'))
         this.moduleData = JSON.parse(localStorage.getItem('userData')).moduleAccess;
         console.log(this.moduleData)
       }
+      this.sharedService.currentUser.subscribe(data => {
+        if(data != ''){
+          this.userData = JSON.parse(data);
+        }
+      });
+
   }
   pages = [
     {

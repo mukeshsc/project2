@@ -198,38 +198,46 @@
   </table>
 
 </div>
-<div id="csvTable" style="display:none">
+<div id="csvTable" style="display:none" *ngIf="responseData.length > 0">
   <table >
     <thead>
-      <tr>
-        <td colspan=13 >
-          <h5 class="mb-0" style="font-size: 13px;">
-           Employee List
-          </h5>
-        </td>
-      </tr>
       <tr style="text-align: left;">
-        <th><b>S.No.</b></th>
-        <th><b>Name</b></th>
-        <th><b>Email</b></th>
-        <th><b>Department</b></th>
-        <th><b>Designation </b></th>
-        <th><b>Insurance Plan</b></th>
-        <th><b>Status</b></th>
+        <ng-container *ngFor="let c of formData | keyvalue">
+          <th><b>{{c.key}}</b></th>
+        </ng-container>
+        <ng-container *ngFor="let l of leaveBalance">
+          <th><b>{{l.label}}</b></th>
+        </ng-container>
+        <ng-container *ngFor="let s of salaryBalance">
+            <th><b>{{s.label}}</b></th>
+        </ng-container>
       </tr>
     </thead>
       <tbody >
            <tr  *ngFor="let itemData of responseData; let i=index">
-            <td><b>#{{i+1}}</b></td>
-            <td>{{itemData && itemData.first_name}} {{itemData && itemData.last_name}}</td>
-            <td>{{itemData && itemData.email}}</td>
-            <td>{{itemData && itemData.department}}</td>
-            <td>{{itemData && itemData.designation}}</td>
-            <td>{{itemData && itemData.insurance_plan_name}}</td>
-            <td>
-              <button mat-flat-button class="round-btn" *ngIf="itemData && itemData.status == 1" color="light">Active</button>
-              <button mat-flat-button class="round-btn" *ngIf="itemData && itemData.status == 0" color="accent">In Active</button>
-            </td>
+            <td><b>{{itemData.company_id}}</b></td>
+            <td>{{itemData.created_By}}</td>
+            <td>{{itemData.department}}</td>
+            <td>{{itemData.designation}}</td>
+            <td>{{itemData.email}}</td>
+            <td>{{itemData.employee_joiningDate}}</td>
+            <td>{{itemData.first_name}}</td>
+            <td>{{itemData.insurance_plan_name}}</td>
+            <td>{{itemData.ip_Address}}</td>
+            <td>0</td>
+            <td>{{itemData.last_name}}</td>
+            <td>{{itemData.reporting_Manager}}</td>
+            <td>{{itemData.role}}</td>
+            <td>{{itemData.updated_By}}</td>
+            <td>{{itemData.user_id}}</td>
+            <td>{{itemData.working_HoursFrom}}</td>
+            <td>{{itemData.working_HoursTo}}</td>
+            <ng-container *ngFor="let l of itemData.leaves">
+              <th><b>{{l.value}}</b></th>
+            </ng-container>
+            <ng-container *ngFor="let s of itemData.salarys">
+              <th><b>{{s.value}}</b></th>
+            </ng-container>
            </tr>
          <tr>
            <td colspan="13">-----</td>

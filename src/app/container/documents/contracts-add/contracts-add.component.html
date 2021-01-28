@@ -26,6 +26,17 @@
         </mat-form-field>
       </div>
     </div>
+    <br />
+    <div fxLayout="row"  class="">
+      <div fxFlex="100">
+        <label>Document For</label><br />
+        <mat-button-toggle-group color="accent" appearance="legacy" name="dependentType" [(ngModel)]="formData.dependentType" aria-label="Font Style">
+          <mat-button-toggle value="0">Self</mat-button-toggle>
+          <mat-button-toggle value="1">Dependent</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+    <br />
     <div fxLayout="row"  class="" *ngIf="isExpire">
       <div fxFlex="100">
         <mat-form-field class="form-fields" >
@@ -44,8 +55,11 @@
               Upload Your Document<br />
               <small>drag & drop to upload the document (Pdf, jpeg, png, doc, xlsx )</small>
             </ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
-                <ngx-dropzone-label [style]="'background:'+formData.file_Path">{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{filePath}}{{formData.file_Path}});">
+                <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+            <ngx-dropzone-preview *ngIf="files.length == 0 && formData.file_Path != ''" [removable]="true"  style="background-image: url({{filePath}}{{formData.file_Path}});">
+              <ngx-dropzone-label ></ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>
         </div>
