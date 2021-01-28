@@ -33,3 +33,29 @@ span.option_options {
 .mat-icon{
   cursor:pointer
 }
+.add-section {
+  margin: 20px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #7a7a7a;
+  padding: 31px 0;
+  border-radius: 10px;
+  background: #eaeaea;
+  cursor: pointer;
+}
+.short-container {
+  max-width: 68%;
+  margin: 0 auto;
+}
+.ques-tab {
+  margin: 25px auto;
+  border-bottom: 1px solid #919191;
+  padding: 25px 0;
+}
+.toolbox {
+  position: fixed !important;
+  top: 320px !important;
+  right: 170px !important;
+}

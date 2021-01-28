@@ -1,6 +1,6 @@
 
     <mat-toolbar color="primary">
-      <mat-icon class="closeModal" (click)="prev()"  *ngIf="tab > 0">keyboard_backspace</mat-icon>
+      <!-- <mat-icon class="closeModal" >keyboard_backspace</mat-icon> -->
       <span class="spacer"></span>
       <span class="mat-toolbar-title">Create New Survey</span>
       <span class="spacer"></span>
@@ -32,7 +32,7 @@
           </div>
         </div>
         <ng-container *ngFor="let q of question;let i = index;">
-          <div class="ques-tab" *ngIf="tab == i">
+          <div class="ques-tab">
             <span class="card-title">Question {{i+1}}</span>
             <p>Please fill below information to change your setting.</p>
             <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
@@ -61,37 +61,16 @@
                 <div class="form-ques">
                   <mat-label>Category <span class="red-txt">*</span> </mat-label>
                   <mat-form-field>
-                    <mat-select name="category" [(ngModel)]="q.category"  name="category" #category required (ngModelChange)="setSegment($event)">
-                      <mat-option  value="mind">Mind</mat-option>
-                      <mat-option  value="body">Body</mat-option>
-                      <mat-option  value="lifestyle">Lifestyle</mat-option>
+                    <mat-select name="category" [(ngModel)]="q.category"  name="category" #category required >
+                      <mat-option  value="feedback">Feedback</mat-option>
+                      <mat-option  value="evaluation">Evaluation</mat-option>
+                      <mat-option  value="application_form">Application / Form</mat-option>
+                      <mat-option  value="voting">Voting</mat-option>
                     </mat-select></mat-form-field>
                 </div>
               </div>
             </div>
-            <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
-              <div fxFlex="100">
-                <div class="form-ques">
-                  <mat-label>Segment <span class="red-txt">*</span> </mat-label>
-                  <mat-form-field>
-                    <mat-select  [(ngModel)]="q.segments"  name="segments" #segments required>
-                      <mat-option  value="" *ngIf="segmentData.length == 0">Please Select Category</mat-option>
-                      <mat-option *ngFor="let item of segmentData" [value]="item">{{item}}</mat-option>
-                    </mat-select></mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
-              <div fxFlex="100">
-                <div class="form-ques">
-                  <mat-label>Description <span class="red-txt">*</span> </mat-label>
-                  <mat-form-field>
-                    <textarea matInput maxlength="500"  name="description" [(ngModel)]="q.description"  ></textarea>
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-              <ng-container *ngIf="q.type == 'text' || q.type == 'textarea'">
+            <ng-container *ngIf="q.type == 'text' || q.type == 'textarea'">
               <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="" >
                 <div fxFlex="100">
                   <div class="form-ques">
@@ -103,16 +82,6 @@
                 </div>
               </div>
             </ng-container>
-            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
-              <div fxFlex="100">
-                <div class="form-ques">
-                  <mat-label>Max Point <span class="red-txt">*</span> </mat-label>
-                  <mat-form-field>
-                    <input matInput    maxlength="2" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="score" [(ngModel)]="q.score"  />
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
             <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.type == 'slider'">
               <div fxFlex="100">
                   <div fxLayout="row" class="quesOption">
@@ -155,14 +124,6 @@
                           </mat-form-field>
                       </div>
                     </div>
-                    <div fxFlex="30">
-                      <div class="form-ques">
-                        <mat-label>Point</mat-label>
-                          <mat-form-field>
-                            <input matInput  maxlength="2" type="text" name="point{{io}}" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="o.point"  />
-                          </mat-form-field>
-                      </div>
-                    </div>
                     <div fxFlex="10">
                       <span class="option_options">
                         <mat-icon color="info" *ngIf="io == 0" (click)="addOption(i)">add_circle</mat-icon>
@@ -185,14 +146,6 @@
                         <mat-label>Text for rating</mat-label>
                           <mat-form-field>
                             <input matInput  maxlength="50" type="text" name="value{{io}}" [(ngModel)]="o.value"  />
-                          </mat-form-field>
-                      </div>
-                    </div>
-                    <div fxFlex="20">
-                      <div class="form-ques">
-                        <mat-label>Point</mat-label>
-                          <mat-form-field>
-                            <input matInput  maxlength="2"  (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="point{{io}}" [(ngModel)]="o.point"  />
                           </mat-form-field>
                       </div>
                     </div>
@@ -257,11 +210,12 @@
               </div>
 
             </div>
+            <br />
             <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
               <div fxFlex="10" >
                 <mat-icon (click)="copy(i)" #tooltip="matTooltip" matTooltip="Copy question" >content_copy</mat-icon>
               </div>
-              <div fxFlex="10"  *ngIf="tab > 0">
+              <div fxFlex="10"  *ngIf="i > 0">
                 <mat-icon (click)="delete(i)"  #tooltip="matTooltip" matTooltip="Delete this question">delete</mat-icon>
               </div>
               <div fxFlex="20">
@@ -274,24 +228,27 @@
                 </mat-slide-toggle>
               </div>
             </div>
-            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" *ngIf="tab > 0" (click)="prev()" color="warn">Cancel</button>
-              </div>
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" (click)="addHra()"  color="green">Done</button>
-              </div>
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" (click)="next(i)" [disabled]="!disTab"  color="primary">Save</button>
-              </div>
-            </div>
           </div>
         </ng-container>
         <div class="toolbox"  (click)="openPreviewModal()">
           <mat-icon>play_circle_filled</mat-icon>
+        </div>
+      </div>
+      <div class="short-container">
+
+        <div fxLayout="row" fxFlexfill fxLayoutGap="10px grid" (click)="next()">
+          <div fxFlex>
+            <div class="add-section">
+              <mat-icon color="light"  >add_circle</mat-icon><br />
+              <p>Add New Question</p>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+          <div fxFlex="100">
+            <mat-label></mat-label>
+            <button mat-raised-button class="big-btn block-btn" (click)="addHra()"  color="green">Done</button>
+          </div>
         </div>
       </div>
     </form>

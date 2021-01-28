@@ -277,19 +277,7 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
     width: 225px !important;
 
   }
-  .mat-drawer-inner-container::-webkit-scrollbar, .mat-dialog-content::-webkit-scrollbar, .scroller::-webkit-scrollbar {
-    width: .5em;
-    height:.5em;
-  }
 
-  .mat-drawer-inner-container::-webkit-scrollbar-track, .mat-dialog-content::-webkit-scrollbar-track,.scroller::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  }
-
-  .mat-drawer-inner-container::-webkit-scrollbar-thumb, .mat-dialog-content::-webkit-scrollbar-thumb,.scroller::-webkit-scrollbar-thumb{
-    background-color: #FFAA00;
-    border-radius:10px
-  }
 
 
 
@@ -1000,6 +988,34 @@ ul.paginations {
 td.e-time-slots {
   padding: 0 !important;
 }
+.scroll {
+  width: 100%;
+  overflow: auto;
+  .scroll-x {
+    display: flex;
+    float: left;
+    width: auto;
+    padding: 10px 0;
+  }
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar, .mat-dialog-content::-webkit-scrollbar, .scroller::-webkit-scrollbar,.scroll::-webkit-scrollbar {
+  width: .5em;
+  height:.5em;
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-track, .mat-dialog-content::-webkit-scrollbar-track,.scroller::-webkit-scrollbar-track,.scroll::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.mat-drawer-inner-container::-webkit-scrollbar-thumb, .mat-dialog-content::-webkit-scrollbar-thumb,.scroller::-webkit-scrollbar-thumb,.scroll::-webkit-scrollbar-thumb{
+  background-color: #FFAA00;
+  border-radius:10px
+}
+.detail-survey .mat-tab-labels {
+  justify-content: flex-start !important;
+}
+
 app-dashboard ,app-login, app-forgot-password, app-reset-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey, app-add-survey,app-view-survey, app-list-survey, app-detail-survey {
   width: 100%;
 }

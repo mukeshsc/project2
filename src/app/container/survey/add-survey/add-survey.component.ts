@@ -12,11 +12,7 @@ import { ViewSurveyComponent } from '../view-survey/view-survey.component';
   styleUrls: ['./add-survey.component.scss']
 })
 export class AddSurveyComponent implements OnInit {
-  tab:number = 0;
   value ={};
-  lifeStyleScore = 100;
-  bodyScore = 100;
-  mindScore = 100;
   segmentData:any = [];
   formName ='';
   formDescription = '';
@@ -25,15 +21,12 @@ export class AddSurveyComponent implements OnInit {
       type:'',
       title:'',
       category:'',
-      segments:'',
-      description:'',
-      optionArray:[{value:'',point:null}],
+      optionArray:[{value:''}],
       subQuestion:[],
       sliderOption:{left:0,label:'',right:100},
       answer:'',
       columnArray: [],
       rowArray: [],
-      score:0,
       isRequired:0,
 			"ip_Address"    :"12.443.22.11"
     }
@@ -56,45 +49,27 @@ export class AddSurveyComponent implements OnInit {
   }
 
 
-  next(i) {
-    let  q = this.question[i]
-    if(q.type == '' || q.title == '' || q.score == 0 || q.category == '' || q.segments == '' || q.description == '' ){
-      this.openErrrorSnackBar('Please fill all field to move to next question')
-
-    }else{
-
-      this.tab++;
-      if (this.tab >= this.question.length) {
+  next() {
         this.question.push({
           type:'',
           title:'',
           category:'',
-          segments:'',
-          description:'',
-          optionArray:[{value:'',point:null}],
+          optionArray:[{value:''}],
           subQuestion:[],
           sliderOption:{left:0,label:'',right:100},
           answer:'',
           columnArray: [],
           rowArray: [],
-          score:0,
           isRequired:0,
           "ip_Address"    :"12.443.22.11"
         })
-      }
-    }
-  }
-  prev() {
-    if (this.tab > 0) {
-      this.tab--;
-    }
   }
 
 
   // add question
   async addHra(){
     let  q = this.question[this.question.length - 1]
-    if(q.type == '' || q.title == '' || q.score == 0 || q.category == '' || q.segments == '' || q.description == '' ){
+    if(q.type == '' || q.title == '' ||  q.category == ''  ){
       this.openErrrorSnackBar('Please fill all field to move to next question');
     }else{
       let data = {
@@ -120,7 +95,7 @@ export class AddSurveyComponent implements OnInit {
   }
 
   addOption(i){
-    this.question[i].optionArray.push({value:'',point:null})
+    this.question[i].optionArray.push({value:''})
   }
 
   removeOption(i,io){
@@ -151,60 +126,19 @@ export class AddSurveyComponent implements OnInit {
     this.question[i].rowArray.splice(rawIndex, 1)
   }
 
-  countScore(q){
-    if(q.category == 'mind'){
-      if(this.mindScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.mindScore = this.mindScore - q.score;
-        this.disTab = true
-      }
-    }
-    if(q.category == 'body'){
-      if(this.bodyScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.bodyScore = this.bodyScore - q.score;
-        this.disTab = true
-      }
-    }
-    if(q.category == 'lifestyle'){
-      if(this.lifeStyleScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.lifeStyleScore = this.lifeStyleScore - q.score;
-        this.disTab = true
-      }
-    }
-  }
 
 
   // copy code
   copy(i){
     let obj = this.question[i];
     this.question.push(obj);
-    this.tab++;
   }
 
   // delete question
   delete(i){
     this.question.splice(i,1);
-    this.tab--;
   }
 
-  setSegment(e){
-    console.log(e)
-    if(e == 'body'){
-      this.segmentData = ['Personal','Biometrics','Clinical History','Screening','Family history','Occupational history']
-    }else if(e == 'mind'){
-      this.segmentData = ['Stress and mental wellbeing','Readiness assessment']
-    }else if(e == 'lifestyle'){
-      this.segmentData = ['LifeStyle History - Diet','Lifestyle history - physical activity','Lifestyle history - physical activity','Lifestyle history - Sleep','Lifestyle history - alcohol']
-    }
-  }
 
 
   changeRequired(e,i){
