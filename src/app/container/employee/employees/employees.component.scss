@@ -136,3 +136,27 @@ color: #000000;
 text-transform: capitalize;
 opacity: 1;
 }
+
+// responsive 414px
+@media (max-width: 414px) {
+  h4.fntSize {
+    font-size: 9px !important;
+  }
+  h2.fntSize {
+    font-size: 6px !important;
+  }
+
+  img.img1 {
+    height: 100%;
+    width: 100%;
+  }
+  // span.fnt {
+  //   font-size: 11px !important;
+  // }
+  // td.data {
+  //   font-size: 6px;
+  // }
+  // button.ty {
+  //   font-size: 6px;
+  // }
+}

@@ -15,10 +15,10 @@
       <mat-card-content>
         <div fxLayout="row">
           <div fxFlex="15">
-            <span class="card-subtitle">
+            <span class="card-subtitle total">
               total salaries
             </span><br />
-            <span class="card-title">
+            <span class="card-title fnt">
               ${{totalPercent && totalPercent.total}}
             </span><br />
             <span class="card-info">
@@ -26,7 +26,7 @@
               <mat-icon class="red-txt" *ngIf="totalPercent && totalPercent.sign == '-'">south</mat-icon>
               {{totalPercent && totalPercent.percent}}%
             </span><br />
-            <span class="card-subtitle">
+            <span class="card-subtitle since">
               Since last month
             </span>
           </div>
@@ -38,13 +38,13 @@
               <div class="scroll-x">
               <div class="department-detail-separation" *ngFor="let item of percentData">
                 <span class="bar" [ngStyle]="{background: item.color}"></span><br />
-                <span class="card-subtitle">
+                <span class="card-subtitle department">
                   {{item.department}}
                 </span><br />
-                <span class="card-title">
+                <span class="card-title current">
                   ${{item.current}}
                 </span><br />
-                <span class="card-info">
+                <span class="card-info percent">
                   <mat-icon class="blue-txt" *ngIf="item.sign == '+'">north</mat-icon>
                   <mat-icon class="red-txt" *ngIf="item.sign == '-'">south</mat-icon>
                   {{item.percent}}%
@@ -58,6 +58,10 @@
     </mat-card>
   </div>
 </div>
+
+<div class="scroller">
+  <div class="scroll-x">
+    
 <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
   <div fxFlex="100"  fxFlex.gt-xs="100">
     <mat-card class="dashboard-detail" >
@@ -182,4 +186,7 @@
     </tbody>
   </table>
 
+</div>
+
+</div>
 </div>

@@ -17,3 +17,28 @@ color: #000000;
 text-transform: capitalize;
 opacity: 1;
 }
+
+@media (max-width: 414px) {
+  th.as {
+    font-size: 8px;
+  }
+  td.sa {
+    font-size: 8px;
+  }
+  a.sa {
+    font-size: 8px;
+  }
+  button.bu {
+    width: 0;
+    height: 0;
+  }
+  mat-icon.ui {
+    font-size: 11px;
+  }
+  b.head {
+    font-size: 12px;
+  }
+  span.date {
+    font-size: 11px !important;
+  }
+}

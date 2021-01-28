@@ -2,8 +2,8 @@
   <div class="login-container">
     <div class="container">
       <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
-        <div fxFlex="50" fxFlex.gt-xs="100" fxFlexAlign="stretch">
-          <div fxLayout="column"  fxLayoutAlign="space-around left" fxFlexAlign="stretch">
+        <div fxFlex="50" fxFlexAlign="stretch">
+          <div fxLayout="column" fxLayoutAlign="space-around left" fxFlexAlign="stretch">
             <div fxFlex="20">
               <h3 class="logo">
                 Company <br /><span>Logo</span>
@@ -11,12 +11,12 @@
             </div>
             <div fxFlex="70">
               <div class="login-heading">
-                <h1>welcome on<br /> Company admin portal</h1>
-                <p>Lorem Ipsum is simply dummy text of the printing and<br /> typesetting industry. Lorem Ipsum has been the industry's<br/> standard dummy text.</p>
+                <h1 class="font">welcome on<br /> Company admin portal</h1>
+                <p class="fnt">Lorem Ipsum is simply dummy text of the printing and<br /> typesetting industry. Lorem Ipsum has been the industry's<br/> standard dummy text.</p>
               </div>
             </div>
             <div fxFlex="10">
-              <div class="quick-links" >
+              <div class="quick-links hide" >
                 <ul>
                   <li>
                     <a>About us</a>
@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div fxFlex="50" fxFlex.gt-xs="100" >
+        <div fxFlex="50" fxFlex.gt-xs="100" class="top">
           <mat-card class="loing-card" >
             <mat-card-header>
               <mat-card-title>Login</mat-card-title>
@@ -54,11 +54,11 @@
 										</div>
                   </mat-form-field>
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="login-form-links">
-                  <div fxFlex="50">
-                    <mat-checkbox (change)="rememberMe($event)" class="example-margin" >Remember Me</mat-checkbox>
+                  <div fxFlex="50" class="forPas">
+                    <mat-checkbox (change)="rememberMe($event)" class="example-margin " >Remember Me</mat-checkbox>
                   </div>
                   <div fxFlex="50" class="forgot-link">
-                    <a routerLink="/forgot-password">Forgot Password?</a>
+                    <a routerLink="/forgot-password" class="forPass">Forgot Password?</a>
                   </div>
                 </div>
                   <button mat-raised-button color="primary" class="block-btn login-button"  [disabled]="!loginform.valid" >

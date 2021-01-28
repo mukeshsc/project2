@@ -8,13 +8,16 @@
     p.fnt {
         display: none;
     }
-    .fnt {
+    .top {
+        margin: 23% 24% 0 0;
+    }
+    a.forPass {
+        font-size: 7px;
+    }
+    .hide {
         display: none;
     }
-    .size {
-        margin: 0 13% 0 9px;
-    }
-    a.fo {
-        font-size: 9px !important;
+    .forPas {
+        font-size: 7px;
     }
 }

@@ -273,7 +273,7 @@
             <form name="SmtpForm" (ngSubmit)="updateSmtp()" #SmtpForm="ngForm">
             <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid" *ngIf="smtpDataSet">
               <div fxFlex="50">
-                <span class="card-title">Email Configurations</span>
+                <span class="card-title ec">Email Configurations</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
               </div>
               <div fxFlex="50">
@@ -353,8 +353,11 @@
                 </mat-toolbar>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  >
+
+            <div fxLayout="row" fxFlex.gt-xs="column" class="theme-setting-inner classname"  >
               <div fxFlex="50">
+                <div class="scroller">
+                  <div class="scroll-x">
                 <table class="table">
                   <thead>
                     <tr>
@@ -373,9 +376,13 @@
                     </tr>
                   </tbody>
                 </table>
+                </div>
+                </div>
               </div>
+
               <div fxFlex="10"></div>
-              <div  fxFlex="40"  *ngIf="accessPermission">
+
+              <div  fxFlex="40" class="top" *ngIf="accessPermission">
                 <mat-card>
                   <form name="SalaryForm" (ngSubmit)="addSalary()" #SalaryForm="ngForm">
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
@@ -408,6 +415,7 @@
                 </mat-card>
               </div>
             </div>
+
           </mat-tab>
           <mat-tab label="Leaves">
 

@@ -55,6 +55,10 @@
 <mat-card>
   <div fxLayout="row"  class="mid-graph" >
       <div fxFlex="100"  fxFlex.gt-xs="100"  >
+
+        <div class="scroller">
+          <div class="scroll-x">
+
         <mat-toolbar color="light" class="tool">
           <span class="mat-toolbar-title icic"> <b>Attempted by </b> </span>
           <span class="mat-toolbar-title icici"> 85/100 </span>
@@ -128,7 +132,13 @@
             <td class="mat-cell" colspan="4">No data found.</td>
           </tr>
         </table>
+
+      </div>
+    </div> 
+
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
+        
 
       </div>
     </div>

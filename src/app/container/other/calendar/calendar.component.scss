@@ -66,3 +66,12 @@ opacity: 1;
 .e-location-container {
   display: none;
 }
+
+
+// responsive 414px
+
+@media (max-width: 414px) {
+  .fnt {
+    font-size: 14px;
+  }
+}
