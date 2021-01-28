@@ -46,44 +46,46 @@
       </div>
       <div fxFlex="50">
         <mat-form-field class="form-fields">
-          <mat-select [(ngModel)]="formData.designation" name="designation" #role required placeholder="Designation">
-            <mat-option  value="President">President</mat-option>
-            <mat-option  value="Chairman Chief">Chairman Chief</mat-option>
-            <mat-option  value="Executive Officer">Executive Officer</mat-option>
-            <mat-option  value="Managing Director">Managing Director</mat-option>
-            <mat-option  value="General Manager">General Manager</mat-option>
-            <mat-option  value="Director">Director</mat-option>
-            <mat-option  value="Vice President">Vice President</mat-option>
-            <mat-option  value="Asst General Manager">Asst General Manager</mat-option>
-            <mat-option  value="Chief Operating Officer">Chief Operating Officer</mat-option>
-            <mat-option  value="Chief Marketing Officer">Chief Marketing Officer</mat-option>
-            <mat-option  value="Chief Technology Officer">Chief Technology Officer</mat-option>
-            <mat-option  value="Chief People Officer">Chief People Officer</mat-option>
-            <mat-option  value="Chief Innovation Officer">Chief Innovation Officer</mat-option>
-            <mat-option  value="Asst General Manager">Asst General Manager</mat-option>
-            <mat-option  value="Asst Director">Asst Director</mat-option>
-            <mat-option  value="Asst Vice President">Asst Vice President</mat-option>
-            <mat-option  value="Finance Manager">Finance Manager</mat-option>
-            <mat-option  value="Purchasing Manager">Purchasing Manager</mat-option>
-            <mat-option  value="Operating Manager">Operating Manager</mat-option>
-            <mat-option  value="HR & Admin Manager">HR & Admin Manager</mat-option>
-            <mat-option  value="Sales Manager">Sales Manager</mat-option>
-            <mat-option  value="Marketing Manager">Marketing Manager</mat-option>
-            <mat-option  value="Business Development Manager">Business Development Manager</mat-option>
-            <mat-option  value="Transformation Officer">Transformation Officer</mat-option>
-            <mat-option  value="Manager">Manager</mat-option>
-            <mat-option  value="Head of the Department">Head of the Department</mat-option>
-            <mat-option  value="Team Leader">Team Leader</mat-option>
-            <mat-option  value="Asst Manager">Asst Manager</mat-option>
-            <mat-option  value="Asst Manager Finance">Asst Manager Finance</mat-option>
-            <mat-option  value="Asst Manager HR & Admin">Asst Manager HR & Admin</mat-option>
-            <mat-option  value="Senior Engineer">Senior Engineer</mat-option>
-            <mat-option  value="Accountant">Accountant</mat-option>
-            <mat-option  value="Senior Accountant">Senior Accountant</mat-option>
-            <mat-option  value="HR & Admin Executive">HR & Admin Executive</mat-option>
-            <mat-option  value="Personal Assistant">Personal Assistant</mat-option>
-            <mat-option  value="Executive">Executive</mat-option>
-          </mat-select></mat-form-field>
+          <input matInput list="desig" [(ngModel)]="formData.designation" name="designation" #role required placeholder="Designation"  />
+          <datalist id="desig">
+            <option  value="President">President</option>
+            <option  value="Chairman Chief">Chairman Chief</option>
+            <option  value="Executive Officer">Executive Officer</option>
+            <option  value="Managing Director">Managing Director</option>
+            <option  value="General Manager">General Manager</option>
+            <option  value="Director">Director</option>
+            <option  value="Vice President">Vice President</option>
+            <option  value="Asst General Manager">Asst General Manager</option>
+            <option  value="Chief Operating Officer">Chief Operating Officer</option>
+            <option  value="Chief Marketing Officer">Chief Marketing Officer</option>
+            <option  value="Chief Technology Officer">Chief Technology Officer</option>
+            <option  value="Chief People Officer">Chief People Officer</option>
+            <option  value="Chief Innovation Officer">Chief Innovation Officer</option>
+            <option  value="Asst General Manager">Asst General Manager</option>
+            <option  value="Asst Director">Asst Director</option>
+            <option  value="Asst Vice President">Asst Vice President</option>
+            <option  value="Finance Manager">Finance Manager</option>
+            <option  value="Purchasing Manager">Purchasing Manager</option>
+            <option  value="Operating Manager">Operating Manager</option>
+            <option  value="HR & Admin Manager">HR & Admin Manager</option>
+            <option  value="Sales Manager">Sales Manager</option>
+            <option  value="Marketing Manager">Marketing Manager</option>
+            <option  value="Business Development Manager">Business Development Manager</option>
+            <option  value="Transformation Officer">Transformation Officer</option>
+            <option  value="Manager">Manager</option>
+            <option  value="Head of the Department">Head of the Department</option>
+            <option  value="Team Leader">Team Leader</option>
+            <option  value="Asst Manager">Asst Manager</option>
+            <option  value="Asst Manager Finance">Asst Manager Finance</option>
+            <option  value="Asst Manager HR & Admin">Asst Manager HR & Admin</option>
+            <option  value="Senior Engineer">Senior Engineer</option>
+            <option  value="Accountant">Accountant</option>
+            <option  value="Senior Accountant">Senior Accountant</option>
+            <option  value="HR & Admin Executive">HR & Admin Executive</option>
+            <option  value="Personal Assistant">Personal Assistant</option>
+            <option  value="Executive">Executive</option>
+          </datalist>
+        </mat-form-field>
       </div>
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
@@ -106,7 +108,7 @@
       <div fxFlex="50">
         <mat-form-field class="form-fields">
           <mat-select [(ngModel)]="formData.insurance_plan_name" name="insurance_plan_name" #insurance_plan_name required placeholder="Insurance Plan Name">
-            <mat-option *ngFor="let emp of insuranceData" [value]="emp.insurance_Plan">{{emp.insurance_Plan}} ({{emp.insurance_Name}})</mat-option>
+            <mat-option *ngFor="let emp of insuranceData" [value]="emp.insuranceDetail_id">{{emp.insurance_Plan}} ({{emp.insurance_Name}})</mat-option>
           </mat-select>
         </mat-form-field>
       </div>
@@ -117,10 +119,12 @@
       </div>
     </div>
     <div fxLayout="column"  fxflexfill fxLayoutGap="10px grid" class="">
-      <div fxFlex="50" *ngFor="let s of salaryData;let i = index;">
-        <mat-form-field class="form-fields">
-          <input matInput  type="text" #salary  name="salary{{i}}" [(ngModel)]="formData.salaryBalance[i][s.salary_Type]" [placeholder]="s.salary_Type + '(ex. 1000)'" required autocomplete="off"  />
-        </mat-form-field>
+      <div fxFlex="50" *ngFor="let s of formData.salaryBalance;let i = index;">
+        <ng-container *ngFor="let k of s | keyvalue">
+          <mat-form-field class="form-fields">
+            <input matInput  type="text" #salary  name="salary{{i}}" [(ngModel)]="formData.salaryBalance[i][k.key]" [placeholder]="k.key + '(ex. 1000)'" required autocomplete="off"  />
+          </mat-form-field>
+        </ng-container>
       </div>
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
@@ -129,10 +133,12 @@
       </div>
     </div>
     <div fxLayout="column"  fxflexfill fxLayoutGap="10px grid" class="">
-      <div fxFlex="50" *ngFor="let l of leaveData;let i = index">
-        <mat-form-field class="form-fields">
-          <input matInput  type="text" #leaves  name="leaves{{i}}" [(ngModel)]="formData.leaveBalance[i][l.leave_Type]" [placeholder]="l.leave_Type + '(ex. 1)'" required autocomplete="off"  />
-        </mat-form-field>
+      <div fxFlex="50" *ngFor="let l of formData.leaveBalance;let i = index">
+        <ng-container *ngFor="let k of l | keyvalue">
+          <mat-form-field class="form-fields">
+            <input matInput  type="text" #leaves  name="leaves{{i}}" [(ngModel)]="formData.leaveBalance[i][k.key]" [placeholder]="k.key + '(ex. 1)'" required autocomplete="off"  />
+          </mat-form-field>
+        </ng-container>
       </div>
     </div>
     <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">

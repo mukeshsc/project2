@@ -11,6 +11,9 @@
         <mat-icon mat-list-icon>fiber_manual_record</mat-icon>
         <div mat-line>{{emp.document_Type}}</div>
       </mat-list-item>
+      <mat-list-item>
+        <button mat-raised-button class="big-btn block-btn" (click)="mailMissingField()"  color="accent"><mat-icon matSuffix>send</mat-icon> Send Mail</button>
+      </mat-list-item>
     </mat-list>
   </mat-dialog-content>
 </div>

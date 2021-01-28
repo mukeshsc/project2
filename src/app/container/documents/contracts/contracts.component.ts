@@ -151,7 +151,8 @@ missedDoc(id){
     const dialogRef = this.dialog.open(MissingListComponent, {
       data: {
         userId: id
-      }});
+      },
+    width:'50%'});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);

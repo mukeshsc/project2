@@ -33,7 +33,8 @@ export class MissingListComponent implements OnInit {
 async getMissingField(){
   let formData = {
     "userId":this.id,
-    "companyId":JSON.parse(localStorage.getItem('userData')).company_id
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "isType ":0
   }
   this.ngxService.start();
   await(this._api.missingDoc(formData).subscribe(res => {
@@ -48,6 +49,32 @@ async getMissingField(){
     console.log(res);
   }, err => {
     const error = err.error;
+    this.ngxService.stop();
+  }));
+
+}
+
+// Get Role Type
+async mailMissingField(){
+  let formData = {
+    "userId":this.id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "isType ":1
+  }
+  this.ngxService.start();
+  await(this._api.missingDoc(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message)
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+
+    this.openErrrorSnackBar(error)
     this.ngxService.stop();
   }));
 
