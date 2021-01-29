@@ -12,6 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { StratSurveyComponent } from '../strat-survey/strat-survey.component';
 
 @Component({
   selector: 'app-initiate-survey',
@@ -20,7 +21,7 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 })
 export class InitiateSurveyComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['profile_picture', 'name', 'email',  'is_leave', 'action'];
+displayedColumns: string[] = ['survey_Name', 'updated_At', 'action'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
@@ -35,17 +36,13 @@ csvFile:any = '';
 newRequest:number = 0;
 accessPermission:boolean;
 formData = {
-  "companyId":"",
-  "userId":"",
-  "employee":"",
-  "department":"",
-  "byWhich":{"startDate":'',"endDate":''}
+  "company_Id":"",
 }
 
 constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
-  this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+  this.formData.company_Id = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
@@ -54,17 +51,12 @@ ngOnInit(): void {
 // Get Leave List
 async getList(){
 this.ngxService.start();
-await(this._api.getLeave(this.formData).subscribe(res => {
+await(this._api.idleSurveyList(this.formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
     console.log(response.data);
     this.responseData = response.data;
-    for (const item of response.data){
-      if(item.is_leave == 0){
-        this.newRequest++
-      }
-    }
     this.dataSource = new MatTableDataSource([...this.responseData]);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -78,8 +70,19 @@ await(this._api.getLeave(this.formData).subscribe(res => {
 }));
 
 }
+ // open start survey modal
+ openSureyInitateModal(e) {
+  const dialogRef = this.dialog.open(StratSurveyComponent,{
+    width:'50%',
+    data: {
+      id: e
+    }});
 
-
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.getList();
+  });
+}
 
 
 //Searching
@@ -107,8 +110,8 @@ this._snackBar.open(msg, 'Ok', {
 });
 }
 
-  currentTime(){
-    return _moment().format('hh : mm : ss')
+getDate(d){
+    return _moment(d).format('DD MMM YYYY')
   }
 
 }

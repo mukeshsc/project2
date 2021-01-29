@@ -109,6 +109,9 @@ body { margin: 0; font-family: 'Poppins', sans-serif !important;}
   color: var(--unnamed-color-000000);
   text-transform: var(--unnamed-text-transform-titlecase);
   }
+  .example-tooltip-primary {
+    background: #3F51B5 !important;
+  }
   .mat-toolbar.mat-primary {
     background: #3F51B5 !important;
     color: #fff;

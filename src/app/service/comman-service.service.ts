@@ -759,4 +759,22 @@ addSurveyQuestion(formData){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addSurveyQuestion`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+//not initiate survey list
+idleSurveyList(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showSurveyQuestion`,formData, {headers}).pipe(map(res => <any>res));
+}
+// initiate surey
+initiatedSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}initiatedSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+
 }
