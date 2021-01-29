@@ -22,6 +22,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/
 import * as _moment from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import {defaultFormat as _rollupMoment} from 'moment';
+import { ContractEditComponent } from './contract-edit/contract-edit.component';
 
 const moment = _rollupMoment || _moment;
 
@@ -289,6 +290,22 @@ openAddControct(){
   });
 }
 
+// open add Contracts modal
+
+openEditControct(data){
+  const dialogRef = this.dialog.open(ContractEditComponent, {
+    data:{
+      doc:JSON.stringify(data)
+    },
+    width: '50%',
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.showDoc();
+  });
+}
+
 async openContractAddModal(event) {
   console.log(event);
   this.files = [...event.addedFiles];
@@ -367,6 +384,7 @@ Download(e) {
 //filter
 onChange(e,t){
   if(t == 'expiry'){
+    console.log(e)
     this.formData.expiryDate = e
   }else if(t == 'user'){
     this.formData.userID = e
@@ -419,7 +437,23 @@ confirmDialog(): void {
     }
   });
 }
+confirmSignleDeleteDialog(id): void {
+  const message = `Are you sure you want to delete this?`;
 
+  const dialogData = new ConfirmDialogModel('Confirm Action', message);
+
+  const dialogRef = this.dialog.open(ConfirmBoxComponent, {
+    maxWidth: '400px',
+    data: dialogData
+  });
+
+  dialogRef.afterClosed().subscribe(dialogResult => {
+    if(dialogResult){
+      let arr = [id];
+      this.deleteDoc(arr);
+    }
+  });
+}
 
 // Download list in CSV
 export_table_to_csv() {

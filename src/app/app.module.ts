@@ -96,6 +96,7 @@ import { ListSurveyComponent } from './container/survey/list-survey/list-survey.
 import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
 import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.component';
 import { SharedService } from './service/shared.service';
+import { ContractEditComponent } from './container/documents/contracts/contract-edit/contract-edit.component';
 
 @NgModule({
   declarations: [
@@ -150,7 +151,8 @@ import { SharedService } from './service/shared.service';
     ViewSurveyComponent,
     ListSurveyComponent,
     DetailSurveyComponent,
-    VerticalBarComponent
+    VerticalBarComponent,
+    ContractEditComponent
   ],
   imports: [
     BrowserModule,

@@ -73,8 +73,10 @@ async getEvent(){
         count++;
         let color = '#3F51B5';
         if(item.isType == 'holiday'){
+          item.isType ='holiday'
           color = '#F44336';
         }else{
+          item.isType = 'event'
           color = colors[Math.floor(Math.random() * colors.length)]
         }
         let obj = {
@@ -313,7 +315,7 @@ async onActionComplete(event){
       "event_Type":data.EventType != null?(data.EventType == 'holiday'?'1':'0'):'0',
       "event_StartDate":moment(sDate).format('YYYY-MM-DD'),
       "event_EndDate":moment(eDate).format('YYYY-MM-DD'),
-      "event_Description":data.Description,
+      "event_Description":data.Description || '',
       "fileName":"",
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0,
@@ -321,10 +323,10 @@ async onActionComplete(event){
       "repeateTime":repeatted,
       "eventstartTime":moment(sDate).format('HH:mm'),
       "eventendTime":moment(eDate).format('HH:mm'),
-      "department":data.department,
-      "ageFrom":parseInt(data.ageFrom),
-      "ageTo":parseInt(data.ageTo),
-      "gender":data.gender
+      "department":data.department || '',
+      "ageFrom":parseInt(data.ageFrom) || 0,
+      "ageTo":parseInt(data.ageTo) || 0,
+      "gender":data.gender || ''
 
     }
     if(data.calendarEvent_id && data.calendarEvent_id != ''  ){

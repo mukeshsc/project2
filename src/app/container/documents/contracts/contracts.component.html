@@ -90,7 +90,11 @@
           <!-- contractValidity Column -->
           <ng-container matColumnDef="expiry_Date">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Expiry Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.expiry_Date}} </td>
+            <td mat-cell *matCellDef="let element"> {{element.expiry_Date}} <br />
+              <span *ngIf="getNegative(element.Action_Required) == 1" class="blue-txt" >Expiring in {{removeChar(element.Action_Required)}} days</span>
+                <span *ngIf="getNegative(element.Action_Required) == -1 || element.Action_Required == 0" class="red-txt" >Expired  {{removeChar(element.Action_Required)}} days ago</span>
+                <span *ngIf="element.Action_Required == '-'" class="green-txt" >Not Expirable</span>
+            </td>
           </ng-container>
 
           <!-- category Column -->
@@ -114,20 +118,17 @@
           <ng-container matColumnDef="Action">
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
-              <ng-container *ngIf="element.selected">
                 <span *ngIf="!accessPermission"> No Permission </span>
 
                   <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" (click)="notifyUser(element.user_Id,element.DocType)" class="cal-button" #tooltip="matTooltip"
                   matTooltip="message"   color="light" ><mat-icon  color="primary">message</mat-icon></button>
                   <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" (click)="missedDoc(element.user_Id)" class="cal-button" #tooltip="matTooltip"
-                  matTooltip="Missing Docs"   color="light" ><mat-icon  color="primary">sync_problem</mat-icon></button>
+                  matTooltip="Missing Docs"   color="light" ><mat-icon  color="accent">pending_actions</mat-icon></button>
+                  <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openEditControct(element)" *ngIf="accessPermission"
+                  matTooltip="Edit"   color="light"><mat-icon color="green">edit</mat-icon></button>
+                  <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
+                  matTooltip="Edit"   color="light"><mat-icon color="warn" (click)="confirmSignleDeleteDialog(element.documentDetail_id)">delete</mat-icon></button>
 
-              </ng-container>
-              <ng-container *ngIf="!element.selected">
-                <span *ngIf="getNegative(element.Action_Required) == 1" class="blue-txt" >Expiring in {{removeChar(element.Action_Required)}} days</span>
-                <span *ngIf="getNegative(element.Action_Required) == -1 || element.Action_Required == 0" class="red-txt" >Expired  {{removeChar(element.Action_Required)}} days ago</span>
-                <span *ngIf="element.Action_Required == '-'" class="green-txt" >Not Expirable</span>
-              </ng-container>
             </td>
           </ng-container>
 

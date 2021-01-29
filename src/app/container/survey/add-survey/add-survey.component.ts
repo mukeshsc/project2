@@ -16,20 +16,23 @@ export class AddSurveyComponent implements OnInit {
   segmentData:any = [];
   formName ='';
   formDescription = '';
+
+
   question = [
     {
-      type:'',
-      title:'',
-      category:'',
-      description:'',
-      optionArray:[{value:''}],
-      subQuestion:[],
-      sliderOption:{left:0,label:'',right:100},
-      answer:'',
-      columnArray: [],
-      rowArray: [],
-      isRequired:0,
-			"ip_Address"    :"12.443.22.11"
+
+      "survey_Type":"TEst",
+      "survey_Title":"Test",
+      "survey_Description":"REWE",
+      "survey_OptionArray":[{"value":""}],
+      "survey_SubQuestion":[],
+      "survey_SliderOption":{"left":0,"label":'',"right":100},
+      "survey_Answer":"",
+      "survey_ColumnArray": [],
+      "survey_RowArray": [],
+      "isRequired":0,
+      "ip_Address" :"12.443.22.11",
+      "survey_Category":""
     }
   ];
   qeustionType = [
@@ -52,18 +55,18 @@ export class AddSurveyComponent implements OnInit {
 
   next() {
         this.question.push({
-          type:'',
-          title:'',
-          category:'',
-          description:'',
-          optionArray:[{value:''}],
-          subQuestion:[],
-          sliderOption:{left:0,label:'',right:100},
-          answer:'',
-          columnArray: [],
-          rowArray: [],
-          isRequired:0,
-          "ip_Address"    :"12.443.22.11"
+          "survey_Type":"TEst",
+          "survey_Title":"Test",
+          "survey_Description":"REWE",
+          "survey_OptionArray":[{"value":""}],
+          "survey_SubQuestion":[],
+          "survey_SliderOption":{"left":0,"label":'',"right":100},
+          "survey_Answer":"",
+          "survey_ColumnArray": [],
+          "survey_RowArray": [],
+          "isRequired":0,
+          "ip_Address" :"12.443.22.11",
+          "survey_Category":""
         })
   }
 
@@ -71,14 +74,19 @@ export class AddSurveyComponent implements OnInit {
   // add question
   async addHra(){
     let  q = this.question[this.question.length - 1]
-    if(q.type == '' || q.title == '' ||  q.category == ''  ){
+    if(this.formName == '' || this.formDescription == '' || q.survey_Type == '' || q.survey_Title == '' ||  q.survey_Category == ''  ){
       this.openErrrorSnackBar('Please fill all field to move to next question');
     }else{
-      let data = {
-          data:this.question
-        };
+
+     let formData =  {
+        "survey_Name":this.formName,
+        "survey_Description":this.formDescription,
+        "userId":JSON.parse(localStorage.getItem('userData')).user_id,
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+        "questionArray":this.question
+        }
       this.ngxService.start();
-      await(this._api.addSurveyQuestion(data).subscribe(res => {
+      await(this._api.addSurveyQuestion(formData).subscribe(res => {
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
@@ -97,35 +105,35 @@ export class AddSurveyComponent implements OnInit {
   }
 
   addOption(i){
-    this.question[i].optionArray.push({value:''})
+    this.question[i].survey_OptionArray.push({value:''})
   }
 
   removeOption(i,io){
-    this.question[i].optionArray.splice(io,1);
+    this.question[i].survey_OptionArray.splice(io,1);
   }
 
   addColumn(i) {
     this.value = { label: "" };
-    this.question[i].columnArray.push(this.value)
-    if(this.question[i].rowArray.length == 0){
-      this.question[i].rowArray.push({ label: "",correct:1 })
+    this.question[i].survey_ColumnArray.push(this.value)
+    if(this.question[i].survey_RowArray.length == 0){
+      this.question[i].survey_RowArray.push({ label: "",correct:1 })
     }
   }
 
   removeColumn(i, idx) {
-    this.question[i].columnArray.splice(idx, 1)
-    if(this.question[i].columnArray.length == 0){
-      this.question[i].rowArray = [];
+    this.question[i].survey_ColumnArray.splice(idx, 1)
+    if(this.question[i].survey_ColumnArray.length == 0){
+      this.question[i].survey_RowArray = [];
     }
   }
 
   addRow(i) {
-    this.question[i].rowArray.push({ label: "",correct:1 })
+    this.question[i].survey_RowArray.push({ label: "",correct:1 })
     console.log(this.question[i])
   }
 
   removeRow(i, rawIndex) {
-    this.question[i].rowArray.splice(rawIndex, 1)
+    this.question[i].survey_RowArray.splice(rawIndex, 1)
   }
 
 
