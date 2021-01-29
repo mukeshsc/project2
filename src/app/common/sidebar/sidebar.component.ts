@@ -124,21 +124,20 @@ export class SidebarComponent implements OnInit {
         },
         {
           title:'Create New',
-          url:'/dashboard',
+          url:'/add-survey',
           open:false,
           icon:'stop_circle',
           children:[],
           access:false,
         },
         {
-          title:'Initial Survey',
-          url:'/dashboard',
+          title:'Survey Initiate',
+          url:'/survey-initiate',
           open:false,
           icon:'stop_circle',
           children:[],
           access:false,
-        },
-        {
+        },{
           title:'Response & Status',
           url:'/dashboard',
           open:false,

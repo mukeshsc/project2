@@ -188,7 +188,7 @@ export class SettingComponent implements OnInit {
           "updated_By":'1',
           "ip_Address":"12.32.32.22",
         }
-        this.getComapny()
+
       }else{
         this.openErrrorSnackBar(response.message);
       }
@@ -201,32 +201,6 @@ export class SettingComponent implements OnInit {
 
 }
 
-// get company by id
-async getComapny() {
-  this.ngxService.stop();
-  let formData = {
-    companyId:JSON.parse(localStorage.getItem('userData')).company_id
-  }
-  await(this._api.showCompanyByID(formData).subscribe(res => {
-    this.ngxService.stop();
-    const response: any = res;
-    if (response.success == true){
-      // this.themeData = response.data[0];
-      console.log(response.data[0])
-      localStorage.setItem('userData',JSON.stringify(response.data[0]))
-      this.sharedService.changeUser(JSON.stringify(response.data[0]));
-
-    }else{
-      this.ngxService.stop();
-      this.openSnackBar(response.message);
-    }
-    console.log(res);
-  }, err => {
-    const error = err.error;
-    this.openErrrorSnackBar(error.message);
-    this.ngxService.stop();
-  }));
-}
 
 // Get Department
 async getDepartment(){
@@ -594,11 +568,12 @@ async updateTheme(){
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
-      this.themeData = response.data;
+      this.themeData = response.data[0];
       this.openSnackBar(response.message);
       this.getTheme()
 
-      this.getComapny();
+      localStorage.setItem('userData',JSON.stringify(response.data[0]))
+      this.sharedService.changeUser(JSON.stringify(response.data[0]));
     }else{
       this.openErrrorSnackBar(response.message);
     }

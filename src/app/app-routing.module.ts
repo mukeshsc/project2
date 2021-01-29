@@ -29,6 +29,7 @@ import { ActiveServeyComponent } from './container/survey/active-servey/active-s
 import { AddSurveyComponent } from './container/survey/add-survey/add-survey.component';
 import { ListSurveyComponent } from './container/survey/list-survey/list-survey.component';
 import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
+import { InitiateSurveyComponent } from './container/survey/initiate-survey/initiate-survey.component';
 
 
 const routes: Routes = [
@@ -61,6 +62,7 @@ const routes: Routes = [
   { path: 'add-survey', component: AddSurveyComponent,canActivate: [AuthGuardService] },
   { path: 'survey-list', component: ListSurveyComponent,canActivate: [AuthGuardService] },
   { path: 'survey-detail/:id', component: DetailSurveyComponent,canActivate: [AuthGuardService] },
+  { path: 'survey-initiate', component: InitiateSurveyComponent,canActivate: [AuthGuardService] },
   { path: '**', redirectTo: '' }
 ];
 

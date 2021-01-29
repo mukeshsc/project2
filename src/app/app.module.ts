@@ -97,6 +97,7 @@ import { DetailSurveyComponent } from './container/survey/detail-survey/detail-s
 import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.component';
 import { SharedService } from './service/shared.service';
 import { ContractEditComponent } from './container/documents/contracts/contract-edit/contract-edit.component';
+import { InitiateSurveyComponent } from './container/survey/initiate-survey/initiate-survey.component';
 
 @NgModule({
   declarations: [
@@ -152,7 +153,8 @@ import { ContractEditComponent } from './container/documents/contracts/contract-
     ListSurveyComponent,
     DetailSurveyComponent,
     VerticalBarComponent,
-    ContractEditComponent
+    ContractEditComponent,
+    InitiateSurveyComponent
   ],
   imports: [
     BrowserModule,
