@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs } from '@syncfusion/ej2-angular-schedule';
-import { createElement, extend } from '@syncfusion/ej2-base';
+import { createElement } from '@syncfusion/ej2-base';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 
 import { CommonServiceService } from 'src/app/service/comman-service.service';
@@ -21,6 +21,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('scheduleObj', { static: true })
   public scheduleObj: ScheduleComponent;
   public data: any = [];
+  public minDate: Date = new Date();
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel = { dataSource: this.data };
   leaveData:any = [{label:'Event',value:'event'},{label:'Holiday',value:'holiday'}];
@@ -244,12 +245,13 @@ onPopupOpen(args: PopupOpenEventArgs): void {
 
 // add new event
 async onActionComplete(event){
-  this.ngxService.start();
   if(this.callApi){
   if(event.requestType == "eventRemoved"){
     let formData = {
       calendarEvent_id:event.data[0].calendarEvent_id
     }
+
+  this.ngxService.start();
     await(this._api.companyDeleteCalendarEvent(formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
@@ -261,6 +263,7 @@ async onActionComplete(event){
         this.openErrrorSnackBar(response.message);
       }
       console.log(res);
+      this.callApi = false;
       // this.getEvent();
     },err => {
       const error = err.error;
@@ -324,7 +327,9 @@ async onActionComplete(event){
       "gender":data.gender
 
     }
-    if(data.calendarEvent_id && data.calendarEvent_id != '' ){
+    if(data.calendarEvent_id && data.calendarEvent_id != ''  ){
+
+  this.ngxService.start();
       formData['calendarEvent_id'] = data.calendarEvent_id;
       await(this._api.editEvent(formData).subscribe(res => {
         this.ngxService.stop();
@@ -335,6 +340,7 @@ async onActionComplete(event){
           this.openErrrorSnackBar(response.message);
         }
         console.log(res);
+        this.callApi = false;
         this.getEvent();
       },err => {
         const error = err.error;
@@ -342,6 +348,8 @@ async onActionComplete(event){
         this.ngxService.stop();
       }));
     }else{
+
+  this.ngxService.start();
       await(this._api.addEvent(formData).subscribe(res => {
         this.ngxService.stop();
         const response: any = res;
@@ -351,6 +359,7 @@ async onActionComplete(event){
           this.openErrrorSnackBar(response.message);
         }
         console.log(res);
+        this.callApi = false
         this.getEvent();
       },err => {
         const error = err.error;

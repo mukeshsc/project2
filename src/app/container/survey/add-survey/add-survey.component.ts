@@ -78,21 +78,21 @@ export class AddSurveyComponent implements OnInit {
           data:this.question
         };
       this.ngxService.start();
-      // await(this._api.addHra(data).subscribe(res => {
-      //   this.ngxService.stop();
-      //   const response: any = res;
-      //   if (response.success == true){
-      //     this.openSnackBar(response.message);
-      //     this.router.navigate(['/hra']);
-      //   }else{
-      //     this.openErrrorSnackBar(response.message);
-      //   }
-      //   console.log(res);
-      // }, err => {
-      //   const error = err.error;
-      //   this.openErrrorSnackBar(error.message);
-      //   this.ngxService.stop();
-      // }));
+      await(this._api.addSurveyQuestion(data).subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.openSnackBar(response.message);
+          this.router.navigate(['/list-survey']);
+        }else{
+          this.openErrrorSnackBar(response.message);
+        }
+        console.log(res);
+      }, err => {
+        const error = err.error;
+        this.openErrrorSnackBar(error.message);
+        this.ngxService.stop();
+      }));
     }
   }
 
