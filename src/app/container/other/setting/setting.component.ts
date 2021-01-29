@@ -188,6 +188,7 @@ export class SettingComponent implements OnInit {
           "updated_By":'1',
           "ip_Address":"12.32.32.22",
         }
+        this.getComapny()
       }else{
         this.openErrrorSnackBar(response.message);
       }

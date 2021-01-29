@@ -1,10 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-around center" >
   <div fxFlex="40" >
     <h3 class="logo">
-      <span *ngIf="!userData && !userData.company_Logo">
+      <span *ngIf="!userData && !userData.company_favicon">
         Company <br /><span>Logo</span>
       </span>
-      <img src="{{imgPath}}{{userData.company_Logo}}" *ngIf="userData && userData.company_Logo" [alt]="userData && userData.company_Logo"/>
+      <img src="{{imgPath}}{{userData.company_favicon}}" *ngIf="userData && userData.company_favicon" [alt]="userData && userData.company_favicon"/>
     </h3>
   </div>
 </div>

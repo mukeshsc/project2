@@ -12,12 +12,45 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ContractsAddComponent } from '../contracts-add/contracts-add.component';
 import { AccessServiceService } from 'src/app/service/access-service.service';
 import { ConfirmBoxComponent, ConfirmDialogModel } from 'src/app/confirm-box/confirm-box.component';
-import * as moment from 'moment';
 import { MissingListComponent } from '../missing-list/missing-list.component';
+import {MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS} from '@angular/material-moment-adapter';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+// Depending on whether rollup is used, moment needs to be imported differently.
+// Since Moment.js doesn't have a default export, we normally need to import using the `* as`
+// syntax. However, rollup creates a synthetic default module and we thus need to import it using
+// the `default as` syntax.
+import * as _moment from 'moment';
+// tslint:disable-next-line:no-duplicate-imports
+import {defaultFormat as _rollupMoment} from 'moment';
+
+const moment = _rollupMoment || _moment;
+
+// See the Moment.js docs for the meaning of these formats:
+// https://momentjs.com/docs/#/displaying/format/
+export const MY_FORMATS = {
+  parse: {
+    dateInput: 'DD/MM/YYYY',
+  },
+  display: {
+    dateInput: 'DD/MM/YYYY',
+    monthYearLabel: 'MMMM YYYY',
+    dateA11yLabel: 'LL',
+    monthYearA11yLabel: 'MMMM YYYY'
+  },
+};
 @Component({
   selector: 'app-contracts',
   templateUrl: './contracts.component.html',
-  styleUrls: ['./contracts.component.scss']
+  styleUrls: ['./contracts.component.scss'],
+  providers: [
+  {
+      provide: DateAdapter,
+      useClass: MomentDateAdapter,
+      deps: [MAT_DATE_LOCALE, MAT_MOMENT_DATE_ADAPTER_OPTIONS]
+    },
+
+    {provide: MAT_DATE_FORMATS, useValue: MY_FORMATS},
+  ]
 })
 export class ContractsComponent implements OnInit {
 // set header column
@@ -86,11 +119,18 @@ async getDocType(){
   }));
 
 }
-
+sync(){
+  this.formData = {
+    "userID":"" ,
+    "expiryDate":"" ,
+    "DocumentType":""
+  }
+  this.showDoc();
+}
 // Get Doc List
 async showDoc(){
   if(this.formData.expiryDate !== ''){
-    this.formData.expiryDate = moment(this.formData.expiryDate).format('YYYY-MM-DD')
+    this.formData.expiryDate = _moment(this.formData.expiryDate).format('YYYY-MM-DD')
   }
   this.ngxService.start();
   await(this._api.showDoc(this.formData).subscribe(res => {
@@ -232,7 +272,23 @@ async deleteDoc(id){
 
 }
 
+
 // open add Contracts modal
+
+openAddControct(){
+  const dialogRef = this.dialog.open(ContractsAddComponent, {
+    data:{
+      file:''
+    },
+    width: '50%',
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.showDoc();
+  });
+}
+
 async openContractAddModal(event) {
   console.log(event);
   this.files = [...event.addedFiles];

@@ -43,19 +43,19 @@
             </mat-select>
           </mat-form-field>
           <mat-form-field class="search-field"  appearance="standard">
-            <input style="opacity: 1;" matInput placeholder="Expiry Date" [matDatepicker]="picker"   name="expiryDate" [(ngModel)]="formData.expiryDate" (ngModelChange)="onChange($event,'expiry')" autocomplete="off"  />
+            <input style="opacity: 1;" readonly matInput placeholder="Expiry Date" [matDatepicker]="picker"   name="expiryDate" [(ngModel)]="formData.expiryDate" (ngModelChange)="onChange($event,'expiry')" autocomplete="off"  />
             <mat-datepicker-toggle matPrefix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Download" mat-flat-button  color="light" (click)="export_table_to_csv()" ><mat-icon color="primary" >cloud_download</mat-icon></button>
                 <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
-                matTooltip="sync" mat-flat-button  color="light" (click)="showDoc()" ><mat-icon color="primary" >sync</mat-icon></button>
+                matTooltip="sync" mat-flat-button  color="light" (click)="sync()" ><mat-icon color="primary" >sync</mat-icon></button>
 
           <button mat-mini-fab mat-flat-button  *ngIf="accessPermission && eanbled" class="cal-button" #tooltip="matTooltip"
                 matTooltip="Edit"   color="light"><mat-icon color="warn" (click)="confirmDialog()">delete</mat-icon></button>
 
-          <button mat-mini-fab mat-flat-button color="primary" class="cal-button" *ngIf="accessPermission"  aria-label="Add new" (click)="openContractAddModal('')" >
+          <button mat-mini-fab mat-flat-button color="primary" class="cal-button" *ngIf="accessPermission"  aria-label="Add new" (click)="openAddControct()" >
             <mat-icon>add</mat-icon>
           </button>
         </mat-toolbar>

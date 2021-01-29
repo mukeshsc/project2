@@ -142,14 +142,20 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           drowDownList.appendTo(inputEle);
           inputEle.setAttribute('name', 'EventType');
 
+
+
+
         // Custom audience trigger field
           let row2: HTMLElement = createElement('div', { className: 'custom-field-row' });
           let formElement2: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
           formElement2.insertBefore(row2, formElement2.childNodes[1]);
           let container2: HTMLElement = createElement('div', { className: 'custom-field-container' });
+          let h2: HTMLElement = createElement('span', { className: 'card-subtitle' });
+          h2.innerText = 'Target Audience';
           let inputEle2: HTMLInputElement = createElement('input', {
             className: 'e-field', attrs: { name: 'gender' }
         }) as HTMLInputElement;
+          container2.appendChild(h2);
           container2.appendChild(inputEle2);
           row2.appendChild(container2);
           let drowDownList1: DropDownList = new DropDownList({
@@ -164,7 +170,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
             ],
             fields: { text: 'text', value: 'value' },
             value: (args.data as { [key: string]: Object }).EventType as string,
-            floatLabelType: 'Always', placeholder: 'Target Audience Gender'
+            floatLabelType: 'Always', placeholder: 'Gender'
         });
           drowDownList1.appendTo(inputEle2);
           inputEle2.setAttribute('name', 'gender');
@@ -183,7 +189,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           dataSource:[...this.departmentData],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Department'
+          floatLabelType: 'Always', placeholder: 'Department'
       });
         drowDownList2.appendTo(inputEle3);
         inputEle3.setAttribute('name', 'department');
@@ -205,7 +211,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Age From'
+          floatLabelType: 'Always', placeholder: 'Age From'
         });
         drowDownList3.appendTo(inputEle4);
         inputEle4.setAttribute('name', 'ageFrom');
@@ -226,7 +232,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Age To'
+          floatLabelType: 'Always', placeholder: 'Age To'
         });
         drowDownList4.appendTo(inputEle5);
         inputEle5.setAttribute('name', 'ageTo');
@@ -238,6 +244,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
 
 // add new event
 async onActionComplete(event){
+  this.ngxService.start();
   if(this.callApi){
   if(event.requestType == "eventRemoved"){
     let formData = {
@@ -270,28 +277,32 @@ async onActionComplete(event){
     }
     console.log(data)
     let repeatArr = [];
-    let repeat = data.RecurrenceRule.split(';');
-    for(let item of repeat){
-      let param = item.split('=');
-      let obj  = {key:param[0],value:param[1]}
-      repeatArr.push(obj)
-    }
+
     let repeatType = 0
     let repeatted = 0
-    if(repeatArr[0].value == 'WEEKLY'){
-      repeatType = 2
-    }else if(repeatArr[0].value == 'DAILY'){
-      repeatType = 1
-    }else if(repeatArr[0].value == 'MONTHLY'){
-      repeatType = 3
-    }else if(repeatArr[0].value == 'YEARLY'){
-      repeatType = 4
-    }
-    for(let item of repeatArr){
-      if(item.key == 'INTERVAL'){
-        repeatted = item.value;
+    if(data.RecurrenceRule){
+      let repeat = data.RecurrenceRule.split(';');
+      for(let item of repeat){
+        let param = item.split('=');
+        let obj  = {key:param[0],value:param[1]}
+        repeatArr.push(obj)
+      }
+      if(repeatArr[0].value == 'WEEKLY'){
+        repeatType = 2
+      }else if(repeatArr[0].value == 'DAILY'){
+        repeatType = 1
+      }else if(repeatArr[0].value == 'MONTHLY'){
+        repeatType = 3
+      }else if(repeatArr[0].value == 'YEARLY'){
+        repeatType = 4
+      }
+      for(let item of repeatArr){
+        if(item.key == 'INTERVAL'){
+          repeatted = item.value;
+        }
       }
     }
+
 
     let sDate = new Date(data.StartTime);
     let eDate = new Date(data.EndTime)

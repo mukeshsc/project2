@@ -59,7 +59,7 @@
                 <ngx-dropzone-label >{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
             </ngx-dropzone-preview>
             <ngx-dropzone-preview *ngIf="files.length == 0 && formData.file_Path != ''" [removable]="true"  style="background-image: url({{filePath}}{{formData.file_Path}});">
-              <ngx-dropzone-label ></ngx-dropzone-label>
+              <ngx-dropzone-label >{{formData.file_Path}}</ngx-dropzone-label>
             </ngx-dropzone-preview>
           </ngx-dropzone>
         </div>
