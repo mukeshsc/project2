@@ -38,6 +38,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -99,6 +100,7 @@ import { SharedService } from './service/shared.service';
 import { ContractEditComponent } from './container/documents/contracts/contract-edit/contract-edit.component';
 import { InitiateSurveyComponent } from './container/survey/initiate-survey/initiate-survey.component';
 import { StratSurveyComponent } from './container/survey/strat-survey/strat-survey.component';
+import { AgoPipePipe } from './pipe/ago-pipe.pipe';
 
 @NgModule({
   declarations: [
@@ -156,7 +158,8 @@ import { StratSurveyComponent } from './container/survey/strat-survey/strat-surv
     VerticalBarComponent,
     ContractEditComponent,
     InitiateSurveyComponent,
-    StratSurveyComponent
+    StratSurveyComponent,
+    AgoPipePipe
   ],
   imports: [
     BrowserModule,

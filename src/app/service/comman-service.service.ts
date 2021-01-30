@@ -776,5 +776,14 @@ initiatedSurvey(formData){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}initiatedSurvey`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+// active surey list
+activeSurveyList(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}activeSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
 
 }

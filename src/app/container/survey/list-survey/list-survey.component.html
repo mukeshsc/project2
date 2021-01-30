@@ -35,33 +35,33 @@
                 The actual rendered columns are set as a property on the row definition" -->
 
           <!-- Name Column -->
-          <ng-container matColumnDef="name">
+          <ng-container matColumnDef="survey_Name">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Name </th>
             <td mat-cell *matCellDef="let element">
               <div class="comp-info">
-                <span class="mat-toolbar-title">{{element.name}}</span>
-                <span>{{element.description | slice:0:20}}...</span>
+                <span class="mat-toolbar-title">{{element.survey_Name}}</span><br />
+                <span>{{element.survey_Description | slice:0:20}}...</span>
               </div>
             </td>
           </ng-container>
 
           <!-- attempted Column -->
           <ng-container matColumnDef="attempted">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Attempted </th>
             <td mat-cell *matCellDef="let element"> 256/300 <a style="cursor: pointer;" class="primary-txt"><b>Resend</b></a></td>
           </ng-container>
 
           <!-- published Column -->
-          <ng-container matColumnDef="published">
+          <ng-container matColumnDef="created_At">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Published on </th>
-            <td mat-cell *matCellDef="let element"> 10 Oct 2020 </td>
+            <td mat-cell *matCellDef="let element"> {{getTime(element.created_At)}} </td>
           </ng-container>
 
           <!-- expiry Column -->
-          <ng-container matColumnDef="expiry">
+          <ng-container matColumnDef="survey_ExpiryDate">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Expire in </th>
             <td mat-cell *matCellDef="let element">
-              <span class="current-time">{{currentTime()}}</span>
+              <span class="current-time">{{element.survey_ExpiryDate}} </span>
             </td>
           </ng-container>
 

@@ -116,7 +116,7 @@ export class SidebarComponent implements OnInit {
       children:[
         {
           title:'Active Survey',
-          url:'/active-survey',
+          url:'/survey-list',
           open:false,
           icon:'stop_circle',
           children:[],
