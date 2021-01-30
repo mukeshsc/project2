@@ -17,11 +17,9 @@
           <mat-tab-group mat-align-tabs="start">
 
           <div fxLayout="column">
-            <div class="scroller">
-              <div class="scroll-x">
             <mat-tab label="Company Profile">
               <form name="profileForm"  #profileForm="ngForm" (ngSubmit)="editCompany()">
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
                     <span class="card-title basic">Basic Information</span>
                     <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
@@ -72,7 +70,7 @@
                     </div>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner" >
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" >
                   <div fxFlex="50">
                     <span class="card-title basic">Logo and iconography</span>
                     <p class="lorem">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
@@ -95,7 +93,7 @@
                     </div>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
                     <span class="card-title basic">Corporate Identity</span>
                     <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
@@ -129,7 +127,7 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
                     <span class="card-title basic">Company Address</span>
                     <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
@@ -192,14 +190,12 @@
               </div>
             </form>
             </mat-tab>
-            </div>
-            </div>
           </div>
 
           <div class="scroller">
             <div class="scroll-x">
           <mat-tab label="Working Hours">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="40">
                 <span class="card-title general">General Information</span>
                 <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
@@ -242,7 +238,7 @@
 
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" >
               <div fxFlex="40">
               </div>
               <div fxFlex="60">
@@ -256,11 +252,9 @@
 
           <mat-tab class="colr" label="Offices"> </mat-tab>
 
-          <!-- <div class="scroller">
-            <div class="scroll-x"> -->
           <mat-tab label="Subscription">
                 <h3 class="page-title rr">Subscription Details</h3>
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayout.xs="column">
                     <div fxFlex="33" fxLayoutAlign="space-around" class="box2">
                       <div fxLayout="column" class="round">
                           <div >
@@ -385,16 +379,10 @@
                                 <button mat-raised-button color="orange" class="but"> Request Upgrade</button>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-
           </mat-tab>
-          <!-- </div>
-          </div> -->
-
+          
           <mat-tab label="Documents">
               <mat-toolbar color="light">
                 <span class="mat-toolbar-title">Privacy Plicy</span>

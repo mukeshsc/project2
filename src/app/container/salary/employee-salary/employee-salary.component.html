@@ -59,8 +59,8 @@
   </div>
 </div>
 
-<div class="scroller">
-  <div class="scroll-x">
+<!-- <div class="scroller">
+  <div class="scroll-x"> -->
     
 <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
   <div fxFlex="100"  fxFlex.gt-xs="100">
@@ -88,6 +88,8 @@
           </button>
 
         </mat-toolbar>
+        <div class="scroller">
+          <div class="scroll-x">
         <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
           <!--- Note that these columns can be defined in any order.
@@ -146,6 +148,8 @@
             <td class="mat-cell" colspan="4">No data found.</td>
           </tr>
         </table>
+        </div>
+        </div>
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
       </mat-card-content>
     </mat-card>
@@ -188,5 +192,5 @@
 
 </div>
 
-</div>
-</div>
+<!-- </div>
+</div> -->
