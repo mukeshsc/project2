@@ -17,7 +17,7 @@ export interface DialogData {
   styleUrls: ['./missing-list.component.scss']
 })
 export class MissingListComponent implements OnInit {
-
+  dependent:any;
   employeeData: any;
   id:any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<MissingListComponent>) { }
@@ -43,6 +43,7 @@ async getMissingField(){
     if (response.success == true){
       console.log(response.data);
       this.employeeData = response.data;
+      this.dependent = response.dependent;
       console.log(this.employeeData);
     }else{
     }
@@ -55,11 +56,11 @@ async getMissingField(){
 }
 
 // Get Role Type
-async mailMissingField(){
+async mailMissingField(n){
   let formData = {
     "userId":this.id,
     "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
-    "isType ":1
+    "isType ":n
   }
   this.ngxService.start();
   await(this._api.missingDoc(formData).subscribe(res => {
