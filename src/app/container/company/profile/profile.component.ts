@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
   files: File[] = [];
   files2: File[] = [];
   activeLink = 0;
+  breadcrumb = 'Profile';
   industryData = [{title:'Agriculture',
     child:[
 'Crop Production',
@@ -454,6 +455,11 @@ child:[
  setOnOff(e, id){
   this.workingDay[id].OnOff = (e == 'true'?true:false)
   }
+
+  tabClick(e){
+    this.breadcrumb = e.tab.textLabel
+  }
+
 
 // alert message after api response success
 openSnackBar(msg) {

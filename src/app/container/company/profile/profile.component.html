@@ -5,19 +5,20 @@
       </h3>
       <ul class="breadcrumb">
         <li><a routerLink="/dashboard">Dashboard</a></li>
-        <li> Company Profile</li>
+        <li> <a>Company Profile</a></li>
+        <li>{{breadcrumb}}</li>
       </ul>
     </div>
 </div>
 
 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
     <div fxFlex="100">
-      <mat-card class="employee-tab">
+      <mat-card class="employee-tab" >
         <mat-card-content>
-          <mat-tab-group mat-align-tabs="start">
+          <mat-tab-group mat-align-tabs="start" (selectedTabChange)="tabClick($event)">
 
             <div fxLayout="column">
-            <mat-tab label="Company Profile">
+            <mat-tab label="Profile">
               <form name="profileForm"  #profileForm="ngForm" (ngSubmit)="editCompany()">
                 <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
