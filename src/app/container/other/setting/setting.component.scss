@@ -33,11 +33,5 @@ opacity: 1;
   margin-right: 50px;
 }
 
-@media screen and (min-width: 414px){
-  span.ec {
-    font-size: 19px;
+@media screen and (max-width: 414px){
   }
-  .classname {
-    flex-direction: column;
-  }
-}

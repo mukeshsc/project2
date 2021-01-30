@@ -13,6 +13,10 @@
   <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
     <div fxFlex="100"  fxFlex.gt-xs="100">
       <mat-card class="dashboard-detail" >
+
+        <div class="scroller">
+          <div class="scroll-x">
+
         <mat-card-content>
           <mat-toolbar color="light">
             <span class="mat-toolbar-title">All Sub Admin</span>
@@ -96,6 +100,10 @@
           </table>
           <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
         </mat-card-content>
+
+          </div>
+        </div>
+
       </mat-card>
     </div>
   </div>

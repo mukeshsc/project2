@@ -16,7 +16,7 @@
         <mat-tab-group mat-align-tabs="start">
           <mat-tab label="Theme" >
             <form name="ThemeForm" (ngSubmit)="updateTheme()" #ThemeForm="ngForm">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Lable</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -40,17 +40,17 @@
                 </div> -->
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Logo and iconography</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
                 <br />
-                <p>Recommended image size is 40px x 40px</p>
+                <p class="lorem">Recommended image size is 40px x 40px</p>
               </div>
               <div fxFlex="50">
                 <mat-label>Light Logo</mat-label>
                 <div class="dropzone">
-                  <ngx-dropzone (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif">
+                  <ngx-dropzone class="light" (change)="onSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
                       Upload Your Logo<br />
                       <small>drag & drop to upload the logo image</small>
@@ -65,7 +65,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
                 <br />
@@ -74,7 +74,7 @@
               <div fxFlex="50">
                 <mat-label>company_favicon</mat-label>
                 <div class="dropzone">
-                  <ngx-dropzone (change)="onFaviSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif">
+                  <ngx-dropzone class="light" (change)="onFaviSelect($event)" accept="image/jpeg,image/jpg,image/png,image/gif">
                     <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
                       Upload Your company_favicon<br />
                       <small>drag & drop to upload the company_favicon image</small>
@@ -89,7 +89,7 @@
                 </div>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" *ngIf="accessPermission">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" *ngIf="accessPermission">
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
@@ -99,113 +99,114 @@
             </div>
           </form>
           </mat-tab>
+
           <mat-tab label="Notifications">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="50">
                 <span class="card-title">Lable</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
               </div>
               <div fxFlex="50">
                 <section class="toggle-section">
-                  <mat-label>Leave Request</mat-label>
+                  <mat-label class="leave">Leave Request</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Chat</mat-label>
+                  <mat-label class="leave">Chat</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Document Expiry</mat-label>
+                  <mat-label class="leave">Document Expiry</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail" 
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Survey Completed</mat-label>
+                  <mat-label class="leave">Survey Completed</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Reward Reddemed</mat-label>
+                  <mat-label class="leave">Reward Reddemed</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Calendar & Events</mat-label>
+                  <mat-label class="leave">Calendar & Events</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
                   </mat-slide-toggle>
                 </section>
                 <section class="toggle-section">
-                  <mat-label>Birthday / Anniversary</mat-label>
+                  <mat-label class="leave">Birthday / Anniversary</mat-label>
                   <mat-slide-toggle
-                      class="example-margin"
+                      class="example-margin portal"
                       color="primary"
                       checked="checked"
                   >Portal
                   </mat-slide-toggle>
                   <mat-slide-toggle
-                  class="example-margin"
+                  class="example-margin mail"
                   color="primary"
                   checked="checked"
                   >Email
@@ -213,7 +214,7 @@
                 </section>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  *ngIf="accessPermission">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  *ngIf="accessPermission">
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
@@ -222,9 +223,10 @@
               </div>
             </div>
           </mat-tab>
+
           <mat-tab label="Security">
             <form name="SecurityForm" (ngSubmit)="updatePassword()" #SecurityForm="ngForm">
-              <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+              <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                 <div fxFlex="50">
                   <span class="card-title">Change Password</span>
                   <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
@@ -259,7 +261,7 @@
                   </div>
                 </div>
               </div>
-              <div fxLayout="row" class="theme-setting-inner"  *ngIf="accessPermission">
+              <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  *ngIf="accessPermission">
                 <div fxFlex="50">
                 </div>
                 <div fxFlex="50">
@@ -269,30 +271,31 @@
               </div>
             </form>
           </mat-tab>
+
           <mat-tab label="SMTP">
             <form name="SmtpForm" (ngSubmit)="updateSmtp()" #SmtpForm="ngForm">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid" *ngIf="smtpDataSet">
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid" *ngIf="smtpDataSet">
               <div fxFlex="50">
-                <span class="card-title ec">Email Configurations</span>
+                <span class="card-title">Email Configurations</span>
                 <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content. Lorem Ipsum Is A Placeholder Text Commonly Used To Demonstrate The Visual Form Of A Document Or A Typeface Without Relying On Meaningful Content.</p>
               </div>
               <div fxFlex="50">
                 <mat-form-field class="form-fields">
-                  <input matInput placeholder="Mail Server"  type="text" #mail_Server  name="mail_Server" maxlength="50" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
+                  <input class="mail" matInput placeholder="Mail Server"  type="text" #mail_Server  name="mail_Server" maxlength="50" [(ngModel)]="smtpDataSet.mail_Server" required autocomplete="off" />
                   <div *ngIf="mail_Server.errors && mail_Server.touched">
                     <span class="error" *ngIf="mail_Server.errors?.required">Mail Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-form-field class="form-fields">
-                  <input matInput placeholder="SMTP Port"  type="number" #smtp_Port min="0" maxlength="40" onkeypress="return event.charCode >= 48" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
+                  <input class="mail" matInput placeholder="SMTP Port"  type="number" #smtp_Port min="0" maxlength="40" onkeypress="return event.charCode >= 48" name="smtp_Port" [(ngModel)]="smtpDataSet.smtp_Port" required autocomplete="off" />
                   <div *ngIf="smtp_Port.errors && smtp_Port.touched">
                     <span class="error" *ngIf="smtp_Port.errors?.required">SMTP Server is mandatory.</span>
                   </div>
                 </mat-form-field>
 
                 <mat-form-field class="form-fields">
-                  <input matInput placeholder="Username"  type="text" #userName  name="userName" maxlength="50" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
+                  <input class="mail" matInput placeholder="Username"  type="text" #userName  name="userName" maxlength="50" [(ngModel)]="smtpDataSet.userName"  required autocomplete="off" />
                   <div *ngIf="userName.errors && userName.touched">
                     <span class="error" *ngIf="userName.errors?.required">Username is mandatory.</span>
                   </div>
@@ -325,7 +328,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" >
               <div fxFlex="50">
               </div>
               <div fxFlex="50">
@@ -333,7 +336,7 @@
                 <button mat-raised-button class="big-btn block-btn" color="primary" [disabled]="!SmtpForm.valid"  *ngIf="accessPermission">Save Settings</button></div>
             </div>
           </form>
-          <div fxLayout="row" class="theme-setting-inner" >
+          <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" >
             <div fxFlex="50">
             </div>
             <div fxFlex="50">
@@ -341,6 +344,7 @@
             </div>
           </div>
           </mat-tab>
+
           <mat-tab label="Salary">
             <div fxLayout="row" class="theme-setting-inner" >
               <div fxFlex="100">
@@ -353,11 +357,8 @@
                 </mat-toolbar>
               </div>
             </div>
-
-            <div fxLayout="row" fxFlex.gt-xs="column" class="theme-setting-inner classname"  >
+            <div fxLayout="row" fxLayout.xs="column"  class="theme-setting-inner"  >
               <div fxFlex="50">
-                <div class="scroller">
-                  <div class="scroll-x">
                 <table class="table">
                   <thead>
                     <tr>
@@ -376,12 +377,8 @@
                     </tr>
                   </tbody>
                 </table>
-                </div>
-                </div>
               </div>
-
               <div fxFlex="10"></div>
-
               <div  fxFlex="40" class="top" *ngIf="accessPermission">
                 <mat-card>
                   <form name="SalaryForm" (ngSubmit)="addSalary()" #SalaryForm="ngForm">
@@ -415,11 +412,11 @@
                 </mat-card>
               </div>
             </div>
-
           </mat-tab>
-          <mat-tab label="Leaves">
 
-            <div fxLayout="row" class="theme-setting-inner" >
+          <mat-tab label="Leaves">
+            
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" >
               <div fxFlex="100">
                 <mat-toolbar color="light">
                   <span class="mat-toolbar-title">All Leaves</span>
@@ -430,7 +427,7 @@
                 </mat-toolbar>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  >
               <div fxFlex="50">
                 <table class="table">
                   <thead>
@@ -486,10 +483,12 @@
                 </mat-card>
               </div>
             </div>
+            
           </mat-tab>
+
           <mat-tab label="Department">
 
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" >
               <div fxFlex="100">
                 <mat-toolbar color="light">
                   <span class="mat-toolbar-title">All Departments</span>
@@ -500,7 +499,7 @@
                 </mat-toolbar>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  >
               <div fxFlex="50">
                 <table class="table">
                   <thead>
@@ -581,7 +580,7 @@
                 </mat-toolbar>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  >
               <div fxFlex="50">
                 <table class="table">
                   <thead>
@@ -680,7 +679,7 @@
           </mat-tab>
 
           <mat-tab label="Holiday">
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner" >
               <div fxFlex="100">
                 <mat-toolbar color="light">
                   <span class="mat-toolbar-title">All Holidays</span>
@@ -691,7 +690,7 @@
                 </mat-toolbar>
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner"  >
+            <div fxLayout="row" fxLayout.xs="column" class="theme-setting-inner"  >
               <div fxFlex="50">
                 <table class="table">
                   <thead>
@@ -779,3 +778,16 @@
     </mat-card>
   </div>
 </div>
+
+<!-- <div class="container" fxLayout="column" fxLayout.md="row" fxLayoutGap="20px">
+  <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column"  fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px" >
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+  </div>
+  <div class="cardWrap" fxLayout.lt-md="column" fxLayout.md="column" fxLayout="row" fxFlex.md="50" fxLayoutAligmnet="space-between center" fxLayoutGap="20px" >
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+    <div fxFlex.lt-md="100" fxFlex="35" >Card</div>
+  </div>
+</div> -->
