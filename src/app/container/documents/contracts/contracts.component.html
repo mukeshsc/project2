@@ -127,7 +127,7 @@
                   <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openEditControct(element)" *ngIf="accessPermission"
                   matTooltip="Edit"   color="light"><mat-icon color="green">edit</mat-icon></button>
                   <button mat-mini-fab mat-flat-button  *ngIf="accessPermission" class="cal-button" #tooltip="matTooltip"
-                  matTooltip="Edit"   color="light"><mat-icon color="warn" (click)="confirmSignleDeleteDialog(element.documentDetail_id)">delete</mat-icon></button>
+                  matTooltip="Delete"   color="light"><mat-icon color="warn" (click)="confirmSignleDeleteDialog(element.documentDetail_id)">delete</mat-icon></button>
 
             </td>
           </ng-container>

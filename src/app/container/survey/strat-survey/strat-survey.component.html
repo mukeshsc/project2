@@ -34,15 +34,16 @@
             <option *ngFor="let item of ageColumn" [value]="item.text">
           </datalist>
         </mat-form-field>
-
-
-
         <mat-form-field class="form-fields">
-          <input matInput maxlength="40" list="survey_Gender" placeholder="Gender"  #survey_Gender  [(ngModel)]="formData.survey_Gender"  name="survey_Gender"  autocomplete="off" />
-          <datalist id="survey_Gender">
-            <option  value="Male">
-            <option  value="Female">
-          </datalist>
+          <mat-select placeholder="Department" [(ngModel)]="formData.survey_Department" name="survey_Department" #survey_Department >
+            <mat-option  *ngFor="let item of departmentData" [value]="item.department_id">{{item.department_Type}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="form-fields">
+          <mat-select placeholder="Gender" [(ngModel)]="formData.survey_Gender" name="survey_Gender" #survey_Gender >
+            <mat-option  value="0">Male</mat-option>
+            <mat-option  value="1">Female</mat-option>
+          </mat-select>
         </mat-form-field>
       </div>
     </div>

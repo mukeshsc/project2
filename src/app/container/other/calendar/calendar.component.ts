@@ -72,11 +72,11 @@ async getEvent(){
       for(let item of response.data){
         count++;
         let color = '#3F51B5';
-        if(item.isType == 'holiday'){
-          item.isType ='holiday'
+        if(item.event_Type == '1'){
+          item.IsType = 'holiday'
           color = '#F44336';
         }else{
-          item.isType = 'event'
+          item.IsType = 'event'
           color = colors[Math.floor(Math.random() * colors.length)]
         }
         let obj = {
@@ -84,14 +84,18 @@ async getEvent(){
           Subject: item.event_Title,
           StartTime: item.event_StartDate,
           EndTime: item.event_EndDate,
-          IsAllDay: item.isAllday == 1 ? true : false,
+          IsAllDay: item.isAllday,
           Description:item.event_Description,
           icon:item.fileName,
-          EventType:item.event_Type,
+          EventType:item.IsType,
           targetAudience:item.target_Audeince,
           calendarEvent_id:item.calendarEvent_id,
-          IsType:item.isType,
-          CategoryColor: color
+          IsType:item.IsType,
+          CategoryColor: color,
+          department:item.department,
+          gender:item.gender,
+          ageFrom:item.ageFrom?item.ageFrom.toString():'',
+          ageTo:item.ageTo?item.ageTo.toString():''
         }
         this.data.push(obj)
       }
@@ -337,6 +341,8 @@ async onActionComplete(event){
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
+
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
@@ -356,6 +362,8 @@ async onActionComplete(event){
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
+
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);

@@ -57,13 +57,14 @@ export class StratSurveyComponent implements OnInit {
     "user_Id":"",
     "survey_AgeTo":"",
     "survey_AgeFrom":"",
-    "survey_Gender":"",
+    "survey_Gender":null,
     "survey_Department":"",
     "survey_ExpiryDate":"",
     "survey_ExpiryTime":"",
     "ip_Address":"12.43.544.33"
   }
   ageColumn:any = [];
+  departmentData:any = []
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<StratSurveyComponent>) { }
 
   ngOnInit(): void {
@@ -73,11 +74,31 @@ export class StratSurveyComponent implements OnInit {
     this.formData.surveyQuestions_Id = this.data.id;
     this.formData.company_Id = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.user_Id = JSON.parse(localStorage.getItem('userData')).user_id;
+    this.getDepartment();
   }
 
-
+// Get Department
+async getDepartment(){
+  this.ngxService.start();
+  await(this._api.showDepartment().subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.departmentData = response.data;
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
   // add new role
   async initiateSurvey(){
+    this.formData.survey_Gender = parseInt(this.formData.survey_Gender)
+    this.formData.survey_ExpiryDate = _moment(this.formData.survey_ExpiryDate).format('YYYY-MM-DD')
     this.ngxService.start()
     await(this._api.initiatedSurvey(this.formData).subscribe(res => {
       this.ngxService.stop();
