@@ -101,6 +101,7 @@ import { ContractEditComponent } from './container/documents/contracts/contract-
 import { InitiateSurveyComponent } from './container/survey/initiate-survey/initiate-survey.component';
 import { StratSurveyComponent } from './container/survey/strat-survey/strat-survey.component';
 import { AgoPipePipe } from './pipe/ago-pipe.pipe';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -203,7 +204,8 @@ import { AgoPipePipe } from './pipe/ago-pipe.pipe';
     NgxDaterangepickerMd.forRoot(),
     NgxMatSelectSearchModule,
     MatProgressSpinnerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    CountdownModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule,SharedService],
   bootstrap: [AppComponent]

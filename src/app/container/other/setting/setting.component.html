@@ -590,8 +590,22 @@
                     <tr *ngFor="let d of docTypeData; let i= index;">
                       <td>{{i+1}}</td>
                       <td>{{d.document_Type}}</td>
-                      <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
-                      <td>{{d.dependent == 1?'Mandatory':'Optional'}}</td>
+                      <td>
+                        <mat-slide-toggle
+                          class="example-margin"
+                          color="primary"
+                          [checked]="d.isCheck == 1?true:false"
+                          (change)="updateDocType($event, d,1)"
+                        ></mat-slide-toggle>
+                      </td>
+                      <td>
+                        <mat-slide-toggle
+                          class="example-margin"
+                          color="primary"
+                          [checked]="d.dependent == 1?true:false"
+                          (change)="updateDocType($event, d,2)"
+                        ></mat-slide-toggle>
+                      </td>
                       <td>{{d.expires == 1?'Yes':'No'}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>

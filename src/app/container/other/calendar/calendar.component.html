@@ -31,6 +31,7 @@
     [eventSettings]="eventSettings"
     (popupOpen)="onPopupOpen($event)"
     (eventRendered)="oneventRendered($event)"
+    (actionBegin)=onActionBegin($event)
     (actionComplete)="onActionComplete($event)"
     (eventClick)="onEventClick($event)" >
       <e-views>

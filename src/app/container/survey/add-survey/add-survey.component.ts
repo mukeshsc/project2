@@ -91,7 +91,7 @@ export class AddSurveyComponent implements OnInit {
         const response: any = res;
         if (response.success == true){
           this.openSnackBar(response.message);
-          this.router.navigate(['/list-survey']);
+          this.router.navigate(['/survey-initiate']);
         }else{
           this.openErrrorSnackBar(response.message);
         }

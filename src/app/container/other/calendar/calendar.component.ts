@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs } from '@syncfusion/ej2-angular-schedule';
+import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
 import { createElement } from '@syncfusion/ej2-base';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 
@@ -121,6 +121,11 @@ async addNew() {
   };
   this.scheduleObj.openEditor(cellData,'Add');
 
+}
+
+//action begin
+onActionBegin(args){
+  console.log(args.requestType)
 }
 
 

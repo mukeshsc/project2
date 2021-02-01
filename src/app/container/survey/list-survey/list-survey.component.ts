@@ -56,7 +56,19 @@ await(this._api.activeSurveyList(this.formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
-    console.log(response.data);
+    for(let item of response.data){
+      console.log(Date.parse(_moment(item.survey_ExpiryDate).format('LLLL')), Date.parse(_moment().format('LLLL')))
+       if(((Date.parse(_moment(item.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL'))) < 864000000 && (Date.parse(item.survey_ExpiryDate) - Date.parse(_moment().format('LLLL'))) > 0){
+        item.expiry = 'current';
+        item.survey_ExpiryDate = ((Date.parse(_moment(item.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL')))
+      }else if(Date.parse(item.survey_ExpiryDate) <= Date.parse(_moment().format())){
+        item.expiry = 'expired'
+
+      }else{
+        item.expiry = 'remain'
+        item.survey_ExpiryDate = _moment(item.survey_ExpiryDate).format('DD MMM  YYYY')
+      }
+    }
     this.responseData = response.data;
     this.dataSource = new MatTableDataSource([...this.responseData]);
     this.dataSource.paginator = this.paginator;

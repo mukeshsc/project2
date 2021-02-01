@@ -20,9 +20,6 @@
             <mat-icon matSuffix>search</mat-icon>
             <input matInput placeholder="Search" #input  (keyup)="applyFilter($event)">
           </mat-form-field>
-          <button mat-mini-fab color="light" class="cal-button" aria-label="Sync" (click)="getList()">
-            <mat-icon>sync</mat-icon>
-          </button>
           <button mat-mini-fab color="primary" class="cal-button"   aria-label="Add new" [routerLink]="['/add-survey']"  *ngIf="accessPermission">
             <mat-icon>add</mat-icon>
           </button>

@@ -15,13 +15,6 @@
         </div>
 
         <mat-form-field class="form-fields">
-          <input matInput placeholder="Survey Expiry Time" type="time" #survey_ExpiryTime  name="survey_ExpiryTime" [(ngModel)]="formData.survey_ExpiryTime"  required autocomplete="off"  />
-        </mat-form-field>
-        <div [hidden]="survey_ExpiryTime.valid || survey_ExpiryTime.untouched">
-          <span class="error" *ngIf="survey_ExpiryTime.errors?.required">Survey expiry time is mandatory.</span>
-        </div>
-
-        <mat-form-field class="form-fields">
           <input matInput maxlength="40" list="survey_AgeFrom" placeholder="Age From" type="number" #survey_AgeFrom  [(ngModel)]="formData.survey_AgeFrom"  name="survey_AgeFrom"  autocomplete="off" />
           <datalist id="survey_AgeFrom">
             <option *ngFor="let item of ageColumn" [value]="item.text">

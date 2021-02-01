@@ -55,12 +55,11 @@ export class StratSurveyComponent implements OnInit {
     "surveyQuestions_Id":"",
     "company_Id":"",
     "user_Id":"",
-    "survey_AgeTo":"",
-    "survey_AgeFrom":"",
+    "survey_AgeTo":null,
+    "survey_AgeFrom":null,
     "survey_Gender":null,
-    "survey_Department":"",
+    "survey_Department":null,
     "survey_ExpiryDate":"",
-    "survey_ExpiryTime":"",
     "ip_Address":"12.43.544.33"
   }
   ageColumn:any = [];
@@ -109,7 +108,7 @@ async getDepartment(){
         this.openErrrorSnackBar(response.message);
       }
       console.log(res);
-        this.dialogRef.close('Close');
+      this.dialogRef.close('Close');
     },err => {
       const error = err.error;
       this.openErrrorSnackBar(error.message);

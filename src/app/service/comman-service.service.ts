@@ -785,5 +785,14 @@ activeSurveyList(formData){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}activeSurvey`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+// active update Document Type
+updateDocumentType(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateDocumentType`,formData, {headers}).pipe(map(res => <any>res));
+}
+
 
 }

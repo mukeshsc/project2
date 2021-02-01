@@ -503,6 +503,40 @@ async getDocType(){
   }));
 }
 
+// Get document type
+async updateDocType(e, d,n){
+  console.log(e,d)
+
+
+  let formData = {
+    "documentTypeId":d.documentType_id,
+    "ip_Address":"1234556",
+    "companyId":d.company_Id,
+    "documentType":d.document_Type,
+    "isCheck":n == 1?(e.checked?1:0):d.isCheck,
+    "dependent":n == 2?(e.checked?1:0):d.dependent ,
+    "expires":d.expires,
+    "docImage":d.doc_Image
+  }
+  this.ngxService.start();
+  await(this._api.updateDocumentType(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+
+      this.openSnackBar(response.message);
+      this.getDocType();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
 //add Document type
 async addDocType(){
   this.ngxService.start();
