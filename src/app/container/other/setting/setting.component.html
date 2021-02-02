@@ -246,7 +246,7 @@
                   <div [hidden]="newpassword.valid || newpassword.untouched">
                     <span class="error" *ngIf="newpassword.errors?.required">New Password is mandatory.</span>
                   </div>
-                  <div *ngIf="oldNewSame">
+                  <div *ngIf="passwordData.oldpassword != '' && passwordData.newpassword == passwordData.oldpassword">
                     <span class="error">Old password an new password can not be same </span>
                   </div>
                   <mat-form-field class="form-fields">
@@ -256,7 +256,7 @@
                   <div [hidden]="confirmpassword.valid || confirmpassword.untouched">
                     <span class="error" *ngIf="confirmpassword.errors?.required">confirmpassword Password is mandatory.</span>
                   </div>
-                  <div *ngIf="passNotMatched">
+                  <div *ngIf="passwordData.newpassword != passwordData.confirmpassword">
                     <span class="error" >Confirm Password is not matched.</span>
                   </div>
                 </div>
@@ -266,7 +266,7 @@
                 </div>
                 <div fxFlex="50">
                   <mat-label></mat-label>
-                  <button mat-raised-button class="big-btn block-btn" [disabled]="!SecurityForm.valid || oldNewSame"  color="primary">Update Password</button>
+                  <button mat-raised-button class="big-btn block-btn" [disabled]="!SecurityForm.valid || passwordData.newpassword != passwordData.confirmpassword || passwordData.newpassword == passwordData.oldpassword "  color="primary">Update Password</button>
                 </div>
               </div>
             </form>
@@ -597,8 +597,22 @@
                     <tr *ngFor="let d of docTypeData; let i= index;">
                       <td>{{i+1}}</td>
                       <td>{{d.document_Type}}</td>
-                      <td>{{d.isCheck == 1?'Mandatory':'Optional'}}</td>
-                      <td>{{d.dependent == 1?'Mandatory':'Optional'}}</td>
+                      <td>
+                        <mat-slide-toggle
+                          class="example-margin"
+                          color="primary"
+                          [checked]="d.isCheck == 1?true:false"
+                          (change)="updateDocType($event, d,1)"
+                        ></mat-slide-toggle>
+                      </td>
+                      <td>
+                        <mat-slide-toggle
+                          class="example-margin"
+                          color="primary"
+                          [checked]="d.dependent == 1?true:false"
+                          (change)="updateDocType($event, d,2)"
+                        ></mat-slide-toggle>
+                      </td>
                       <td>{{d.expires == 1?'Yes':'No'}}</td>
                       <td>
                         <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission" (click)="confirmDialogDoc(d.documentType_id)"  matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>
@@ -614,13 +628,13 @@
                     <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
                       <div fxFlex="100">
                         <mat-form-field class="form-fields">
-                          <input matInput  type="text" list="documentTypeList" (ngModelChange)="setDocImage($event)" placeholder="Document Type Name" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
+                          <input matInput  type="text" list="documentTypeList" (ngModelChange)="setDocImage($event)" placeholder="Document Type" #documentType maxlength="50"  [(ngModel)]="docTypeSet.documentType"  name="documentType" required autocomplete="off" />
                           <datalist id="documentTypeList">
                             <option *ngFor="let item of getDocumentTypeData"  [value]="item.DocType">
                           </datalist>
                         </mat-form-field>
                         <div *ngIf="documentType.errors && documentType.touched">
-                          <span class="error" *ngIf="documentType.errors?.required">Document Type name is mandatory.</span>
+                          <span class="error" *ngIf="documentType.errors?.required">Document type is mandatory.</span>
                         </div>
                       </div>
                     </div>

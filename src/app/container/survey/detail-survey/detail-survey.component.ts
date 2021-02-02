@@ -21,9 +21,14 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 export class DetailSurveyComponent implements OnInit {
 // set header column
 displayedColumns: string[] = ['profile_picture', 'name', 'email',  'answer', 'action'];
+displayedColumns1: string[] = ['sno', 'question', 'answer'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
+//set static data for table
+dataSource1 = new MatTableDataSource([{sno:1,question:'lorem ipsum doler sumit us',description:'Lorem ipsum dolor sit amet...'},
+{sno:1,question:'lorem ipsum doler sumit us',description:'Lorem ipsum dolor sit amet...'},
+{sno:1,question:'lorem ipsum doler sumit us',description:'Lorem ipsum dolor sit amet...'}]);
 
 // table sorting and pagination
 @ViewChild(MatPaginator,{static:false}) paginator: MatPaginator;

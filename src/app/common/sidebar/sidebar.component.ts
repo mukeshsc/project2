@@ -116,7 +116,7 @@ export class SidebarComponent implements OnInit {
       children:[
         {
           title:'Active Survey',
-          url:'/active-survey',
+          url:'/survey-list',
           open:false,
           icon:'stop_circle',
           children:[],
@@ -124,19 +124,19 @@ export class SidebarComponent implements OnInit {
         },
         {
           title:'Create New',
-          url:'/dashboard',
+          url:'/add-survey',
           open:false,
           icon:'stop_circle',
           children:[],
           access:false,
         },
         {
-          title:'Initial Survey',
-          url:'/dashboard',
+          title:'Initiate Survey',
+          url:'/survey-initiate',
           open:false,
           icon:'stop_circle',
           children:[],
-          access:false,
+          access:true,
         },
         {
           title:'Response & Status',

@@ -1,10 +1,10 @@
 
     <mat-toolbar color="primary">
-      <mat-icon class="closeModal" (click)="prev()"  *ngIf="tab > 0">keyboard_backspace</mat-icon>
+      <!-- <mat-icon class="closeModal" >keyboard_backspace</mat-icon> -->
       <span class="spacer"></span>
       <span class="mat-toolbar-title">Create New Survey</span>
       <span class="spacer"></span>
-      <mat-icon class="closeModal" [routerLink]="['/hra']" routerLinkActive="router-link-active" >close</mat-icon>
+      <mat-icon class="closeModal" [routerLink]="['/active-survey']" routerLinkActive="router-link-active" >close</mat-icon>
     </mat-toolbar>
   <div class="main-hra-form-container">
     <form name="registerForm" #registerForm="ngForm">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <ng-container *ngFor="let q of question;let i = index;">
-          <div class="ques-tab" *ngIf="tab == i">
+          <div class="ques-tab">
             <span class="card-title">Question {{i+1}}</span>
             <p>Please fill below information to change your setting.</p>
             <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
@@ -40,7 +40,7 @@
                 <div class="form-ques">
                   <mat-label>Question Type <span class="red-txt">*</span> </mat-label>
                   <mat-form-field>
-                    <mat-select  name="type" [(ngModel)]="q.type">
+                    <mat-select  name="survey_Type" [(ngModel)]="q.survey_Type">
                       <mat-option *ngFor="let t of qeustionType"  [value]="t.value">{{t.label}}</mat-option>
                     </mat-select></mat-form-field>
                 </div>
@@ -51,7 +51,7 @@
                 <div class="form-ques">
                   <mat-label>Question Name <span class="red-txt">*</span> </mat-label>
                   <mat-form-field>
-                    <input matInput   type="text" maxlength="200"  name="title" [(ngModel)]="q.title"  />
+                    <input matInput   type="text" maxlength="200"  name="survey_Title" [(ngModel)]="q.survey_Title"  />
                   </mat-form-field>
                 </div>
               </div>
@@ -61,66 +61,46 @@
                 <div class="form-ques">
                   <mat-label>Category <span class="red-txt">*</span> </mat-label>
                   <mat-form-field>
-                    <mat-select name="category" [(ngModel)]="q.category"  name="category" #category required (ngModelChange)="setSegment($event)">
-                      <mat-option  value="mind">Mind</mat-option>
-                      <mat-option  value="body">Body</mat-option>
-                      <mat-option  value="lifestyle">Lifestyle</mat-option>
+                    <mat-select name="category" [(ngModel)]="q.survey_Category"  name="survey_Category" #category required >
+                      <mat-option  value="feedback">Feedback</mat-option>
+                      <mat-option  value="evaluation">Evaluation</mat-option>
+                      <mat-option  value="application_form">Application / Form</mat-option>
+                      <mat-option  value="voting">Voting</mat-option>
                     </mat-select></mat-form-field>
                 </div>
               </div>
             </div>
-            <div fxLayout="row"  fxflexfill fxLayoutGap="10px grid" class="">
-              <div fxFlex="100">
-                <div class="form-ques">
-                  <mat-label>Segment <span class="red-txt">*</span> </mat-label>
-                  <mat-form-field>
-                    <mat-select  [(ngModel)]="q.segments"  name="segments" #segments required>
-                      <mat-option  value="" *ngIf="segmentData.length == 0">Please Select Category</mat-option>
-                      <mat-option *ngFor="let item of segmentData" [value]="item">{{item}}</mat-option>
-                    </mat-select></mat-form-field>
-                </div>
-              </div>
-            </div>
+
             <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
               <div fxFlex="100">
                 <div class="form-ques">
                   <mat-label>Description <span class="red-txt">*</span> </mat-label>
                   <mat-form-field>
-                    <textarea matInput maxlength="500"  name="description" [(ngModel)]="q.description"  ></textarea>
+                    <textarea matInput maxlength="500"  name="survey_Description" [(ngModel)]="q.survey_Description"  ></textarea>
                   </mat-form-field>
                 </div>
               </div>
             </div>
-              <ng-container *ngIf="q.type == 'text' || q.type == 'textarea'">
+            <ng-container *ngIf="q.survey_Type == 'text' || q.survey_Type == 'textarea'">
               <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="" >
                 <div fxFlex="100">
                   <div class="form-ques">
                     <mat-label>Correct Answer </mat-label>
                     <mat-form-field>
-                      <textarea matInput  maxlength="500"  name="answer" [(ngModel)]="q.answer"  ></textarea>
+                      <textarea matInput  maxlength="500"  name="answer" [(ngModel)]="q.survey_Answer"  ></textarea>
                     </mat-form-field>
                   </div>
                 </div>
               </div>
             </ng-container>
-            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
-              <div fxFlex="100">
-                <div class="form-ques">
-                  <mat-label>Max Point <span class="red-txt">*</span> </mat-label>
-                  <mat-form-field>
-                    <input matInput    maxlength="2" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="score" [(ngModel)]="q.score"  />
-                  </mat-form-field>
-                </div>
-              </div>
-            </div>
-            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.type == 'slider'">
+            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.survey_Type == 'slider'">
               <div fxFlex="100">
                   <div fxLayout="row" class="quesOption">
                     <div fxFlex="25">
                       <div class="form-ques">
                         <mat-label>Left Side</mat-label>
                           <mat-form-field>
-                            <input matInput    maxlength="3" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="left" [(ngModel)]="q.sliderOption.left"  />
+                            <input matInput    maxlength="3" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="left" [(ngModel)]="q.survey_SliderOption.left"  />
                           </mat-form-field>
                       </div>
                     </div>
@@ -128,7 +108,7 @@
                       <div class="form-ques">
                         <mat-label>Label</mat-label>
                           <mat-form-field>
-                            <input matInput  maxlength="50" type="text" name="label" [(ngModel)]="q.sliderOption.label"  />
+                            <input matInput  maxlength="50" type="text" name="label" [(ngModel)]="q.survey_SliderOption.label"  />
                           </mat-form-field>
                       </div>
                     </div>
@@ -136,30 +116,22 @@
                       <div class="form-ques">
                         <mat-label>Right Side</mat-label>
                           <mat-form-field>
-                            <input matInput  maxlength="3"  (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="right" [(ngModel)]="q.sliderOption.right"  />
+                            <input matInput  maxlength="3"  (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="right" [(ngModel)]="q.survey_SliderOption.right"  />
                           </mat-form-field>
                       </div>
                     </div>
                   </div>
               </div>
             </div>
-            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.type == 'slider' || q.type == 'multiSelect' || q.type == 'radio' || q.type == 'dropdown'|| q.type == 'linkert'">
-              <div fxFlex="100" *ngFor="let o of q.optionArray;let io = index;">
-                  <h3 *ngIf="q.type == 'slider'">Give point for slider value (eg, value = 10, point =2)</h3>
+            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.survey_Type == 'slider' || q.survey_Type == 'multiSelect' || q.survey_Type == 'radio' || q.survey_Type == 'dropdown'|| q.survey_Type == 'linkert'">
+              <div fxFlex="100" *ngFor="let o of q.survey_OptionArray;let io = index;">
+                  <h3 *ngIf="q.survey_Type == 'slider'">Give point for slider value (eg, value = 10, point =2)</h3>
                   <div fxLayout="row" class="quesOption">
                     <div fxFlex="60">
                       <div class="form-ques">
                         <mat-label>Option</mat-label>
                           <mat-form-field>
                             <input matInput  maxlength="50" type="text" name="value{{io}}" [(ngModel)]="o.value"  />
-                          </mat-form-field>
-                      </div>
-                    </div>
-                    <div fxFlex="30">
-                      <div class="form-ques">
-                        <mat-label>Point</mat-label>
-                          <mat-form-field>
-                            <input matInput  maxlength="2" type="text" name="point{{io}}" (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" [(ngModel)]="o.point"  />
                           </mat-form-field>
                       </div>
                     </div>
@@ -172,8 +144,8 @@
                   </div>
               </div>
             </div>
-            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.type == 'rating'">
-              <div fxFlex="100" *ngFor="let o of q.optionArray;let io = index;">
+            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.survey_Type == 'rating'">
+              <div fxFlex="100" *ngFor="let o of q.survey_OptionArray;let io = index;">
                   <div fxLayout="row" class="quesOption">
                     <div fxFlex="20">
                       <div class="form-ques">
@@ -188,14 +160,6 @@
                           </mat-form-field>
                       </div>
                     </div>
-                    <div fxFlex="20">
-                      <div class="form-ques">
-                        <mat-label>Point</mat-label>
-                          <mat-form-field>
-                            <input matInput  maxlength="2"  (keypress)=" ($event.charCode == 8 || $event.charCode == 0) ? null : $event.charCode >= 48 && $event.charCode <= 57" name="point{{io}}" [(ngModel)]="o.point"  />
-                          </mat-form-field>
-                      </div>
-                    </div>
                     <div fxFlex="10">
                       <span class="option_options">
                         <mat-icon color="info" *ngIf="io == 0" (click)="addOption(i)">add_circle</mat-icon>
@@ -205,22 +169,22 @@
                   </div>
               </div>
             </div>
-            <div *ngIf=" q.type == 'matrix'">
+            <div *ngIf=" q.survey_Type == 'matrix'">
               <div fxLayout="row" >
                 <div fxFlex="80">
                   <button mat-raised-button (click)="addColumn(i)" color="primary">Add Question</button>
                 </div>
                 <div fxFlex="20" dir="rtl">
                   <button mat-raised-button (click)="addRow(i)" color="accent"
-                    [disabled]="q.columnArray.length == 0">Add Answer</button>
+                    [disabled]="q.survey_ColumnArray.length == 0">Add Answer</button>
                 </div>
               </div>
               <div class="simple-table-container overflow-auto text-nowrap" style="width: 100%;overflow: auto;"
-                ms-responsive-table *ngIf="q.columnArray.length > 0">
+                ms-responsive-table *ngIf="q.survey_ColumnArray.length > 0">
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="30">
                     <mat-label>Question</mat-label>
-                    <div fxLayout="column" *ngFor="let sub of q.columnArray; let valueIndex=index;">
+                    <div fxLayout="column" *ngFor="let sub of q.survey_ColumnArray; let valueIndex=index;">
                       <mat-form-field appearance="outline"  class="form-ques">
                         <input matInput placeholder="Column name"  maxlength="50" [(ngModel)]="sub.label"
                           name="label{{valueIndex}}" required>
@@ -232,7 +196,7 @@
                   </div>
                   <div fxFlex="30">
                     <mat-label>Answer</mat-label>
-                    <div fxLayout="column" *ngFor="let sub of q.rowArray; let rawIndex=index;">
+                    <div fxLayout="column" *ngFor="let sub of q.survey_RowArray; let rawIndex=index;">
                       <mat-form-field appearance="outline"  class="form-ques">
                         <input matInput placeholder="Column name" maxlength="50" [(ngModel)]="sub.label"
                           name="label{{rawIndex}}">
@@ -244,10 +208,10 @@
                   </div>
                   <div fxFlex="30">
                     <mat-label>Correct Answer no</mat-label>
-                    <div fxLayout="column" *ngFor="let sub of q.columnArray; let rawIndex=index;">
+                    <div fxLayout="column" *ngFor="let sub of q.survey_ColumnArray; let rawIndex=index;">
                       <mat-form-field appearance="outline"  class="form-ques">
                         <mat-select name="correct" [(ngModel)]="sub.correct"   #correct required>
-                          <mat-option *ngFor="let sub of q.rowArray;let i = index;"  [value]="i+1">{{i+1}}</mat-option>
+                          <mat-option *ngFor="let sub of q.survey_RowArray;let i = index;"  [value]="i+1">{{i+1}}</mat-option>
                         </mat-select>
                       </mat-form-field>
                     </div>
@@ -257,11 +221,12 @@
               </div>
 
             </div>
+            <br />
             <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="">
               <div fxFlex="10" >
                 <mat-icon (click)="copy(i)" #tooltip="matTooltip" matTooltip="Copy question" >content_copy</mat-icon>
               </div>
-              <div fxFlex="10"  *ngIf="tab > 0">
+              <div fxFlex="10"  *ngIf="i > 0">
                 <mat-icon (click)="delete(i)"  #tooltip="matTooltip" matTooltip="Delete this question">delete</mat-icon>
               </div>
               <div fxFlex="20">
@@ -274,24 +239,27 @@
                 </mat-slide-toggle>
               </div>
             </div>
-            <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" *ngIf="tab > 0" (click)="prev()" color="warn">Cancel</button>
-              </div>
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" (click)="addHra()"  color="green">Done</button>
-              </div>
-              <div fxFlex="33">
-                <mat-label></mat-label>
-                <button mat-raised-button class="big-btn block-btn" (click)="next(i)" [disabled]="!disTab"  color="primary">Save</button>
-              </div>
-            </div>
           </div>
         </ng-container>
         <div class="toolbox"  (click)="openPreviewModal()">
           <mat-icon>play_circle_filled</mat-icon>
+        </div>
+      </div>
+      <div class="short-container">
+
+        <div fxLayout="row" fxFlexfill fxLayoutGap="10px grid" (click)="next()">
+          <div fxFlex>
+            <div class="add-section">
+              <mat-icon color="light"  >add_circle</mat-icon><br />
+              <p>Add New Question</p>
+            </div>
+          </div>
+        </div>
+        <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+          <div fxFlex="100">
+            <mat-label></mat-label>
+            <button mat-raised-button class="big-btn block-btn" (click)="addHra()"  color="green">Done</button>
+          </div>
         </div>
       </div>
     </form>

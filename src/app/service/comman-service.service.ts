@@ -329,6 +329,14 @@ addDoc(formData){
   return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addEmpDocument `,formData, {headers}).pipe(map(res => <any>res));
  }
 
+editDoc(formData){
+  let headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Authorization': this.token
+  });
+  return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateEmpDocument `,formData, {headers}).pipe(map(res => <any>res));
+ }
+
 // show Doc
 showDoc(formData){
   let headers = new HttpHeaders({
@@ -741,5 +749,50 @@ editCompany(formData){
     });
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}editCompany`,formData, {headers}).pipe(map(res => <any>res));
 }
+
+//add survey
+addSurveyQuestion(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}addSurveyQuestion`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+//not initiate survey list
+idleSurveyList(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}showSurveyQuestion`,formData, {headers}).pipe(map(res => <any>res));
+}
+// initiate surey
+initiatedSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}initiatedSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// active surey list
+activeSurveyList(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}activeSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// active update Document Type
+updateDocumentType(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateDocumentType`,formData, {headers}).pipe(map(res => <any>res));
+}
+
 
 }

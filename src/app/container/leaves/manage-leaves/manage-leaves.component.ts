@@ -92,11 +92,18 @@ async updateLeave(){
   if(this.formData.isType == ''){
     this.openErrrorSnackBar('Please select Action type to update this request')
   }else{
-    this.formData.isLeave = this.formData.isType == 'reject' && 2;
-    this.formData.isLeave = this.formData.isType == 'accept' && 1;
-    this.formData.isLeave = this.formData.isType == 'cancel' && 3;
-    this.formData.isLeave = this.formData.isType == 'modify' && 0;
+    console.log(this.formData.isType)
+    if(this.formData.isType == 'reject'){
+      this.formData.isLeave = 2;
+    }else if(this.formData.isType == 'accept'){
+      this.formData.isLeave = 1;
+    }else if(this.formData.isType == 'cancel'){
+      this.formData.isLeave = 3;
+    }else{
+      this.formData.isLeave = 0;
+    }
     this.formData.isType = (this.formData.isType == 'reject' || this.formData.isType == 'accept')?'request':this.formData.isType;
+    console.log(this.formData.isLeave)
     this.ngxService.start();
     await(this._api.modifyEmployeeleave(this.formData).subscribe(res => {
       this.ngxService.stop();

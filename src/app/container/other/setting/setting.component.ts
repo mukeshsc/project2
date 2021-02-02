@@ -188,6 +188,7 @@ export class SettingComponent implements OnInit {
           "updated_By":'1',
           "ip_Address":"12.32.32.22",
         }
+
       }else{
         this.openErrrorSnackBar(response.message);
       }
@@ -200,32 +201,6 @@ export class SettingComponent implements OnInit {
 
 }
 
-// get company by id
-async getComapny() {
-  this.ngxService.stop();
-  let formData = {
-    companyId:JSON.parse(localStorage.getItem('userData')).company_id
-  }
-  await(this._api.showCompanyByID(formData).subscribe(res => {
-    this.ngxService.stop();
-    const response: any = res;
-    if (response.success == true){
-      // this.themeData = response.data[0];
-      console.log(response.data[0])
-      localStorage.setItem('userData',JSON.stringify(response.data[0]))
-      this.sharedService.changeUser(JSON.stringify(response.data[0]));
-
-    }else{
-      this.ngxService.stop();
-      this.openSnackBar(response.message);
-    }
-    console.log(res);
-  }, err => {
-    const error = err.error;
-    this.openErrrorSnackBar(error.message);
-    this.ngxService.stop();
-  }));
-}
 
 // Get Department
 async getDepartment(){
@@ -528,6 +503,40 @@ async getDocType(){
   }));
 }
 
+// Get document type
+async updateDocType(e, d,n){
+  console.log(e,d)
+
+
+  let formData = {
+    "documentTypeId":d.documentType_id,
+    "ip_Address":"1234556",
+    "companyId":d.company_Id,
+    "documentType":d.document_Type,
+    "isCheck":n == 1?(e.checked?1:0):d.isCheck,
+    "dependent":n == 2?(e.checked?1:0):d.dependent ,
+    "expires":d.expires,
+    "docImage":d.doc_Image
+  }
+  this.ngxService.start();
+  await(this._api.updateDocumentType(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+
+      this.openSnackBar(response.message);
+      this.getDocType();
+    }else{
+      this.openErrrorSnackBar(response.message);
+    }
+    console.log(res);
+  },err => {
+    const error = err.error;
+    this.ngxService.stop();
+    this.openErrrorSnackBar(error.message);
+  }));
+}
+
 //add Document type
 async addDocType(){
   this.ngxService.start();
@@ -593,11 +602,12 @@ async updateTheme(){
     this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
-      this.themeData = response.data;
+      this.themeData = response.data[0];
       this.openSnackBar(response.message);
       this.getTheme()
 
-      this.getComapny();
+      localStorage.setItem('userData',JSON.stringify(response.data[0]))
+      this.sharedService.changeUser(JSON.stringify(response.data[0]));
     }else{
       this.openErrrorSnackBar(response.message);
     }

@@ -17,7 +17,7 @@ export interface DialogData {
   styleUrls: ['./missing-list.component.scss']
 })
 export class MissingListComponent implements OnInit {
-
+  dependent:any;
   employeeData: any;
   id:any;
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogData, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar, public dialogRef: MatDialogRef<MissingListComponent>) { }
@@ -33,7 +33,8 @@ export class MissingListComponent implements OnInit {
 async getMissingField(){
   let formData = {
     "userId":this.id,
-    "companyId":JSON.parse(localStorage.getItem('userData')).company_id
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "isType ":0
   }
   this.ngxService.start();
   await(this._api.missingDoc(formData).subscribe(res => {
@@ -42,12 +43,39 @@ async getMissingField(){
     if (response.success == true){
       console.log(response.data);
       this.employeeData = response.data;
+      this.dependent = response.dependent;
       console.log(this.employeeData);
     }else{
     }
     console.log(res);
   }, err => {
     const error = err.error;
+    this.ngxService.stop();
+  }));
+
+}
+
+// Get Role Type
+async mailMissingField(n){
+  let formData = {
+    "userId":this.id,
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "isType ":n
+  }
+  this.ngxService.start();
+  await(this._api.missingDoc(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message)
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+
+    this.openErrrorSnackBar(error)
     this.ngxService.stop();
   }));
 

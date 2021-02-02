@@ -12,30 +12,27 @@ import { ViewSurveyComponent } from '../view-survey/view-survey.component';
   styleUrls: ['./add-survey.component.scss']
 })
 export class AddSurveyComponent implements OnInit {
-  tab:number = 0;
   value ={};
-  lifeStyleScore = 100;
-  bodyScore = 100;
-  mindScore = 100;
   segmentData:any = [];
   formName ='';
   formDescription = '';
+
+
   question = [
     {
-      type:'',
-      title:'',
-      category:'',
-      segments:'',
-      description:'',
-      optionArray:[{value:'',point:null}],
-      subQuestion:[],
-      sliderOption:{left:0,label:'',right:100},
-      answer:'',
-      columnArray: [],
-      rowArray: [],
-      score:0,
-      isRequired:0,
-			"ip_Address"    :"12.443.22.11"
+
+      "survey_Type":"TEst",
+      "survey_Title":"Test",
+      "survey_Description":"REWE",
+      "survey_OptionArray":[{"value":""}],
+      "survey_SubQuestion":[],
+      "survey_SliderOption":{"left":0,"label":'',"right":100},
+      "survey_Answer":"",
+      "survey_ColumnArray": [],
+      "survey_RowArray": [],
+      "isRequired":0,
+      "ip_Address" :"12.443.22.11",
+      "survey_Category":""
     }
   ];
   qeustionType = [
@@ -56,155 +53,102 @@ export class AddSurveyComponent implements OnInit {
   }
 
 
-  next(i) {
-    let  q = this.question[i]
-    if(q.type == '' || q.title == '' || q.score == 0 || q.category == '' || q.segments == '' || q.description == '' ){
-      this.openErrrorSnackBar('Please fill all field to move to next question')
-
-    }else{
-
-      this.tab++;
-      if (this.tab >= this.question.length) {
+  next() {
         this.question.push({
-          type:'',
-          title:'',
-          category:'',
-          segments:'',
-          description:'',
-          optionArray:[{value:'',point:null}],
-          subQuestion:[],
-          sliderOption:{left:0,label:'',right:100},
-          answer:'',
-          columnArray: [],
-          rowArray: [],
-          score:0,
-          isRequired:0,
-          "ip_Address"    :"12.443.22.11"
+          "survey_Type":"TEst",
+          "survey_Title":"Test",
+          "survey_Description":"REWE",
+          "survey_OptionArray":[{"value":""}],
+          "survey_SubQuestion":[],
+          "survey_SliderOption":{"left":0,"label":'',"right":100},
+          "survey_Answer":"",
+          "survey_ColumnArray": [],
+          "survey_RowArray": [],
+          "isRequired":0,
+          "ip_Address" :"12.443.22.11",
+          "survey_Category":""
         })
-      }
-    }
-  }
-  prev() {
-    if (this.tab > 0) {
-      this.tab--;
-    }
   }
 
 
   // add question
   async addHra(){
     let  q = this.question[this.question.length - 1]
-    if(q.type == '' || q.title == '' || q.score == 0 || q.category == '' || q.segments == '' || q.description == '' ){
+    if(this.formName == '' || this.formDescription == '' || q.survey_Type == '' || q.survey_Title == '' ||  q.survey_Category == ''  ){
       this.openErrrorSnackBar('Please fill all field to move to next question');
     }else{
-      let data = {
-          data:this.question
-        };
+
+     let formData =  {
+        "survey_Name":this.formName,
+        "survey_Description":this.formDescription,
+        "userId":JSON.parse(localStorage.getItem('userData')).user_id,
+        "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+        "questionArray":this.question
+        }
       this.ngxService.start();
-      // await(this._api.addHra(data).subscribe(res => {
-      //   this.ngxService.stop();
-      //   const response: any = res;
-      //   if (response.success == true){
-      //     this.openSnackBar(response.message);
-      //     this.router.navigate(['/hra']);
-      //   }else{
-      //     this.openErrrorSnackBar(response.message);
-      //   }
-      //   console.log(res);
-      // }, err => {
-      //   const error = err.error;
-      //   this.openErrrorSnackBar(error.message);
-      //   this.ngxService.stop();
-      // }));
+      await(this._api.addSurveyQuestion(formData).subscribe(res => {
+        this.ngxService.stop();
+        const response: any = res;
+        if (response.success == true){
+          this.openSnackBar(response.message);
+          this.router.navigate(['/survey-initiate']);
+        }else{
+          this.openErrrorSnackBar(response.message);
+        }
+        console.log(res);
+      }, err => {
+        const error = err.error;
+        this.openErrrorSnackBar(error.message);
+        this.ngxService.stop();
+      }));
     }
   }
 
   addOption(i){
-    this.question[i].optionArray.push({value:'',point:null})
+    this.question[i].survey_OptionArray.push({value:''})
   }
 
   removeOption(i,io){
-    this.question[i].optionArray.splice(io,1);
+    this.question[i].survey_OptionArray.splice(io,1);
   }
 
   addColumn(i) {
     this.value = { label: "" };
-    this.question[i].columnArray.push(this.value)
-    if(this.question[i].rowArray.length == 0){
-      this.question[i].rowArray.push({ label: "",correct:1 })
+    this.question[i].survey_ColumnArray.push(this.value)
+    if(this.question[i].survey_RowArray.length == 0){
+      this.question[i].survey_RowArray.push({ label: "",correct:1 })
     }
   }
 
   removeColumn(i, idx) {
-    this.question[i].columnArray.splice(idx, 1)
-    if(this.question[i].columnArray.length == 0){
-      this.question[i].rowArray = [];
+    this.question[i].survey_ColumnArray.splice(idx, 1)
+    if(this.question[i].survey_ColumnArray.length == 0){
+      this.question[i].survey_RowArray = [];
     }
   }
 
   addRow(i) {
-    this.question[i].rowArray.push({ label: "",correct:1 })
+    this.question[i].survey_RowArray.push({ label: "",correct:1 })
     console.log(this.question[i])
   }
 
   removeRow(i, rawIndex) {
-    this.question[i].rowArray.splice(rawIndex, 1)
+    this.question[i].survey_RowArray.splice(rawIndex, 1)
   }
 
-  countScore(q){
-    if(q.category == 'mind'){
-      if(this.mindScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.mindScore = this.mindScore - q.score;
-        this.disTab = true
-      }
-    }
-    if(q.category == 'body'){
-      if(this.bodyScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.bodyScore = this.bodyScore - q.score;
-        this.disTab = true
-      }
-    }
-    if(q.category == 'lifestyle'){
-      if(this.lifeStyleScore < q.score){
-        this.openErrrorSnackBar('Sorry you can not add this question total score of this category is greator than 100')
-        this.disTab = false;
-      }else{
-        this.lifeStyleScore = this.lifeStyleScore - q.score;
-        this.disTab = true
-      }
-    }
-  }
 
 
   // copy code
   copy(i){
     let obj = this.question[i];
     this.question.push(obj);
-    this.tab++;
   }
 
   // delete question
   delete(i){
     this.question.splice(i,1);
-    this.tab--;
   }
 
-  setSegment(e){
-    console.log(e)
-    if(e == 'body'){
-      this.segmentData = ['Personal','Biometrics','Clinical History','Screening','Family history','Occupational history']
-    }else if(e == 'mind'){
-      this.segmentData = ['Stress and mental wellbeing','Readiness assessment']
-    }else if(e == 'lifestyle'){
-      this.segmentData = ['LifeStyle History - Diet','Lifestyle history - physical activity','Lifestyle history - physical activity','Lifestyle history - Sleep','Lifestyle history - alcohol']
-    }
-  }
 
 
   changeRequired(e,i){

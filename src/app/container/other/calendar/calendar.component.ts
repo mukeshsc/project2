@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs } from '@syncfusion/ej2-angular-schedule';
-import { createElement, extend } from '@syncfusion/ej2-base';
+import { EventSettingsModel, DayService, WeekService, WorkWeekService, MonthService, ScheduleComponent, PopupOpenEventArgs, EventRenderedArgs, ActionEventArgs } from '@syncfusion/ej2-angular-schedule';
+import { createElement } from '@syncfusion/ej2-base';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
 
 import { CommonServiceService } from 'src/app/service/comman-service.service';
@@ -21,6 +21,7 @@ export class CalendarComponent implements OnInit {
   @ViewChild('scheduleObj', { static: true })
   public scheduleObj: ScheduleComponent;
   public data: any = [];
+  public minDate: Date = new Date();
   public selectedDate: Date = new Date();
   public eventSettings: EventSettingsModel = { dataSource: this.data };
   leaveData:any = [{label:'Event',value:'event'},{label:'Holiday',value:'holiday'}];
@@ -33,7 +34,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     for(let i = 0;100 > i;i++){
-      this.ageColumn.push({text:i,value:i})
+      this.ageColumn.push({text:i.toString(),value:i.toString()})
     }
     this.getEvent();
     this.getDepartment();
@@ -71,9 +72,11 @@ async getEvent(){
       for(let item of response.data){
         count++;
         let color = '#3F51B5';
-        if(item.isType == 'holiday'){
+        if(item.event_Type == '1'){
+          item.IsType = 'holiday'
           color = '#F44336';
         }else{
+          item.IsType = 'event'
           color = colors[Math.floor(Math.random() * colors.length)]
         }
         let obj = {
@@ -81,14 +84,18 @@ async getEvent(){
           Subject: item.event_Title,
           StartTime: item.event_StartDate,
           EndTime: item.event_EndDate,
-          IsAllDay: item.isAllday == 1 ? true : false,
+          IsAllDay: item.isAllday,
           Description:item.event_Description,
           icon:item.fileName,
-          EventType:item.event_Type,
+          EventType:item.IsType,
           targetAudience:item.target_Audeince,
           calendarEvent_id:item.calendarEvent_id,
-          IsType:item.isType,
-          CategoryColor: color
+          IsType:item.IsType,
+          CategoryColor: color,
+          department:item.department,
+          gender:item.gender,
+          ageFrom:item.ageFrom?item.ageFrom.toString():'',
+          ageTo:item.ageTo?item.ageTo.toString():''
         }
         this.data.push(obj)
       }
@@ -114,6 +121,11 @@ async addNew() {
   };
   this.scheduleObj.openEditor(cellData,'Add');
 
+}
+
+//action begin
+onActionBegin(args){
+  console.log(args.requestType)
 }
 
 
@@ -142,14 +154,20 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           drowDownList.appendTo(inputEle);
           inputEle.setAttribute('name', 'EventType');
 
+
+
+
         // Custom audience trigger field
           let row2: HTMLElement = createElement('div', { className: 'custom-field-row' });
           let formElement2: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
           formElement2.insertBefore(row2, formElement2.childNodes[1]);
           let container2: HTMLElement = createElement('div', { className: 'custom-field-container' });
+          let h2: HTMLElement = createElement('span', { className: 'card-subtitle' });
+          h2.innerText = 'Target Audience';
           let inputEle2: HTMLInputElement = createElement('input', {
-            className: 'e-field', attrs: { name: 'age' }
+            className: 'e-field', attrs: { name: 'gender' }
         }) as HTMLInputElement;
+          container2.appendChild(h2);
           container2.appendChild(inputEle2);
           row2.appendChild(container2);
           let drowDownList1: DropDownList = new DropDownList({
@@ -164,15 +182,15 @@ onPopupOpen(args: PopupOpenEventArgs): void {
             ],
             fields: { text: 'text', value: 'value' },
             value: (args.data as { [key: string]: Object }).EventType as string,
-            floatLabelType: 'Always', placeholder: 'Target Audience Age'
+            floatLabelType: 'Always', placeholder: 'Gender'
         });
           drowDownList1.appendTo(inputEle2);
-          inputEle2.setAttribute('name', 'age');
+          inputEle2.setAttribute('name', 'gender');
 
         // Custom audience trigger field
         let row3: HTMLElement = createElement('div', { className: 'custom-field-row' });
         let formElement3: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        formElement3.insertBefore(row3, formElement3.childNodes[1]);
+        formElement3.insertBefore(row3, formElement3.childNodes[2]);
         let container3: HTMLElement = createElement('div', { className: 'custom-field-container' });
         let inputEle3: HTMLInputElement = createElement('input', {
           className: 'e-field', attrs: { name: 'department' }
@@ -183,7 +201,7 @@ onPopupOpen(args: PopupOpenEventArgs): void {
           dataSource:[...this.departmentData],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Department'
+          floatLabelType: 'Always', placeholder: 'Department'
       });
         drowDownList2.appendTo(inputEle3);
         inputEle3.setAttribute('name', 'department');
@@ -191,54 +209,46 @@ onPopupOpen(args: PopupOpenEventArgs): void {
         // Custom audience trigger field
         let row4: HTMLElement = createElement('div', { className: 'custom-field-row' });
         let formElement4: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        formElement4.insertBefore(row4, formElement4.childNodes[1]);
+        formElement4.insertBefore(row4, formElement4.childNodes[3]);
         let container4: HTMLElement = createElement('div', { className: 'custom-field-container' });
         let inputEle4: HTMLInputElement = createElement('input', {
           className: 'e-field', attrs: { name: 'ageFrom' }
-      }) as HTMLInputElement;
-      let inputEle5: HTMLInputElement = createElement('input', {
-        className: 'e-field', attrs: { name: 'ageTo' }
-    }) as HTMLInputElement;
+        }) as HTMLInputElement;
+
         container4.appendChild(inputEle4);
-        container4.appendChild(inputEle5);
         row4.appendChild(container4);
+
+
         let drowDownList3: DropDownList = new DropDownList({
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Age From'
-      });
+          floatLabelType: 'Always', placeholder: 'Age From'
+        });
         drowDownList3.appendTo(inputEle4);
-        inputEle4.setAttribute('name', 'ageTo');
+        inputEle4.setAttribute('name', 'ageFrom');
 
+
+        // Custom audience trigger field
+        let row5: HTMLElement = createElement('div', { className: 'custom-field-row' });
+        let formElement5: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
+        formElement5.insertBefore(row5, formElement5.childNodes[4]);
+        let container5: HTMLElement = createElement('div', { className: 'custom-field-container' })
+        let inputEle5: HTMLInputElement = createElement('input', {
+          className: 'e-field', attrs: { name: 'ageTo' }
+        }) as HTMLInputElement;
+
+        container5.appendChild(inputEle5);
+        row5.appendChild(container5);
         let drowDownList4: DropDownList = new DropDownList({
           dataSource:[...this.ageColumn],
           fields: { text: 'text', value: 'value' },
           value: (args.data as { [key: string]: Object }).EventType as string,
-          floatLabelType: 'Always', placeholder: 'Target Audience Age To'
-      });
+          floatLabelType: 'Always', placeholder: 'Age To'
+        });
         drowDownList4.appendTo(inputEle5);
         inputEle5.setAttribute('name', 'ageTo');
 
-        // // Custom Icon upload field
-        //   let row1: HTMLElement = createElement('div', { className: 'dropzone' });
-        //   let formElement1: HTMLElement = <HTMLElement>args.element.querySelector('.e-schedule-form');
-        //   formElement1.lastChild.appendChild(row1);
-        //   let container1: HTMLElement = createElement('div', { className: 'dropzone-inner' });
-        //   let inputLabel: HTMLElement = createElement('h2', {className: 'uplaod-Label'})
-        //   inputLabel.innerHTML = 'Upload Icon (Optional)';
-        //   let inputLabelSub: HTMLElement = createElement('span', {className: 'uplaod-Label-sub'})
-        //   inputLabelSub.innerHTML = 'drag & drop to upload the document';
-
-        //   let inputEle1: HTMLInputElement = createElement('input', {
-        //     className: 'e-field-upload', attrs: { name: 'EventIcon', type: 'file' }
-        // }) as HTMLInputElement;
-        //   container1.appendChild(inputLabel);
-        //   container1.appendChild(inputLabelSub);
-        //   container1.appendChild(inputEle1);
-        //   row1.appendChild(container1);
-
-        // inputEle1.setAttribute('name', 'EventIcon');
     }
 
   }
@@ -251,6 +261,8 @@ async onActionComplete(event){
     let formData = {
       calendarEvent_id:event.data[0].calendarEvent_id
     }
+
+  this.ngxService.start();
     await(this._api.companyDeleteCalendarEvent(formData).subscribe(res => {
       this.ngxService.stop();
       const response: any = res;
@@ -262,6 +274,7 @@ async onActionComplete(event){
         this.openErrrorSnackBar(response.message);
       }
       console.log(res);
+      this.callApi = false;
       // this.getEvent();
     },err => {
       const error = err.error;
@@ -278,46 +291,69 @@ async onActionComplete(event){
     }
     console.log(data)
     let repeatArr = [];
-    let repeat = data.RecurrenceRule.split(';');
-    for(let item of repeat){
-      let param = item.split('=');
-      let obj  = {key:param[0],value:param[1]}
-      repeatArr.push(obj)
-    }
+
     let repeatType = 0
-    if(repeatArr[0].value == 'WEEKLY'){
-      repeatType = 2
-    }else if(repeatArr[0].value == 'DAILY'){
-      repeatType = 1
-    }else if(repeatArr[0].value == 'MONTHLY'){
-      repeatType = 3
-    }else if(repeatArr[0].value == 'YEARLY'){
-      repeatType = 4
+    let repeatted = 0
+    if(data.RecurrenceRule){
+      let repeat = data.RecurrenceRule.split(';');
+      for(let item of repeat){
+        let param = item.split('=');
+        let obj  = {key:param[0],value:param[1]}
+        repeatArr.push(obj)
+      }
+      if(repeatArr[0].value == 'WEEKLY'){
+        repeatType = 2
+      }else if(repeatArr[0].value == 'DAILY'){
+        repeatType = 1
+      }else if(repeatArr[0].value == 'MONTHLY'){
+        repeatType = 3
+      }else if(repeatArr[0].value == 'YEARLY'){
+        repeatType = 4
+      }
+      for(let item of repeatArr){
+        if(item.key == 'INTERVAL'){
+          repeatted = item.value;
+        }
+      }
     }
 
+
+    let sDate = new Date(data.StartTime);
+    let eDate = new Date(data.EndTime)
     let formData = {
-      "event_Type":data.EventType != null?data.EventType:'event',
-      "event_StartDate":new Date(data.StartTime),
-      "event_EndDate":new Date(data.EndTime),
-      "target_Audeince":data.targetAudience != null?data.targetAudience : 0,
-      "event_Description":data.Description,
+      "event_Type":data.EventType != null?(data.EventType == 'holiday'?'1':'0'):'0',
+      "event_StartDate":moment(sDate).format('YYYY-MM-DD'),
+      "event_EndDate":moment(eDate).format('YYYY-MM-DD'),
+      "event_Description":data.Description || '',
       "fileName":"",
-      "repeatType":repeatType,
-      "repeatArray":repeatArr,
       "event_Title":data.Subject,
-      "isAllday":data.IsAllDay ? 1 : 0
+      "isAllday":data.IsAllDay ? 1 : 0,
+      "repeatType": repeatType,
+      "repeateTime":repeatted,
+      "eventstartTime":moment(sDate).format('HH:mm'),
+      "eventendTime":moment(eDate).format('HH:mm'),
+      "department":data.department || '',
+      "ageFrom":parseInt(data.ageFrom) || 0,
+      "ageTo":parseInt(data.ageTo) || 0,
+      "gender":data.gender || ''
+
     }
-    if(data.calendarEvent_id && data.calendarEvent_id != '' ){
+    if(data.calendarEvent_id && data.calendarEvent_id != ''  ){
+
+  this.ngxService.start();
       formData['calendarEvent_id'] = data.calendarEvent_id;
       await(this._api.editEvent(formData).subscribe(res => {
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
+
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
         }
         console.log(res);
+        this.callApi = false;
         this.getEvent();
       },err => {
         const error = err.error;
@@ -325,15 +361,20 @@ async onActionComplete(event){
         this.ngxService.stop();
       }));
     }else{
+
+  this.ngxService.start();
       await(this._api.addEvent(formData).subscribe(res => {
         this.ngxService.stop();
         const response: any = res;
         if (response.success == true){
+
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
         }
         console.log(res);
+        this.callApi = false
         this.getEvent();
       },err => {
         const error = err.error;

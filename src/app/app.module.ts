@@ -38,6 +38,7 @@ import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -96,6 +97,11 @@ import { ListSurveyComponent } from './container/survey/list-survey/list-survey.
 import { DetailSurveyComponent } from './container/survey/detail-survey/detail-survey.component';
 import { VerticalBarComponent } from './helpers/chart/vertical-bar/vertical-bar.component';
 import { SharedService } from './service/shared.service';
+import { ContractEditComponent } from './container/documents/contracts/contract-edit/contract-edit.component';
+import { InitiateSurveyComponent } from './container/survey/initiate-survey/initiate-survey.component';
+import { StratSurveyComponent } from './container/survey/strat-survey/strat-survey.component';
+import { AgoPipePipe } from './pipe/ago-pipe.pipe';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -150,7 +156,11 @@ import { SharedService } from './service/shared.service';
     ViewSurveyComponent,
     ListSurveyComponent,
     DetailSurveyComponent,
-    VerticalBarComponent
+    VerticalBarComponent,
+    ContractEditComponent,
+    InitiateSurveyComponent,
+    StratSurveyComponent,
+    AgoPipePipe
   ],
   imports: [
     BrowserModule,
@@ -194,7 +204,8 @@ import { SharedService } from './service/shared.service';
     NgxDaterangepickerMd.forRoot(),
     NgxMatSelectSearchModule,
     MatProgressSpinnerModule,
-    MatButtonToggleModule
+    MatButtonToggleModule,
+    CountdownModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule,SharedService],
   bootstrap: [AppComponent]

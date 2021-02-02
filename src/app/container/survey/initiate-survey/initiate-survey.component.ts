@@ -12,15 +12,16 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { StratSurveyComponent } from '../strat-survey/strat-survey.component';
 
 @Component({
-  selector: 'app-list-survey',
-  templateUrl: './list-survey.component.html',
-  styleUrls: ['./list-survey.component.scss']
+  selector: 'app-initiate-survey',
+  templateUrl: './initiate-survey.component.html',
+  styleUrls: ['./initiate-survey.component.scss']
 })
-export class ListSurveyComponent implements OnInit {
+export class InitiateSurveyComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['survey_Name', 'attempted',  'created_At', 'survey_ExpiryDate'];
+displayedColumns: string[] = ['survey_Name', 'updated_At', 'action'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
@@ -35,15 +36,13 @@ csvFile:any = '';
 newRequest:number = 0;
 accessPermission:boolean;
 formData = {
-  "companyId":"",
+  "company_Id":"",
 }
 
-constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
-
-}
+constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
-  this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
+  this.formData.company_Id = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
   this.getList();
@@ -52,23 +51,11 @@ ngOnInit(): void {
 // Get Leave List
 async getList(){
 this.ngxService.start();
-await(this._api.activeSurveyList(this.formData).subscribe(res => {
+await(this._api.idleSurveyList(this.formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
-    for(let item of response.data){
-      console.log(Date.parse(_moment(item.survey_ExpiryDate).format('LLLL')), Date.parse(_moment().format('LLLL')))
-       if(((Date.parse(_moment(item.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL'))) < 864000000 && (Date.parse(item.survey_ExpiryDate) - Date.parse(_moment().format('LLLL'))) > 0){
-        item.expiry = 'current';
-        item.survey_ExpiryDate = ((Date.parse(_moment(item.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL')))
-      }else if(Date.parse(item.survey_ExpiryDate) <= Date.parse(_moment().format())){
-        item.expiry = 'expired'
-
-      }else{
-        item.expiry = 'remain'
-        item.survey_ExpiryDate = _moment(item.survey_ExpiryDate).format('DD MMM  YYYY')
-      }
-    }
+    console.log(response.data);
     this.responseData = response.data;
     this.dataSource = new MatTableDataSource([...this.responseData]);
     this.dataSource.paginator = this.paginator;
@@ -83,19 +70,25 @@ await(this._api.activeSurveyList(this.formData).subscribe(res => {
 }));
 
 }
+ // open start survey modal
+ openSureyInitateModal(e) {
+  const dialogRef = this.dialog.open(StratSurveyComponent,{
+    width:'50%',
+    data: {
+      id: e
+    }});
 
-
+  dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result: ${result}`);
+    this.getList();
+  });
+}
 
 
 //Searching
 applyFilter(event: Event){
   const filterValue = (event.target as HTMLInputElement).value;
   this.dataSource.filter = filterValue.trim().toLowerCase();
-}
-
-
-getTime(time){
-  return _moment(time).format('DD MMM YYYY')
 }
 
 // alert message after api response success
@@ -117,8 +110,8 @@ this._snackBar.open(msg, 'Ok', {
 });
 }
 
-  currentTime(){
-    return _moment().format('hh : mm : ss')
+getDate(d){
+    return _moment(d).format('DD MMM YYYY')
   }
 
 }
