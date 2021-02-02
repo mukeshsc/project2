@@ -1053,3 +1053,13 @@ div#_dialog_wrapper {
 app-dashboard ,app-login, app-forgot-password, app-reset-password,app-set-password, app-calendar, app-chat, app-employees,app-employee-detail, app-setting, app-user-roles, app-access, app-payslip,app-payslip-detail, app-contracts, app-insurance,app-faq,app-privacy-policy, app-profile, app-subscription-plan, app-sub-admin-list, app-leaves-list, app-payslip-one,app-payslip-edit, app-employee-salary,app-payslip-generate, app-active-servey, app-add-survey,app-view-survey, app-list-survey, app-detail-survey, app-initiate-survey {
   width: 100%;
 }
+
+@media (max-width: 414px){
+  .modal-box {
+    padding: 0 !important;
+  }
+  .mat-datepicker-content .mat-calendar {
+    width: 194px !important;
+    height: 342px !important;
+  }
+}

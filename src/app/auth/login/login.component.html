@@ -1,22 +1,22 @@
 <div class="back-bg">
   <div class="login-container">
     <div class="container">
-      <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
-        <div fxFlex="50" fxFlex.gt-xs="100" fxFlexAlign="stretch">
-          <div fxLayout="column"  fxLayoutAlign="space-around left" fxFlexAlign="stretch">
+      <div fxLayout="row" fxLayout.xs="column" fxflexfill fxLayoutGap="10px grid">
+        <div fxFlex="50" fxFlexAlign="stretch">
+          <div fxLayout="column" fxLayoutAlign="space-around left" fxFlexAlign="stretch">
             <div fxFlex="20">
               <h3 class="logo">
                 Company <br /><span>Logo</span>
               </h3>
             </div>
             <div fxFlex="70">
-              <div class="login-heading">
+              <div class="login-heading welhide">
                 <h1>welcome on<br /> Company admin portal</h1>
                 <p>Lorem Ipsum is simply dummy text of the printing and<br /> typesetting industry. Lorem Ipsum has been the industry's<br/> standard dummy text.</p>
               </div>
             </div>
             <div fxFlex="10">
-              <div class="quick-links" >
+              <div class="quick-links welhide" >
                 <ul>
                   <li>
                     <a>About us</a>
@@ -29,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div fxFlex="50" fxFlex.gt-xs="100" >
+        <div fxFlex="50" fxFlex.gt-xs="100" class="top">
           <mat-card class="loing-card" >
             <mat-card-header>
               <mat-card-title>Login</mat-card-title>
@@ -55,7 +55,7 @@
                   </mat-form-field>
                 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" class="login-form-links">
                   <div fxFlex="50">
-                    <mat-checkbox (change)="rememberMe($event)" class="example-margin" >Remember Me</mat-checkbox>
+                    <mat-checkbox (change)="rememberMe($event)" class="example-margin " >Remember Me</mat-checkbox>
                   </div>
                   <div fxFlex="50" class="forgot-link">
                     <a routerLink="/forgot-password">Forgot Password?</a>

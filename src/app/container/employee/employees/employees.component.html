@@ -9,32 +9,32 @@
     </ul>
   </div>
 </div>
-<div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxflexfill fxLayoutGap="10px grid" >
   <div fxFlex="25"  fxFlex.gt-xs="100">
     <mat-card class="dashboard-count">
-      <h4>Active Employees</h4>
-      <h2>100 / 150</h2>
+      <h4 class="fntSize">Active Employees</h4>
+      <h2 class="fntSize">100 / 150</h2>
       <img src="./assets/img/Image_7.png" />
     </mat-card>
   </div>
   <div fxFlex="25" fxFlex.gt-xs="100">
     <mat-card class="dashboard-count">
-      <h4>Late Coming</h4>
-      <h2>20</h2>
+      <h4 class="fntSize">Late Coming</h4>
+      <h2 class="fntSize">20</h2>
       <img src="./assets/img/Image_2.png" />
     </mat-card>
   </div>
   <div fxFlex="25" fxFlex.gt-xs="100">
     <mat-card class="dashboard-count">
-      <h4>Working From Home</h4>
-      <h2>100</h2>
+      <h4 class="fntSize">Working From Home</h4>
+      <h2 class="fntSize">100</h2>
       <img src="./assets/img/Image_2.png" />
     </mat-card>
   </div>
   <div fxFlex="25" fxFlex.gt-xs="100">
     <mat-card class="dashboard-count">
-      <h4>On leave</h4>
-      <h2>100</h2>
+      <h4 class="fntSize">On leave</h4>
+      <h2 class="fntSize">100</h2>
       <img src="./assets/img/Image_2.png" />
     </mat-card>
   </div>
@@ -48,22 +48,26 @@
       <mat-card-content>
         <div  fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
           <div fxFlex="70"  fxFlex.gt-xs="100">
-            <img src="./assets/img/Image_3.png" />
+            <img class="img1" src="./assets/img/Image_3.png" />
           </div>
           <div fxFlex="30"  fxFlex.gt-xs="100">
-            <img src="./assets/img/echarts_1.png" />
+            <img class="img1" src="./assets/img/echarts_1.png" />
           </div>
         </div>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
+
+<div class="scroller">
+  <div class="scroll-x">
+
 <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
   <div fxFlex="100"  fxFlex.gt-xs="100">
     <mat-card class="dashboard-detail" >
       <mat-card-content>
         <mat-toolbar color="light">
-          <span class="mat-toolbar-title">All Employees</span>&nbsp;&nbsp;
+          <span class="mat-toolbar-title fnt">All Employees</span>&nbsp;&nbsp;
           <button mat-mini-fab color="light" class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission"
           matTooltip="Get Sample Csv"  aria-label="Sync" (click)="sampleCsv()">
             <mat-icon>file_copy</mat-icon>
@@ -106,29 +110,29 @@
 
           <!-- Name Column -->
           <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef  mat-sort-header> Name </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <th mat-header-cell *matHeaderCellDef  mat-sort-header class="heading"> Name </th>
+            <td mat-cell *matCellDef="let element" class="data"> {{element.name}} </td>
           </ng-container>
 
           <!-- Email Column -->
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Email </th>
-            <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            <td mat-cell *matCellDef="let element" class="data"> {{element.email}} </td>
           </ng-container>
 
           <!-- Designation Column -->
           <ng-container matColumnDef="designation">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Designation </th>
-            <td mat-cell *matCellDef="let element"> {{element.designation}} </td>
+            <td mat-cell *matCellDef="let element" class="data"> {{element.designation}} </td>
           </ng-container>
 
 
           <!-- Status Column -->
           <ng-container matColumnDef="status">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Status </th>
-            <td mat-cell *matCellDef="let element">
-              <button mat-flat-button class="round-btn" *ngIf="element.status == 1" color="light">Active</button>
-              <button mat-flat-button class="round-btn" *ngIf="element.status == 0" color="warn">Lock</button>
+            <td mat-cell *matCellDef="let element" class="data">
+              <button mat-flat-button class="round-btn ty" *ngIf="element.status == 1" color="light">Active</button>
+              <button mat-flat-button class="round-btn ty" *ngIf="element.status == 0" color="warn">Lock</button>
             </td>
           </ng-container>
 
@@ -249,4 +253,7 @@
 
   </table>
 
+</div>
+
+</div>
 </div>

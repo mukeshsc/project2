@@ -22,44 +22,39 @@
     <div fxLayout="row"  class="mid-graph" *ngFor="let item of responseData;let i = index;">
         <div fxFlex="100"  fxFlex.gt-xs="100"  >
           <mat-toolbar color="light" class="tool">
-            <span class="mat-toolbar-title icic"> <b> {{item.insuranceName}}</b> </span>
-            <span class="mat-toolbar-title icici">  {{item.date}}  </span>
+            <span class="mat-toolbar-title icic"> <b class="head"> {{item.insuranceName}}</b> </span>
+            <span class="mat-toolbar-title icici date">  {{item.date}}  </span>
             <span class="spacer"></span>
             <button mat-mini-fab color="primary" class="cal-button"  aria-label="Add new" (click)="openSubAddModal(item.insuranceName,item.date)">
               <mat-icon>add</mat-icon>
             </button>
           </mat-toolbar>
-
-
           <table class="table">
             <thead>
               <tr>
-                <th width="10%">Plan Id</th>
-                <th width="10%">Name of Plan</th>
-                <th width="10%">Members</th>
-                <th width="15%">Table of benefits</th>
-                <th width="15%">Network</th>
-                <th width="25%">Action Required</th>
+                <th width="10%" class="as">Plan Id</th>
+                <th width="10%" class="as">Name of Plan</th>
+                <th width="10%" class="as">Members</th>
+                <th width="15%" class="as">Table of benefits</th>
+                <th width="15%" class="as">Network</th>
+                <th width="25%" class="as">Action Required</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let sub of item.data" >
-                <td>{{sub.insuranceDetail_id}}</td>
-                <td>{{sub.insurance_Plan}}</td>
-                <td>{{sub.member}}</td>
-                <td><a href="http://{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
-                <td><a href="http://{{sub.network}}" target="_blank">View Network</a></td>
-                <td><button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
-                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn">delete</mat-icon></button>
-                  <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="openSubEditModal(item,sub)"
-                  matTooltip="Edit"   color="light"><mat-icon color="green">edit</mat-icon></button>
+                <td class="sa">{{sub.insuranceDetail_id}}</td>
+                <td class="sa">{{sub.insurance_Plan}}</td>
+                <td class="sa">{{sub.member}}</td>
+                <td><a class="sa" href="http://{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
+                <td><a class="sa" href="http://{{sub.network}}" target="_blank">View Network</a></td>
+                <td><button mat-mini-fab  class="cal-button bu" #tooltip="matTooltip"
+                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn" class="ui">delete</mat-icon></button>
+                  <button mat-mini-fab  class="cal-button bu" #tooltip="matTooltip" (click)="openSubEditModal(item,sub)"
+                  matTooltip="Edit"   color="light"><mat-icon color="green ui">edit</mat-icon></button>
                 </td>
               </tr>
             </tbody>
           </table>
-
-
         </div>
       </div>
-
   </mat-card>

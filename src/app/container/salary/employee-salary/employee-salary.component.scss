@@ -6,3 +6,26 @@ span.bar {
 .mid-graph {
   margin-bottom: 30px !important;
 }
+
+// responsive 414px
+
+@media (max-width: 414px) {
+  span.fnt {
+    font-size: 9px;
+  }
+  span.total {
+    font-size: 7px;
+  }
+  span.since {
+    font-size: 7px;
+  }
+  span.current {
+    font-size: 9px;
+  }
+  span.percent {
+    font-size: 10px;
+  } 
+  span.department {
+    font-size: 9px;
+  }
+}

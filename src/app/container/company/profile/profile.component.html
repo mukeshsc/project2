@@ -20,10 +20,10 @@
             <div fxLayout="column">
             <mat-tab label="Profile">
               <form name="profileForm"  #profileForm="ngForm" (ngSubmit)="editCompany()">
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
-                    <span class="card-title">Basic Information</span>
-                    <p>Lorem ipsum is a placeholder text commonly used.</p>
+                    <span class="card-title basic">Basic Information</span>
+                    <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
                   </div>
                   <div fxFlex="50">
                     <mat-form-field class="form-fields">
@@ -71,21 +71,21 @@
                     </div>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner" >
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" >
                   <div fxFlex="50">
-                    <span class="card-title">Logo and iconography</span>
-                    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
+                    <span class="card-title basic">Logo and iconography</span>
+                    <p class="lorem">Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relyin. </p>
                     <br />
-                    <p>Recommended image size is 40px x 40px</p>
+                    <p class="lorem">Recommended image size is 40px x 40px</p>
                   </div>
                   <div fxFlex="50">
                     <mat-label>Light Logo</mat-label>
                     <div class="dropzone">
-                      <img src="{{imgShow}}" *ngIf="imgShow != ''" style="max-width: 150px; max-height: 150px;" />
+                      <img class="imgsize" src="{{imgShow}}" *ngIf="imgShow != ''" />
                       <ngx-dropzone (change)="onSelect($event)">
-                        <ngx-dropzone-label><mat-icon>note_add</mat-icon><br />
+                        <ngx-dropzone-label class="upload"><mat-icon>note_add</mat-icon><br />
                           Upload Your Logo<br />
-                          <small>drag & drop to upload the Logo Image</small>
+                          <small class="small">drag & drop to upload the Logo Image</small>
                         </ngx-dropzone-label>
                         <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)" style="background-image: url({{imgShow}});">
                             <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
@@ -94,10 +94,10 @@
                     </div>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
-                    <span class="card-title">Corporate Identity</span>
-                    <p>Lorem ipsum is a placeholder text commonly used.</p>
+                    <span class="card-title basic">Corporate Identity</span>
+                    <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
                   </div>
                   <div fxFlex="50">
                     <mat-form-field class="form-fields">
@@ -128,10 +128,10 @@
                     </mat-form-field>
                   </div>
                 </div>
-                <div fxLayout="row" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
+                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner"  fxflexfill fxLayoutGap="10px grid">
                   <div fxFlex="50">
-                    <span class="card-title">Company Address</span>
-                    <p>Lorem ipsum is a placeholder text commonly used.</p>
+                    <span class="card-title basic">Company Address</span>
+                    <p class="lorem">Lorem ipsum is a placeholder text commonly used.</p>
                   </div>
                   <div fxFlex="50">
                     <mat-form-field class="form-fields">
@@ -191,18 +191,14 @@
               </div>
             </form>
             </mat-tab>
-
-
-
           </div>
 
-
-
-
+          <div class="scroller">
+            <div class="scroll-x">
           <mat-tab label="Working Hours">
-            <div fxLayout="row" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" fxflexfill fxLayoutGap="10px grid">
               <div fxFlex="40">
-                <span class="card-title">General Information</span>
+                <span class="card-title general">General Information</span>
                 <p class="just">Just a bit of info about your company, and the default language your employees will see when invited.</p>
                 <br />
               </div>
@@ -211,11 +207,11 @@
                   <table class="working">
                     <thead>
                       <tr>
-                        <th>
+                        <th class="week">
                           Week Days
                         </th>
-                        <th colspan="2">Working Shifts</th>
-                        <th>Working/Off</th>
+                        <th colspan="2" class="wosh">Working Shifts</th>
+                        <th class="work">Working/Off</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -243,7 +239,7 @@
 
               </div>
             </div>
-            <div fxLayout="row" class="theme-setting-inner" >
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" class="theme-setting-inner" >
               <div fxFlex="40">
               </div>
               <div fxFlex="60">
@@ -252,29 +248,28 @@
               </div>
             </div>
           </mat-tab>
-          <mat-tab class="colr" label="Offices">
+          </div>
+          </div>
 
-          </mat-tab>
+          <mat-tab class="colr" label="Offices"> </mat-tab>
 
-
-
-            <mat-tab label="Subscription">
+          <!-- <mat-tab label="Subscription">
                 <h3 class="page-title rr">Subscription Details</h3>
-                <div fxLayout="row">
+                <div fxLayout="row" fxLayout.xs="column">
                     <div fxFlex="33" fxLayoutAlign="space-around" class="box2">
-                      <div fxLayout="column">
-                          <div class="round">
+                      <div fxLayout="column" class="round">
+                          <div >
                             <div class="doll"> <mat-icon>shopping_bag</mat-icon><h2 class="twn"> $20.00</h2> <span class="th">per month</span></div>
                           </div>
 
                           <div class="row mn">
-                              <h3 class="ji">JitterBug </h3>
+                              <h3 class="jitterbug">JitterBug </h3>
                           </div>
-                          <div class="para1">
+                          <div class="all">
                               <p>
                                 <span class="col1"> Dashboard </span>
                                 <span class="col1"> Attendance </span>
-                                <span class="col1"> Notifications/Announcement </span>
+                                <span class="col1"> Notifications/ <br> Announcement </span>
                                 <span class="col1">Salary Management </span>
                                 <span class="col1">Calendar </span>
                                 <span class="col1">Insurance Management </span>
@@ -304,8 +299,8 @@
                       </div>
                     </div>
                     <div fxFlex="33" fxLayoutAlign="space-around" class="box3">
-                        <div fxLayout="column">
-                        <div class="round">
+                        <div fxLayout="column" class="round">
+                        <div >
                           <div class="doll"><mat-icon>local_florist</mat-icon> <h2 class="thr"> $30.00</h2> <span class="th">per month</span></div>
                         </div>
 
@@ -313,13 +308,10 @@
                             <h3 class="sw">Swing </h3>
                         </div>
                         <div class="para1">
-                            <!-- <div *ngFor="let item of privacyPolicyData">
-                                <p class="data_show1">{{item.description}}</p>
-                            </div> -->
-                            <p>
+                            <p class="all">
                                 <span class="col1"> Dashboard </span>
                                 <span class="col1"> Attendance </span>
-                                <span class="col1"> Notifications/Announcement </span>
+                                <span class="col1"> Notifications/ <br> Announcement </span>
                                 <span class="col1">Salary Management </span>
                                 <span class="col1">Calendar </span>
                                 <span class="col1">Insurance Management </span>
@@ -348,22 +340,20 @@
                     </div>
                     </div>
                     <div fxFlex="33" fxLayoutAlign="space-around" class="box4">
-                        <div fxLayout="column">
-                            <div class="round">
+                        <div fxLayout="column" class="round">
+                            <div >
                               <div class="doll"><mat-icon>filter_vintage</mat-icon> <h2 class="for"> $40.00</h2> <span class="th">per month</span></div>
                             </div>
 
                             <div class="row mn">
                                 <h3 class="jiv">Jive </h3>
                             </div>
-                            <div class="para1">
-                                <!-- <div *ngFor="let item of privacyPolicyData">
-                                    <p class="data_show1">{{item.description}}</p>
-                                </div> -->
+                            <div class="all">
+
                                 <p>
                                     <span class="col1"> Dashboard </span>
                                     <span class="col1"> Attendance </span>
-                                    <span class="col1"> Notifications/Announcement </span>
+                                    <span class="col1"> Notifications/ <br> Announcement </span>
                                     <span class="col1">Salary Management </span>
                                     <span class="col1">Calendar </span>
                                     <span class="col1">Insurance Management </span>
@@ -390,21 +380,154 @@
                                 <button mat-raised-button color="orange" class="but"> Request Upgrade</button>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
+          </mat-tab> -->
+          
+          <mat-tab label="Subscription">
+            <h3 class="page-title rr">Subscription Details</h3>
+            <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <div fxFlex="33" fxLayoutAlign="space-around" class="box2">
+                  <div fxLayout="column">
+                      <div class="round">
+                        <div class="doll"> <mat-icon>shopping_bag</mat-icon><h2 class="twn"> $20.00</h2> <span class="th">per month</span></div>
+                      </div>
+
+                      <div class="row mn">
+                          <h3 class="ji">JitterBug </h3>
+                      </div>
+                      <div class="para1">
+                          <p>
+                            <span class="col1"> Dashboard </span>
+                            <span class="col1"> Attendance </span>
+                            <span class="col1"> Notifications/Announcement </span>
+                            <span class="col1">Salary Management </span>
+                            <span class="col1">Calendar </span>
+                            <span class="col1">Insurance Management </span>
+                            <span class="col1">HRA </span>
+                            <span class="col1">HRAreports </span>
+                            <span class="col1">Other Reports</span>
+                            <span class="col2">Tracking - Health,Activity & Behavior </span>
+                            <span class="col2">Coaching </span>
+                            <span class="col2">Document Management </span>
+                            <span class="col2">Leave Management </span>
+                            <span class="col2">Reward Program </span>
+                            <span class="col2">Survey </span>
+                            <span class="col2">Messaging </span>
+                            <span class="col2">Settings </span>
+                            <span class="col1">Company Profile </span>
+                            <span class="col1">Employee Management </span>
+                            <span class="col1">FAQs & Privacy Policy </span>
+                            <span class="col1">Menu </span>
+                            <span class="col2">Role & Access </span>
+                            <span class="col2">Integration with wearables </span>
+                          </p>
+
+                      </div>
+                      <div>
+                          <button mat-raised-button color="orange" class="but"> Select</button>
+                      </div>
+                  </div>
+                </div>
+                <div fxFlex="33" fxLayoutAlign="space-around" class="box3">
+                    <div fxLayout="column">
+                    <div class="round">
+                      <div class="doll"><mat-icon>local_florist</mat-icon> <h2 class="thr"> $30.00</h2> <span class="th">per month</span></div>
+                    </div>
+
+                    <div class="row sw mn">
+                        <h3 class="sw">Swing </h3>
+                    </div>
+                    <div class="para1">
+                        <!-- <div *ngFor="let item of privacyPolicyData">
+                            <p class="data_show1">{{item.description}}</p>
+                        </div> -->
+                        <p>
+                            <span class="col1"> Dashboard </span>
+                            <span class="col1"> Attendance </span>
+                            <span class="col1"> Notifications/Announcement </span>
+                            <span class="col1">Salary Management </span>
+                            <span class="col1">Calendar </span>
+                            <span class="col1">Insurance Management </span>
+                            <span class="col1">HRA </span>
+                            <span class="col1">HRAreports </span>
+                            <span class="col1">Other Reports</span>
+                            <span class="col1">Tracking - Health,Activity & behavior </span>
+                            <span class="col1">Coaching </span>
+                            <span class="col1">Document Management </span>
+                            <span class="col1">Leave Management </span>
+                            <span class="col2">Reward Program </span>
+                            <span class="col2">Survey </span>
+                            <span class="col2">Messaging </span>
+                            <span class="col1">Settings </span>
+                            <span class="col1">Company Profile </span>
+                            <span class="col1">Employee Management </span>
+                            <span class="col1">FAQs & Privacy Policy </span>
+                            <span class="col1">Menu </span>
+                            <span class="col1">Role & Access </span>
+                            <span class="col1">Integration with wearables </span>
+                         </p>
+                    </div>
+                    <div>
+                        <button mat-raised-button color="green" class="gr"> Selected</button>
+                    </div>
+                </div>
+                </div>
+                <div fxFlex="33" fxLayoutAlign="space-around" class="box4">
+                    <div fxLayout="column">
+                        <div class="round">
+                          <div class="doll"><mat-icon>filter_vintage</mat-icon> <h2 class="for"> $40.00</h2> <span class="th">per month</span></div>
+                        </div>
+
+                        <div class="row mn">
+                            <h3 class="jiv">Jive </h3>
+                        </div>
+                        <div class="para1">
+                            <!-- <div *ngFor="let item of privacyPolicyData">
+                                <p class="data_show1">{{item.description}}</p>
+                            </div> -->
+                            <p>
+                                <span class="col1"> Dashboard </span>
+                                <span class="col1"> Attendance </span>
+                                <span class="col1"> Notifications/Announcement </span>
+                                <span class="col1">Salary Management </span>
+                                <span class="col1">Calendar </span>
+                                <span class="col1">Insurance Management </span>
+                                <span class="col1">HRA </span>
+                                <span class="col1">HRAreports </span>
+                                <span class="col1">Other Reports</span>
+                                <span class="col1">Tracking - Health,Activity & behavior </span>
+                                <span class="col1">Coaching </span>
+                                <span class="col1">Document Management </span>
+                                <span class="col1">Leave Management </span>
+                                <span class="col1">Reward Program </span>
+                                <span class="col1">Survey </span>
+                                <span class="col1">Messaging </span>
+                                <span class="col1">Setting </span>
+                                <span class="col1">Company Profile </span>
+                                <span class="col1">Employee Management </span>
+                                <span class="col1">FAQs & Privacy Policy </span>
+                                <span class="col1">Menu </span>
+                                <span class="col1">Role & Access </span>
+                                <span class="col1">Integration with wearables </span>
+                             </p>
+                        </div>
+                        <div>
+                            <button mat-raised-button color="orange" class="but"> Select</button>
+                        </div>
+                    </div>
 
 
-            </mat-tab>
+                </div>
+            </div>
+        </mat-tab>
 
-
-            <mat-tab label="Documents">
+          <mat-tab label="Documents">
               <mat-toolbar color="light">
                 <span class="mat-toolbar-title">Privacy Plicy</span>
               </mat-toolbar>
               <div ></div>
-            </mat-tab>
+          </mat-tab>
 
 
         </mat-tab-group>

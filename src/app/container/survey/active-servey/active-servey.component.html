@@ -17,12 +17,12 @@
     <mat-card-subtitle><a class="primary-txt">view all 25 questions</a></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div fxLayout="row" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
+    <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
       <div fxFlex="30" >
-        <img src="./assets/img/echarts_1.png" />
+        <img class="im1" src="./assets/img/echarts_1.png" />
       </div>
       <div fxFlex="30" >
-        <img src="./assets/img/echarts_1.png" />
+        <img class="im2" src="./assets/img/echarts_1.png" />
       </div>
       <div fxFlex="40">
         <div fxLayout="column" fxflexfill class="" fxLayoutGap="10px grid">
@@ -55,6 +55,10 @@
 <mat-card>
   <div fxLayout="row"  class="mid-graph" >
       <div fxFlex="100"  fxFlex.gt-xs="100"  >
+
+        <div class="scroller">
+          <div class="scroll-x">
+
         <mat-toolbar color="light" class="tool">
           <span class="mat-toolbar-title icic"> <b>Attempted by </b> </span>
           <span class="mat-toolbar-title icici"> 85/100 </span>
@@ -129,7 +133,13 @@
             <td class="mat-cell" colspan="4">No data found.</td>
           </tr>
         </table>
+
+      </div>
+    </div> 
+
         <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
+        
 
       </div>
     </div>
