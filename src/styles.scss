@@ -857,17 +857,20 @@ td.mat-cell,td{
 span.mat-option-text {
 font-size: 12px;
 }
+
 .scroller {
   width: 100%;
   overflow: auto;
   .scroll-x {
     display: flex;
+    flex-direction: column;
     .department-detail-separation {
       min-width: 150px;
       margin-bottom:10px;
     }
   }
 }
+
 .current-time{
   font: var(--unnamed-font-style-normal) normal var(--unnamed-font-weight-600) var(--unnamed-font-size-24)/var(--unnamed-line-spacing-35) var(--unnamed-font-family-poppins);
   letter-spacing: var(--unnamed-character-spacing-0);

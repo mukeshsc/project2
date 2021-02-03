@@ -12,6 +12,7 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-active-servey',
   templateUrl: './active-servey.component.html',
@@ -19,7 +20,7 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 })
 export class ActiveServeyComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['profile_picture', 'name', 'email',  'is_leave', 'action'];
+displayedColumns: string[] = ['profile_picture', 'name', 'email',  'attemptedQuestion', 'action'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
@@ -34,12 +35,15 @@ csvFile:any = '';
 newRequest:number = 0;
 accessPermission:boolean;
 formData = {
-  "companyId":"",
+  companyId:"",
+  surveyQuestionsId:""
 }
 
-constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+constructor(public router:Router, public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
+  let url  = this.router.url.split('/')
+  this.formData.surveyQuestionsId = url.pop();
   this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
@@ -49,13 +53,25 @@ ngOnInit(): void {
 // Get Leave List
 async getList(){
 this.ngxService.start();
-await(this._api.activeSurveyList(this.formData).subscribe(res => {
+await(this._api.surveyDetail(this.formData).subscribe(res => {
   this.ngxService.stop();
   const response: any = res;
   if (response.success == true){
     console.log(response.data);
-    this.responseData = response.data;
-    this.dataSource = new MatTableDataSource([...this.responseData]);
+
+    this.responseData = response.data[0];
+      console.log(Date.parse(_moment(this.responseData.survey_ExpiryDate).format('LLLL')), Date.parse(_moment().format('LLLL')))
+       if(((Date.parse(_moment(this.responseData.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL'))) < 864000000 && (Date.parse(this.responseData.survey_ExpiryDate) - Date.parse(_moment().format('LLLL'))) > 0){
+        this.responseData.expiry = 'current';
+        this.responseData.survey_ExpiryDate = ((Date.parse(_moment(this.responseData.survey_ExpiryDate).format('LLLL'))) - Date.parse(_moment().format('LLLL')))
+      }else if(Date.parse(this.responseData.survey_ExpiryDate) <= Date.parse(_moment().format())){
+        this.responseData.expiry = 'expired'
+
+      }else{
+        this.responseData.expiry = 'remain'
+        this.responseData.survey_ExpiryDate = _moment(this.responseData.survey_ExpiryDate).format('DD MMM  YYYY')
+      }
+    this.dataSource = new MatTableDataSource([...this.responseData.user]);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     console.log(this.dataSource);

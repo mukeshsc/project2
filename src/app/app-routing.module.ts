@@ -58,7 +58,7 @@ const routes: Routes = [
   { path: 'privacy-policy', component: PrivacyPolicyComponent,canActivate: [AuthGuardService] },
   { path: 'sub-admin', component: SubAdminListComponent,canActivate: [AuthGuardService] },
   { path: 'leaves', component: LeavesListComponent,canActivate: [AuthGuardService] },
-  { path: 'active-survey', component: ActiveServeyComponent,canActivate: [AuthGuardService] },
+  { path: 'active-survey/:id', component: ActiveServeyComponent,canActivate: [AuthGuardService] },
   { path: 'add-survey', component: AddSurveyComponent,canActivate: [AuthGuardService] },
   { path: 'survey-list', component: ListSurveyComponent,canActivate: [AuthGuardService] },
   { path: 'survey-detail/:id', component: DetailSurveyComponent,canActivate: [AuthGuardService] },

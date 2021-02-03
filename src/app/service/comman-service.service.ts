@@ -794,5 +794,14 @@ updateDocumentType(formData){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}updateDocumentType`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+// survey detail
+surveyDetail(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}detailSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
 
 }
