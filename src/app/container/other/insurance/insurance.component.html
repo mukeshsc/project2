@@ -47,10 +47,15 @@
                 <td class="sa">{{sub.member}}</td>
                 <td><a class="sa" href="http://{{sub.insurance_Benefit}}" target="_blank">View Benifits</a></td>
                 <td><a class="sa" href="http://{{sub.network}}" target="_blank">View Network</a></td>
-                <td><button mat-mini-fab  class="cal-button bu" #tooltip="matTooltip"
-                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)"><mat-icon color="warn" class="ui">delete</mat-icon></button>
-                  <button mat-mini-fab  class="cal-button bu" #tooltip="matTooltip" (click)="openSubEditModal(item,sub)"
-                  matTooltip="Edit"   color="light"><mat-icon color="green ui">edit</mat-icon></button>
+                <td>
+                  <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
+                  matTooltip="Delete"   color="light" (click)="confirmDialog(sub.insuranceDetail_id)">
+                  <mat-icon color="warn"  >delete</mat-icon>
+                </button>
+                <button mat-mini-fab  class="cal-button" #tooltip="matTooltip"
+                  matTooltip="Edit"   color="light" (click)="openSubEditModal(item,sub)">
+                  <mat-icon color="green"  >edit</mat-icon>
+                </button>
                 </td>
               </tr>
             </tbody>

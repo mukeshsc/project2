@@ -21,7 +21,7 @@ export class CsvUploadComponent implements OnInit {
   async uploadDoc(event) {
     console.log(event);
     let fileName = (event.addedFiles[0].name).split('.');
-    if(fileName[1] == 'csv'){
+    if(fileName[1] == 'csv' || fileName[1] == 'xlsx'){
       this.files = [...event.addedFiles];
       if(event.addedFiles.length > 0){
         this.ngxService.start();

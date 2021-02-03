@@ -68,9 +68,15 @@
               Target Audience
             </span>
             <span class="target-detail">
-              <span class="blue-txt">
-                {{item.targetAudience}}
+              <span class="blue-txt"  *ngIf="item.department !=''">
+               <b>Department</b> {{item.department}}
               </span>
+              <span class="blue-txt" *ngIf="item.ageFrom !=''">
+                <b>Age</b> {{item.ageFrom}} - {{item.ageTo}}
+               </span>
+               <span class="blue-txt" *ngIf="item.gender !=''">
+                 <b>Gender</b> {{item.gender}}
+                </span>
             </span>
           </div>
           <div fxFlex="33">

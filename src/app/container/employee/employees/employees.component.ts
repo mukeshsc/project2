@@ -226,7 +226,9 @@ async invitationLink(id){
 
   // open add Employee modal
   openSubAddModal() {
-    const dialogRef = this.dialog.open(EmployeeAddComponent);
+    const dialogRef = this.dialog.open(EmployeeAddComponent,{
+      width:'50%'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -237,7 +239,9 @@ async invitationLink(id){
 
   // open filter modal
   openfilterModal() {
-    const dialogRef = this.dialog.open(FilterComponent);
+    const dialogRef = this.dialog.open(FilterComponent,{
+      width:'50%'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -249,6 +253,7 @@ async invitationLink(id){
   openSubEditModal(e) {
     let data  = this.responseData.filter(item => e.id == item.user_id);
     const dialogRef = this.dialog.open(EmployeeEditComponent, {
+      width:'50%',
       data: {
         employee: JSON.stringify(data[0])
       }});
@@ -261,7 +266,7 @@ async invitationLink(id){
 
   uploadCsv(){
     const dialogRef = this.dialog.open(CsvUploadComponent,{
-      maxWidth: '500px',
+      width: '50%',
     });
 
     dialogRef.afterClosed().subscribe(result => {
