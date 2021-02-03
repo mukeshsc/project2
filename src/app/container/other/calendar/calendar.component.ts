@@ -98,7 +98,8 @@ async getEvent(){
         this.data.push(obj)
       }
       console.log(this.data)
-        this.scheduleObj.saveEvent(this.data);
+        // this.scheduleObj.saveEvent(this.data);
+        this.scheduleObj.eventSettings.dataSource = this.data;
         this.callApi = false;
         this.scheduleObj.refresh();
 
@@ -266,7 +267,6 @@ async onActionComplete(event){
       const response: any = res;
       if (response.success == true){
         this.openSnackBar(response.message);
-        this.data = []
         this.getEvent();
 
       }else{
@@ -320,11 +320,11 @@ async onActionComplete(event){
     let sDate = new Date(data.StartTime);
     let eDate = new Date(data.EndTime)
     let formData = {
-      "event_Type":data.EventType != null?(data.event_Type == 'holiday'?1:0):0,
+      "event_Type":data.EventType != null?(data.EventType == 'holiday'?1:0):0,
       "event_StartDate":moment(sDate).format('YYYY-MM-DD'),
       "event_EndDate":moment(eDate).format('YYYY-MM-DD'),
       "event_Description":data.Description || '',
-      "isType":data.isType,
+      "isType":data.EventType != null?data.EventType:'event',
       "fileName":"",
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0,
@@ -338,7 +338,7 @@ async onActionComplete(event){
       "gender":data.gender || ''
 
     }
-    if(data.calendarEvent_id && data.calendarEvent_id != ''  ){
+    if(event.requestType == 'eventChanged' ){
 
   this.ngxService.start();
       formData['calendarEvent_id'] = data.calendarEvent_id;
@@ -347,7 +347,7 @@ async onActionComplete(event){
         const response: any = res;
         if (response.success == true){
 
-          this.data = []
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
@@ -368,7 +368,7 @@ async onActionComplete(event){
         const response: any = res;
         if (response.success == true){
 
-          this.data = []
+  this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
