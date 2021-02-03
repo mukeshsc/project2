@@ -58,7 +58,7 @@ ngOnInit(): void {
   this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);
-  this.getList();
+
   this.getComapnsationList();
   this.showDepartmentSalary();
 
@@ -218,6 +218,10 @@ async showDepartmentSalary(){
         count++;
       }
       this.graphData = JSON.stringify(graphdata);
+      console.log(this.percentData.length)
+      if(this.percentData.length > 0){
+        this.getList();
+      }
     }else{
       this.openErrrorSnackBar(response.message)
     }

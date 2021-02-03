@@ -82,7 +82,6 @@ export class PayslipGenerateComponent implements OnInit {
 async getEmployeeList(){
   this.ngxService.start();
   await(this._api.getEmployee().subscribe(res => {
-    this.ngxService.stop();
     const response: any = res;
     if (response.success == true){
       console.log(response.data);
@@ -109,7 +108,11 @@ async getEmployeeList(){
         item['salary'] =  isNaN(total)?0:total;
         item['salaryArray'] = salAr;
       }
+
+      this.generateSlip()
     }else{
+
+    this.ngxService.stop();
     }
     console.log(res);
 
@@ -123,7 +126,8 @@ async generateSlip(){
 
   this.ngxService.start();
   if(this.responseData){
-    for(let item of this.responseData){
+    let count = 0;
+   await this.responseData.forEach(async item => {
       let userDetail = [];
       this.salarySlipId+= 1;
       let name = item.first_name+' '+item.last_name;
@@ -150,11 +154,18 @@ async generateSlip(){
         })
       }
       console.log(obj.paySlipImage)
-      await(this._api.addPatSlip(obj).subscribe(res => {
+      let subscription = await(this._api.addPatSlip(obj).subscribe( async res => {
 
+        count++;
         const response: any = res;
         if (response.success == true){
-          this.payslipeone.getCount();
+          await this.payslipeone.getCount();
+          if(count >= this.responseData.length){
+
+            this.openSnackBar('Something Went wrong please try again');
+            this.ngxService.stop();
+            this.router.navigate(['/employee-salary'])
+          }
         }else{
           this.openErrrorSnackBar(response.msg)
           return;
@@ -162,15 +173,17 @@ async generateSlip(){
         console.log(res);
       }, err => {
         const error = err.error;
-
+        subscription.unsubscribe()
         this.ngxService.stop();
+        if(count >= this.responseData.length){
+          this.openErrrorSnackBar('Something Went wrong please try again');
+          this.ngxService.stop();
+          this.router.navigate(['/employee-salary'])
+        }
       }));
-    }
+    });
 
   }
-  this.openSnackBar('SalarySlip Generated successfully');
-  this.ngxService.stop();
-  this.router.navigate(['/employee-salary'])
 }
 // alert message after api response success
 openSnackBar(msg) {
