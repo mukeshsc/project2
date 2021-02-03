@@ -72,11 +72,9 @@ async getEvent(){
       for(let item of response.data){
         count++;
         let color = '#3F51B5';
-        if(item.event_Type == '1'){
-          item.IsType = 'holiday'
+        if(item.isType == 'holiday'){
           color = '#F44336';
         }else{
-          item.IsType = 'event'
           color = colors[Math.floor(Math.random() * colors.length)]
         }
         let obj = {
@@ -268,6 +266,7 @@ async onActionComplete(event){
       const response: any = res;
       if (response.success == true){
         this.openSnackBar(response.message);
+        this.data = []
         this.getEvent();
 
       }else{
@@ -321,10 +320,11 @@ async onActionComplete(event){
     let sDate = new Date(data.StartTime);
     let eDate = new Date(data.EndTime)
     let formData = {
-      "event_Type":data.EventType != null?(data.EventType == 'holiday'?'1':'0'):'0',
+      "event_Type":data.EventType != null?(data.event_Type == 'holiday'?1:0):0,
       "event_StartDate":moment(sDate).format('YYYY-MM-DD'),
       "event_EndDate":moment(eDate).format('YYYY-MM-DD'),
       "event_Description":data.Description || '',
+      "isType":data.isType,
       "fileName":"",
       "event_Title":data.Subject,
       "isAllday":data.IsAllDay ? 1 : 0,
@@ -347,7 +347,7 @@ async onActionComplete(event){
         const response: any = res;
         if (response.success == true){
 
-  this.data = []
+          this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);
@@ -368,7 +368,7 @@ async onActionComplete(event){
         const response: any = res;
         if (response.success == true){
 
-  this.data = []
+          this.data = []
           this.openSnackBar(response.message);
         }else{
           this.openErrrorSnackBar(response.message);

@@ -76,15 +76,19 @@ export class ContractEditComponent implements OnInit {
   ngOnInit(): void {
     this.getData = JSON.parse(this.data.doc);
     console.log(this.getData)
+    let expireDate = null
     if(this.getData.expiry_Date == '-'){
       this.isExpire = false
+      expireDate == null;
     }else{
       this.isExpire = true;
+      let d = this.getData.expiry_Date.split('/')
+      expireDate = new Date(d[1]+'-'+d[0]+'-'+d[2])
     }
     this.formData = {
       "documentDetailId":this.getData.documentDetail_id,
       "document_Title":this.getData.document_Title,
-      "expiry_Date":this.getData.expiry_Date == '-'?null:new Date(this.getData.expiry_Date),
+      "expiry_Date":expireDate,
       "file_Path":this.getData.file_Path,
       "ip_Address":"12.32.221.11",
       "userId":this.getData.user_Id,
@@ -137,6 +141,7 @@ async getDocType(){
 
 // add new Doc
 async addDoc(){
+  this.formData.expiry_Date = _moment(this.formData.expiry_Date).format('YYYY-MM-DD 00:00:00')
   await(this._api.editDoc(this.formData).subscribe(res => {
     this.ngxService.stop();
     const response: any = res;
