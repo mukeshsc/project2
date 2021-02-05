@@ -161,7 +161,7 @@ async generateSlip(){
           await this.payslipeone.getCount();
           if(count >= this.responseData.length){
 
-            this.openSnackBar('Something Went wrong please try again');
+            this.openSnackBar('Salary slips generated successfully');
             this.ngxService.stop();
             this.router.navigate(['/employee-salary'])
           }

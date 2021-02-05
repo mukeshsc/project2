@@ -5,7 +5,10 @@
       <div fxLayout="row">
         <div fxFlex="100"  fxFlex.gt-xs="100">
           <h3 class="logo">
-            Company <br /><span>Logo</span>
+            <span *ngIf="!userData && !userData.company_favicon">
+              Company <br /><span>Logo</span>
+            </span>
+            <img src="{{imgPath}}{{userData.company_favicon}}" *ngIf="userData && userData.company_favicon" [alt]="userData && userData.company_favicon"/>
           </h3>
           <span class="card-title">
             Pay Slip
@@ -44,7 +47,7 @@
                   </tr>
                   <tr *ngIf="data.address">
                     <th>work location</th>
-                    <td>Mohali, India</td>
+                    <td>{{userData && userData.company_Address}}</td>
                   </tr>
                   <tr *ngIf="data.passport">
                     <th>Passport No.</th>

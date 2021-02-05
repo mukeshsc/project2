@@ -23,6 +23,7 @@ export class PayslipEditComponent implements OnInit {
   }
   responseData:any;
   tempNo:number;
+  showAll = true
   constructor(public router:Router ,public _access:AccessServiceService,public dialog: MatDialog,public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
     this.tempNo = parseInt(this.router.url.split('/').pop());
    }
@@ -87,17 +88,7 @@ async editPaySlip(){
 
 
   showTemplate(tempNo){
-    const dialogRef = this.dialog.open(PayslipDetailComponent,{
-      width:'100%',
-      data: {
-        tempNo: tempNo,
-        tempData:JSON.stringify(this.data)
-      }
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+    this.showAll = false
   }
 // alert message after api response success
 openSnackBar(msg) {

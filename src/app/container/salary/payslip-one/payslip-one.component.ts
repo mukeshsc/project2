@@ -3,6 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { CommonServiceService } from 'src/app/service/comman-service.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-payslip-one',
   templateUrl: './payslip-one.component.html',
@@ -13,12 +14,14 @@ export class PayslipOneComponent implements OnInit {
   allData:any;
   responseData:any = [];
   demoData:any;
+  imgPath = environment.apiBaseUrl;
   salData:any = [];
   currentDate = moment().format('DD MMM YYYY')
   currentMonth = moment().format('MMM YYYY');
-  count = 0
+  count = 1;
+  userData:any
   constructor(public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) {
-
+    this.userData = JSON.parse(localStorage.getItem('userData'))
   }
 
   ngOnInit(): void {

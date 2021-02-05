@@ -13,8 +13,12 @@
 <div fxLayout="row" fxflexfill fxLayoutGap="10px grid" >
   <div fxFlex="100">
     <mat-card>
+      <span class="back-link" *ngIf="!showAll" (click)="showAll = !showAll">
+        <mat-icon matSuffix>keyboard_backspace</mat-icon>
+        Back
+      </span>
       <div fxLayout="row" fxflexfill fxLayoutGap="10px grid">
-        <div fxFlex="30">
+        <div fxFlex="30" *ngIf="showAll">
           <span class="card-title">Create Template</span>
           <p>Fill out the data and generate completely customized reports</p>
           <span class="paySlipHead">Payslip Preferences</span>
@@ -37,12 +41,13 @@
             <div fxFlex="100">
               <mat-label></mat-label>
               <button mat-raised-button class="big-btn block-btn" color="primary" (click)="editPaySlip()" >Save Template</button>
+              <br />
             </div>
           </div>
         </div>
-        <div fxFlex="70">
+        <div [fxFlex]="showAll?'70':'100'">
           <app-payslip-one [data]="data"></app-payslip-one>
-          <span class="show-preview" (click)="showTemplate(1)">Full screen preview</span>
+          <span class="show-preview" (click)="showTemplate(1)" *ngIf="showAll">Full screen preview</span>
         </div>
       </div>
     </mat-card>

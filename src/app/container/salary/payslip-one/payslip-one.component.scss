@@ -13,11 +13,13 @@
   color: #000000;
   text-transform: capitalize;
   margin-top: 25px;
-  position: absolute;
   span{
     color:#FFAA00;
+    text-align:right;
     display: block;
-    margin-left: 47px;
+  }
+  img {
+    width: 75px;
   }
 }
 .header-bg{
