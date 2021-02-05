@@ -257,11 +257,11 @@ async showDepartmentSalary(){
       console.log(response.data)
       this.totalPercent = response.total[0];
       this.percentData = response.data;
-      let graphdata = {label:[],percentage:[],colors:['#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC','#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC']}
+      let graphdata = {label:[],percentage:[],colors:['#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC','#3F5248','#FFAB56','#F44BA2','#C86AA2','#FF41BC','#15C2AC']}
       let count = 0;
       for(let item of this.percentData){
         // graphdata.label.push(item.department)
-        let per = (parseInt(this.totalPercent.total) *100)/parseInt(item.current)
+        let per = (parseInt(item.current) *100)/parseInt(this.totalPercent.total)
         console.log(per)
         graphdata.percentage.push(per)
         item['color'] = graphdata.colors[count]
