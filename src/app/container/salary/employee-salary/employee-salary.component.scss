@@ -24,8 +24,21 @@ span.bar {
   }
   span.percent {
     font-size: 10px;
-  } 
+  }
   span.department {
     font-size: 9px;
+  }
+}
+
+.scroller {
+  width: 100%;
+  overflow: auto;
+  .scroll-x {
+    display: flex;
+    // flex-direction: column;
+    .department-detail-separation {
+      min-width: 150px;
+      margin-bottom:10px;
+    }
   }
 }

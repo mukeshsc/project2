@@ -15,9 +15,11 @@
     <mat-card class="dashboard-detail" >
       <mat-card-content>
         <mat-toolbar color="light">
-          <span class="mat-toolbar-title">Salary slip Preview </span>&nbsp;&nbsp;
+          <span class="mat-toolbar-title">Salary slip Preview Click Generate button to generate salary</span>&nbsp;&nbsp;
           <span class="spacer"></span>
-
+          <button mat-flat-button color="primary" class="cal-button" aria-label="genearte" (click)="generateSlip()">
+            Generate salary
+          </button>
         </mat-toolbar>
         <div style="width:100%" #screen>
           <app-payslip-one [data]="data" ></app-payslip-one>

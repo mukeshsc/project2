@@ -13,6 +13,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
 import { PayslipDetailComponent } from '../payslip-detail/payslip-detail.component';
 import * as moment from 'moment';
+import * as jsPDF from 'jspdf';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-employee-salary',
   templateUrl: './employee-salary.component.html',
@@ -52,7 +54,7 @@ formData = {
 reportData:any =[];
 totalPercent:any;
 percentData:any = []
-constructor(public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
+constructor(private sanitizer: DomSanitizer, public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
   this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
@@ -198,6 +200,54 @@ async showTemplate(tempNo, user_id){
 
 }
 
+async downloadSlip(tempNo, user_id){
+  let formData = {
+    "currentMonth":moment().format('MM'),
+    "userID":user_id,
+    "isType":"0"
+}
+  this.ngxService.start();
+  await(this._api.payslipMail(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data[0].paySlip_Image)
+      let imageFile;
+      let downloadLink;
+
+      // CSV FILE
+      imageFile = new Blob([response.data[0].paySlip_Image], {type: 'image/jpg'});
+
+      // Download link
+      downloadLink = document.createElement('a');
+
+      // File name
+      downloadLink.download = response.data[0].paySlip_Image;
+
+      // We have to create a link to the file
+      downloadLink.href = response.data[0].paySlip_Image;
+
+      // Make sure that the link is not displayed
+      downloadLink.style.display = 'none';
+
+      // Add the link to your DOM
+      document.body.appendChild(downloadLink);
+
+      // Lanzamos
+      downloadLink.click();
+      this.ngxService.stop();
+
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
+}
+
 async showDepartmentSalary(){
   this.ngxService.start();
   await(this._api.showDepartmentSalary().subscribe(res => {
@@ -207,10 +257,10 @@ async showDepartmentSalary(){
       console.log(response.data)
       this.totalPercent = response.total[0];
       this.percentData = response.data;
-      let graphdata = {label:[],percentage:[],colors:['#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC']}
+      let graphdata = {label:[],percentage:[],colors:['#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC','#3F51B5','#FFAA00','#F44336','#C86CE6','#FF4081','#15C1DC']}
       let count = 0;
       for(let item of this.percentData){
-        graphdata.label.push(item.department)
+        // graphdata.label.push(item.department)
         let per = (parseInt(this.totalPercent.total) *100)/parseInt(item.current)
         console.log(per)
         graphdata.percentage.push(per)

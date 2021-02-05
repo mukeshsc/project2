@@ -140,6 +140,8 @@
                 matTooltip="Preview"   color="light"><mat-icon color="green">preview</mat-icon></button>
                 <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="mailPaySlip(element.user_id)" *ngIf="accessPermission"
                 matTooltip="Send salary slip"   color="light"><mat-icon color="accent">send</mat-icon></button>
+                <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" (click)="downloadSlip(1,element.user_id)" *ngIf="accessPermission"
+                matTooltip="Download"   color="light"><mat-icon color="primary">download</mat-icon></button>
               </div>
               <span *ngIf="accessPermission && percentData.length == 0" class="blue-txt" [routerLink]="'/payslip-generate'">Generate Salary</span>
             </td>

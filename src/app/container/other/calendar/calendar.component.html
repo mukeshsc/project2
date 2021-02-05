@@ -43,7 +43,7 @@
     <br />
     <mat-card class="event-detail" *ngFor="let item of selectedEvent">
       <mat-card-header>
-        <mat-card-title>{{item.Subject}}</mat-card-title>
+        <mat-card-title *ngIf="item.Subject != 'Add title'">{{item.Subject}}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="space-around left" class="heading-calendar-detail">
@@ -79,7 +79,7 @@
           </div>
           <div fxFlex="33">
             <span class="target_title">
-              Tag
+              Type
             </span>
             <span class="target-detail">
               <span class="red-txt">

@@ -108,7 +108,6 @@ async getEmployeeList(){
         item['salary'] =  isNaN(total)?0:total;
         item['salaryArray'] = salAr;
       }
-
       this.generateSlip()
     }else{
 
@@ -127,7 +126,7 @@ async generateSlip(){
   this.ngxService.start();
   if(this.responseData){
     let count = 0;
-   await this.responseData.forEach(async item => {
+   for(let item of this.responseData) {
       let userDetail = [];
       this.salarySlipId+= 1;
       let name = item.first_name+' '+item.last_name;
@@ -181,7 +180,7 @@ async generateSlip(){
           this.router.navigate(['/employee-salary'])
         }
       }));
-    });
+    };
 
   }
 }
