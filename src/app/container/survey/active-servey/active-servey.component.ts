@@ -36,14 +36,14 @@ newRequest:number = 0;
 accessPermission:boolean;
 formData = {
   companyId:"",
-  surveyQuestionsId:""
+  surveyQuestionsId:null
 }
 
 constructor(public router:Router, public _access:AccessServiceService, public dialog: MatDialog, public _api: CommonServiceService, public ngxService: NgxUiLoaderService, public _snackBar: MatSnackBar) { }
 
 ngOnInit(): void {
   let url  = this.router.url.split('/')
-  this.formData.surveyQuestionsId = url.pop();
+  this.formData.surveyQuestionsId = parseInt(url.pop());
   this.formData.companyId = JSON.parse(localStorage.getItem('userData')).company_id;
 //getting access permission
   this.accessPermission = this._access.getRouteAccess('User roles',JSON.parse(localStorage.getItem('userData')).moduleAccess);

@@ -803,5 +803,41 @@ surveyDetail(formData){
     return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}detailSurvey`,formData, {headers}).pipe(map(res => <any>res));
 }
 
+// finished survey detail
+attemptedQuestionSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}attemptedQuestionSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// question detail
+questionDetail(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}questionSubmissionSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// survery user detail
+surveyUser(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}userAssignListSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// survery user detail
+individualResponsesSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}individualResponsesSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
 
 }

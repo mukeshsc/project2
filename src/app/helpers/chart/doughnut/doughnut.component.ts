@@ -15,6 +15,7 @@ export class DoughnutComponent implements OnInit {
   public doughnutChartData: SingleDataSet = [];
   public doughnutChartColors: Color[] = []
   public doughnutChartType: ChartType = 'doughnut';
+  public barChartLegend = false
   constructor() { }
 
   ngOnInit(): void {

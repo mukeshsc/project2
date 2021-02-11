@@ -29,21 +29,19 @@
                 <mat-card-title>Survey Quetions</mat-card-title>
               </mat-card-header>
               <mat-card-content>
-                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid"  class="question-section">
+                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid"  class="question-section" *ngFor="let item of responseData;let i = index">
                   <div fxFlex="10">
-                    <span class="row-title"> 1</span>
+                    <span class="row-title">{{i+1}}</span>
                   </div>
                   <div fxFlex="40">
-                    <span class="row-title">Lorem Ipsum Is A Placeholder Text.</span>
-                    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form</p>
+                    <span class="row-title">{{item.survey_Title}}</span>
+                    <p>{{item.surveyDescription}}</p>
                   </div>
                   <div fxFlex="20">
                     <span>Yes</span>
-                    <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{(item.yesCount*100)/(item.yesCount+item.noCount)}}"  ></mat-progress-bar>
                     <span>No</span>
-                    <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
-                    <span>Not Answered</span>
-                    <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{(item.noCount*100)/(item.yesCount+item.noCount)}}"></mat-progress-bar>
                   </div>
                   <div fxFlex="30" dir="rtl">
                     <div class="progress-bar-detail">
@@ -51,41 +49,11 @@
                       class="example-margin"
                       color="accent"
                       mode="determinate"
-                      value="60">
+                      value="{{(item.yesCount*100)/(item.yesCount+item.noCount)}}"
+                      >
                     </mat-progress-spinner>
                     <span class="spinner-value">
-                      60%
-                    </span>
-                    <p>Attempted</p>
-                    </div>
-                  </div>
-                </div>
-                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid"  class="question-section">
-                  <div fxFlex="10">
-                    <span class="row-title"> 1</span>
-                  </div>
-                  <div fxFlex="40">
-                    <span class="row-title">Lorem Ipsum Is A Placeholder Text.</span>
-                    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form</p>
-                  </div>
-                  <div fxFlex="20">
-                    <span>Yes</span>
-                    <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
-                    <span>No</span>
-                    <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
-                    <span>Not Answered</span>
-                    <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
-                  </div>
-                  <div fxFlex="30" dir="rtl">
-                    <div class="progress-bar-detail">
-                      <mat-progress-spinner
-                      class="example-margin"
-                      color="accent"
-                      mode="determinate"
-                      value="60">
-                    </mat-progress-spinner>
-                    <span class="spinner-value">
-                      60%
+                      {{(item.yesCount*100)/(item.yesCount+item.noCount)}}%
                     </span>
                     <p>Attempted</p>
                     </div>
@@ -97,21 +65,19 @@
           <mat-tab label="Questions" >
             <mat-card class="employee-tab">
               <mat-card-content>
-                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid"  class="question-section">
+                <div fxLayout="row" fxflexfill fxLayoutGap="10px grid"  class="question-section" *ngIf="responseData.length > 0">
                   <div fxFlex="10">
-                    <span class="row-title"> 3</span>
+                    <span class="row-title">{{tabIndex + 1}}</span>
                   </div>
                   <div fxFlex="40">
-                    <span class="row-title">Lorem Ipsum Is A Placeholder Text.</span>
-                    <p>Lorem ipsum is a placeholder text commonly used to demonstrate the visual form</p>
+                    <span class="row-title">{{responseData[tabIndex].survey_Title}}</span>
+                    <p>{{responseData[tabIndex].surveyDescription}}</p>
                   </div>
                   <div fxFlex="20">
                     <span>Yes</span>
-                    <mat-progress-bar mode="determinate" value="60"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"  ></mat-progress-bar>
                     <span>No</span>
-                    <mat-progress-bar mode="determinate" value="30"></mat-progress-bar>
-                    <span>Not Answered</span>
-                    <mat-progress-bar mode="determinate" value="10"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{(responseData[tabIndex].noCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"></mat-progress-bar>
                   </div>
                   <div fxFlex="30" dir="rtl">
                     <div class="progress-bar-detail">
@@ -119,22 +85,18 @@
                       class="example-margin"
                       color="accent"
                       mode="determinate"
-                      value="60">
+                      value="{{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"
+                      >
                     </mat-progress-spinner>
                     <span class="spinner-value">
-                      60%
+                      {{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}%
                     </span>
                     <p>Attempted</p>
                     </div>
                   </div>
                 </div>
                 <ul class="paginations">
-                  <li>1</li>
-                  <li>2</li>
-                  <li class="active-page">3</li>
-                  <li>4</li>
-                  <li>5</li>
-                  <li>6</li>
+                  <li *ngFor="let item of responseData;let i = index" (click)="tabIndex = i;getQuestionDetail(item.surveyQuestions_id,item.surveyType_Id)" [ngClass]="i == tabIndex?'active-page':''">{{1+i}}</li>
                 </ul>
               </mat-card-content>
             </mat-card>
@@ -143,7 +105,7 @@
                   <div fxFlex="100"  fxFlex.gt-xs="100"  >
                     <mat-toolbar color="light" class="tool">
                       <span class="mat-toolbar-title icic"> <b>Attempted by </b> </span>
-                      <span class="mat-toolbar-title icici"> 85/100 </span>
+                      <span class="mat-toolbar-title icici"> {{attempted}}/{{attempted + notAttempted}} </span>
                       <span class="spacer"></span>
 
                     </mat-toolbar>
@@ -174,11 +136,14 @@
                         <td mat-cell *matCellDef="let element"> {{element.email}} </td>
                       </ng-container>
 
-                      <!-- Status Column -->
-                      <ng-container matColumnDef="answer">
+                      <!-- yesCount Column -->
+                      <ng-container matColumnDef="yesCount">
                         <th mat-header-cell *matHeaderCellDef  mat-sort-header> Answer </th>
                         <td mat-cell *matCellDef="let element">
-                          <mat-icon color="accent">thumb_up_alt</mat-icon> <span style="display: block;">Yes</span>
+                          <div class="thumb">
+                            <mat-icon *ngIf="element.yesCount != 0" color="accent">thumb_up_alt</mat-icon> <span *ngIf="element.yesCount != 0"  >Yes</span>
+                            <mat-icon *ngIf="element.yesCount == 0" color="accent">thumb_down_alt</mat-icon> <span *ngIf="element.yesCount == 0" >No</span>
+                          </div>
                         </td>
                       </ng-container>
 
@@ -187,7 +152,7 @@
                         <th mat-header-cell *matHeaderCellDef> Other Information </th>
                         <td mat-cell *matCellDef="let element" >
                           <span *ngIf="!accessPermission">No Permission</span>
-                          <p>Descritpion</p>
+                          <p style="text-align: right;">Descritpion</p>
 
                         </td>
                       </ng-container>
@@ -212,35 +177,11 @@
               <mat-card-content>
                 <div class="scroll">
                   <div class="scroll-x">
-                    <mat-card class="userCard active">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
-                    </mat-card>
-                    <mat-card class="userCard">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
-                    </mat-card>
-                    <mat-card class="userCard">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
-                    </mat-card>
-                    <mat-card class="userCard">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
-                    </mat-card>
-                    <mat-card class="userCard">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
-                    </mat-card>
-                    <mat-card class="userCard">
-                      <img src="./assets/img/Ellipse_1_b.png" />
-                      <span class="user-name">Emily Smith</span>
-                      <span class="usere-desig">Manager</span>
+                    <mat-card class="userCard " *ngFor="let item of userData;let i = index" [ngClass]="cardIndex == i?'active':''" (click)="getUserSurveyDetail(item.user_Id)">
+                      <img src="{{filePath}}{{item.profile_picture}}" *ngIf="item.profile_picture != ''" />
+                      <img src="./assets/img/Ellipse_1.png" *ngIf="item.profile_picture == ''" />
+                      <span class="user-name">{{item.name}}</span>
+                      <span class="usere-desig">{{item.designation}}</span>
                     </mat-card>
                   </div>
                 </div>
@@ -251,7 +192,7 @@
                   <div fxFlex="100"  fxFlex.gt-xs="100"  >
                     <mat-toolbar color="light" class="tool">
                       <span class="mat-toolbar-title icic"> <b>Attempted by </b> </span>
-                      <span class="mat-toolbar-title icici"> 85/100 </span>
+                      <span class="mat-toolbar-title icici"> {{attempted}}/{{attempted + notAttempted}} </span>
                       <span class="spacer"></span>
 
                     </mat-toolbar>
@@ -260,27 +201,20 @@
                       <!--- Note that these columns can be defined in any order.
                             The actual rendered columns are set as a property on the row definition" -->
 
-                      <!-- count Column -->
-                      <ng-container matColumnDef="sno">
-                        <th mat-header-cell *matHeaderCellDef >  </th>
-                        <td mat-cell *matCellDef="let element">
-                          {{element.sno}}
-                        </td>
-                      </ng-container>
-
-                      <!-- question Column -->
-                      <ng-container matColumnDef="question">
+                      <!-- survey_Title Column -->
+                      <ng-container matColumnDef="survey_Title">
                         <th mat-header-cell *matHeaderCellDef  mat-sort-header> Question </th>
-                        <td mat-cell *matCellDef="let element"> <span class="card-title">{{element.question}}</span>
-                        <p  style="text-align: center;">{{element.description}}</p></td>
+                        <td mat-cell *matCellDef="let element"> <span class="card-title">{{element.survey_Title}}</span>
+                        <p  >{{element.survey_Description}}</p></td>
                       </ng-container>
 
-                      <!-- answer Column -->
-                      <ng-container matColumnDef="answer">
+                      <!-- yesCount Column -->
+                      <ng-container matColumnDef="yesCount">
                         <th mat-header-cell *matHeaderCellDef  mat-sort-header> Answer </th>
                         <td mat-cell *matCellDef="let element">
-                          <div class="answer">
-                            <mat-icon color="accent">thumb_up_alt</mat-icon> <span style="display: block;">Yes</span><span style="display: block;"> No</span>
+                          <div class="thumb">
+                            <mat-icon *ngIf="element.yesCount != 0" color="accent">thumb_up_alt</mat-icon> <span *ngIf="element.yesCount != 0"  >Yes</span>
+                            <mat-icon *ngIf="element.yesCount == 0" color="accent">thumb_down_alt</mat-icon> <span *ngIf="element.yesCount == 0" >No</span>
                           </div>
                         </td>
                       </ng-container>
