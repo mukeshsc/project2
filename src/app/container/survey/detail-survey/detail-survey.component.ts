@@ -159,4 +159,8 @@ async getUserSurveyDetail(userId){
   }));
 }
 
+roundFigure(number){
+  return Math.round(number)
+}
+
 }

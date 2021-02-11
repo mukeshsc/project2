@@ -39,9 +39,9 @@
                   </div>
                   <div fxFlex="20">
                     <span>Yes</span>
-                    <mat-progress-bar mode="determinate" value="{{(item.yesCount*100)/(item.yesCount+item.noCount)}}"  ></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{roundFigure((item.yesCount*100)/(item.yesCount+item.noCount))}}"  ></mat-progress-bar>
                     <span>No</span>
-                    <mat-progress-bar mode="determinate" value="{{(item.noCount*100)/(item.yesCount+item.noCount)}}"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{roundFigure((item.noCount*100)/(item.yesCount+item.noCount))}}"></mat-progress-bar>
                   </div>
                   <div fxFlex="30" dir="rtl">
                     <div class="progress-bar-detail">
@@ -49,11 +49,11 @@
                       class="example-margin"
                       color="accent"
                       mode="determinate"
-                      value="{{(item.yesCount*100)/(item.yesCount+item.noCount)}}"
+                      value="{{roundFigure((item.yesCount*100)/(item.yesCount+item.noCount))}}"
                       >
                     </mat-progress-spinner>
                     <span class="spinner-value">
-                      {{(item.yesCount*100)/(item.yesCount+item.noCount)}}%
+                      {{roundFigure((item.yesCount*100)/(item.yesCount+item.noCount))}}%
                     </span>
                     <p>Attempted</p>
                     </div>
@@ -75,9 +75,9 @@
                   </div>
                   <div fxFlex="20">
                     <span>Yes</span>
-                    <mat-progress-bar mode="determinate" value="{{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"  ></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{roundFigure((responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount))}}"  ></mat-progress-bar>
                     <span>No</span>
-                    <mat-progress-bar mode="determinate" value="{{(responseData[tabIndex].noCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"></mat-progress-bar>
+                    <mat-progress-bar mode="determinate" value="{{roundFigure((responseData[tabIndex].noCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount))}}"></mat-progress-bar>
                   </div>
                   <div fxFlex="30" dir="rtl">
                     <div class="progress-bar-detail">
@@ -85,11 +85,11 @@
                       class="example-margin"
                       color="accent"
                       mode="determinate"
-                      value="{{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}"
+                      value="{{roundFigure((responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount))}}"
                       >
                     </mat-progress-spinner>
                     <span class="spinner-value">
-                      {{(responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount)}}%
+                      {{roundFigure((responseData[tabIndex].yesCount*100)/(responseData[tabIndex].yesCount+responseData[tabIndex].noCount))}}%
                     </span>
                     <p>Attempted</p>
                     </div>
@@ -177,7 +177,7 @@
               <mat-card-content>
                 <div class="scroll">
                   <div class="scroll-x">
-                    <mat-card class="userCard " *ngFor="let item of userData;let i = index" [ngClass]="cardIndex == i?'active':''" (click)="getUserSurveyDetail(item.user_Id)">
+                    <mat-card class="userCard " *ngFor="let item of userData;let i = index" [ngClass]="cardIndex == i?'active':''" (click)="cardIndex = i;getUserSurveyDetail(item.user_Id)">
                       <img src="{{filePath}}{{item.profile_picture}}" *ngIf="item.profile_picture != ''" />
                       <img src="./assets/img/Ellipse_1.png" *ngIf="item.profile_picture == ''" />
                       <span class="user-name">{{item.name}}</span>
