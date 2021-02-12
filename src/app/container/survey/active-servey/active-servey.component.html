@@ -19,10 +19,10 @@
   <mat-card-content>
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
       <div fxFlex="30" >
-        <img class="im1" src="./assets/img/echarts_1.png" />
+        <app-vertical-bar *ngIf="graphData" [data]="graphData"></app-vertical-bar>
       </div>
       <div fxFlex="30" >
-        <img class="im2" src="./assets/img/echarts_1.png" />
+        <app-doughnut *ngIf="graphData" [data]="graphData"></app-doughnut>>
       </div>
 
       <div fxFlex="40">

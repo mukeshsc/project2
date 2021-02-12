@@ -35,6 +35,7 @@ responseData:any = [];
 csvFile:any = '';
 newRequest:number = 0;
 accessPermission:boolean;
+graphData:any
 formData = {
   companyId:"",
   surveyQuestionsId:null
@@ -72,6 +73,7 @@ await(this._api.surveyDetail(this.formData).subscribe(res => {
         this.responseData.expiry = 'remain'
         this.responseData.survey_ExpiryDate = _moment(this.responseData.survey_ExpiryDate).format('DD MMM  YYYY')
       }
+      this.graphData = JSON.stringify({label:['Attempt','Not Attempt'],percentage:[this.responseData.totalUserAttempted,this.responseData.totalQuestion - this.responseData.totalUserAttempted],colors:['#15C1DC','#FF6384']})
     this.dataSource = new MatTableDataSource([...this.responseData.user]);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
