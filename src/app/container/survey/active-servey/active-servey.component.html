@@ -14,7 +14,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{responseData.survey_Name}}</mat-card-title>
-    <mat-card-subtitle><a class="primary-txt" (click)="openSurveyQuestion()" style="cursor: pointer;">view all {{responseData.totalQuestion}} questions</a></mat-card-subtitle>
+    <mat-card-subtitle><a class="primary-txt" (click)="openSurveyQuestion()" style="cursor: pointer;">view all {{responseData.TotalQuestionCount}} questions</a></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
@@ -22,7 +22,7 @@
         <app-vertical-bar *ngIf="graphData" [data]="graphData"></app-vertical-bar>
       </div>
       <div fxFlex="30" >
-        <app-doughnut *ngIf="graphData" [data]="graphData"></app-doughnut>>
+        <app-doughnut *ngIf="graphData" [data]="graphData"></app-doughnut>
       </div>
 
       <div fxFlex="40">

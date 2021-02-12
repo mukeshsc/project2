@@ -40,7 +40,7 @@ export class AddSurveyComponent implements OnInit {
     { label:'Drop Down',value:'dropdown'},
     { label:'Radio Button',value:'radio'},
     { label:'Slider',value:'slider'},
-    { label:'Open Ended',value:'textarea'},
+    { label:'Open Ended',value:'Open Ended'},
     { label:'Multiple Choice',value:'multiSelect'},
     { label:'Linkert',value:'linkert'},
     { label:'Matrix',value:'matrix'},
