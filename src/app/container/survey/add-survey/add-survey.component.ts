@@ -21,9 +21,9 @@ export class AddSurveyComponent implements OnInit {
   question = [
     {
 
-      "survey_Type":"TEst",
-      "survey_Title":"Test",
-      "survey_Description":"REWE",
+      "survey_Type":"",
+      "survey_Title":"",
+      "survey_Description":"",
       "survey_OptionArray":[{"value":""}],
       "survey_SubQuestion":[],
       "survey_SliderOption":{"left":0,"label":'',"right":100},
@@ -55,9 +55,9 @@ export class AddSurveyComponent implements OnInit {
 
   next() {
         this.question.push({
-          "survey_Type":"TEst",
-          "survey_Title":"Test",
-          "survey_Description":"REWE",
+          "survey_Type":"",
+          "survey_Title":"",
+          "survey_Description":"",
           "survey_OptionArray":[{"value":""}],
           "survey_SubQuestion":[],
           "survey_SliderOption":{"left":0,"label":'',"right":100},

@@ -57,6 +57,7 @@ export class StratSurveyComponent implements OnInit {
     "user_Id":"",
     "survey_AgeTo":null,
     "survey_AgeFrom":null,
+    "survey_CompanyId":null,
     "survey_Gender":null,
     "survey_Department":null,
     "survey_ExpiryDate":"",
@@ -72,6 +73,7 @@ export class StratSurveyComponent implements OnInit {
     }
     this.formData.surveyQuestions_Id = this.data.id;
     this.formData.company_Id = JSON.parse(localStorage.getItem('userData')).company_id;
+    this.formData.survey_CompanyId = JSON.parse(localStorage.getItem('userData')).company_id;
     this.formData.user_Id = JSON.parse(localStorage.getItem('userData')).user_id;
     this.getDepartment();
   }
