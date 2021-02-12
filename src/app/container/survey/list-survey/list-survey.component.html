@@ -45,7 +45,7 @@
           <!-- attempted Column -->
           <ng-container matColumnDef="attempted">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Attempted </th>
-            <td mat-cell *matCellDef="let element"> 256/300 <a *ngIf="element.expiry != 'expired'" style="cursor: pointer;" class="primary-txt"><b>Resend</b></a></td>
+            <td mat-cell *matCellDef="let element"> 256/300 <a *ngIf="element.expiry != 'expired'" (click)="reminderSurvey(element.surveyQuestions_Id)" style="cursor: pointer;" class="primary-txt"><b>Resend</b></a></td>
           </ng-container>
 
           <!-- published Column -->
@@ -69,13 +69,14 @@
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
               <span *ngIf="!accessPermission">No Permission</span>
-
+              <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" [routerLink]="[element.expiry == 'expired'?'/survey-detail/'+element.surveyQuestions_Id:'/active-survey/'+element.surveyQuestions_Id]" *ngIf="accessPermission"
+              matTooltip="Edit"   color="light"><mat-icon color="green">preview</mat-icon></button>
 
             </td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;" [routerLink]="[row.expiry == 'expired'?'/survey-detail/'+row.surveyQuestions_Id:'/active-survey/'+row.surveyQuestions_Id]"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
           <!-- Row shown when there is no matching data. -->
           <tr class="mat-row" *matNoDataRow>
             <td class="mat-cell" colspan="4">No data found.</td>

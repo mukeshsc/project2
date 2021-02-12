@@ -20,7 +20,7 @@ import { AccessServiceService } from 'src/app/service/access-service.service';
 })
 export class ListSurveyComponent implements OnInit {
 // set header column
-displayedColumns: string[] = ['survey_Name', 'attempted',  'created_At', 'survey_ExpiryDate'];
+displayedColumns: string[] = ['survey_Name', 'attempted',  'created_At', 'survey_ExpiryDate','action'];
 
 //set static data for table
 dataSource = new MatTableDataSource([]);
@@ -84,7 +84,29 @@ await(this._api.activeSurveyList(this.formData).subscribe(res => {
 
 }
 
+// send reinder to user
+async reminderSurvey(id){
+  let formData = {
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "surveyTypeId":id
+    }
+  this.ngxService.start();
+  await(this._api.reminderAllUserSurvey(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message)
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
 
+  }
 
 
 //Searching

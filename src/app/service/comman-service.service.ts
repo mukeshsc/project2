@@ -840,4 +840,32 @@ individualResponsesSurvey(formData){
 }
 
 
+// send to all user survey reminder
+reminderAllUserSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}reminderAllUserSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// send to perticular user survey reminder
+reminderByUSerSurvey(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}reminderByUSerSurvey`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+// get survey question
+getSurveryQuestion(formData){
+  let headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization': this.token
+    });
+    return this.http.post(`${environment.apiBaseUrl}${environment.apiPath}surveyTypeByQuestion`,formData, {headers}).pipe(map(res => <any>res));
+}
+
+
 }

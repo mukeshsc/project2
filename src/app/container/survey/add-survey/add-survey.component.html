@@ -123,7 +123,7 @@
                   </div>
               </div>
             </div>
-            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.survey_Type == 'slider' || q.survey_Type == 'multiSelect' || q.survey_Type == 'radio' || q.survey_Type == 'dropdown'|| q.survey_Type == 'linkert'">
+            <div fxLayout="column" fxflexfill fxLayoutGap="10px grid" class="" *ngIf="q.survey_Type == 'multiSelect' || q.survey_Type == 'radio' || q.survey_Type == 'dropdown'|| q.survey_Type == 'linkert'">
               <div fxFlex="100" *ngFor="let o of q.survey_OptionArray;let io = index;">
                   <h3 *ngIf="q.survey_Type == 'slider'">Give point for slider value (eg, value = 10, point =2)</h3>
                   <div fxLayout="row" class="quesOption">
@@ -137,8 +137,8 @@
                     </div>
                     <div fxFlex="10">
                       <span class="option_options">
-                        <mat-icon color="info" *ngIf="io == 0" (click)="addOption(i)">add_circle</mat-icon>
-                        <mat-icon color="warn" *ngIf="io > 0" (click)="removeOption(i,io)">remove_circle</mat-icon>
+                        <mat-icon color="info" *ngIf="io == (q.survey_OptionArray.length - 1)" (click)="addOption(i)">add_circle</mat-icon>
+                        <mat-icon color="warn" *ngIf="io != (q.survey_OptionArray.length - 1)" (click)="removeOption(i,io)">remove_circle</mat-icon>
                       </span>
                     </div>
                   </div>
@@ -162,8 +162,8 @@
                     </div>
                     <div fxFlex="10">
                       <span class="option_options">
-                        <mat-icon color="info" *ngIf="io == 0" (click)="addOption(i)">add_circle</mat-icon>
-                        <mat-icon color="warn" *ngIf="io > 0" (click)="removeOption(i,io)">remove_circle</mat-icon>
+                        <mat-icon color="info" *ngIf="io == (q.survey_OptionArray.length - 1)" (click)="addOption(i)">add_circle</mat-icon>
+                        <mat-icon color="warn" *ngIf="io != (q.survey_OptionArray.length - 1)" (click)="removeOption(i,io)">remove_circle</mat-icon>
                       </span>
                     </div>
                   </div>

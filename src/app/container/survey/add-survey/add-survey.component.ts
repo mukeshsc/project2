@@ -166,7 +166,9 @@ openPreviewModal() {
     width: '90%',
     height:'90%',
     data:{
-      hraP:JSON.stringify(this.question)
+      hraP:JSON.stringify(this.question),
+      formName:this.formName,
+      formDescription:this.formDescription
     }
   },
   );

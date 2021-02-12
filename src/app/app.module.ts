@@ -36,6 +36,7 @@ import { NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSliderModule} from '@angular/material/slider';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 
@@ -205,7 +206,8 @@ import { CountdownModule } from 'ngx-countdown';
     NgxMatSelectSearchModule,
     MatProgressSpinnerModule,
     MatButtonToggleModule,
-    CountdownModule
+    CountdownModule,
+    MatSliderModule
   ],
   providers: [{ provide: AuthGuardService, useClass: AuthGuardService }, MatDatepickerModule,SharedService],
   bootstrap: [AppComponent]

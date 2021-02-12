@@ -14,7 +14,7 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>{{responseData.survey_Name}}</mat-card-title>
-    <mat-card-subtitle><a class="primary-txt">view all {{responseData.totalQuestion}} questions</a></mat-card-subtitle>
+    <mat-card-subtitle><a class="primary-txt" (click)="openSurveyQuestion()" style="cursor: pointer;">view all {{responseData.totalQuestion}} questions</a></mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
     <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxflexfill class="mid-graph" fxLayoutGap="10px grid" >
@@ -24,6 +24,7 @@
       <div fxFlex="30" >
         <img class="im2" src="./assets/img/echarts_1.png" />
       </div>
+
       <div fxFlex="40">
         <div fxLayout="column" fxflexfill class="" fxLayoutGap="10px grid">
           <div fxFlex>
@@ -42,7 +43,7 @@
 
             <div fxLayout="row" fxflexfill class="surve-time-col" fxLayoutGap="10px grid" >
               <div fxFlex="50">
-                <span class="current-status-survey">{{responseData.totalUserAttempted}} / {{responseData.totalQuestion}}</span><br />
+                <span class="current-status-survey">{{responseData.totalQuestion - responseData.totalUserAttempted}} / {{responseData.totalQuestion}}</span><br />
                 <span>Not attempted yet!</span>
               </div>
               <div fxFlex="50">
@@ -111,7 +112,7 @@
           <ng-container matColumnDef="attemptedQuestion">
             <th mat-header-cell *matHeaderCellDef  mat-sort-header> Attempted </th>
             <td mat-cell *matCellDef="let element">
-              <span>{{element.attemptedQuestion}}/{{responseData.totalQuestion}}</span>
+              <span>{{element.attemptedCount}}/{{responseData.totalQuestion}}</span>
               <mat-progress-bar mode="determinate"
               [value]="element.attemptedQuestion"
               [bufferValue]="responseData.totalQuestion"></mat-progress-bar>
@@ -123,7 +124,7 @@
             <th mat-header-cell *matHeaderCellDef> Action Required </th>
             <td mat-cell *matCellDef="let element" >
               <span *ngIf="!accessPermission">No Permission</span>
-              <button mat-raised-button style="margin-left:0 !important" class="cal-button round-btn" *ngIf="accessPermission"
+              <button mat-raised-button style="margin-left:0 !important" class="cal-button round-btn" (click)="reminderByUSerSurvey(element.user_id)" *ngIf="accessPermission"
               color="light"><span class="primary-txt">Send Reminder</span></button>
               <button mat-mini-fab  class="cal-button" #tooltip="matTooltip" *ngIf="accessPermission"
               matTooltip="Delete"   color="light" ><mat-icon color="warn">delete</mat-icon></button>

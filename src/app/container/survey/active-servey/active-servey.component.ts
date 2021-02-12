@@ -13,6 +13,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { AccessServiceService } from 'src/app/service/access-service.service';
 import { Router } from '@angular/router';
+import { ViewSurveyComponent } from '../view-survey/view-survey.component';
 @Component({
   selector: 'app-active-servey',
   templateUrl: './active-servey.component.html',
@@ -86,6 +87,69 @@ await(this._api.surveyDetail(this.formData).subscribe(res => {
 }
 
 
+// send reinder to user
+async reminderByUSerSurvey(id){
+  let formData = {
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "userId":id,
+    "surveyTypeId":this.formData.surveyQuestionsId
+    }
+  this.ngxService.start();
+  await(this._api.reminderByUSerSurvey(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      this.openSnackBar(response.message)
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
+
+  }
+
+// get survery qustion by id
+async openSurveyQuestion(){
+  let formData = {
+    "companyId":JSON.parse(localStorage.getItem('userData')).company_id,
+    "surveyTypeId":this.formData.surveyQuestionsId
+    }
+  this.ngxService.start();
+  await(this._api.getSurveryQuestion(formData).subscribe(res => {
+    this.ngxService.stop();
+    const response: any = res;
+    if (response.success == true){
+      console.log(response.data)
+      const dialogRef = this.dialog.open(ViewSurveyComponent,{
+        width: '90%',
+        height:'90%',
+        data:{
+          hraP:JSON.stringify(response.data),
+          formName:this.responseData.survey_Name,
+          formDescription:this.responseData.survey_Description
+        }
+      },
+      );
+
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog result: ${result}`);
+        // this.getRole();
+      });
+    }else{
+      this.openErrrorSnackBar(response.message)
+    }
+    console.log(res);
+  }, err => {
+    const error = err.error;
+    this.openErrrorSnackBar(error)
+    this.ngxService.stop();
+  }));
+
+  }
 
 
 //Searching
